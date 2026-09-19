@@ -423,7 +423,7 @@
 
     .card-content { padding: 0 8px 10px; }
     .card-title { font-family: var(--font-heading); font-size: 21px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
-    .card-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+    .card-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
 
     .card-footer {
       border-top: 1px solid var(--border-subtle);
@@ -1344,26 +1344,56 @@
                   </p>
                 </div>
               </div>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price" data-i18n="card2Price">from 1,100,000 IDR</div>
+                  <div class="card-discount" data-i18n="card2Disc">990,000 IDR with 10% discount</div>
+                </div>
+                <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
+              </div>
             </div>
 
-            <!-- Card 3: Webinars -->
+            <!-- Card 3: Webinars & Live Stream -->
             <div class="studio-card" data-cat="stream">
               <div>
                 <div class="card-img-wrap">
-                  <span class="card-tag" data-i18n="tagStream">Fiber Optic • Live Director</span>
-                  <img src="podcast-setup-desk-table.jpg" alt="Webinar Broadcast Bali">
+                  <span class="card-tag" data-i18n="tagStream">Fiber Optic • Turnkey</span>
+                  <img src="webinar-live-stream.jpg" alt="Live Streaming & Webinar Studio Bali" onerror="this.src='podcast-setup-desk-table.jpg'">
                 </div>
                 <div class="card-content">
                   <h2 class="card-title" data-i18n="card3Title">Live Streaming & Webinar Studio in Bali</h2>
                   <p class="card-desc" data-i18n="card3Desc">
-                    Broadcast-grade live streaming with dedicated redundant internet, on-screen slide decks and speaker monitor.
+                    Turnkey broadcasts for online launches and masterclasses with optical fiber channel.
                   </p>
+
+                  <!-- Тарифная сетка из прайс-листа -->
+                  <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; margin-bottom: 14px; font-size: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 700; color: #fff;">
+                      <span>2 hours:</span>
+                      <span>4,100,000 IDR</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 700; color: #fff;">
+                      <span>3 hours:</span>
+                      <span>5,300,000 IDR</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 700; color: #fff;">
+                      <span>4 hours:</span>
+                      <span>6,400,000 IDR</span>
+                    </div>
+                    <div style="color: var(--text-dim); font-size: 11px; border-top: 1px dashed var(--border-subtle); padding-top: 6px;" data-i18n="card3Ext">
+                      extension: +1,000,000 IDR / hour
+                    </div>
+                  </div>
+
+                  <div style="font-size: 11.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;" data-i18n="card3Included">
+                    ✓ Studio &nbsp;•&nbsp; 1 Camera &nbsp;•&nbsp; Videographer &nbsp;•&nbsp; DJI Mic
+                  </div>
                 </div>
               </div>
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card3Price">from 4,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card3Disc">2-hour turnkey live broadcast</div>
+                  <div class="card-discount" data-i18n="card3Disc">3,690,000 IDR with 10% discount</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('webinar')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
@@ -1566,14 +1596,14 @@
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Live Broadcast</span>
-                  <img src="podcast-setup-desk-table.jpg" alt="Live Webinar Stage Bali">
+                  <img src="webinar-live-stream.jpg" alt="Live Webinar Stage Bali" onerror="this.src='podcast-setup-desk-table.jpg'">
                 </div>
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="setStream1Title">Webinar Keynote Stage</h3>
-                  <p class="set-desc" data-i18n="setStream1Desc">Full-featured webinar broadcasting desk with dual monitor returns for live slides, chat moderation, and 300 Mbps optical fiber.</p>
+                  <p class="set-desc" data-i18n="setStream1Desc">Full-featured webinar broadcasting desk with confidence monitors for live slides, chat moderation, and 300 Mbps optical fiber.</p>
                   <div class="set-specs">
                     <span class="set-spec-chip">300 Mbps Fiber</span>
-                    <span class="set-spec-chip">Dual Confidence Monitors</span>
+                    <span class="set-spec-chip">Confidence Monitors</span>
                     <span class="set-spec-chip">Live Director</span>
                   </div>
                 </div>
@@ -2242,11 +2272,13 @@
         card2Desc: 'High-yield vertical video shoots with teleprompter. 20% discount on video editing for 10+ videos bundle.',
         card2Price: 'from 1,100,000 IDR',
         card2Disc: '990,000 IDR with 10% discount',
-        tagStream: 'Fiber Optic • Live Director',
+        tagStream: 'Fiber Optic • Turnkey',
         card3Title: 'Live Streaming & Webinar Studio in Bali',
-        card3Desc: 'Broadcast-grade live streaming with dedicated redundant internet, on-screen slide decks and speaker monitor.',
+        card3Desc: 'Turnkey broadcasts for online launches and masterclasses with optical fiber channel.',
+        card3Ext: 'extension: +1,000,000 IDR / hour',
+        card3Included: '✓ Studio • 1 Camera • Videographer • DJI Mic',
         card3Price: 'from 4,100,000 IDR',
-        card3Disc: '2-hour turnkey live broadcast',
+        card3Disc: '3,690,000 IDR with 10% discount',
         card4Title: 'Photo & Video Studio Rental (Dry Hire)',
         card4Desc: 'Rent the fully acoustically treated studio with all Nanlite & Aputure lighting rigs configured for your own crew.',
         card4Price: 'from 700,000 IDR/h',
@@ -2272,7 +2304,7 @@
         setReels3Title: 'Setup #3: Executive Desk & Screen',
         setReels3Desc: 'White desk format with laptop display or background graphics, podcasts and live digital reactions.',
         setStream1Title: 'Webinar Keynote Stage',
-        setStream1Desc: 'Full-featured webinar broadcasting desk with dual monitor returns for live slides, chat moderation, and 300 Mbps optical fiber.',
+        setStream1Desc: 'Full-featured webinar broadcasting desk with confidence monitors for live slides, chat moderation, and 300 Mbps optical fiber.',
         btnBookThisSet: 'Select Setup',
         equipPreTitle: 'Production Gear',
         equipTitle: 'Studio Equipment & Tech Specs',
@@ -2396,11 +2428,13 @@
         card2Desc: 'Съемка вертикального экспертного контента на 1 камеру 4K с суфлером. Скидка 20% на монтаж при пакете от 10 роликов.',
         card2Price: 'от 1 100 000 IDR',
         card2Disc: '990 000 IDR со скидкой 10%',
-        tagStream: 'Оптоволокно • Режиссер',
+        tagStream: 'Оптоволокно • Под ключ',
         card3Title: 'Вебинары и прямые трансляции на Бали',
-        card3Desc: 'Прямые трансляции запусков со стабильным оптоволоконным каналом, выводом презентаций спикеру и чата участников.',
+        card3Desc: 'Прямые трансляции онлайн-запусков и мастер-классов со стабильным оптоволоконным каналом.',
+        card3Ext: 'продление: +1 000 000 IDR / час',
+        card3Included: '✓ Студия • 1 камера • Оператор • DJI Mic',
         card3Price: 'от 4 100 000 IDR',
-        card3Disc: '2 часа эфира под ключ',
+        card3Disc: '3 690 000 IDR со скидкой 10%',
         card4Title: 'Аренда студии для фото и видео (Dry Hire)',
         card4Desc: 'Аренда подготовленного студийного пространства со всем профессиональным светом Aputure и Nanlite под вашу команду.',
         card4Price: 'от 700 000 IDR/час',
@@ -2426,7 +2460,7 @@
         setReels3Title: 'Сетап #3: Рабочий стол и экран',
         setReels3Desc: 'Съемка за белым столом с демонстрацией ноутбука, презентаций и реакций на студийном мониторе.',
         setStream1Title: 'Сцена для вебинаров и запусков',
-        setStream1Desc: 'Оборудованная зона прямого эфира со вторым монитором для чата, выводом слайдов и резервным интернетом 300 Mbps.',
+        setStream1Desc: 'Оборудованная зона прямого эфира со студийным монитором для слайдов, чата и резервным интернетом 300 Mbps.',
         btnBookThisSet: 'Выбрать сетап',
         equipPreTitle: 'Технический сетап',
         equipTitle: 'Студийное оборудование и спецификации',
@@ -2438,11 +2472,11 @@
         eqDeskTitle: 'Пульт RØDECaster Pro II & DJI Mic 2',
         eqDeskDesc: 'Раздельная поканальная запись ISO дорожек, звуковые пэды, подключение гостей через Bluetooth и петлички 32-bit float.',
         eqLightTitle: 'Киносвет Aputure & Nanlite',
-        eqLightDesc: 'Мягкий заполняющий свет с большими софтбоксами, акцентный контравой свет и RGB-трубки под цвет вашего бренда.',
-        eqPrompTitle: 'Телесуфлер 4K и контрольный ТВ',
-        eqPrompDesc: 'Большой оптический суфлер для уверенного ведения спикера по сценарию и студийный ТВ-экран для гостей в Zoom.',
-        eqSoundTitle: '100% шумоизоляция и оптоволокно',
-        eqSoundDesc: 'Aкустическая подготовка стен без эха тропического дождя и выделенный интернет-канал 300 Mbps для стримов.',
+        eqLightDesc: 'Key lights with large softboxes, subtle hair rim lights, and full RGB background tubes for custom brand colors.',
+        eqPrompTitle: '4K Teleprompter & Confidence TV',
+        eqPrompDesc: 'Large beam-splitter teleprompter for flawless script delivery plus on-camera return monitor for Zoom guests.',
+        eqSoundTitle: '100% Soundproof & Fiber Internet',
+        eqSoundDesc: 'Complete acoustic wall treatment, zero tropical rain echo, and 300 Mbps dedicated optical fiber for webinars.',
         infraPreTitle: 'Инфраструктура студии',
         infraTitle: 'Все для комфорта вашей команды',
         loungeTitle: 'Лаундж-зона и прохладительный бар',
