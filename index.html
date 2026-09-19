@@ -786,6 +786,7 @@
       transform: scale(1.1);
     }
 
+    /* 4. EQUIPMENT SPECS (COMPACT CARDS & TALLER PHOTOS) */
     .equip-section {
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
@@ -806,7 +807,6 @@
       transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .equip-card:hover {
@@ -816,7 +816,7 @@
 
     .equip-photo-header {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 4 / 3;
       height: auto;
       background: #0d0d12;
       overflow: hidden;
@@ -840,16 +840,16 @@
     }
 
     .equip-inner-content {
-      padding: 24px;
+      padding: 16px 18px 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      gap: 12px;
     }
 
     .equip-icon-wrap {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       background: rgba(255, 59, 0, 0.12);
       border: 1px solid rgba(255, 59, 0, 0.25);
@@ -857,21 +857,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      margin-bottom: 14px;
+      font-size: 15px;
+      margin-bottom: 6px;
     }
 
-    .equip-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .equip-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
+    .equip-title { 
+      font-family: var(--font-heading); 
+      font-size: 16.5px; 
+      font-weight: 700; 
+      margin-bottom: 6px; 
+      line-height: 1.3;
+    }
+
+    .equip-desc { 
+      font-size: 12.5px; 
+      color: var(--text-muted); 
+      line-height: 1.45; 
+      margin-bottom: 8px; 
+    }
 
     .equip-tag {
       display: inline-block;
       align-self: flex-start;
       background: #15151c;
       border: 1px solid var(--border-subtle);
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -1889,7 +1901,7 @@
 
             <!-- 4. Studio Lighting -->
             <div class="equip-card">
-              <div class="equip-inner-content" style="padding-top: 30px;">
+              <div class="equip-inner-content" style="padding-top: 20px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-lightbulb"></i></div>
                   <h3 class="equip-title" data-i18n="eqLightTitle">Aputure & Nanlite Cinema Light</h3>
@@ -1901,7 +1913,7 @@
 
             <!-- 5. Teleprompter & Confidence TV -->
             <div class="equip-card">
-              <div class="equip-inner-content" style="padding-top: 30px;">
+              <div class="equip-inner-content" style="padding-top: 20px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-tv"></i></div>
                   <h3 class="equip-title" data-i18n="eqPrompTitle">4K Teleprompter & Confidence TV</h3>
@@ -1913,7 +1925,7 @@
 
             <!-- 6. Acoustic Soundproofing -->
             <div class="equip-card">
-              <div class="equip-inner-content" style="padding-top: 30px;">
+              <div class="equip-inner-content" style="padding-top: 20px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
                   <h3 class="equip-title" data-i18n="eqSoundTitle">100% Soundproof & Fiber Internet</h3>
