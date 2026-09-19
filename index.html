@@ -1428,7 +1428,6 @@
                     Turnkey broadcasts for online launches and masterclasses with optical fiber channel.
                   </p>
 
-                  <!-- Тарифная сетка из прайс-листа -->
                   <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px; margin-bottom: 14px; font-size: 12px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 700; color: #fff;">
                       <span>2 hours:</span>
@@ -1554,13 +1553,30 @@
               </div>
             </div>
 
-            <!-- PODCAST SETUP 2 -->
+            <!-- PODCAST SETUP 2 (WITH INTERACTIVE GALLERY) -->
             <div class="set-card" data-setcat="podcast">
               <div>
-                <div class="set-img-wrap">
+                <div class="set-img-wrap" id="deskGalleryBox">
                   <span class="set-badge">Executive Format</span>
-                  <img src="podcast-setup-desk-table.jpg" alt="Executive Table Podcast Setup Icon Media">
+                  
+                  <button type="button" class="gallery-nav-btn gallery-nav-prev" onclick="stepDeskGallery(-1)" aria-label="Previous photo">
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <button type="button" class="gallery-nav-btn gallery-nav-next" onclick="stepDeskGallery(1)" aria-label="Next photo">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+
+                  <img id="deskGalleryImg" src="podcast-setup-desk-guests.jpg" alt="Executive White Desk Podcast Setup Icon Media" onerror="this.src='podcast-setup-desk-table.jpg'">
+
+                  <div class="gallery-dots">
+                    <span class="gallery-dot active" onclick="setDeskSlide(0)"></span>
+                    <span class="gallery-dot" onclick="setDeskSlide(1)"></span>
+                    <span class="gallery-dot" onclick="setDeskSlide(2)"></span>
+                    <span class="gallery-dot" onclick="setDeskSlide(3)"></span>
+                    <span class="gallery-dot" onclick="setDeskSlide(4)"></span>
+                  </div>
                 </div>
+
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="set2Title">Setup #2: Executive White Desk</h3>
                   <p class="set-desc" data-i18n="set2Desc">Formal white desk dialogue setup with black executive leather chairs, desktop Shure SM7B booms, and background greenery.</p>
@@ -2660,7 +2676,7 @@
       });
     }
 
-    /* Interactive Gallery Logic for Emerald Setup */
+    /* Interactive Gallery Logic for Emerald Setup (Setup #1) */
     const emeraldImages = [
       'podcast-setup-emerald-amber.jpg',
       'podcast-setup-emerald-left.jpg',
@@ -2692,6 +2708,41 @@
     function setEmeraldSlide(idx) {
       emeraldIndex = idx;
       updateEmeraldGallery();
+    }
+
+    /* Interactive Gallery Logic for Executive Desk (Setup #2) */
+    const deskImages = [
+      'podcast-setup-desk-guests.jpg',
+      'podcast-setup-desk-blue.jpg',
+      'podcast-setup-desk-table.jpg',
+      'podcast-setup-desk-left.jpg',
+      'podcast-setup-desk-right.jpg'
+    ];
+    let deskIndex = 0;
+
+    function updateDeskGallery() {
+      const imgEl = document.getElementById('deskGalleryImg');
+      if (imgEl) {
+        imgEl.style.opacity = '0.4';
+        setTimeout(() => {
+          imgEl.src = deskImages[deskIndex];
+          imgEl.style.opacity = '1';
+        }, 120);
+      }
+      const dots = document.querySelectorAll('#deskGalleryBox .gallery-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === deskIndex);
+      });
+    }
+
+    function stepDeskGallery(direction) {
+      deskIndex = (deskIndex + direction + deskImages.length) % deskImages.length;
+      updateDeskGallery();
+    }
+
+    function setDeskSlide(idx) {
+      deskIndex = idx;
+      updateDeskGallery();
     }
 
     let calcService = 'podcast';
