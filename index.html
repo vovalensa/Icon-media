@@ -117,8 +117,6 @@
     body.view-mobile .equip-grid,
     body.view-tablet .infra-grid,
     body.view-mobile .infra-grid,
-    body.view-tablet .reviews-grid,
-    body.view-mobile .reviews-grid,
     body.view-tablet .calc-grid,
     body.view-mobile .calc-grid,
     body.view-tablet .footer-grid,
@@ -986,61 +984,6 @@
       margin-bottom: 4px;
     }
 
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .review-bubble {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 22px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.25s ease;
-    }
-
-    .review-bubble:hover {
-      border-color: rgba(255, 59, 0, 0.4);
-      transform: translateY(-3px);
-    }
-
-    .reviewer-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .reviewer-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .reviewer-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #1c1c26;
-      color: var(--flame-orange);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .reviewer-name { font-weight: 700; font-size: 15px; color: #fff; }
-    .reviewer-info { font-size: 12px; color: var(--text-dim); }
-    .google-verified-icon { color: #4285f4; font-size: 18px; }
-    .review-stars { color: #ffb800; font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; }
-    .review-quote { font-size: 13.5px; color: #d1d1db; line-height: 1.6; }
-
     .calc-section {
       padding: 100px 0;
       border-top: 1px solid var(--border-subtle);
@@ -1255,7 +1198,7 @@
 
     @media (max-width: 992px) {
       .hero-title { font-size: 38px; }
-      .cards-grid, .sets-grid, .equip-grid, .portfolio-grid, .infra-grid, .reviews-grid, .calc-grid, .footer-grid { grid-template-columns: 1fr; }
+      .cards-grid, .sets-grid, .equip-grid, .portfolio-grid, .infra-grid, .calc-grid, .footer-grid { grid-template-columns: 1fr; }
       .footer-watermark { font-size: 60px; }
       .device-switcher-bar { display: none; }
     }
@@ -1388,13 +1331,6 @@
                     High-yield vertical video shoots with teleprompter. 20% discount on video editing for 10+ videos bundle.
                   </p>
                 </div>
-              </div>
-              <div class="card-footer">
-                <div>
-                  <div class="card-price" data-i18n="card2Price">from 1,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card2Disc">990,000 IDR with 10% discount</div>
-                </div>
-                <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
             </div>
 
@@ -2085,64 +2021,9 @@
             </div>
           </div>
 
-          <div class="reviews-grid" id="googleReviewsDeck">
-            <div class="review-bubble">
-              <div>
-                <div class="reviewer-top">
-                  <div class="reviewer-meta">
-                    <div class="reviewer-avatar">AK</div>
-                    <div>
-                      <div class="reviewer-name">Artem Kuzmin</div>
-                      <div class="reviewer-info" data-i18n="rev1Info">Podcast Producer • 3 weeks ago</div>
-                    </div>
-                  </div>
-                  <i class="fa-brands fa-google google-verified-icon"></i>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <p class="review-quote" data-i18n="rev1Text">
-                  "We filmed 4 podcast episodes in a row. The 3 Sony 4K cameras were perfectly dialed in, and the Shure SM7B mics delivered warm radio-quality audio. Major bonus: private car parking right at the entrance!"
-                </p>
-              </div>
-            </div>
-
-            <div class="review-bubble">
-              <div>
-                <div class="reviewer-top">
-                  <div class="reviewer-meta">
-                    <div class="reviewer-avatar">ML</div>
-                    <div>
-                      <div class="reviewer-name">Maria Lindqvist</div>
-                      <div class="reviewer-info" data-i18n="rev2Info">Content Creator • 1 month ago</div>
-                    </div>
-                  </div>
-                  <i class="fa-brands fa-google google-verified-icon"></i>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <p class="review-quote" data-i18n="rev2Text">
-                  "Recorded 22 Reels with the 4K teleprompter in just 2 hours! Zero reflections, air conditioning was silent, and the complimentary coffee in the lounge was top-notch."
-                </p>
-              </div>
-            </div>
-
-            <div class="review-bubble">
-              <div>
-                <div class="reviewer-top">
-                  <div class="reviewer-meta">
-                    <div class="reviewer-avatar">DV</div>
-                    <div>
-                      <div class="reviewer-name">Dmitry Voronov</div>
-                      <div class="reviewer-info" data-i18n="rev3Info">Online Founder • 2 weeks ago</div>
-                    </div>
-                  </div>
-                  <i class="fa-brands fa-google google-verified-icon"></i>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <p class="review-quote" data-i18n="rev3Text">
-                  "Hosted an important webinar for 500+ participants. The optical fiber line held stable 300 Mbps with zero drops. The technical team in the studio handled everything seamlessly."
-                </p>
-              </div>
-            </div>
-          </div>
+          <!-- Elfsight Google Reviews Widget -->
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div>
 
         </div>
       </section>
@@ -2418,12 +2299,6 @@
         revTitle: 'Verified Google Reviews',
         revMeta: '270+ Verified Reviews on Google Maps',
         btnAllGoogle: 'View on Maps',
-        rev1Info: 'Podcast Producer • 3 weeks ago',
-        rev1Text: '"We filmed 4 podcast episodes in a row. The 3 Sony 4K cameras were perfectly dialed in, and the Shure SM7B mics delivered warm radio-quality audio. Major bonus: private car parking right at the entrance!"',
-        rev2Info: 'Content Creator • 1 month ago',
-        rev2Text: '"Recorded 22 Reels with the 4K teleprompter in just 2 hours! Zero reflections, air conditioning was silent, and the complimentary coffee in the lounge was top-notch."',
-        rev3Info: 'Online Founder • 2 weeks ago',
-        rev3Text: '"Hosted an important webinar for 500+ participants. The optical fiber line held stable 300 Mbps with zero drops. The technical team in the studio handled everything seamlessly."',
         calcPreTitle: 'Transparent Estimate',
         calcTitle: 'Instant Price Calculator (10% OFF Included)',
         calcSub: 'Select your format and hours. The estimate automatically applies your 10% discount and generates a ready booking link.',
@@ -2578,12 +2453,6 @@
         revTitle: 'Реальные отзывы на Google Maps',
         revMeta: '270+ проверенных отзывов в Google',
         btnAllGoogle: 'Открыть на картах',
-        rev1Info: 'Продюсер подкастов • 3 недели назад',
-        rev1Text: '«Сняли 4 выпуска подкаста подряд. 3 камеры Sony идеально сведены по цвету, а Shure SM7B дают бархатный звук. Огромный плюс за собственную парковку для авто прямо у входа!»',
-        rev2Info: 'Reels Creator • 1 месяц назад',
-        rev2Text: '«Записали 22 экспертных рилс с телесуфлером 4K всего за 2 часа! Кондиционер работает бесшумно, в лаундже прохладно и очень вкусный зерновой кофе.»',
-        rev3Info: 'Основатель онлайн-школы • 2 недели назад',
-        rev3Text: '«Проводили запуск вебинара на 500+ участников. Оптоволоконный интернет держал 300 Мбит без единого сбоя. Инженер в студии вовремя переключал презентацию.»',
         calcPreTitle: 'Прозрачная смета',
         calcTitle: 'Онлайн-калькулятор со скидкой 10%',
         calcSub: 'Выберите формат и количество часов. Калькулятор автоматически учтет скидку 10% и создаст ссылку на WhatsApp/Telegram.',
