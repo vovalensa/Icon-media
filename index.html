@@ -498,11 +498,13 @@
       border-color: var(--border-active);
     }
 
+    /* Interactive Setup Gallery */
     .set-img-wrap {
       width: 100%;
-      height: 220px;
+      height: 230px;
       position: relative;
       background: #171720;
+      overflow: hidden;
     }
 
     .set-img-wrap img {
@@ -510,6 +512,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: opacity 0.3s ease;
     }
 
     .set-badge {
@@ -524,6 +527,65 @@
       font-size: 11px;
       font-weight: 700;
       color: #fff;
+      z-index: 3;
+    }
+
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(5, 5, 7, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-nav-btn:hover {
+      background: var(--flame-orange);
+      border-color: var(--flame-orange);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .gallery-nav-prev { left: 10px; }
+    .gallery-nav-next { right: 10px; }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+      background: rgba(5, 5, 7, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-dot.active {
+      background: var(--flame-orange);
+      transform: scale(1.3);
     }
 
     .set-body { padding: 22px 20px; }
@@ -1335,7 +1397,7 @@
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagReels">DJI Mic • 4K Teleprompter</span>
-                  <img src="reels-course-production.jpg" alt="Reels Shooting Canggu" onerror="this.src='podcast-setup-guest-angle.jpg'">
+                  <img src="reels-shorts-production.jpg" alt="Reels Shorts Course Production Canggu" onerror="this.src='podcast-setup-guest-angle.jpg'">
                 </div>
                 <div class="card-content">
                   <h2 class="card-title" data-i18n="card2Title">Reels, Shorts & Course Production in Canggu</h2>
@@ -1453,13 +1515,29 @@
 
           <div class="sets-grid" id="setsContainer">
             
-            <!-- PODCAST SETUP 1 -->
+            <!-- PODCAST SETUP 1 (WITH INTERACTIVE GALLERY) -->
             <div class="set-card" data-setcat="podcast">
               <div>
-                <div class="set-img-wrap">
+                <div class="set-img-wrap" id="emeraldGalleryBox">
                   <span class="set-badge" data-i18n="badgeSetFeatured">Most Popular</span>
-                  <img src="podcast-setup-emerald-amber.jpg" alt="Emerald Velvet Amber Lounge Setup Icon Media">
+                  
+                  <button type="button" class="gallery-nav-btn gallery-nav-prev" onclick="stepEmeraldGallery(-1)" aria-label="Previous photo">
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <button type="button" class="gallery-nav-btn gallery-nav-next" onclick="stepEmeraldGallery(1)" aria-label="Next photo">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+
+                  <img id="emeraldGalleryImg" src="podcast-setup-emerald-amber.jpg" alt="Emerald Velvet Amber Lounge Setup Icon Media">
+
+                  <div class="gallery-dots">
+                    <span class="gallery-dot active" onclick="setEmeraldSlide(0)"></span>
+                    <span class="gallery-dot" onclick="setEmeraldSlide(1)"></span>
+                    <span class="gallery-dot" onclick="setEmeraldSlide(2)"></span>
+                    <span class="gallery-dot" onclick="setEmeraldSlide(3)"></span>
+                  </div>
                 </div>
+
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="set1Title">Setup #1: Emerald Amber Lounge</h3>
                   <p class="set-desc" data-i18n="set1Desc">Deep emerald velvet armchairs, warm 3200K ambient floor lights, boho ethnic rug, and dual Shure SM7B boom stands.</p>
@@ -2475,7 +2553,7 @@
         eqLightDesc: 'Key lights with large softboxes, subtle hair rim lights, and full RGB background tubes for custom brand colors.',
         eqPrompTitle: '4K Teleprompter & Confidence TV',
         eqPrompDesc: 'Large beam-splitter teleprompter for flawless script delivery plus on-camera return monitor for Zoom guests.',
-        eqSoundTitle: '100% шумоизоляция и оптоволокно',
+        eqSoundTitle: '100% Soundproof & Fiber Internet',
         eqSoundDesc: 'Complete acoustic wall treatment, zero tropical rain echo, and 300 Mbps dedicated optical fiber for webinars.',
         infraPreTitle: 'Инфраструктура студии',
         infraTitle: 'Все для комфорта вашей команды',
@@ -2580,6 +2658,40 @@
           c.style.display = 'none';
         }
       });
+    }
+
+    /* Interactive Gallery Logic for Emerald Setup */
+    const emeraldImages = [
+      'podcast-setup-emerald-amber.jpg',
+      'podcast-setup-emerald-left.jpg',
+      'podcast-setup-emerald-right.jpg',
+      'podcast-setup-emerald-neon.jpg'
+    ];
+    let emeraldIndex = 0;
+
+    function updateEmeraldGallery() {
+      const imgEl = document.getElementById('emeraldGalleryImg');
+      if (imgEl) {
+        imgEl.style.opacity = '0.4';
+        setTimeout(() => {
+          imgEl.src = emeraldImages[emeraldIndex];
+          imgEl.style.opacity = '1';
+        }, 120);
+      }
+      const dots = document.querySelectorAll('#emeraldGalleryBox .gallery-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === emeraldIndex);
+      });
+    }
+
+    function stepEmeraldGallery(direction) {
+      emeraldIndex = (emeraldIndex + direction + emeraldImages.length) % emeraldImages.length;
+      updateEmeraldGallery();
+    }
+
+    function setEmeraldSlide(idx) {
+      emeraldIndex = idx;
+      updateEmeraldGallery();
     }
 
     let calcService = 'podcast';
