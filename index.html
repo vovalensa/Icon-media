@@ -1836,7 +1836,7 @@
           <button type="button" class="lang-btn" id="btn-ru" onclick="switchLanguage('ru')">RU</button>
         </div>
 
-        <a href="https://wa.me/6282314734072" target="_blank" class="btn-pill btn-pill-dark">
+        <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> WhatsApp
         </a>
         <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange">
@@ -1889,7 +1889,7 @@
                 <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 13px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
                   Book Slot
                 </a>
-                <a href="https://wa.me/6282314734072?text=Hello!%20I%20want%20to%20learn%20more%20about%20booking%20Icon%20Media%20Studio" target="_blank" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;">
+                <a href="https://wa.me/6282314734072?text=Hello!%20I%20want%20to%20learn%20more%20about%20booking%20Icon%20Media%20Studio" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;">
                   <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> Chat in WhatsApp
                 </a>
               </div>
@@ -2709,7 +2709,7 @@
                   <span data-i18n="revMeta">Verified Reviews on Google Maps</span>
                 </div>
               </div>
-              <a href="https://maps.google.com" target="_blank" class="btn-pill btn-pill-dark" style="margin-left: 12px;">
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="margin-left: 12px;">
                 <i class="fa-brands fa-google" style="color: #ea4335;"></i> <span data-i18n="btnAllGoogle">View on Maps</span>
               </a>
             </div>
@@ -2841,7 +2841,7 @@
                     <span id="bill-base">1 900 000 IDR</span>
                   </div>
                   
-                  <!-- Строка ночного коэффициента (показывается только ночью) -->
+                  <!-- Строка ночного коэффициента -->
                   <div class="bill-row night-row" id="bill-night-row">
                     <span data-i18n="billNightRate">🌙 Night Rate (1.5×):</span>
                     <span id="bill-night-extra">+0 IDR</span>
@@ -3023,8 +3023,8 @@
           <div>
             <h5 data-i18n="footerColContacts">Contacts</h5>
             <ul class="footer-links">
-              <li><a href="https://wa.me/6282314734072"><i class="fa-brands fa-whatsapp"></i> +62 823-1473-4072</a></li>
-              <li><a href="https://t.me/iconmediastudio"><i class="fa-brands fa-telegram"></i> @iconmediastudio</a></li>
+              <li><a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +62 823-1473-4072</a></li>
+              <li><a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @iconmediastudio</a></li>
               <li><span style="color: var(--text-dim);" data-i18n="fHours">Mon–Sun 09:00 – 22:00 WITA</span></li>
               <li><span style="color: var(--text-dim);">Kerobokan / Canggu, Bali</span></li>
             </ul>
@@ -3672,7 +3672,7 @@
       }
     }
 
-    /* Отправка заявки: стандартная сумма без скидки, менеджер считает скидку индивидуально */
+    /* Отправка заявки: формируется строго на актуальном языке пользователя */
     function sendToMessenger(ch) {
       const data = rates[calcService];
       let base = 0;
@@ -3737,9 +3737,9 @@
         : `Здравствуйте! Хочу забронировать студию Icon Media:%0A%0A• Формат: ${srvTitle}%0A• Дата: ${chosenDate}%0A• Время начала: ${chosenTime}%0A• Длительность: ${calcHours} ч${nightNoteRu}%0A• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}%0A• Итого: ${formatIDR(regularTotal)}%0A%0AСвободен ли этот слот?`;
 
       if (ch === 'wa') {
-        window.open(`https://wa.me/6282314734072?text=${text}`, '_blank');
+        window.open(`https://wa.me/6282314734072?text=${text}`, '_blank', 'noopener,noreferrer');
       } else {
-        window.open(`https://t.me/iconmediastudio?text=${text}`, '_blank');
+        window.open(`https://t.me/iconmediastudio?text=${text}`, '_blank', 'noopener,noreferrer');
       }
     }
 
@@ -3818,7 +3818,7 @@
             allowfullscreen>
           </iframe>
           <div style="position: absolute; bottom: 12px; right: 16px; z-index: 10;">
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="btn-pill btn-pill-dark" style="font-size: 11px; padding: 6px 14px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.2);">
+            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="font-size: 11px; padding: 6px 14px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.2);">
               <i class="fa-brands fa-youtube" style="color: #ff3b00;"></i> ${watchLabel}
             </a>
           </div>`;
