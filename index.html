@@ -1522,7 +1522,109 @@
       margin-top: 26px;
     }
 
-    /* 9. FOOTER */
+    /* 9. FAQ ACCORDION SECTION */
+    .faq-section {
+      padding: 100px 0 110px;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .faq-container {
+      max-width: 920px;
+      margin: 40px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .faq-item.active {
+      border-color: var(--border-active);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 59, 0, 0.12);
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 22px 26px;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 17.5px;
+      font-weight: 700;
+      line-height: 1.4;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: #ff6a38;
+    }
+
+    .faq-chevron {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item.active .faq-chevron {
+      background: var(--flame-orange);
+      border-color: var(--flame-orange);
+      color: #fff;
+      transform: rotate(180deg);
+      box-shadow: 0 4px 15px var(--flame-glow);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
+    }
+
+    .faq-answer-inner {
+      padding: 0 26px 24px;
+      color: #b5b5c3;
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+
+    .faq-answer-inner p + p {
+      margin-top: 10px;
+    }
+
+    .faq-item.active .faq-answer {
+      opacity: 1;
+    }
+
+    /* 10. FOOTER */
     .footer-section {
       position: relative;
       padding: 110px 0 50px;
@@ -1597,6 +1699,8 @@
       .cards-grid, .sets-grid, .equip-grid, .portfolio-grid, .infra-grid, .calc-grid, .footer-grid { grid-template-columns: 1fr; }
       .footer-watermark { font-size: 60px; }
       .device-switcher-bar { display: none; }
+      .faq-question { font-size: 16px; padding: 18px 20px; }
+      .faq-answer-inner { padding: 0 20px 20px; font-size: 14px; }
     }
   </style>
 </head>
@@ -1635,6 +1739,7 @@
         <li><a href="#infra" data-i18n="navInfra">Amenities</a></li>
         <li><a href="#reviews" data-i18n="navReviews">Reviews 5.0</a></li>
         <li><a href="#calculator" data-i18n="navCalc">Calculator</a></li>
+        <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -2633,9 +2738,110 @@
 
         </div>
       </section>
+
+      <!-- 9. FAQ ACCORDION SECTION -->
+      <section class="faq-section" id="faq">
+        <div class="container">
+          
+          <div class="reveal-item" style="text-align: center;">
+            <span class="section-eyebrow" data-i18n="faqPreTitle">Frequently Asked Questions</span>
+            <h2 class="section-heading" data-i18n="faqTitle">Everything you need to know</h2>
+            <p class="section-subtext" style="margin: 8px auto 0;" data-i18n="faqSub">
+              Got questions before your recording session? Here are quick answers to the most common inquiries.
+            </p>
+          </div>
+
+          <div class="faq-container">
+            <!-- FAQ 1 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ1">How can I book the studio, and is a deposit required?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA1">
+                  <p>Simply contact us via WhatsApp or Telegram. Let us know your preferred date, time and type of shoot, and we’ll check availability for you.</p>
+                  <p>To confirm your booking, a 50% deposit of the total amount is required. Once the deposit is received, we reserve your chosen date and time slot exclusively for you. The remaining balance is paid after the shoot.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ2">What is the minimum booking duration, and what are your studio hours?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA2">
+                  <p>The minimum booking is 1 hour. We’re open daily, from 9 AM to 10 PM.</p>
+                  <p>Need to shoot at night? We can arrange a late-night session upon request. Night sessions are subject to a 1.5× rate.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ3">Can I rent the studio without a videographer and shoot by myself?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA3">
+                  <p>Yes, absolutely. We offer self-shoot studio rental from IDR 700,000 per hour, including the full lighting setup, furniture and wireless lavalier microphones.</p>
+                  <p>This option is ideal if you have your own camera and equipment or already have a production team. You can also rent additional camera and audio equipment from us if needed.</p>
+                  <p>If you want a fully managed production and a professional result, we recommend booking a complete shooting package with our videographers.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ4">Do you have free parking?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA4">
+                  <p>Yes, we have free parking right next to the studio, suitable for both cars and scooters.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ5">Do you offer video editing services?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA5">
+                  <p>Yes, we do. We edit podcasts, YouTube videos, online courses and all types of social media content.</p>
+                  <p>Video editing can be added to your booking as an additional service and paid for together with your studio session.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="faq-item reveal-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span data-i18n="faqQ6">Can I book an on-location shoot?</span>
+                <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner" data-i18n="faqA6">
+                  <p>Yes, absolutely. We offer professional video production on location for different types of content and projects.</p>
+                  <p>You can discuss your requirements and book an on-location shoot with our manager via WhatsApp or Telegram.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
     </main>
 
-    <!-- 9. FOOTER -->
+    <!-- 10. FOOTER -->
     <footer class="footer-section">
       <div class="footer-flame-glow"></div>
       
@@ -2698,6 +2904,7 @@
         navServices: 'Services',
         navSets: 'Studio Sets',
         navPortfolio: 'Portfolio',
+        navFaq: 'FAQ',
         vidWatch: 'Watch Episode',
         portPreTitle: 'Our Production Portfolio',
         portTitle: 'Featured Episodes & Projects',
@@ -2846,6 +3053,21 @@
         billTotal: 'Total:',
         btnBookWA: 'Book via WhatsApp',
         btnBookTG: 'Book via Telegram',
+        faqPreTitle: 'Frequently Asked Questions',
+        faqTitle: 'Everything you need to know',
+        faqSub: 'Got questions before your recording session? Here are quick answers to the most common inquiries.',
+        faqQ1: 'How can I book the studio, and is a deposit required?',
+        faqA1: '<p>Simply contact us via WhatsApp or Telegram. Let us know your preferred date, time and type of shoot, and we’ll check availability for you.</p><p>To confirm your booking, a 50% deposit of the total amount is required. Once the deposit is received, we reserve your chosen date and time slot exclusively for you. The remaining balance is paid after the shoot.</p>',
+        faqQ2: 'What is the minimum booking duration, and what are your studio hours?',
+        faqA2: '<p>The minimum booking is 1 hour. We’re open daily, from 9 AM to 10 PM.</p><p>Need to shoot at night? We can arrange a late-night session upon request. Night sessions are subject to a 1.5× rate.</p>',
+        faqQ3: 'Can I rent the studio without a videographer and shoot by myself?',
+        faqA3: '<p>Yes, absolutely. We offer self-shoot studio rental from IDR 700,000 per hour, including the full lighting setup, furniture and wireless lavalier microphones.</p><p>This option is ideal if you have your own camera and equipment or already have a production team. You can also rent additional camera and audio equipment from us if needed.</p><p>If you want a fully managed production and a professional result, we recommend booking a complete shooting package with our videographers.</p>',
+        faqQ4: 'Do you have free parking?',
+        faqA4: '<p>Yes, we have free parking right next to the studio, suitable for both cars and scooters.</p>',
+        faqQ5: 'Do you offer video editing services?',
+        faqA5: '<p>Yes, we do. We edit podcasts, YouTube videos, online courses and all types of social media content.</p><p>Video editing can be added to your booking as an additional service and paid for together with your studio session.</p>',
+        faqQ6: 'Can I book an on-location shoot?',
+        faqA6: '<p>Yes, absolutely. We offer professional video production on location for different types of content and projects.</p><p>You can discuss your requirements and book an on-location shoot with our manager via WhatsApp or Telegram.</p>',
         footerAbout: 'Premier video production and podcast studio in Bali. Crafting high-converting visual media and courses in Kerobokan.',
         footerColServices: 'Services',
         footerColInfra: 'Infrastructure',
@@ -2861,6 +3083,7 @@
         navServices: 'Услуги',
         navSets: 'Зоны съемки',
         navPortfolio: 'Примеры работ',
+        navFaq: 'FAQ',
         vidWatch: 'Смотреть выпуск',
         portPreTitle: 'Портфолио продакшна',
         portTitle: 'Примеры съёмок и выпусков',
@@ -3009,6 +3232,21 @@
         billTotal: 'Итого:',
         btnBookWA: 'Забронировать в WhatsApp',
         btnBookTG: 'Забронировать в Telegram',
+        faqPreTitle: 'Часто задаваемые вопросы',
+        faqTitle: 'Все, что вам нужно знать',
+        faqSub: 'Остались вопросы перед съемкой? Мы собрали ответы на самые частые из них.',
+        faqQ1: 'Как забронировать студию и требуется ли предоплата?',
+        faqA1: '<p>Просто напишите нам в WhatsApp или Telegram. Сообщите желаемую дату, время и формат съемки, и мы проверим доступность слотов.</p><p>Для подтверждения бронирования вносится предоплата 50% от общей стоимости. После получения депозита слот закрепляется исключительно за вами. Оставшаяся часть оплачивается после завершения съемки.</p>',
+        faqQ2: 'Какая минимальная длительность аренды и часы работы студии?',
+        faqA2: '<p>Минимальное время бронирования — 1 час. Мы работаем ежедневно с 09:00 до 22:00.</p><p>Нужно провести съемку ночью? Мы можем организовать ночную смену по предварительному согласованию. Ночные часы рассчитываются по коэффициенту 1.5×.</p>',
+        faqQ3: 'Можно ли арендовать студию без оператора и снимать самостоятельно?',
+        faqA3: '<p>Да, конечно. Мы предлагаем аренду студии (Dry Hire) от 700 000 IDR в час, включая всю настроенную световую схему, интерьерные зоны и беспроводные петличные микрофоны.</p><p>Это идеальный вариант, если у вас свои камеры или работает собственная съемочная группа. Также при необходимости вы можете арендовать у нас дополнительные камеры и аудиооборудование.</p><p>Если же вам нужен полноценный продакшн без технических забот, рекомендуем заказать пакетную съемку с нашими операторами.</p>',
+        faqQ4: 'Есть ли у вас бесплатная парковка?',
+        faqA4: '<p>Да, прямо возле входа в студию есть собственная бесплатная парковка, подходящая как для автомобилей, так и для байков.</p>',
+        faqQ5: 'Предоставляете ли вы услуги видеомонтажа?',
+        faqA5: '<p>Да, мы монтируем подкасты, YouTube-выпуски, онлайн-курсы и все форматы вертикального контента (Reels / Shorts).</p><p>Монтаж можно добавить к бронированию как дополнительную услугу и оплатить вместе со студийной сменой.</p>',
+        faqQ6: 'Можно ли заказать выездную съемку?',
+        faqA6: '<p>Да, безусловно. Мы проводим профессиональные выездные видеосъемки локаций, мероприятий и контента на выезде по всему Бали.</p><p>Обсудить техническое задание и забронировать выездную съемку можно с нашим менеджером в WhatsApp или Telegram.</p>',
         footerAbout: 'Премиальная медиастудия на Бали. Создаем продающий видеоконтент, подкасты и образовательные курсы для брендов и авторов.',
         footerColServices: 'Услуги',
         footerColInfra: 'Инфраструктура',
@@ -3282,6 +3520,29 @@
         window.open(`https://wa.me/6282314734072?text=${text}`, '_blank');
       } else {
         window.open(`https://t.me/iconmediastudio?text=${text}`, '_blank');
+      }
+    }
+
+    /* FAQ Accordion Toggle */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isActive = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-item').forEach(el => {
+        if (el !== item) {
+          el.classList.remove('active');
+          const ans = el.querySelector('.faq-answer');
+          if (ans) ans.style.maxHeight = null;
+        }
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        item.classList.remove('active');
+        answer.style.maxHeight = null;
       }
     }
 
