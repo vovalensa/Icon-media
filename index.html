@@ -35,9 +35,9 @@
     body {
       background-color: var(--bg-main);
       background-image: 
-        radial-gradient(ellipse 800px 600px at 0% 38%, rgba(255, 68, 10, 0.12) 0%, rgba(7, 7, 9, 0) 70%),
-        radial-gradient(ellipse 950px 600px at 50% 55%, rgba(255, 68, 10, 0.11) 0%, rgba(7, 7, 9, 0) 70%),
-        radial-gradient(ellipse 1000px 650px at 80% 78%, rgba(255, 68, 10, 0.16) 0%, rgba(7, 7, 9, 0) 70%);
+        radial-gradient(ellipse 800px 600px at 0% 38%, rgba(255, 68, 10, 0.1) 0%, rgba(7, 7, 9, 0) 70%),
+        radial-gradient(ellipse 950px 600px at 50% 55%, rgba(255, 68, 10, 0.1) 0%, rgba(7, 7, 9, 0) 70%),
+        radial-gradient(ellipse 1000px 650px at 80% 78%, rgba(255, 68, 10, 0.15) 0%, rgba(7, 7, 9, 0) 70%);
       background-attachment: scroll;
       background-repeat: no-repeat;
       color: var(--text-main);
@@ -70,13 +70,14 @@
       transform: translateY(0);
     }
 
+    /* Authority Badge */
     .authority-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 7px 16px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(14, 14, 20, 0.7);
       border: 1px solid var(--border-light);
       color: #eaeaf2;
       font-size: 12px;
@@ -116,6 +117,7 @@
       pointer-events: none;
     }
 
+    /* Buttons */
     .btn-pill {
       display: inline-flex;
       align-items: center;
@@ -136,14 +138,14 @@
     }
 
     .btn-pill-dark {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(14, 14, 20, 0.65);
       border-color: var(--border-light);
       color: #fff;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .btn-pill-dark:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
     }
@@ -210,12 +212,6 @@
       background-color: var(--bg-main);
     }
 
-    body.view-tablet .hero-fullbleed-inner,
-    body.view-mobile .hero-fullbleed-inner {
-      grid-template-columns: 1fr !important;
-      gap: 30px !important;
-    }
-
     body.view-tablet .cards-grid,
     body.view-mobile .cards-grid,
     body.view-tablet .sets-grid,
@@ -271,7 +267,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 7, 9, 0.82);
+      background: rgba(7, 7, 9, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 14px 0;
@@ -395,54 +391,73 @@
       line-height: 1.6;
     }
 
-    /* =========================================================
-       1. HERO SECTION: ПОЛНОРАЗМЕРНЫЙ БЭКГРАУНД КАК В РЕФЕРЕНСЕ
-       ========================================================= */
-    .hero-fullbleed-section {
+    /* ========================================================
+       1. HERO SECTION (ВАРИАНТ 3: OBJECT-FIT CONTAIN + БЕСШОВНОЕ СЛИЯНИЕ)
+       ======================================================== */
+    .hero-section {
       position: relative;
-      min-height: 90vh;
+      min-height: 640px;
+      padding: 80px 0 70px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 90px 0 50px;
       overflow: hidden;
-      background-color: var(--bg-main);
     }
 
-    /* Растянутая фоновая картинка студии */
+    /* Фотография расположена справа и помещается полностью по высоте */
     .hero-bg-media {
       position: absolute;
-      inset: 0;
-      width: 100%;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 58%;
       height: 100%;
-      object-fit: cover;
-      object-position: right 30%; /* Центрует правое кресло и торшер */
       z-index: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .hero-bg-media img {
+      max-height: 94%;
+      width: auto;
+      object-fit: contain; /* Картинка полностью помещается без обрезки */
+      object-position: right center;
+      display: block;
+      /* Мягкое растворение левого, верхнего и нижнего краев фото */
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 75% 50%, black 50%, transparent 95%);
+      mask-image: radial-gradient(ellipse 90% 90% at 75% 50%, black 50%, transparent 95%);
+    }
+
+    /* Дополнительный линейный градиент слева для читаемости текста */
+    .hero-bg-gradient-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: 
+        linear-gradient(90deg, #070709 0%, #070709 38%, rgba(7, 7, 9, 0.85) 54%, rgba(7, 7, 9, 0.2) 75%, transparent 100%),
+        linear-gradient(180deg, rgba(7, 7, 9, 0.4) 0%, transparent 15%, transparent 80%, #070709 100%);
       pointer-events: none;
     }
 
-    /* Кинематографичный многослойный градиент для мягкого слияния */
-    .hero-bg-vignette {
+    /* Теплый фоновый свет вокруг торшера */
+    .hero-bg-glow {
       position: absolute;
-      inset: 0;
-      background: 
-        /* Плотная левая вуаль под текст */
-        linear-gradient(to right, rgba(7, 7, 9, 0.94) 0%, rgba(7, 7, 9, 0.88) 42%, rgba(7, 7, 9, 0.35) 75%, rgba(7, 7, 9, 0.65) 100%),
-        /* Растворение внизу и сверху */
-        linear-gradient(to bottom, rgba(7, 7, 9, 0.5) 0%, transparent 20%, transparent 65%, var(--bg-main) 100%),
-        /* Теплый янтарный отсвет справа */
-        radial-gradient(ellipse at 85% 30%, rgba(255, 68, 10, 0.22) 0%, transparent 60%);
+      top: 20%;
+      right: 8%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 68, 10, 0.22) 0%, rgba(7, 7, 9, 0) 70%);
+      filter: blur(65px);
       z-index: 1;
       pointer-events: none;
     }
 
-    .hero-fullbleed-inner {
+    .hero-content-wrap {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 50px;
-      align-items: center;
+      max-width: 620px; /* Контент строго слева */
     }
 
     .hero-badge-row {
@@ -459,7 +474,7 @@
       gap: 8px;
       padding: 7px 16px;
       border-radius: 999px;
-      background: rgba(18, 18, 25, 0.8);
+      background: rgba(14, 14, 20, 0.75);
       border: 1px solid var(--border-light);
       font-size: 12px;
       backdrop-filter: blur(10px);
@@ -469,97 +484,67 @@
 
     .hero-title {
       font-family: var(--font-heading);
-      font-size: 54px;
+      font-size: 52px;
       font-weight: 900;
-      letter-spacing: -1.8px;
+      letter-spacing: -1.6px;
       line-height: 1.08;
       margin-bottom: 22px;
       color: #fff;
     }
 
     .hero-title-highlight {
-      background: linear-gradient(135deg, #ffffff 25%, #ff5e26 85%);
+      background: linear-gradient(135deg, #ffffff 30%, #ff5e26 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-sub {
-      color: #d1d1e0;
+      color: var(--text-muted);
       font-size: 16.5px;
       line-height: 1.6;
       margin-bottom: 26px;
-      max-width: 600px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-features-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-bottom: 34px;
+      font-size: 13px;
+      color: #d6d6e2;
+    }
+
+    .hero-features-line span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-features-line i {
+      color: var(--flame-orange);
+      font-size: 11px;
     }
 
     .hero-cta-btns {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-
-    .hero-bottom-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 13px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 18px;
-      max-width: 620px;
-    }
-
-    .hero-bottom-tags span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-bottom-tags span:not(:last-child)::after {
-      content: '|';
-      margin-left: 14px;
-      color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Правая информационная карточка (как на референсе) */
-    .hero-feature-card-floating {
-      background: rgba(14, 14, 20, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 26px 28px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 68, 10, 0.15);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 360px;
-      margin-left: auto;
-    }
-
-    .hero-spec-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #eaeaf2;
-    }
-
-    .hero-spec-item i {
-      color: var(--flame-orange);
-      font-size: 13px;
     }
 
     /* CREDIBILITY STRIP */
     .cred-strip {
       border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
-      background: rgba(14, 14, 19, 0.6);
+      background: rgba(14, 14, 19, 0.7);
       padding: 24px 0;
-      backdrop-filter: blur(10px);
       position: relative;
       z-index: 2;
+      backdrop-filter: blur(12px);
     }
 
     .cred-bar-grid {
@@ -1174,7 +1159,7 @@
       margin-bottom: 3px;
     }
 
-    /* 7. CALCULATOR SECTION */
+    /* 7. CALCULATOR SECTION WITH FOCUS GLOW */
     .calc-section {
       padding: 100px 0;
       border-top: 1px solid var(--border-subtle);
@@ -1653,10 +1638,25 @@
     .modal-close-btn:hover { background: var(--flame-orange); }
 
     @media (max-width: 992px) {
-      .hero-fullbleed-section { padding: 60px 0 40px; min-height: auto; }
+      .hero-section {
+        min-height: auto;
+        padding: 60px 0 60px;
+      }
+      .hero-bg-media {
+        width: 100%;
+        opacity: 0.35;
+      }
+      .hero-bg-media img {
+        max-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .hero-bg-gradient-scrim {
+        background: linear-gradient(180deg, rgba(7, 7, 9, 0.85) 0%, rgba(7, 7, 9, 0.95) 100%);
+      }
       .datetime-row { grid-template-columns: 1fr; }
-      .hero-title { font-size: 38px; }
-      .hero-feature-card-floating { max-width: 100%; margin-left: 0; }
+      .hero-title { font-size: 40px; }
       .cards-grid, .sets-grid, .equip-grid, .infra-grid, .calc-grid, .footer-grid, .cred-bar-grid { grid-template-columns: 1fr; }
       .footer-watermark { font-size: 50px; }
       .device-switcher-bar { display: none; }
@@ -1717,120 +1717,83 @@
 
   <div id="pageFrameWrapper">
     <main>
-      <!-- =================================================================
-           1. HERO SECTION: ПОЛНОРАЗМЕРНЫЙ ФОН С БЕСШОВНЫМ ПЕРЕХОДОМ
-           ================================================================= -->
-      <section class="hero-fullbleed-section">
-        <!-- Полноразмерный фон фотографии (IMG_2523.jpg) -->
-        <img src="IMG_2523.jpg" 
-             alt="Icon Media Studio Bali Emerald Lounge Setup" 
-             class="hero-bg-media" 
-             onerror="this.src='hero-studio-emerald.jpg'">
+      <!-- 1. HERO SECTION: ПОЛНОЕ КРЕСЛО СПРАВА + БЕСШОВНОЕ РАСТВОРЕНИЕ -->
+      <section class="hero-section">
+        <!-- Фотография справа: 100% высота кадра, без обрезки деталей -->
+        <div class="hero-bg-media">
+          <img src="IMG_2523.jpg" alt="Icon Media Studio Bali Background" onerror="this.src='hero-studio-emerald.jpg'">
+        </div>
         
-        <!-- Оверлей для идеального растворения и контраста текста слева -->
-        <div class="hero-bg-vignette"></div>
+        <!-- Градиентное слияние с глубоким темным фоном сайта слева и снизу -->
+        <div class="hero-bg-gradient-scrim"></div>
+        <div class="hero-bg-glow"></div>
 
         <div class="container">
-          <div class="hero-fullbleed-inner">
-            
-            <!-- Левая колонка с текстом и CTA -->
-            <div class="reveal-item">
-              <div class="hero-badge-row">
-                <div class="authority-badge">
-                  <i class="fa-solid fa-circle-dot"></i>
-                  <span>CANGGU / BALI • PRODUCTION STUDIO</span>
-                </div>
-                
-                <div class="google-pill">
-                  <i class="fa-brands fa-google"></i>
-                  <span style="font-weight: 700;">5.0</span>
-                  <span class="stars">★★★★★</span>
-                  <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
-                </div>
+          <div class="hero-content-wrap reveal-item">
+            <div class="hero-badge-row">
+              <div class="authority-badge">
+                <i class="fa-solid fa-circle-dot"></i>
+                <span>CANGGU / BALI • PRODUCTION STUDIO</span>
               </div>
-
-              <h1 class="hero-title" data-i18n="heroTitle">
-                Where Bali’s Leading Creators & Brands <span class="hero-title-highlight">Record High-Impact Video</span>
-              </h1>
-
-              <p class="hero-sub" data-i18n="heroSub1">
-                Multi-camera 4K podcasting, vertical Reels batching, and turnkey post-production. Zero technical hassle — walk in, record with cinema clarity, leave with master files.
-              </p>
-
-              <div class="hero-cta-btns">
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 13px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
-                  Calculate & Reserve
-                </a>
-                <a href="#portfolio" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;" data-i18n="heroBtnReel">
-                  <i class="fa-solid fa-play" style="font-size: 11px;"></i> Watch Showreel
-                </a>
-              </div>
-
-              <div class="hero-bottom-tags">
-                <span data-i18n="tagPod">Podcasts</span>
-                <span data-i18n="tagVid">YouTube Video</span>
-                <span data-i18n="tagReelsShort">Reels & Shorts</span>
-                <span data-i18n="tagLive">Live Broadcasts</span>
-                <span data-i18n="tagTurnkey">Turnkey Editing</span>
+              
+              <div class="google-pill">
+                <i class="fa-brands fa-google"></i>
+                <span style="font-weight: 700;">5.0</span>
+                <span class="stars">★★★★★</span>
+                <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
               </div>
             </div>
 
-            <!-- Правая парящая карточка со спецификациями студии (по референсу) -->
-            <div class="reveal-item" style="display: flex; justify-content: flex-end;">
-              <div class="hero-feature-card-floating">
-                <div style="font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--flame-orange); margin-bottom: 2px;">
-                  STUDIO SPECS
-                </div>
-                <div class="hero-spec-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>3 Unique Filming Sets</span>
-                </div>
-                <div class="hero-spec-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Sony 4K FX Cinema Line</span>
-                </div>
-                <div class="hero-spec-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Broadcast Shure SM7B Mics</span>
-                </div>
-                <div class="hero-spec-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Dedicated Sound Engineer</span>
-                </div>
-                <div class="hero-spec-item">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>300 Mbps Dedicated Fiber</span>
-                </div>
-              </div>
+            <h1 class="hero-title" data-i18n="heroTitle">
+              Where Bali’s Leading Creators & Brands <span class="hero-title-highlight">Record High-Impact Video</span>
+            </h1>
+
+            <p class="hero-sub" data-i18n="heroSub1">
+              Multi-camera 4K podcasting, vertical Reels batching, and turnkey post-production. Zero technical hassle — walk in, record with cinema clarity, leave with master files.
+            </p>
+
+            <div class="hero-features-line">
+              <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf1">3x Sony 4K FX Cinema Line</strong></span>
+              <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf2">Broadcast Shure SM7B Audio</strong></span>
+              <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf3">100% Soundproof Treated</strong></span>
+              <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf4">Same-Day Rushes Delivery</strong></span>
             </div>
 
+            <div class="hero-cta-btns">
+              <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 13px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
+                Calculate & Reserve
+              </a>
+              <a href="#portfolio" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;" data-i18n="heroBtnReel">
+                <i class="fa-solid fa-play" style="font-size: 11px;"></i> Watch Showreel
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Credibility Strip -->
+        <div class="cred-strip reveal-item" style="margin-top: 55px;">
+          <div class="container">
+            <div class="cred-bar-grid">
+              <div>
+                <div class="cred-stat-val counter-number" data-target="270" data-suffix="+">270+</div>
+                <div class="cred-stat-lbl" data-i18n="cred1">Episodes Recorded</div>
+              </div>
+              <div>
+                <div class="cred-stat-val">5.0 ★</div>
+                <div class="cred-stat-lbl" data-i18n="cred2">Google Maps Rating</div>
+              </div>
+              <div>
+                <div class="cred-stat-val">4K 10-Bit</div>
+                <div class="cred-stat-lbl" data-i18n="cred3">Sony Cinema Line</div>
+              </div>
+              <div>
+                <div class="cred-stat-val">300 Mbps</div>
+                <div class="cred-stat-lbl" data-i18n="cred4">Dedicated Optical Fiber</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      <!-- Credibility Strip -->
-      <div class="cred-strip reveal-item">
-        <div class="container">
-          <div class="cred-bar-grid">
-            <div>
-              <div class="cred-stat-val counter-number" data-target="270" data-suffix="+">270+</div>
-              <div class="cred-stat-lbl" data-i18n="cred1">Episodes Recorded</div>
-            </div>
-            <div>
-              <div class="cred-stat-val">5.0 ★</div>
-              <div class="cred-stat-lbl" data-i18n="cred2">Google Maps Rating</div>
-            </div>
-            <div>
-              <div class="cred-stat-val">4K 10-Bit</div>
-              <div class="cred-stat-lbl" data-i18n="cred3">Sony Cinema Line</div>
-            </div>
-            <div>
-              <div class="cred-stat-val">300 Mbps</div>
-              <div class="cred-stat-lbl" data-i18n="cred4">Dedicated Optical Fiber</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- 2. PORTFOLIO SHOWREEL -->
       <section class="portfolio-section" id="portfolio">
@@ -1975,7 +1938,6 @@
           </div>
 
           <div class="sets-grid" id="setsContainer">
-            <!-- Setup 1 -->
             <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="emeraldGalleryBox">
@@ -2014,7 +1976,6 @@
               </div>
             </div>
 
-            <!-- Setup 2 -->
             <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="deskGalleryBox">
@@ -2054,7 +2015,6 @@
               </div>
             </div>
 
-            <!-- Setup 3 -->
             <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap">
@@ -2077,7 +2037,6 @@
               </div>
             </div>
 
-            <!-- REELS SETUP 1 -->
             <div class="set-card" data-setcat="reels" style="display: none;">
               <div>
                 <div class="set-img-wrap">
@@ -2100,7 +2059,6 @@
               </div>
             </div>
 
-            <!-- REELS SETUP 2 -->
             <div class="set-card" data-setcat="reels" style="display: none;">
               <div>
                 <div class="set-img-wrap">
@@ -2123,7 +2081,6 @@
               </div>
             </div>
 
-            <!-- STREAM SETUP -->
             <div class="set-card" data-setcat="stream" style="display: none;">
               <div>
                 <div class="set-img-wrap">
@@ -2673,13 +2630,12 @@
         ctaBook: 'Book Session',
         heroTitle: 'Where Bali’s Leading Creators & Brands <span class="hero-title-highlight">Record High-Impact Video</span>',
         heroSub1: 'Multi-camera 4K podcasting, vertical Reels batching, and turnkey post-production. Zero technical hassle — walk in, record with cinema clarity, leave with master files.',
+        hf1: '3x Sony 4K FX Cinema Line',
+        hf2: 'Broadcast Shure SM7B Audio',
+        hf3: '100% Soundproof Treated',
+        hf4: 'Same-Day Rushes Delivery',
         heroBtnCalc: 'Calculate & Reserve',
         heroBtnReel: 'Watch Showreel',
-        tagPod: 'Podcasts',
-        tagVid: 'YouTube Video',
-        tagReelsShort: 'Reels & Shorts',
-        tagLive: 'Live Broadcasts',
-        tagTurnkey: 'Turnkey Editing',
         cred1: 'Episodes Recorded',
         cred2: 'Google Maps Rating',
         cred3: 'Sony Cinema Line',
@@ -2821,13 +2777,12 @@
         ctaBook: 'Забронировать',
         heroTitle: 'Пространство, где авторы и бренды Бали <span class="hero-title-highlight">создают топовое видео</span>',
         heroSub1: 'Многокамерная съемка подкастов 4K, пакетная запись Reels и монтаж под ключ. Ноль технических забот: заходите в студию, записываете с кино-качеством, уходите с готовыми мастер-файлами.',
+        hf1: '3x Sony 4K FX Cinema Line',
+        hf2: 'Вещательный звук Shure SM7B',
+        hf3: '100% шумоизоляция зала',
+        hf4: 'Отдача исходников в день съемки',
         heroBtnCalc: 'Рассчитать и выбрать дату',
         heroBtnReel: 'Смотреть шоурил',
-        tagPod: 'Подкасты',
-        tagVid: 'YouTube-шоу',
-        tagReelsShort: 'Reels & Shorts',
-        tagLive: 'Прямые трансляции',
-        tagTurnkey: 'Монтаж под ключ',
         cred1: 'Выпусков записано',
         cred2: 'Рейтинг Google Maps',
         cred3: 'Кинокамеры Sony FX',
