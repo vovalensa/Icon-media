@@ -1399,22 +1399,51 @@
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 12px;
-      margin-bottom: 26px;
+      margin-bottom: 14px;
+    }
+
+    .date-input-wrapper {
+      position: relative;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .date-input-wrapper i.fa-calendar-days {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--flame-orange);
+      font-size: 16px;
+      pointer-events: none;
+      filter: drop-shadow(0 0 6px rgba(255, 59, 0, 0.5));
     }
 
     .input-field-dark {
       width: 100%;
-      background: rgba(22, 22, 30, 0.8);
+      background: rgba(22, 22, 30, 0.85);
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 13px 16px;
       color: #fff;
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       outline: none;
       transition: all 0.2s ease;
+      color-scheme: dark;
     }
+
+    .date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     .input-field-dark:focus {
       border-color: var(--flame-orange);
       box-shadow: 0 0 15px rgba(255, 59, 0, 0.25);
@@ -1422,6 +1451,25 @@
     .input-field-dark option {
       background: #14141c;
       color: #fff;
+    }
+
+    /* Ночной баннер-предупреждение */
+    .night-warning-banner {
+      display: none;
+      background: rgba(147, 51, 234, 0.12);
+      border: 1px dashed rgba(168, 85, 247, 0.5);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #c084fc;
+      line-height: 1.45;
+      margin-bottom: 24px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .night-warning-banner.active {
+      display: flex;
     }
 
     .hours-picker {
@@ -1498,6 +1546,12 @@
       margin-bottom: 14px;
     }
 
+    .bill-row.night-row {
+      color: #c084fc;
+      font-weight: 700;
+      display: none;
+    }
+
     .bill-total-row {
       margin-top: 18px;
       padding-top: 18px;
@@ -1515,11 +1569,45 @@
       text-shadow: 0 2px 20px rgba(255, 255, 255, 0.2);
     }
 
+    /* Мотивирующий призыв к бронированию со скидкой 10% */
+    .bill-promo-cta-box {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 59, 0, 0.16) 0%, rgba(255, 90, 31, 0.06) 100%);
+      border: 1px dashed rgba(255, 59, 0, 0.55);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(255, 59, 0, 0.12);
+    }
+
+    .bill-promo-cta-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 59, 0, 0.2);
+      border: 1px solid rgba(255, 59, 0, 0.45);
+      color: var(--flame-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .bill-promo-cta-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ff9166;
+      line-height: 1.4;
+    }
+
     .messenger-buttons {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 26px;
+      margin-top: 20px;
     }
 
     /* 9. FAQ ACCORDION SECTION */
@@ -1776,7 +1864,6 @@
                   <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
                 </div>
                 
-                <!-- Заметная кнопка-бейдж 10% скидки на первый визит -->
                 <a href="#calculator" class="promo-badge-mega">
                   <i class="fa-solid fa-fire"></i>
                   <span data-i18n="offerBadge">10% OFF on First Booking</span>
@@ -1877,7 +1964,7 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card2Price">from 1,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card2Disc">-10% on first visit</div>
+                  <div class="card-discount" data-i18n="card1Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
@@ -1922,7 +2009,7 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card3Price">from 4,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card3Disc">-10% on first visit</div>
+                  <div class="card-discount" data-i18n="card1Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('webinar')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
@@ -1945,7 +2032,7 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card4Price">from 700,000 IDR/h</div>
-                  <div class="card-discount" data-i18n="card4Disc">-10% on first visit</div>
+                  <div class="card-discount" data-i18n="card1Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('rental')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
@@ -2663,21 +2750,62 @@
 
                 <span class="step-title" data-i18n="calcStepDateTime">2. Preferred Date & Time</span>
                 <div class="datetime-row">
-                  <input type="date" id="booking-date" class="input-field-dark" onchange="calcTotal()">
-                  <select id="booking-time" class="input-field-dark" onchange="calcTotal()">
-                    <option value="09:00 WITA">09:00 WITA</option>
-                    <option value="10:00 WITA">10:00 WITA</option>
-                    <option value="11:00 WITA">11:00 WITA</option>
-                    <option value="12:00 WITA">12:00 WITA</option>
-                    <option value="13:00 WITA">13:00 WITA</option>
-                    <option value="14:00 WITA" selected>14:00 WITA</option>
-                    <option value="15:00 WITA">15:00 WITA</option>
-                    <option value="16:00 WITA">16:00 WITA</option>
-                    <option value="17:00 WITA">17:00 WITA</option>
-                    <option value="18:00 WITA">18:00 WITA</option>
-                    <option value="19:00 WITA">19:00 WITA</option>
-                    <option value="20:00 WITA">20:00 WITA</option>
+                  <div class="date-input-wrapper" onclick="openDatePicker()">
+                    <input type="date" id="booking-date" class="input-field-dark" onchange="calcTotal()">
+                    <i class="fa-regular fa-calendar-days"></i>
+                  </div>
+
+                  <!-- Полный список времени: дневной и ночной диапазон -->
+                  <select id="booking-time" class="input-field-dark" onchange="onTimeChange()">
+                    <option value="Any time / Flexible" data-i18n="optFlexible">Any time / Flexible</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00" selected>14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                    <option value="21:30">21:30</option>
+                    <!-- Ночные часы (1.5x) -->
+                    <option value="22:00">22:00 🌙 (Night 1.5×)</option>
+                    <option value="22:30">22:30 🌙 (Night 1.5×)</option>
+                    <option value="23:00">23:00 🌙 (Night 1.5×)</option>
+                    <option value="23:30">23:30 🌙 (Night 1.5×)</option>
+                    <option value="00:00">00:00 🌙 (Night 1.5×)</option>
+                    <option value="01:00">01:00 🌙 (Night 1.5×)</option>
+                    <option value="02:00">02:00 🌙 (Night 1.5×)</option>
+                    <option value="03:00">03:00 🌙 (Night 1.5×)</option>
+                    <option value="04:00">04:00 🌙 (Night 1.5×)</option>
+                    <option value="05:00">05:00 🌙 (Night 1.5×)</option>
+                    <option value="06:00">06:00 🌙 (Night 1.5×)</option>
+                    <option value="07:00">07:00 🌙 (Night 1.5×)</option>
+                    <option value="08:00">08:00 🌙 (Night 1.5×)</option>
+                    <option value="08:30">08:30 🌙 (Night 1.5×)</option>
                   </select>
+                </div>
+
+                <!-- Блок уведомления при выборе ночного тарифа -->
+                <div id="night-warning" class="night-warning-banner">
+                  <i class="fa-solid fa-moon"></i>
+                  <span data-i18n="nightWarningText">🌙 Night session selected (22:00 – 09:00). Night hours are calculated at a 1.5× rate upon prior confirmation.</span>
                 </div>
 
                 <span class="step-title" data-i18n="calcStep2">3. Session Duration</span>
@@ -2712,6 +2840,13 @@
                     <span id="bill-service">Podcast (1h)</span>
                     <span id="bill-base">1 900 000 IDR</span>
                   </div>
+                  
+                  <!-- Строка ночного коэффициента (показывается только ночью) -->
+                  <div class="bill-row night-row" id="bill-night-row">
+                    <span data-i18n="billNightRate">🌙 Night Rate (1.5×):</span>
+                    <span id="bill-night-extra">+0 IDR</span>
+                  </div>
+
                   <div class="bill-row">
                     <span data-i18n="billAddons">Add-ons:</span>
                     <span id="bill-addons">0 IDR</span>
@@ -2720,6 +2855,16 @@
                   <div class="bill-total-row">
                     <span style="font-weight: 800;" data-i18n="billTotal">Total:</span>
                     <span class="final-sum" id="bill-total">1 900 000 IDR</span>
+                  </div>
+
+                  <!-- Акцентный текст-призыв к бронированию со скидкой 10% -->
+                  <div class="bill-promo-cta-box">
+                    <div class="bill-promo-cta-icon">
+                      <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div class="bill-promo-cta-text" data-i18n="billPromoCta">
+                      Book right now and get a 10% discount on your first booking!
+                    </div>
                   </div>
                 </div>
 
@@ -3039,6 +3184,9 @@
         calcSub: 'Select your format, date, and preferred time. Your booking request will be generated and sent directly to WhatsApp or Telegram.',
         calcStep1: '1. Choose Format',
         calcStepDateTime: '2. Preferred Date & Time',
+        optFlexible: 'Any time / Flexible',
+        nightWarningText: '🌙 Night session selected (22:00 – 09:00). Night hours are calculated at a 1.5× rate upon prior confirmation.',
+        billNightRate: '🌙 Night Rate (1.5×):',
         calcOptPod: 'Podcast (3 Cams)',
         calcOptReels: 'Reels / Shorts (1 Cam)',
         calcOptWebinar: 'Webinar / Stream',
@@ -3051,6 +3199,7 @@
         billTitle: 'Estimate Summary',
         billAddons: 'Add-ons:',
         billTotal: 'Total:',
+        billPromoCta: 'Book right now and get a 10% discount on your first booking!',
         btnBookWA: 'Book via WhatsApp',
         btnBookTG: 'Book via Telegram',
         faqPreTitle: 'Frequently Asked Questions',
@@ -3218,9 +3367,12 @@
         calcSub: 'Выберите формат, дату и желаемое время. Заявка сформируется и отправится напрямую в WhatsApp или Telegram.',
         calcStep1: '1. Выберите формат',
         calcStepDateTime: '2. Желаемая дата и время',
+        optFlexible: 'Любое время / Гибкое',
+        nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по предварительному согласованию.',
+        billNightRate: '🌙 Ночной тариф (1.5×):',
         calcOptPod: 'Podcast (3 камеры)',
         calcOptReels: 'Reels / Соцсети (1 камера)',
-        calcOptWebinar: 'Вебинар / Стрим',
+        calcOptWebinar: 'Webinar / Стрим',
         calcOptRental: 'Аренда студии (Dry Hire)',
         calcStep2: '3. Время съемки',
         calcStep3: '4. Оборудование и монтаж',
@@ -3230,6 +3382,7 @@
         billTitle: 'Детали расчета',
         billAddons: 'Доп. опции:',
         billTotal: 'Итого:',
+        billPromoCta: 'Забронируй прямо сейчас и получи скидку 10% на первую съемку!',
         btnBookWA: 'Забронировать в WhatsApp',
         btnBookTG: 'Забронировать в Telegram',
         faqPreTitle: 'Часто задаваемые вопросы',
@@ -3434,6 +3587,37 @@
       return num.toLocaleString('id-ID') + ' IDR';
     }
 
+    /* Определение ночных часов: возвращает долю ночных часов [0..1] */
+    function calculateNightRatio(timeStr, hours) {
+      if (!timeStr || timeStr.includes('Flexible')) return 0;
+      const parts = timeStr.split(':');
+      if (parts.length < 2) return 0;
+      const startHour = parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
+      
+      let nightHoursCount = 0;
+      for (let i = 0; i < hours; i++) {
+        const currentH = (startHour + i) % 24;
+        // Ночные часы: с 22:00 до 09:00
+        if (currentH >= 22 || currentH < 9) {
+          nightHoursCount++;
+        }
+      }
+      return nightHoursCount / hours;
+    }
+
+    function onTimeChange() {
+      const timeVal = document.getElementById('booking-time').value;
+      const warningBanner = document.getElementById('night-warning');
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+
+      if (nightRatio > 0) {
+        warningBanner.classList.add('active');
+      } else {
+        warningBanner.classList.remove('active');
+      }
+      calcTotal();
+    }
+
     function calcTotal() {
       const data = rates[calcService];
       let base = 0;
@@ -3448,12 +3632,26 @@
         else base = data[3] + (calcHours - 3) * data.ext;
       }
 
+      // Расчет ночной наценки 1.5x (то есть +50% к базовой части за ночные часы)
+      const timeVal = document.getElementById('booking-time').value;
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+      const nightExtra = Math.round(base * 0.5 * nightRatio);
+
+      const nightRow = document.getElementById('bill-night-row');
+      const nightExtraEl = document.getElementById('bill-night-extra');
+      if (nightExtra > 0) {
+        nightRow.style.display = 'flex';
+        nightExtraEl.innerText = '+' + formatIDR(nightExtra);
+      } else {
+        nightRow.style.display = 'none';
+      }
+
       let addons = 0;
       if (document.getElementById('addon-prompter').checked) addons += 300000;
       if (document.getElementById('addon-fx30').checked) addons += 300000;
       if (document.getElementById('addon-edit').checked) addons += 600000;
 
-      const regularTotal = base + addons;
+      const regularTotal = base + nightExtra + addons;
 
       const srvName = currentLang === 'en' ? data.en : data.ru;
       document.getElementById('bill-service').innerText = `${srvName} (${calcHours}h)`;
@@ -3462,7 +3660,19 @@
       document.getElementById('bill-total').innerText = formatIDR(regularTotal);
     }
 
-    /* Отправка заявки: формируется строго на актуальном языке пользователя */
+    /* Принудительное открытие нативного календаря */
+    function openDatePicker() {
+      const input = document.getElementById('booking-date');
+      if (input) {
+        if (typeof input.showPicker === 'function') {
+          input.showPicker();
+        } else {
+          input.focus();
+        }
+      }
+    }
+
+    /* Отправка заявки: стандартная сумма без скидки, менеджер считает скидку индивидуально */
     function sendToMessenger(ch) {
       const data = rates[calcService];
       let base = 0;
@@ -3476,6 +3686,10 @@
         if (calcHours <= 3) base = data[calcHours];
         else base = data[3] + (calcHours - 3) * data.ext;
       }
+
+      const timeVal = document.getElementById('booking-time').value;
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+      const nightExtra = Math.round(base * 0.5 * nightRatio);
 
       let addons = 0;
       let addonsList = [];
@@ -3492,7 +3706,7 @@
         addonsList.push(currentLang === 'en' ? 'Video Editing' : 'Монтаж');
       }
 
-      const regularTotal = base + addons;
+      const regularTotal = base + nightExtra + addons;
 
       const rawDate = document.getElementById('booking-date').value;
       let chosenDate = rawDate;
@@ -3509,12 +3723,18 @@
         chosenDate = currentLang === 'en' ? 'Flexible / To discuss' : 'Гибкая / Обсудить';
       }
 
-      const chosenTime = document.getElementById('booking-time').value;
+      let chosenTime = timeVal.replace('🌙 (Night 1.5×)', '').trim();
+      if (chosenTime === 'Any time / Flexible') {
+        chosenTime = currentLang === 'en' ? 'Flexible' : 'Гибкое / Любое';
+      }
+
       const srvTitle = currentLang === 'en' ? data.en : data.ru;
+      const nightNoteEn = nightExtra > 0 ? '%0A• Night Rate: 1.5× applied' : '';
+      const nightNoteRu = nightExtra > 0 ? '%0A• Ночной тариф: 1.5×' : '';
 
       const text = currentLang === 'en'
-        ? `Hello! I would like to book Icon Media Studio:%0A%0A• Service: ${srvTitle}%0A• Date: ${chosenDate}%0A• Start time: ${chosenTime}%0A• Duration: ${calcHours}h%0A• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}%0A• Total: ${formatIDR(regularTotal)}%0A%0AIs this slot available?`
-        : `Здравствуйте! Хочу забронировать студию Icon Media:%0A%0A• Формат: ${srvTitle}%0A• Дата: ${chosenDate}%0A• Время начала: ${chosenTime}%0A• Длительность: ${calcHours} ч%0A• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}%0A• Итого: ${formatIDR(regularTotal)}%0A%0AСвободен ли этот слот?`;
+        ? `Hello! I would like to book Icon Media Studio:%0A%0A• Service: ${srvTitle}%0A• Date: ${chosenDate}%0A• Start time: ${chosenTime}%0A• Duration: ${calcHours}h${nightNoteEn}%0A• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}%0A• Total: ${formatIDR(regularTotal)}%0A%0AIs this slot available?`
+        : `Здравствуйте! Хочу забронировать студию Icon Media:%0A%0A• Формат: ${srvTitle}%0A• Дата: ${chosenDate}%0A• Время начала: ${chosenTime}%0A• Длительность: ${calcHours} ч${nightNoteRu}%0A• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}%0A• Итого: ${formatIDR(regularTotal)}%0A%0AСвободен ли этот слот?`;
 
       if (ch === 'wa') {
         window.open(`https://wa.me/6282314734072?text=${text}`, '_blank');
