@@ -58,6 +58,84 @@
       z-index: 2;
     }
 
+    /* Scroll Reveal Animation */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glow Pulse Animation for Promo Badges */
+    @keyframes megaGlowPulse {
+      0%, 100% {
+        box-shadow: 0 0 16px rgba(255, 59, 0, 0.35), inset 0 0 10px rgba(255, 59, 0, 0.15);
+        border-color: rgba(255, 59, 0, 0.6);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 59, 0, 0.75), inset 0 0 15px rgba(255, 59, 0, 0.3);
+        border-color: rgba(255, 90, 31, 1);
+        transform: scale(1.02);
+      }
+    }
+
+    .promo-badge-mega {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 59, 0, 0.22) 0%, rgba(255, 90, 31, 0.12) 100%);
+      border: 1.5px solid var(--flame-orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(12px);
+      animation: megaGlowPulse 2.8s ease-in-out infinite;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .promo-badge-mega:hover {
+      background: linear-gradient(135deg, rgba(255, 59, 0, 0.35) 0%, rgba(255, 90, 31, 0.2) 100%);
+    }
+    .promo-badge-mega i {
+      color: #ff3b00;
+      font-size: 14px;
+    }
+
+    /* Shimmer Button Effect */
+    @keyframes shimmerMove {
+      0% { transform: translateX(-140%) skewX(-20deg); }
+      20%, 100% { transform: translateX(200%) skewX(-20deg); }
+    }
+
+    .btn-pill-orange {
+      background: linear-gradient(135deg, var(--flame-orange), #ff5a1f);
+      color: #fff;
+      box-shadow: 0 6px 22px rgba(255, 59, 0, 0.38);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-pill-orange::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      bottom: -50%;
+      left: 0;
+      width: 45%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
+      animation: shimmerMove 4.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
     /* Device Viewport Switcher */
     .device-switcher-bar {
       position: fixed;
@@ -281,12 +359,6 @@
       border: 1px solid transparent;
     }
 
-    .btn-pill-orange {
-      background: linear-gradient(135deg, var(--flame-orange), #ff5a1f);
-      color: #fff;
-      box-shadow: 0 6px 22px rgba(255, 59, 0, 0.38);
-    }
-
     .btn-pill-orange:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 30px rgba(255, 59, 0, 0.55);
@@ -305,7 +377,7 @@
       transform: translateY(-2px);
     }
 
-    /* SECTION HEADERS (PRE-TITLES) */
+    /* SECTION HEADERS */
     .section-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -360,7 +432,7 @@
     .hero-badge-row {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 22px;
       flex-wrap: wrap;
     }
@@ -369,7 +441,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
       background: rgba(18, 18, 24, 0.85);
       border: 1px solid var(--border-light);
@@ -378,19 +450,6 @@
     }
     .google-pill i.fa-google { color: #ea4335; }
     .stars { color: #ffb800; font-size: 11px; letter-spacing: 1.5px; }
-
-    .offer-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 15px;
-      border-radius: 999px;
-      background: rgba(255, 59, 0, 0.14);
-      border: 1px solid rgba(255, 59, 0, 0.4);
-      color: #ff6a38;
-      font-size: 12px;
-      font-weight: 700;
-      backdrop-filter: blur(10px);
-    }
 
     .hero-title {
       font-family: var(--font-heading);
@@ -1307,7 +1366,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .opt-btn {
@@ -1335,10 +1394,40 @@
       box-shadow: 0 4px 18px rgba(255, 59, 0, 0.25);
     }
 
+    /* Date & Time Picker Row */
+    .datetime-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .input-field-dark {
+      width: 100%;
+      background: rgba(22, 22, 30, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .input-field-dark:focus {
+      border-color: var(--flame-orange);
+      box-shadow: 0 0 15px rgba(255, 59, 0, 0.25);
+    }
+    .input-field-dark option {
+      background: #14141c;
+      color: #fff;
+    }
+
     .hours-picker {
       display: flex;
       gap: 12px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .hour-btn {
@@ -1409,11 +1498,6 @@
       margin-bottom: 14px;
     }
 
-    .bill-row.green {
-      color: #22c55e;
-      font-weight: 700;
-    }
-
     .bill-total-row {
       margin-top: 18px;
       padding-top: 18px;
@@ -1427,8 +1511,8 @@
       font-family: var(--font-heading);
       font-size: 30px;
       font-weight: 900;
-      color: var(--flame-orange);
-      text-shadow: 0 2px 25px rgba(255, 59, 0, 0.45);
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(255, 255, 255, 0.2);
     }
 
     .messenger-buttons {
@@ -1507,6 +1591,7 @@
           radial-gradient(ellipse 650px 450px at 50% 90%, rgba(255, 59, 0, 0.2) 0%, rgba(6, 6, 8, 0) 75%);
       }
       .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .datetime-row { grid-template-columns: 1fr; }
       .hero-title { font-size: 40px; }
       .hero-photo-card { height: 400px; }
       .cards-grid, .sets-grid, .equip-grid, .portfolio-grid, .infra-grid, .calc-grid, .footer-grid { grid-template-columns: 1fr; }
@@ -1558,11 +1643,11 @@
           <button type="button" class="lang-btn" id="btn-ru" onclick="switchLanguage('ru')">RU</button>
         </div>
 
-        <a href="https://wa.me/6287865026481" target="_blank" class="btn-pill btn-pill-dark">
+        <a href="https://wa.me/6282314734072" target="_blank" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> WhatsApp
         </a>
         <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange">
-          <span data-i18n="ctaBook">Book with -10%</span>
+          <i class="fa-solid fa-fire"></i> <span data-i18n="ctaBook">Book with -10%</span>
         </a>
       </div>
     </div>
@@ -1571,23 +1656,26 @@
   <!-- Page Wrapper for Viewport Emulation -->
   <div id="pageFrameWrapper">
     <main>
-      <!-- 1. HERO SECTION (SPLIT SCREEN PREMIUM SHOWCASE) -->
+      <!-- 1. HERO SECTION -->
       <section class="hero-section">
         <div class="container">
           
           <div class="hero-grid">
             <!-- Left Text Column -->
-            <div>
+            <div class="reveal-item">
               <div class="hero-badge-row">
                 <div class="google-pill">
                   <i class="fa-brands fa-google"></i>
-                  <span style="font-weight: 700;">5.0</span>
+                  <span style="font-weight: 700;" class="counter-number" data-target="5.0" data-decimals="1">5.0</span>
                   <span class="stars">★★★★★</span>
                   <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
                 </div>
-                <div class="offer-pill" data-i18n="offerBadge">
-                  10% OFF your first session
-                </div>
+                
+                <!-- Заметная кнопка-бейдж 10% скидки на первый визит -->
+                <a href="#calculator" class="promo-badge-mega">
+                  <i class="fa-solid fa-fire"></i>
+                  <span data-i18n="offerBadge">10% OFF on First Booking</span>
+                </a>
               </div>
 
               <h1 class="hero-title" data-i18n="heroTitle">
@@ -1607,16 +1695,16 @@
 
               <div class="hero-cta-btns">
                 <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 13px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
-                  Calculate Session (-10%)
+                  Book Slot
                 </a>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20learn%20more%20about%20booking%20Icon%20Media%20Studio" target="_blank" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;">
+                <a href="https://wa.me/6282314734072?text=Hello!%20I%20want%20to%20learn%20more%20about%20booking%20Icon%20Media%20Studio" target="_blank" class="btn-pill btn-pill-dark" style="padding: 13px 24px; font-size: 14px;">
                   <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> Chat in WhatsApp
                 </a>
               </div>
             </div>
 
             <!-- Right Photo Showcase Column -->
-            <div class="hero-photo-wrap">
+            <div class="hero-photo-wrap reveal-item">
               <div class="hero-photo-card">
                 <img src="hero-studio-emerald.jpg" alt="Icon Media Studio Bali Podcast Production Lounge" onerror="this.src='podcast-setup-emerald-amber.jpg'">
                 
@@ -1633,7 +1721,7 @@
             </div>
           </div>
 
-          <div class="category-pills">
+          <div class="category-pills reveal-item">
             <button type="button" class="filter-pill active" onclick="filterCards('all', this)" data-i18n="filterAll">All Formats</button>
             <button type="button" class="filter-pill" onclick="filterCards('podcast', this)" data-i18n="filterPodcast">Podcasts in Canggu</button>
             <button type="button" class="filter-pill" onclick="filterCards('reels', this)" data-i18n="filterReels">Reels & Courses</button>
@@ -1645,7 +1733,7 @@
           <div class="cards-grid" id="services">
             
             <!-- Card 1: Podcast -->
-            <div class="studio-card" data-cat="podcast">
+            <div class="studio-card reveal-item" data-cat="podcast">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagPodcast">3 Cameras • Shure</span>
@@ -1661,14 +1749,14 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card1Price">from 1,900,000 IDR</div>
-                  <div class="card-discount" data-i18n="card1Disc">1,710,000 IDR with 10% discount</div>
+                  <div class="card-discount" data-i18n="card1Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
             </div>
 
             <!-- Card 2: Reels -->
-            <div class="studio-card" data-cat="reels">
+            <div class="studio-card reveal-item" data-cat="reels">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagReels">DJI Mic • 4K Teleprompter</span>
@@ -1684,14 +1772,14 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card2Price">from 1,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card2Disc">990,000 IDR with 10% discount</div>
+                  <div class="card-discount" data-i18n="card2Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
             </div>
 
             <!-- Card 3: Webinars & Live Stream -->
-            <div class="studio-card" data-cat="stream">
+            <div class="studio-card reveal-item" data-cat="stream">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagStream">Fiber Optic • Turnkey</span>
@@ -1729,14 +1817,14 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card3Price">from 4,100,000 IDR</div>
-                  <div class="card-discount" data-i18n="card3Disc">3,690,000 IDR with 10% discount</div>
+                  <div class="card-discount" data-i18n="card3Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('webinar')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
             </div>
 
             <!-- Card 4: Studio Rental -->
-            <div class="studio-card" data-cat="rental">
+            <div class="studio-card reveal-item" data-cat="rental">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag">Dry Hire • Lighting</span>
@@ -1752,7 +1840,7 @@
               <div class="card-footer">
                 <div>
                   <div class="card-price" data-i18n="card4Price">from 700,000 IDR/h</div>
-                  <div class="card-discount" data-i18n="card4Disc">630,000 IDR with 10% discount</div>
+                  <div class="card-discount" data-i18n="card4Disc">-10% on first visit</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('rental')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
               </div>
@@ -1767,7 +1855,7 @@
       <section class="sets-section" id="sets">
         <div class="container">
           
-          <div>
+          <div class="reveal-item">
             <span class="section-eyebrow" data-i18n="setsPreTitle">Interactive Stage Selector</span>
             <h2 class="section-heading" data-i18n="setsTitle">Studio Sets & Filming Zones</h2>
             <p class="section-subtext" data-i18n="setsSub">
@@ -1775,7 +1863,7 @@
             </p>
           </div>
 
-          <div class="sets-tabs">
+          <div class="sets-tabs reveal-item">
             <button type="button" class="set-tab-btn active" onclick="switchSets('podcast', this)">
               <i class="fa-solid fa-podcast"></i> <span data-i18n="tabSetPod">Podcast Setups (3 Options)</span>
             </button>
@@ -1789,11 +1877,11 @@
 
           <div class="sets-grid" id="setsContainer">
             
-            <!-- PODCAST SETUP 1 (WITH INTERACTIVE GALLERY) -->
-            <div class="set-card" data-setcat="podcast">
+            <!-- PODCAST SETUP 1 -->
+            <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="emeraldGalleryBox">
-                  <span class="set-badge" data-i18n="badgeSetFeatured">Most Popular</span>
+                  <span class="set-badge pulse-glow" data-i18n="badgeSetFeatured">Most Popular</span>
                   
                   <button type="button" class="gallery-nav-btn gallery-nav-prev" onclick="stepEmeraldGallery(-1)" aria-label="Previous photo">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -1824,12 +1912,12 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Podcast%20Setup%201%20(Emerald%20Amber%20Lounge)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
-            <!-- PODCAST SETUP 2 (WITH INTERACTIVE GALLERY) -->
-            <div class="set-card" data-setcat="podcast">
+            <!-- PODCAST SETUP 2 -->
+            <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="deskGalleryBox">
                   <span class="set-badge">Executive Format</span>
@@ -1864,12 +1952,12 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Podcast%20Setup%202%20(Executive%20Desk)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
             <!-- PODCAST SETUP 3 -->
-            <div class="set-card" data-setcat="podcast">
+            <div class="set-card reveal-item" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Web3 / Tech Style</span>
@@ -1887,7 +1975,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Podcast%20Setup%203%20(Cyber%20Purple%20Neon)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
@@ -1910,7 +1998,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Reels%20Setup%201%20(Dynamic%20Neon)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
@@ -1933,7 +2021,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Reels%20Setup%202%20(Emerald%20Armchair)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
@@ -1956,7 +2044,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Reels%20Setup%203%20(Executive%20Desk)" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
@@ -1979,7 +2067,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: #22c55e; font-weight: 700;">-10% First Booking</span>
-                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20book%20Webinar%20Stage%20Setup" target="_blank" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
           </div>
@@ -1991,7 +2079,7 @@
       <section class="portfolio-section" id="portfolio">
         <div class="container">
           
-          <div class="portfolio-header-wrap">
+          <div class="portfolio-header-wrap reveal-item">
             <div>
               <span class="section-eyebrow" data-i18n="portPreTitle">Our Production Portfolio</span>
               <h2 class="section-heading" data-i18n="portTitle">Featured Episodes & Projects</h2>
@@ -2010,7 +2098,7 @@
             </div>
           </div>
 
-          <div class="portfolio-carousel-track" id="portfolioTrack">
+          <div class="portfolio-carousel-track reveal-item" id="portfolioTrack">
             <!-- Video Card 1 -->
             <div class="video-card" onclick="openVideoModal('GuUftSGhDi0')">
               <div class="video-thumb-box">
@@ -2246,7 +2334,7 @@
       <section class="equip-section" id="equipment">
         <div class="container">
           
-          <div>
+          <div class="reveal-item">
             <span class="section-eyebrow" data-i18n="equipPreTitle">Production Gear</span>
             <h2 class="section-heading" data-i18n="equipTitle">Studio Equipment & Tech Specs</h2>
             <p class="section-subtext" data-i18n="equipSub">
@@ -2257,7 +2345,7 @@
           <div class="equip-grid">
             
             <!-- 1. Sony Cinema Line FX30 / FX3 -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-photo-header">
                 <img src="sony-cinema-line.jpg" alt="Sony Cinema Line FX30 4K Camera Icon Media">
               </div>
@@ -2271,7 +2359,7 @@
             </div>
 
             <!-- 2. Shure SM7B Mic -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-photo-header">
                 <img src="shure-sm7b-mic.jpg" alt="Shure SM7B Microphone on Boom Arm">
               </div>
@@ -2285,7 +2373,7 @@
             </div>
 
             <!-- 3. Audio Console & DJI Mic -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-photo-header">
                 <img src="audio-console-rodecaster.jpg" alt="RODECaster Pro II Console and DJI Mic">
               </div>
@@ -2299,7 +2387,7 @@
             </div>
 
             <!-- 4. Studio Lighting -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-inner-content" style="padding-top: 24px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-lightbulb"></i></div>
@@ -2311,7 +2399,7 @@
             </div>
 
             <!-- 5. Teleprompter & Confidence TV -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-inner-content" style="padding-top: 24px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-tv"></i></div>
@@ -2323,7 +2411,7 @@
             </div>
 
             <!-- 6. Acoustic Soundproofing -->
-            <div class="equip-card">
+            <div class="equip-card reveal-item">
               <div class="equip-inner-content" style="padding-top: 24px;">
                 <div>
                   <div class="equip-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
@@ -2343,7 +2431,7 @@
       <section class="infra-section" id="infra">
         <div class="container">
           
-          <div>
+          <div class="reveal-item">
             <span class="section-eyebrow" data-i18n="infraPreTitle">Studio Infrastructure</span>
             <h2 class="section-heading" data-i18n="infraTitle">Engineered for creator comfort</h2>
           </div>
@@ -2351,7 +2439,7 @@
           <div class="infra-grid">
             
             <!-- 1. Lounge & Waiting Area -->
-            <div class="infra-card">
+            <div class="infra-card reveal-item">
               <div class="infra-photo-header">
                 <img src="lounge-waiting-area.jpg" alt="Icon Media Studio Chill Lounge and Waiting Area">
               </div>
@@ -2370,7 +2458,7 @@
             </div>
 
             <!-- 2. Makeup & Vanity Station -->
-            <div class="infra-card">
+            <div class="infra-card reveal-item">
               <div class="infra-photo-header">
                 <img src="makeup-station.jpg" alt="Icon Media Studio Makeup Vanity Station">
               </div>
@@ -2389,7 +2477,7 @@
             </div>
 
             <!-- 3. Parking Area -->
-            <div class="infra-card" id="parking">
+            <div class="infra-card reveal-item" id="parking">
               <div class="infra-inner-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding-top: 36px;">
                 <div>
                   <i class="fa-solid fa-square-parking" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
@@ -2414,17 +2502,20 @@
       <section class="reviews-section" id="reviews">
         <div class="container">
           
-          <div class="reviews-header-wrap">
+          <div class="reviews-header-wrap reveal-item">
             <div>
               <span class="section-eyebrow" data-i18n="revPreTitle">Social Proof & Real Feedback</span>
               <h2 class="section-heading" data-i18n="revTitle">Verified Google Reviews</h2>
             </div>
 
             <div class="google-score-box">
-              <div class="giant-score">5.0</div>
+              <div class="giant-score counter-number" data-target="5.0" data-decimals="1">5.0</div>
               <div>
                 <div class="score-details-stars">★★★★★</div>
-                <div style="font-size: 13px; color: var(--text-muted);" data-i18n="revMeta">270+ Verified Reviews on Google Maps</div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  <span class="counter-number" data-target="270" data-suffix="+">270+</span> 
+                  <span data-i18n="revMeta">Verified Reviews on Google Maps</span>
+                </div>
               </div>
               <a href="https://maps.google.com" target="_blank" class="btn-pill btn-pill-dark" style="margin-left: 12px;">
                 <i class="fa-brands fa-google" style="color: #ea4335;"></i> <span data-i18n="btnAllGoogle">View on Maps</span>
@@ -2433,8 +2524,10 @@
           </div>
 
           <!-- Elfsight Google Reviews Widget -->
-          <script src="https://elfsightcdn.com/platform.js" async></script>
-          <div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div>
+          <div class="reveal-item">
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div>
+          </div>
 
         </div>
       </section>
@@ -2443,15 +2536,15 @@
       <section class="calc-section" id="calculator">
         <div class="container">
           
-          <div>
+          <div class="reveal-item">
             <span class="section-eyebrow" data-i18n="calcPreTitle">Transparent Estimate</span>
-            <h2 class="section-heading" data-i18n="calcTitle">Instant Price Calculator (10% OFF Included)</h2>
+            <h2 class="section-heading" data-i18n="calcTitle">Studio Estimate & Instant Booking</h2>
             <p class="section-subtext" data-i18n="calcSub">
-              Select your format and hours. The estimate automatically applies your 10% discount and generates a ready booking link.
+              Select your format, date, and preferred time. Your booking request will be generated and sent directly to WhatsApp or Telegram.
             </p>
           </div>
 
-          <div class="calc-box">
+          <div class="calc-box reveal-item">
             <div class="calc-grid">
               
               <div>
@@ -2463,7 +2556,26 @@
                   <button type="button" class="opt-btn" onclick="setService('rental', this)">🏠 <span data-i18n="calcOptRental">Studio Rental (Dry Hire)</span></button>
                 </div>
 
-                <span class="step-title" data-i18n="calcStep2">2. Session Duration</span>
+                <span class="step-title" data-i18n="calcStepDateTime">2. Preferred Date & Time</span>
+                <div class="datetime-row">
+                  <input type="date" id="booking-date" class="input-field-dark" onchange="calcTotal()">
+                  <select id="booking-time" class="input-field-dark" onchange="calcTotal()">
+                    <option value="09:00 WITA">09:00 WITA</option>
+                    <option value="10:00 WITA">10:00 WITA</option>
+                    <option value="11:00 WITA">11:00 WITA</option>
+                    <option value="12:00 WITA">12:00 WITA</option>
+                    <option value="13:00 WITA">13:00 WITA</option>
+                    <option value="14:00 WITA" selected>14:00 WITA</option>
+                    <option value="15:00 WITA">15:00 WITA</option>
+                    <option value="16:00 WITA">16:00 WITA</option>
+                    <option value="17:00 WITA">17:00 WITA</option>
+                    <option value="18:00 WITA">18:00 WITA</option>
+                    <option value="19:00 WITA">19:00 WITA</option>
+                    <option value="20:00 WITA">20:00 WITA</option>
+                  </select>
+                </div>
+
+                <span class="step-title" data-i18n="calcStep2">3. Session Duration</span>
                 <div class="hours-picker">
                   <button type="button" class="hour-btn active" onclick="setHours(1, this)">1h</button>
                   <button type="button" class="hour-btn" onclick="setHours(2, this)">2h</button>
@@ -2471,7 +2583,7 @@
                   <button type="button" class="hour-btn" onclick="setHours(4, this)">4h</button>
                 </div>
 
-                <span class="step-title" data-i18n="calcStep3">3. Add-ons & Equipment</span>
+                <span class="step-title" data-i18n="calcStep3">4. Add-ons & Equipment</span>
                 <div class="addons-list">
                   <label class="addon-card">
                     <span><input type="checkbox" id="addon-prompter" onchange="calcTotal()"> <span data-i18n="addonPrompter">4K Teleprompter</span></span>
@@ -2499,14 +2611,10 @@
                     <span data-i18n="billAddons">Add-ons:</span>
                     <span id="bill-addons">0 IDR</span>
                   </div>
-                  <div class="bill-row green">
-                    <span data-i18n="billDiscount">10% First Visit Discount:</span>
-                    <span id="bill-discount">-190 000 IDR</span>
-                  </div>
 
                   <div class="bill-total-row">
-                    <span style="font-weight: 800;" data-i18n="billTotal">Total to Pay:</span>
-                    <span class="final-sum" id="bill-total">1 710 000 IDR</span>
+                    <span style="font-weight: 800;" data-i18n="billTotal">Total:</span>
+                    <span class="final-sum" id="bill-total">1 900 000 IDR</span>
                   </div>
                 </div>
 
@@ -2564,8 +2672,8 @@
           <div>
             <h5 data-i18n="footerColContacts">Contacts</h5>
             <ul class="footer-links">
-              <li><a href="https://wa.me/6287865026481"><i class="fa-brands fa-whatsapp"></i> +62 878-6502-6481</a></li>
-              <li><a href="https://t.me/+6287865026481"><i class="fa-brands fa-telegram"></i> Telegram Chat</a></li>
+              <li><a href="https://wa.me/6282314734072"><i class="fa-brands fa-whatsapp"></i> +62 823-1473-4072</a></li>
+              <li><a href="https://t.me/iconmediastudio"><i class="fa-brands fa-telegram"></i> @iconmediastudio</a></li>
               <li><span style="color: var(--text-dim);" data-i18n="fHours">Mon–Sun 09:00 – 22:00 WITA</span></li>
               <li><span style="color: var(--text-dim);">Kerobokan / Canggu, Bali</span></li>
             </ul>
@@ -2623,14 +2731,14 @@
         navReviews: 'Reviews 5.0',
         navCalc: 'Calculator',
         ctaBook: 'Book with -10%',
-        offerBadge: '10% OFF your first session',
+        offerBadge: '10% OFF on First Booking',
         heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali',
         heroSub1: 'A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.',
         hf1: 'Professional setup.',
         hf2: 'Great lighting.',
         hf3: 'Clean sound.',
         hf4: 'Zero production hassle.',
-        heroBtnCalc: 'Calculate Session (-10%)',
+        heroBtnCalc: 'Book Slot',
         heroBadgeTitle: 'Iconic Bali Studio Setup',
         heroBadgeSub: 'Sony 4K Multi-Cam • Shure SM7B • 100% Soundproof',
         filterAll: 'All Formats',
@@ -2642,23 +2750,23 @@
         card1Title: 'Podcast Recording Studio in Canggu, Bali',
         card1Desc: 'Multi-cam recording with 3 Sony 4K cameras, Shure SM7B mics on boom arms, on-site videographer, and full episode post-production.',
         card1Price: 'from 1,900,000 IDR',
-        card1Disc: '1,710,000 IDR with 10% discount',
+        card1Disc: '-10% on first visit',
         tagReels: 'DJI Mic • 4K Teleprompter',
         card2Title: 'Reels, Shorts & Course Production in Canggu',
         card2Desc: 'High-yield vertical video shoots with teleprompter. 20% discount on video editing for 10+ videos bundle.',
         card2Price: 'from 1,100,000 IDR',
-        card2Disc: '990,000 IDR with 10% discount',
+        card2Disc: '-10% on first visit',
         tagStream: 'Fiber Optic • Turnkey',
         card3Title: 'Live Streaming & Webinar Studio in Bali',
         card3Desc: 'Turnkey broadcasts for online launches and masterclasses with optical fiber channel.',
         card3Ext: 'extension: +1,000,000 IDR / hour',
         card3Included: '✓ Studio • 1 Camera • Videographer • DJI Mic',
         card3Price: 'from 4,100,000 IDR',
-        card3Disc: '3,690,000 IDR with 10% discount',
+        card3Disc: '-10% on first visit',
         card4Title: 'Photo & Video Studio Rental (Dry Hire)',
         card4Desc: 'Rent the fully acoustically treated studio with all Nanlite & Aputure lighting rigs configured for your own crew.',
         card4Price: 'from 700,000 IDR/h',
-        card4Disc: '630,000 IDR with 10% discount',
+        card4Disc: '-10% on first visit',
         btnBookSlot: 'Calculate',
         setsPreTitle: 'Interactive Stage Selector',
         setsTitle: 'Studio Sets & Filming Zones',
@@ -2717,25 +2825,25 @@
         fLinkParking: 'Private Parking',
         revPreTitle: 'Social Proof & Real Feedback',
         revTitle: 'Verified Google Reviews',
-        revMeta: '270+ Verified Reviews on Google Maps',
+        revMeta: 'Verified Reviews on Google Maps',
         btnAllGoogle: 'View on Maps',
         calcPreTitle: 'Transparent Estimate',
-        calcTitle: 'Instant Price Calculator (10% OFF Included)',
-        calcSub: 'Select your format and hours. The estimate automatically applies your 10% discount and generates a ready booking link.',
+        calcTitle: 'Studio Estimate & Instant Booking',
+        calcSub: 'Select your format, date, and preferred time. Your booking request will be generated and sent directly to WhatsApp or Telegram.',
         calcStep1: '1. Choose Format',
+        calcStepDateTime: '2. Preferred Date & Time',
         calcOptPod: 'Podcast (3 Cams)',
         calcOptReels: 'Reels / Shorts (1 Cam)',
         calcOptWebinar: 'Webinar / Stream',
         calcOptRental: 'Studio Rental (Dry Hire)',
-        calcStep2: '2. Session Duration',
-        calcStep3: '3. Add-ons & Equipment',
+        calcStep2: '3. Session Duration',
+        calcStep3: '4. Add-ons & Equipment',
         addonPrompter: '4K Teleprompter',
         addonFx30: 'Second Sony FX30 Camera',
         addonEdit: 'Full Video Editing Package',
         billTitle: 'Estimate Summary',
         billAddons: 'Add-ons:',
-        billDiscount: '10% First Visit Discount:',
-        billTotal: 'Total to Pay:',
+        billTotal: 'Total:',
         btnBookWA: 'Book via WhatsApp',
         btnBookTG: 'Book via Telegram',
         footerAbout: 'Premier video production and podcast studio in Bali. Crafting high-converting visual media and courses in Kerobokan.',
@@ -2785,7 +2893,7 @@
         navInfra: 'Инфраструктура',
         navReviews: 'Отзывы 5.0',
         navCalc: 'Калькулятор',
-        ctaBook: 'Забронировать -10%',
+        ctaBook: 'Бронь со скидкой 10%',
         offerBadge: 'Скидка 10% на первую съемку',
         heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Студия подкастов и видеопродакшна</span> на Бали',
         heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
@@ -2793,7 +2901,7 @@
         hf2: 'Кинематографичный свет.',
         hf3: 'Чистый студийный звук.',
         hf4: 'Ноль забот о продакшне.',
-        heroBtnCalc: 'Рассчитать съемку (-10%)',
+        heroBtnCalc: 'Забронировать',
         heroBadgeTitle: 'Студийный сетап на Бали',
         heroBadgeSub: '3 камеры Sony 4K • Shure SM7B • 100% шумоизоляция',
         filterAll: 'Все форматы',
@@ -2805,23 +2913,23 @@
         card1Title: 'Запись подкастов и YouTube-шоу в Чангу',
         card1Desc: 'Многокамерная съемка на 3 камеры Sony, микрофоны Shure SM7B на пантографах, сопровождение оператора и монтаж эпизодов под ключ.',
         card1Price: 'от 1 900 000 IDR',
-        card1Disc: '1 710 000 IDR со скидкой 10%',
+        card1Disc: '-10% на первый визит',
         tagReels: 'DJI Mic • Суфлер 4K',
         card2Title: 'Съемка Reels, Shorts и онлайн-курсов в Чангу',
         card2Desc: 'Съемка вертикального экспертного контента на 1 камеру 4K с суфлером. Скидка 20% на монтаж при пакете от 10 роликов.',
         card2Price: 'от 1 100 000 IDR',
-        card2Disc: '990 000 IDR со скидкой 10%',
+        card2Disc: '-10% на первый визит',
         tagStream: 'Оптоволокно • Под ключ',
         card3Title: 'Вебинары и прямые трансляции на Бали',
         card3Desc: 'Прямые трансляции онлайн-запусков и мастер-классов со стабильным оптоволоконным каналом.',
         card3Ext: 'продление: +1 000 000 IDR / час',
         card3Included: '✓ Студия • 1 камера • Оператор • DJI Mic',
         card3Price: 'от 4 100 000 IDR',
-        card3Disc: '3 690 000 IDR со скидкой 10%',
+        card3Disc: '-10% на первый визит',
         card4Title: 'Аренда студии для фото и видео (Dry Hire)',
         card4Desc: 'Аренда подготовленного студийного пространства со всем профессиональным светом Aputure и Nanlite под вашу команду.',
         card4Price: 'от 700 000 IDR/час',
-        card4Disc: '630 000 IDR со скидкой 10%',
+        card4Disc: '-10% на первый визит',
         btnBookSlot: 'Рассчитать',
         setsPreTitle: 'Интерактивный выбор локации',
         setsTitle: 'Зоны и интерьерные сетапы для съемки',
@@ -2880,25 +2988,25 @@
         fLinkParking: 'Своя автопарковка',
         revPreTitle: 'Социальное доказательство и отзывы',
         revTitle: 'Реальные отзывы на Google Maps',
-        revMeta: '270+ проверенных отзывов в Google',
+        revMeta: 'проверенных отзывов в Google',
         btnAllGoogle: 'Открыть на картах',
         calcPreTitle: 'Прозрачная смета',
-        calcTitle: 'Онлайн-калькулятор со скидкой 10%',
-        calcSub: 'Выберите формат и количество часов. Калькулятор автоматически учтет скидку 10% и создаст ссылку на WhatsApp/Telegram.',
+        calcTitle: 'Расчет стоимости и бронирование слота',
+        calcSub: 'Выберите формат, дату и желаемое время. Заявка сформируется и отправится напрямую в WhatsApp или Telegram.',
         calcStep1: '1. Выберите формат',
-        calcOptPod: 'Подкаст (3 камеры)',
+        calcStepDateTime: '2. Желаемая дата и время',
+        calcOptPod: 'Podcast (3 камеры)',
         calcOptReels: 'Reels / Соцсети (1 камера)',
         calcOptWebinar: 'Вебинар / Стрим',
         calcOptRental: 'Аренда студии (Dry Hire)',
-        calcStep2: '2. Время съемки',
-        calcStep3: '3. Оборудование и монтаж',
+        calcStep2: '3. Время съемки',
+        calcStep3: '4. Оборудование и монтаж',
         addonPrompter: 'Телесуфлер 4K',
         addonFx30: 'Вторая камера Sony FX30',
         addonEdit: 'Экспресс-монтаж под ключ',
         billTitle: 'Детали расчета',
         billAddons: 'Доп. опции:',
-        billDiscount: 'Скидка 10% на первую съемку:',
-        billTotal: 'Итого к оплате:',
+        billTotal: 'Итого:',
         btnBookWA: 'Забронировать в WhatsApp',
         btnBookTG: 'Забронировать в Telegram',
         footerAbout: 'Премиальная медиастудия на Бали. Создаем продающий видеоконтент, подкасты и образовательные курсы для брендов и авторов.',
@@ -2918,8 +3026,10 @@
 
     function switchLanguage(lang) {
       currentLang = lang;
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      const btnEn = document.getElementById('btn-en');
+      const btnRu = document.getElementById('btn-ru');
+      if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+      if (btnRu) btnRu.classList.toggle('active', lang === 'ru');
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -2928,7 +3038,10 @@
         }
       });
 
-      document.getElementById('btnExportText').innerText = i18n[lang].exportBtnText;
+      const btnExport = document.getElementById('btnExportText');
+      if (btnExport && i18n[lang]) {
+        btnExport.innerText = i18n[lang].exportBtnText;
+      }
 
       document.title = lang === 'en'
         ? 'ICON MEDIA | Podcast Studio & Video Production in Bali'
@@ -3102,35 +3215,73 @@
       if (document.getElementById('addon-fx30').checked) addons += 300000;
       if (document.getElementById('addon-edit').checked) addons += 600000;
 
-      const subtotal = base + addons;
-      const discount = Math.round(subtotal * 0.10);
-      const total = subtotal - discount;
+      const regularTotal = base + addons;
 
       const srvName = currentLang === 'en' ? data.en : data.ru;
       document.getElementById('bill-service').innerText = `${srvName} (${calcHours}h)`;
       document.getElementById('bill-base').innerText = formatIDR(base);
       document.getElementById('bill-addons').innerText = formatIDR(addons);
-      document.getElementById('bill-discount').innerText = '-' + formatIDR(discount);
-      document.getElementById('bill-total').innerText = formatIDR(total);
+      document.getElementById('bill-total').innerText = formatIDR(regularTotal);
     }
 
+    /* Отправка заявки: формируется строго на актуальном языке пользователя */
     function sendToMessenger(ch) {
       const data = rates[calcService];
-      const total = document.getElementById('bill-total').innerText;
-      let addonsList = [];
-      if (document.getElementById('addon-prompter').checked) addonsList.push(currentLang === 'en' ? '4K Prompter' : 'Суфлер 4K');
-      if (document.getElementById('addon-fx30').checked) addonsList.push(currentLang === 'en' ? 'Sony FX30 Cam' : 'Камера FX30');
-      if (document.getElementById('addon-edit').checked) addonsList.push(currentLang === 'en' ? 'Video Editing' : 'Монтаж');
+      let base = 0;
 
+      if (calcService === 'webinar') {
+        if (calcHours <= 2) base = data[2];
+        else if (calcHours === 3) base = data[3];
+        else if (calcHours === 4) base = data[4];
+        else base = data[4] + (calcHours - 4) * data.ext;
+      } else {
+        if (calcHours <= 3) base = data[calcHours];
+        else base = data[3] + (calcHours - 3) * data.ext;
+      }
+
+      let addons = 0;
+      let addonsList = [];
+      if (document.getElementById('addon-prompter').checked) {
+        addons += 300000;
+        addonsList.push(currentLang === 'en' ? '4K Prompter' : 'Суфлер 4K');
+      }
+      if (document.getElementById('addon-fx30').checked) {
+        addons += 300000;
+        addonsList.push(currentLang === 'en' ? 'Sony FX30 Cam' : 'Камера FX30');
+      }
+      if (document.getElementById('addon-edit').checked) {
+        addons += 600000;
+        addonsList.push(currentLang === 'en' ? 'Video Editing' : 'Монтаж');
+      }
+
+      const regularTotal = base + addons;
+
+      const rawDate = document.getElementById('booking-date').value;
+      let chosenDate = rawDate;
+      if (rawDate) {
+        const parts = rawDate.split('-');
+        if (parts.length === 3) {
+          const monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+          const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          const day = parseInt(parts[2], 10);
+          const monthIdx = parseInt(parts[1], 10) - 1;
+          chosenDate = currentLang === 'en' ? `${day} ${monthsEn[monthIdx]}` : `${day} ${monthsRu[monthIdx]}`;
+        }
+      } else {
+        chosenDate = currentLang === 'en' ? 'Flexible / To discuss' : 'Гибкая / Обсудить';
+      }
+
+      const chosenTime = document.getElementById('booking-time').value;
       const srvTitle = currentLang === 'en' ? data.en : data.ru;
+
       const text = currentLang === 'en'
-        ? `Hello! I would like to book Icon Media Studio with 10% discount:%0A%0A• Service: ${srvTitle}%0A• Duration: ${calcHours}h%0A• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}%0A• Total with 10% OFF: ${total}%0A%0AAre there available slots this week?`
-        : `Здравствуйте! Хочу забронировать студию Icon Media со скидкой 10%:%0A%0A• Формат: ${srvTitle}%0A• Время: ${calcHours} ч%0A• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}%0A• Итого со скидкой 10%: ${total}%0A%0AПодскажите, есть ли свободные слоты на этой неделе?`;
+        ? `Hello! I would like to book Icon Media Studio:%0A%0A• Service: ${srvTitle}%0A• Date: ${chosenDate}%0A• Start time: ${chosenTime}%0A• Duration: ${calcHours}h%0A• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}%0A• Total: ${formatIDR(regularTotal)}%0A%0AIs this slot available?`
+        : `Здравствуйте! Хочу забронировать студию Icon Media:%0A%0A• Формат: ${srvTitle}%0A• Дата: ${chosenDate}%0A• Время начала: ${chosenTime}%0A• Длительность: ${calcHours} ч%0A• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}%0A• Итого: ${formatIDR(regularTotal)}%0A%0AСвободен ли этот слот?`;
 
       if (ch === 'wa') {
-        window.open(`https://wa.me/6287865026481?text=${text}`, '_blank');
+        window.open(`https://wa.me/6282314734072?text=${text}`, '_blank');
       } else {
-        window.open(`https://t.me/share/url?url=https://iconmediastudio.com&text=${text}`, '_blank');
+        window.open(`https://t.me/iconmediastudio?text=${text}`, '_blank');
       }
     }
 
@@ -3172,7 +3323,7 @@
       }
     }
 
-    // Video Lightbox Modal (Fixed Error 153 + YouTube No-Cookie)
+    // Video Lightbox Modal
     function openVideoModal(videoId) {
       const modal = document.getElementById('videoModal');
       const slot = document.getElementById('modalPlayerSlot');
@@ -3222,6 +3373,96 @@
         document.body.classList.add('view-mobile');
       }
     }
+
+    // Scroll Reveal Intersection Observer
+    function initScrollReveal() {
+      const revealItems = document.querySelectorAll('.reveal-item');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add('revealed'));
+      }
+    }
+
+    // Animated Counter Logic
+    function animateCounters() {
+      const counterElements = document.querySelectorAll('.counter-number');
+      if (!counterElements.length) return;
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.getAttribute('data-target'));
+            const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1400;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const currentVal = (target * easeOut).toFixed(decimals);
+              el.innerText = currentVal + suffix;
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                el.innerText = target.toFixed(decimals) + suffix;
+              }
+            }
+
+            requestAnimationFrame(updateCounter);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      counterElements.forEach(el => observer.observe(el));
+    }
+
+    // Set default booking date to tomorrow
+    function initDefaultDate() {
+      const dateInput = document.getElementById('booking-date');
+      if (dateInput) {
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const dd = String(tomorrow.getDate()).padStart(2, '0');
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+
+    // Автоматический выбор языка по локали браузера пользователя
+    function initLanguageAutoDetect() {
+      const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (userLang.startsWith('ru')) {
+        switchLanguage('ru');
+      } else {
+        switchLanguage('en');
+      }
+    }
+
+    // Initialize on DOM Ready
+    document.addEventListener('DOMContentLoaded', () => {
+      initLanguageAutoDetect();
+      initDefaultDate();
+      initScrollReveal();
+      animateCounters();
+    });
 
     calcTotal();
   </script>
