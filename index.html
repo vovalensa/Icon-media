@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Icon Media Studio | Podcast & Video Production Studio in Bali</title>
+  <title>ICON MEDIA | Podcast Studio & Video Production in Bali</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
   <style>
     :root {
       --bg-main: #050507;
-      --bg-card: #101014;
+      --bg-card: rgba(16, 16, 20, 0.78);
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-active: rgba(255, 59, 0, 0.5);
       --flame-orange: #ff3b00;
@@ -30,11 +30,19 @@
 
     body {
       background-color: var(--bg-main);
+      background-image: 
+        radial-gradient(ellipse 900px 500px at 50% -50px, rgba(255, 59, 0, 0.22) 0%, rgba(5, 5, 7, 0) 70%),
+        radial-gradient(ellipse 850px 550px at 100% 30%, rgba(255, 59, 0, 0.12) 0%, rgba(5, 5, 7, 0) 65%),
+        radial-gradient(ellipse 800px 600px at 0% 65%, rgba(255, 59, 0, 0.14) 0%, rgba(5, 5, 7, 0) 65%),
+        radial-gradient(ellipse 1100px 650px at 50% 88%, rgba(255, 59, 0, 0.18) 0%, rgba(5, 5, 7, 0) 75%);
+      background-attachment: scroll;
+      background-repeat: no-repeat;
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.5;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
     a { text-decoration: none; color: inherit; }
@@ -43,6 +51,8 @@
       max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
+      position: relative;
+      z-index: 2;
     }
 
     /* Device Viewport Switcher */
@@ -53,7 +63,7 @@
       z-index: 9998;
       display: flex;
       gap: 6px;
-      background: rgba(16, 16, 20, 0.95);
+      background: rgba(16, 16, 20, 0.92);
       border: 1px solid var(--border-subtle);
       padding: 6px;
       border-radius: 999px;
@@ -91,8 +101,8 @@
     #pageFrameWrapper {
       transition: all 0.35s ease;
       margin: 0 auto;
-      background-color: var(--bg-main);
       width: 100%;
+      position: relative;
     }
 
     body.view-tablet #pageFrameWrapper {
@@ -100,6 +110,7 @@
       border-left: 2px solid rgba(255, 59, 0, 0.3);
       border-right: 2px solid rgba(255, 59, 0, 0.3);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+      background-color: var(--bg-main);
     }
 
     body.view-mobile #pageFrameWrapper {
@@ -107,8 +118,11 @@
       border-left: 2px solid rgba(255, 59, 0, 0.3);
       border-right: 2px solid rgba(255, 59, 0, 0.3);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+      background-color: var(--bg-main);
     }
 
+    body.view-tablet .hero-grid,
+    body.view-mobile .hero-grid,
     body.view-tablet .cards-grid,
     body.view-mobile .cards-grid,
     body.view-tablet .sets-grid,
@@ -135,11 +149,15 @@
     }
 
     body.view-mobile .hero-title {
-      font-size: 32px !important;
+      font-size: 30px !important;
     }
 
     body.view-tablet .hero-title {
-      font-size: 40px !important;
+      font-size: 38px !important;
+    }
+
+    body.view-mobile .hero-photo-card {
+      height: 340px !important;
     }
 
     body.view-mobile .header-inner {
@@ -181,8 +199,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 5, 7, 0.92);
-      backdrop-filter: blur(16px);
+      background: rgba(5, 5, 7, 0.88);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 14px 0;
     }
@@ -224,7 +242,7 @@
 
     .lang-switcher {
       display: inline-flex;
-      background: #111116;
+      background: rgba(17, 17, 22, 0.8);
       border: 1px solid var(--border-subtle);
       border-radius: 999px;
       padding: 3px;
@@ -265,32 +283,46 @@
     .btn-pill-orange {
       background: var(--flame-orange);
       color: #fff;
+      box-shadow: 0 4px 20px rgba(255, 59, 0, 0.35);
     }
 
     .btn-pill-orange:hover {
       background: var(--flame-orange-hover);
       transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(255, 59, 0, 0.5);
     }
 
     .btn-pill-dark {
       background: rgba(255, 255, 255, 0.05);
       border-color: var(--border-subtle);
       color: #fff;
+      backdrop-filter: blur(8px);
     }
 
     .btn-pill-dark:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
+    /* 1. HERO SECTION SPLIT LAYOUT */
     .hero-section {
       padding: 60px 0 80px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 40px;
     }
 
     .hero-badge-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .google-pill {
@@ -299,9 +331,10 @@
       gap: 8px;
       padding: 6px 14px;
       border-radius: 999px;
-      background: #111116;
+      background: rgba(17, 17, 22, 0.85);
       border: 1px solid var(--border-subtle);
       font-size: 12.5px;
+      backdrop-filter: blur(8px);
     }
     .google-pill i.fa-google { color: #ea4335; }
     .stars { color: #ffb800; font-size: 11px; letter-spacing: 1.5px; }
@@ -311,35 +344,142 @@
       align-items: center;
       padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(255, 59, 0, 0.12);
-      border: 1px solid rgba(255, 59, 0, 0.3);
-      color: var(--flame-orange);
+      background: rgba(255, 59, 0, 0.15);
+      border: 1px solid rgba(255, 59, 0, 0.4);
+      color: #ff6a38;
       font-size: 12px;
       font-weight: 700;
+      backdrop-filter: blur(8px);
     }
 
     .hero-title {
       font-family: var(--font-heading);
-      font-size: 56px;
+      font-size: 48px;
       font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.08;
-      max-width: 920px;
-      margin-bottom: 22px;
+      letter-spacing: -1.2px;
+      line-height: 1.12;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-title-highlight {
+      background: linear-gradient(135deg, #ffffff 40%, #ff551a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-sub {
-      color: var(--text-muted);
+      color: #b5b5c3;
       font-size: 16.5px;
-      max-width: 740px;
       line-height: 1.6;
-      margin-bottom: 36px;
+      margin-bottom: 14px;
+    }
+
+    .hero-features-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e2ec;
+    }
+
+    .hero-features-line span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-features-line i {
+      color: var(--flame-orange);
+      font-size: 12px;
+    }
+
+    .hero-cta-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    /* Hero Right Photo Showcase */
+    .hero-photo-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-photo-card {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 59, 0, 0.18);
+      background: #0f0f15;
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-photo-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(10, 10, 14, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-badge-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hero-badge-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .hero-badge-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 59, 0, 0.18);
+      border: 1px solid rgba(255, 59, 0, 0.4);
+      color: var(--flame-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
     }
 
     .category-pills {
       display: flex;
       gap: 8px;
-      margin-bottom: 44px;
+      margin: 10px 0 36px;
       flex-wrap: wrap;
     }
 
@@ -348,22 +488,24 @@
       border-radius: 999px;
       font-size: 13px;
       font-weight: 600;
-      background: #111116;
+      background: rgba(17, 17, 22, 0.7);
       color: var(--text-muted);
       border: 1px solid var(--border-subtle);
       cursor: pointer;
       transition: all 0.2s;
+      backdrop-filter: blur(8px);
     }
 
     .filter-pill:hover {
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .filter-pill.active {
       background: var(--flame-orange);
       color: #fff;
       border-color: var(--flame-orange);
+      box-shadow: 0 4px 15px rgba(255, 59, 0, 0.4);
     }
 
     .cards-grid {
@@ -381,11 +523,14 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.25s ease;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .studio-card:hover {
       transform: translateY(-4px);
       border-color: var(--border-active);
+      box-shadow: 0 14px 40px rgba(255, 59, 0, 0.15);
     }
 
     .card-img-wrap {
@@ -437,9 +582,9 @@
     .card-discount { font-size: 12px; color: #22c55e; font-weight: 600; }
 
     .sets-section {
-      padding: 90px 0;
+      padding: 95px 0;
       border-top: 1px solid var(--border-subtle);
-      background: linear-gradient(180deg, #050507 0%, #09090d 100%);
+      position: relative;
     }
 
     .sets-tabs {
@@ -454,7 +599,7 @@
       border-radius: 999px;
       font-size: 14px;
       font-weight: 700;
-      background: #121217;
+      background: rgba(18, 18, 23, 0.8);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
       cursor: pointer;
@@ -462,11 +607,12 @@
       align-items: center;
       gap: 8px;
       transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
     }
 
     .set-tab-btn:hover {
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .set-tab-btn.active {
@@ -491,11 +637,14 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.25s ease;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .set-card:hover {
       transform: translateY(-4px);
       border-color: var(--border-active);
+      box-shadow: 0 14px 40px rgba(255, 59, 0, 0.15);
     }
 
     /* Interactive Setup Gallery */
@@ -594,7 +743,7 @@
 
     .set-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
     .set-spec-chip {
-      background: #16161e;
+      background: rgba(22, 22, 30, 0.85);
       border: 1px solid var(--border-subtle);
       font-size: 11.5px;
       color: #d1d1dc;
@@ -605,7 +754,7 @@
     .set-cta {
       border-top: 1px solid var(--border-subtle);
       padding: 14px 20px;
-      background: rgba(255, 255, 255, 0.015);
+      background: rgba(255, 255, 255, 0.02);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -613,9 +762,8 @@
 
     /* PORTFOLIO CAROUSEL & VIDEO MODAL */
     .portfolio-section {
-      padding: 90px 0;
+      padding: 95px 0;
       border-top: 1px solid var(--border-subtle);
-      background: #08080c;
       position: relative;
     }
 
@@ -637,7 +785,7 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: #14141c;
+      background: rgba(20, 20, 28, 0.85);
       border: 1px solid var(--border-subtle);
       color: #fff;
       display: flex;
@@ -646,6 +794,7 @@
       font-size: 16px;
       cursor: pointer;
       transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
     }
 
     .carousel-arrow:hover {
@@ -683,12 +832,14 @@
       cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .video-card:hover {
       border-color: var(--border-active);
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 59, 0, 0.2);
     }
 
     .video-thumb-box {
@@ -848,10 +999,11 @@
       transform: scale(1.1);
     }
 
-    /* 4. EQUIPMENT SPECS (COMPACT CARDS & TALLER PHOTOS) */
+    /* 4. EQUIPMENT SPECS */
     .equip-section {
-      padding: 90px 0;
+      padding: 95px 0;
       border-top: 1px solid var(--border-subtle);
+      position: relative;
     }
 
     .equip-grid {
@@ -869,11 +1021,14 @@
       transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .equip-card:hover {
       border-color: var(--border-active);
       transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(255, 59, 0, 0.15);
     }
 
     .equip-photo-header {
@@ -913,8 +1068,8 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(255, 59, 0, 0.12);
-      border: 1px solid rgba(255, 59, 0, 0.25);
+      background: rgba(255, 59, 0, 0.15);
+      border: 1px solid rgba(255, 59, 0, 0.35);
       color: var(--flame-orange);
       display: flex;
       align-items: center;
@@ -941,7 +1096,7 @@
     .equip-tag {
       display: inline-block;
       align-self: flex-start;
-      background: #15151c;
+      background: rgba(21, 21, 28, 0.85);
       border: 1px solid var(--border-subtle);
       padding: 3px 8px;
       border-radius: 6px;
@@ -953,8 +1108,9 @@
     }
 
     .infra-section {
-      padding: 90px 0;
+      padding: 95px 0;
       border-top: 1px solid var(--border-subtle);
+      position: relative;
     }
 
     .infra-grid {
@@ -973,11 +1129,14 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .infra-card:hover {
       border-color: var(--border-active);
       transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(255, 59, 0, 0.15);
     }
 
     .infra-photo-header {
@@ -1014,7 +1173,7 @@
 
     .infra-chips { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip-item {
-      background: #15151c;
+      background: rgba(21, 21, 28, 0.85);
       border: 1px solid var(--border-subtle);
       padding: 5px 12px;
       border-radius: 999px;
@@ -1023,9 +1182,9 @@
     }
 
     .reviews-section {
-      padding: 90px 0;
+      padding: 95px 0;
       border-top: 1px solid var(--border-subtle);
-      background: #08080c;
+      position: relative;
     }
 
     .reviews-header-wrap {
@@ -1049,6 +1208,7 @@
       font-weight: 900;
       line-height: 1;
       color: #fff;
+      text-shadow: 0 4px 20px rgba(255, 59, 0, 0.3);
     }
 
     .score-details-stars {
@@ -1059,18 +1219,19 @@
     }
 
     .calc-section {
-      padding: 100px 0;
+      padding: 105px 0;
       border-top: 1px solid var(--border-subtle);
-      background: linear-gradient(180deg, #08080c 0%, #050507 100%);
+      position: relative;
     }
 
     .calc-box {
-      background: var(--bg-card);
+      background: rgba(16, 16, 20, 0.85);
       border: 1.5px solid var(--border-active);
       border-radius: 32px;
       padding: 44px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 59, 0, 0.15);
       margin-top: 36px;
+      backdrop-filter: blur(18px);
     }
 
     .calc-grid {
@@ -1097,7 +1258,7 @@
     }
 
     .opt-btn {
-      background: #14141c;
+      background: rgba(20, 20, 28, 0.8);
       border: 1px solid var(--border-subtle);
       padding: 12px 14px;
       border-radius: 12px;
@@ -1110,9 +1271,10 @@
     }
 
     .opt-btn.active {
-      background: rgba(255, 59, 0, 0.15);
+      background: rgba(255, 59, 0, 0.2);
       border-color: var(--flame-orange);
       color: #fff;
+      box-shadow: 0 4px 15px rgba(255, 59, 0, 0.25);
     }
 
     .hours-picker {
@@ -1124,7 +1286,7 @@
     .hour-btn {
       flex: 1;
       padding: 12px;
-      background: #14141c;
+      background: rgba(20, 20, 28, 0.8);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       color: #fff;
@@ -1138,6 +1300,7 @@
       background: var(--flame-orange);
       color: #fff;
       border-color: var(--flame-orange);
+      box-shadow: 0 4px 15px rgba(255, 59, 0, 0.4);
     }
 
     .addons-list {
@@ -1150,7 +1313,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #14141c;
+      background: rgba(20, 20, 28, 0.8);
       border: 1px solid var(--border-subtle);
       padding: 12px 16px;
       border-radius: 12px;
@@ -1166,13 +1329,14 @@
     }
 
     .bill-panel {
-      background: #13131a;
+      background: rgba(19, 19, 26, 0.9);
       border: 1px solid var(--border-subtle);
       border-radius: 22px;
       padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: inset 0 0 30px rgba(255, 59, 0, 0.05);
     }
 
     .bill-row {
@@ -1202,6 +1366,7 @@
       font-size: 28px;
       font-weight: 900;
       color: var(--flame-orange);
+      text-shadow: 0 2px 20px rgba(255, 59, 0, 0.4);
     }
 
     .messenger-buttons {
@@ -1223,9 +1388,9 @@
       bottom: -150px;
       left: 50%;
       transform: translateX(-50%);
-      width: 900px;
-      height: 380px;
-      background: radial-gradient(ellipse at center, rgba(255, 59, 0, 0.45) 0%, rgba(255, 59, 0, 0.1) 50%, rgba(5, 5, 7, 0) 75%);
+      width: 1000px;
+      height: 420px;
+      background: radial-gradient(ellipse at center, rgba(255, 59, 0, 0.55) 0%, rgba(255, 59, 0, 0.15) 50%, rgba(5, 5, 7, 0) 75%);
       filter: blur(80px);
       pointer-events: none;
       z-index: 0;
@@ -1253,7 +1418,7 @@
       font-weight: 900;
       letter-spacing: -3px;
       line-height: 0.9;
-      color: rgba(255, 255, 255, 0.035);
+      color: rgba(255, 255, 255, 0.04);
       user-select: none;
       pointer-events: none;
       margin-bottom: 20px;
@@ -1271,7 +1436,19 @@
     }
 
     @media (max-width: 992px) {
+      body {
+        background-image: 
+          radial-gradient(ellipse 600px 350px at 50% -30px, rgba(255, 59, 0, 0.25) 0%, rgba(5, 5, 7, 0) 70%),
+          radial-gradient(ellipse 500px 400px at 100% 35%, rgba(255, 59, 0, 0.15) 0%, rgba(5, 5, 7, 0) 65%),
+          radial-gradient(ellipse 500px 400px at 0% 70%, rgba(255, 59, 0, 0.15) 0%, rgba(5, 5, 7, 0) 65%),
+          radial-gradient(ellipse 650px 450px at 50% 90%, rgba(255, 59, 0, 0.2) 0%, rgba(5, 5, 7, 0) 75%);
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
       .hero-title { font-size: 38px; }
+      .hero-photo-card { height: 380px; }
       .cards-grid, .sets-grid, .equip-grid, .portfolio-grid, .infra-grid, .calc-grid, .footer-grid { grid-template-columns: 1fr; }
       .footer-watermark { font-size: 60px; }
       .device-switcher-bar { display: none; }
@@ -1334,29 +1511,67 @@
   <!-- Page Wrapper for Viewport Emulation -->
   <div id="pageFrameWrapper">
     <main>
-      <!-- 1. HERO SECTION -->
+      <!-- 1. HERO SECTION (UPDATED SPLIT LAYOUT + ATTACHED PHOTO) -->
       <section class="hero-section">
         <div class="container">
           
-          <div class="hero-badge-row">
-            <div class="google-pill">
-              <i class="fa-brands fa-google"></i>
-              <span style="font-weight: 700;">5.0</span>
-              <span class="stars">★★★★★</span>
-              <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
+          <div class="hero-grid">
+            <!-- Left Text Column -->
+            <div>
+              <div class="hero-badge-row">
+                <div class="google-pill">
+                  <i class="fa-brands fa-google"></i>
+                  <span style="font-weight: 700;">5.0</span>
+                  <span class="stars">★★★★★</span>
+                  <span style="color: var(--text-muted); font-size: 11.5px;">Google Maps</span>
+                </div>
+                <div class="offer-pill" data-i18n="offerBadge">
+                  10% OFF your first session
+                </div>
+              </div>
+
+              <h1 class="hero-title" data-i18n="heroTitle">
+                ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali
+              </h1>
+
+              <p class="hero-sub" data-i18n="heroSub1">
+                A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.
+              </p>
+
+              <div class="hero-features-line">
+                <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf1">Professional setup.</strong></span>
+                <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf2">Great lighting.</strong></span>
+                <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf3">Clean sound.</strong></span>
+                <span><i class="fa-solid fa-check"></i> <strong data-i18n="hf4">Zero production hassle.</strong></span>
+              </div>
+
+              <div class="hero-cta-btns">
+                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 12px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
+                  Calculate Session (-10%)
+                </a>
+                <a href="https://wa.me/6287865026481?text=Hello!%20I%20want%20to%20learn%20more%20about%20booking%20Icon%20Media%20Studio" target="_blank" class="btn-pill btn-pill-dark" style="padding: 12px 24px; font-size: 14px;">
+                  <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> Chat in WhatsApp
+                </a>
+              </div>
             </div>
-            <div class="offer-pill" data-i18n="offerBadge">
-              10% OFF your first session
+
+            <!-- Right Photo Showcase Column -->
+            <div class="hero-photo-wrap">
+              <div class="hero-photo-card">
+                <img src="hero-studio-emerald.jpg" alt="Icon Media Studio Bali Podcast Production Lounge" onerror="this.src='podcast-setup-emerald-amber.jpg'">
+                
+                <div class="hero-floating-badge">
+                  <div>
+                    <div class="hero-badge-title" data-i18n="heroBadgeTitle">Iconic Bali Studio Setup</div>
+                    <div class="hero-badge-desc" data-i18n="heroBadgeSub">Sony 4K Multi-Cam • Shure SM7B • 100% Soundproof</div>
+                  </div>
+                  <div class="hero-badge-icon">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <h1 class="hero-title" data-i18n="heroTitle">
-            Podcast & Video Production Studio in Bali
-          </h1>
-
-          <p class="hero-sub" data-i18n="heroSub">
-            Turnkey podcast recording, Reels production, and live streaming in Bali. 3-camera Sony 4K setup, Shure SM7B mics, 100% soundproofing, dedicated parking, and full videographer support just 7 minutes from Canggu.
-          </p>
 
           <div class="category-pills">
             <button type="button" class="filter-pill active" onclick="filterCards('all', this)" data-i18n="filterAll">All Formats</button>
@@ -2349,8 +2564,15 @@
         navCalc: 'Calculator',
         ctaBook: 'Book with -10%',
         offerBadge: '10% OFF your first session',
-        heroTitle: 'Podcast & Video Production Studio in Bali',
-        heroSub: 'Turnkey podcast recording, Reels production, and live streaming in Bali. 3-camera Sony 4K setup, Shure SM7B mics, 100% soundproofing, dedicated parking, and full videographer support just 7 minutes from Canggu.',
+        heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali',
+        heroSub1: 'A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.',
+        hf1: 'Professional setup.',
+        hf2: 'Great lighting.',
+        hf3: 'Clean sound.',
+        hf4: 'Zero production hassle.',
+        heroBtnCalc: 'Calculate Session (-10%)',
+        heroBadgeTitle: 'Iconic Bali Studio Setup',
+        heroBadgeSub: 'Sony 4K Multi-Cam • Shure SM7B • 100% Soundproof',
         filterAll: 'All Formats',
         filterPodcast: 'Podcasts in Canggu',
         filterReels: 'Reels & Courses',
@@ -2505,8 +2727,15 @@
         navCalc: 'Калькулятор',
         ctaBook: 'Забронировать -10%',
         offerBadge: 'Скидка 10% на первую съемку',
-        heroTitle: 'Студия подкастов и видеопродакшна на Бали',
-        heroSub: 'Запись подкастов под ключ, экспертных Reels и прямых эфиров на Бали. 3 камеры 4K, микрофоны Shure SM7B, 100% шумоизоляция, своя автопарковка и сопровождение оператора в 7 минутах от Чангу.',
+        heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Студия подкастов и видеопродакшна</span> на Бали',
+        heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
+        hf1: 'Профессиональный сетап.',
+        hf2: 'Кинематографичный свет.',
+        hf3: 'Чистый студийный звук.',
+        hf4: 'Ноль забот о продакшне.',
+        heroBtnCalc: 'Рассчитать съемку (-10%)',
+        heroBadgeTitle: 'Студийный сетап на Бали',
+        heroBadgeSub: '3 камеры Sony 4K • Shure SM7B • 100% шумоизоляция',
         filterAll: 'Все форматы',
         filterPodcast: 'Подкасты в Чангу',
         filterReels: 'Reels & Курсы',
@@ -2635,15 +2864,15 @@
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18n[lang] && i18n[lang][key]) {
-          el.innerText = i18n[lang][key];
+          el.innerHTML = i18n[lang][key];
         }
       });
 
       document.getElementById('btnExportText').innerText = i18n[lang].exportBtnText;
 
       document.title = lang === 'en'
-        ? 'Icon Media Studio | Podcast & Video Production Studio in Bali'
-        : 'Icon Media Studio | Студия подкастов и видеопродакшна на Бали';
+        ? 'ICON MEDIA | Podcast Studio & Video Production in Bali'
+        : 'ICON MEDIA | Студия подкастов и видеопродакшна на Бали';
       
       calcTotal();
     }
