@@ -57,7 +57,6 @@
       z-index: 5;
     }
 
-    /* Гарантия видимости контента */
     .reveal-item {
       opacity: 1;
       transform: none;
@@ -144,20 +143,21 @@
       transform: translateY(-2px);
     }
 
-    /* Device Switcher */
+    /* ПЛАВАЮЩИЙ ТУЛБАР ПЕРЕКЛЮЧЕНИЯ ВЕРСИЙ (ИСПРАВЛЕННЫЙ) */
     .device-switcher-bar {
       position: fixed;
       top: 84px;
       right: 24px;
-      z-index: 9998;
+      z-index: 100000 !important;
       display: flex;
       gap: 6px;
-      background: rgba(14, 14, 18, 0.85);
+      background: rgba(14, 14, 18, 0.92);
       border: 1px solid var(--border-light);
       padding: 5px;
       border-radius: 999px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(16px);
+      pointer-events: auto !important;
     }
 
     .device-btn {
@@ -174,6 +174,7 @@
       align-items: center;
       gap: 6px;
       transition: all 0.25s ease;
+      pointer-events: auto !important;
     }
 
     .device-btn:hover { color: #fff; }
@@ -184,14 +185,15 @@
     }
 
     #pageFrameWrapper {
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
       margin: 0 auto;
       width: 100%;
       position: relative;
     }
 
+    /* СТИЛИ ПРИ ЭМУЛЯЦИИ ТАБЛЕТА И МОБИЛЬНОГО ЧЕРЕЗ ТУЛБАР */
     body.view-tablet #pageFrameWrapper {
-      max-width: 768px;
+      max-width: 768px !important;
       border-left: 1px solid rgba(255, 68, 10, 0.4);
       border-right: 1px solid rgba(255, 68, 10, 0.4);
       box-shadow: 0 0 70px rgba(0, 0, 0, 0.9);
@@ -199,7 +201,7 @@
     }
 
     body.view-mobile #pageFrameWrapper {
-      max-width: 390px;
+      max-width: 390px !important;
       border-left: 1px solid rgba(255, 68, 10, 0.4);
       border-right: 1px solid rgba(255, 68, 10, 0.4);
       box-shadow: 0 0 70px rgba(0, 0, 0, 0.9);
@@ -207,7 +209,39 @@
     }
 
     body.view-tablet .hero-grid,
-    body.view-mobile .hero-grid,
+    body.view-mobile .hero-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    body.view-tablet .hero-content-wrap,
+    body.view-mobile .hero-content-wrap {
+      max-width: 100% !important;
+    }
+
+    body.view-tablet .hero-bg-media,
+    body.view-mobile .hero-bg-media {
+      width: 100% !important;
+      opacity: 0.35 !important;
+    }
+
+    body.view-tablet .hero-bg-media img,
+    body.view-mobile .hero-bg-media img {
+      width: 100% !important;
+      max-height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+    }
+
+    body.view-tablet .nav-list,
+    body.view-mobile .nav-list {
+      display: none !important;
+    }
+
+    body.view-tablet .burger-btn,
+    body.view-mobile .burger-btn {
+      display: flex !important;
+    }
+
     body.view-tablet .cards-grid,
     body.view-mobile .cards-grid,
     body.view-tablet .sets-grid,
@@ -229,8 +263,7 @@
     body.view-tablet .video-card { flex: 0 0 calc(50% - 12px) !important; min-width: 300px !important; }
     body.view-mobile .hero-title { font-size: 32px !important; }
     body.view-tablet .hero-title { font-size: 40px !important; }
-    body.view-mobile .header-inner { flex-wrap: wrap; gap: 12px; }
-    body.view-mobile .nav-list { display: none; }
+    body.view-mobile .header-cta-btn { display: none !important; }
 
     .png-exporter-btn {
       position: fixed;
@@ -263,7 +296,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 7, 9, 0.85);
+      background: rgba(7, 7, 9, 0.88);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 14px 0;
@@ -349,6 +382,103 @@
       color: #fff;
     }
 
+    /* МЕНЮ-БУРГЕР (СТАНДАРТ 2026 ГОДА) */
+    .burger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: rgba(18, 18, 25, 0.85);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 10001;
+      transition: all 0.25s ease;
+      padding: 0;
+    }
+
+    .burger-line {
+      width: 20px;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.25s ease;
+    }
+
+    .burger-btn.active .burger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background-color: var(--flame-orange);
+    }
+    .burger-btn.active .burger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .burger-btn.active .burger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background-color: var(--flame-orange);
+    }
+
+    /* ПОЛНОЭКРАННАЯ ШТОРКА МОБИЛЬНОГО МЕНЮ */
+    .mobile-menu-drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 7, 9, 0.98);
+      backdrop-filter: blur(25px);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 100px 32px 40px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-menu-drawer.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .mobile-nav-links a {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--flame-orange);
+      transform: translateX(6px);
+    }
+
+    .mobile-nav-links a i {
+      font-size: 16px;
+      color: var(--flame-orange);
+    }
+
+    .mobile-menu-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+    }
+
     /* SECTION HEADERS */
     .section-eyebrow {
       display: inline-flex;
@@ -387,9 +517,7 @@
       line-height: 1.6;
     }
 
-    /* ========================================================
-       1. HERO SECTION (CSS GRID + ВЫРАВНИВАНИЕ ПО ЛОГОТИПУ)
-       ======================================================== */
+    /* 1. HERO SECTION */
     .hero-section {
       position: relative;
       min-height: 660px;
@@ -1641,35 +1769,37 @@
 
     .modal-close-btn:hover { background: var(--flame-orange); }
 
+    /* НАСТОЯЩИЙ АДАПТИВ (МЕНЬШЕ 992px) */
     @media (max-width: 992px) {
+      .nav-list { display: none !important; }
+      .burger-btn { display: flex !important; }
       .hero-section {
         min-height: auto;
         padding: 60px 0 60px;
       }
       .hero-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
       }
       .hero-content-wrap {
-        max-width: 100%;
+        max-width: 100% !important;
       }
       .hero-bg-media {
-        width: 100%;
-        opacity: 0.35;
+        width: 100% !important;
+        opacity: 0.35 !important;
       }
       .hero-bg-media img {
-        max-height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center;
+        max-height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
       }
       .hero-bg-gradient-scrim {
-        background: linear-gradient(180deg, rgba(7, 7, 9, 0.85) 0%, rgba(7, 7, 9, 0.95) 100%);
+        background: linear-gradient(180deg, rgba(7, 7, 9, 0.85) 0%, rgba(7, 7, 9, 0.95) 100%) !important;
       }
       .datetime-row { grid-template-columns: 1fr; }
       .hero-title { font-size: 38px; }
-      .cards-grid, .sets-grid, .equip-grid, .infra-grid, .calc-grid, .footer-grid, .cred-bar-grid { grid-template-columns: 1fr; }
+      .cards-grid, .sets-grid, .equip-grid, .infra-grid, .calc-grid, .footer-grid, .cred-bar-grid { grid-template-columns: 1fr !important; }
       .footer-watermark { font-size: 50px; }
-      .device-switcher-bar { display: none; }
       .brand-logo-img { height: 46px; }
       .footer-brand-logo-img { height: 48px; }
     }
@@ -1682,7 +1812,7 @@
     <i class="fa-solid fa-camera"></i> <span id="btnExportText">Export PNG (1440px)</span>
   </button>
 
-  <!-- Device Switcher -->
+  <!-- Device Switcher (100% кликабельный) -->
   <div class="device-switcher-bar">
     <button type="button" class="device-btn active" onclick="setDeviceView('desktop', this)">
       <i class="fa-solid fa-desktop"></i> Desktop
@@ -1702,6 +1832,7 @@
         <img src="logo.png" alt="Icon Media Studio Bali" class="brand-logo-img">
       </a>
 
+      <!-- Десктопное меню -->
       <ul class="nav-list">
         <li><a href="#sets" data-i18n="navSets">Studio Sets</a></li>
         <li><a href="#portfolio" data-i18n="navPortfolio">Showreel</a></li>
@@ -1718,12 +1849,44 @@
         <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> WhatsApp
         </a>
-        <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange">
+        <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange header-cta-btn">
           <span data-i18n="ctaBook">Book Session</span>
         </a>
+
+        <!-- Кнопка бургер-меню (2026) -->
+        <button type="button" class="burger-btn" id="burgerToggleBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- Полноэкранная шторка мобильного меню -->
+  <div class="mobile-menu-drawer" id="mobileMenuDrawer">
+    <ul class="mobile-nav-links">
+      <li><a href="#sets" onclick="closeMobileMenu()" data-i18n="navSets">Studio Sets <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#portfolio" onclick="closeMobileMenu()" data-i18n="navPortfolio">Showreel <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#services" onclick="closeMobileMenu()" data-i18n="navServices">Services <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#calculator" onclick="closeMobileMenu()" data-i18n="navCalc">Pricing <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#faq" onclick="closeMobileMenu()" data-i18n="navFaq">FAQ <i class="fa-solid fa-arrow-right"></i></a></li>
+    </ul>
+
+    <div class="mobile-menu-bottom">
+      <a href="#calculator" onclick="closeMobileMenu()" class="btn-pill btn-pill-orange" style="width: 100%; padding: 14px; font-size: 15px;">
+        <span data-i18n="ctaBook">Book Session</span>
+      </a>
+      <div style="display: flex; gap: 10px;">
+        <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px;">
+          <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> WhatsApp
+        </a>
+        <a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px; color: #38bdf8;">
+          <i class="fa-brands fa-telegram"></i> Telegram
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div id="pageFrameWrapper">
     <main>
@@ -2638,6 +2801,7 @@
         navSets: 'Studio Sets',
         navPortfolio: 'Showreel',
         navCalc: 'Pricing',
+        navFaq: 'FAQ',
         ctaBook: 'Book Session',
         heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali',
         heroSub1: 'A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.',
@@ -2785,6 +2949,7 @@
         navSets: 'Сетапы',
         navPortfolio: 'Шоурил',
         navCalc: 'Цены',
+        navFaq: 'FAQ',
         ctaBook: 'Забронировать',
         heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Студия подкастов и видеопродакшна</span> на Бали',
         heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
@@ -2957,195 +3122,42 @@
       calcTotal();
     }
 
-    function switchSets(cat, btn) {
-      document.querySelectorAll('.sets-tabs .set-tab-btn').forEach(b => b.classList.remove('active'));
+    /* УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ */
+    function toggleMobileMenu() {
+      const btn = document.getElementById('burgerToggleBtn');
+      const drawer = document.getElementById('mobileMenuDrawer');
+      const isActive = drawer.classList.contains('active');
+
+      if (!isActive) {
+        btn.classList.add('active');
+        drawer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMobileMenu();
+      }
+    }
+
+    function closeMobileMenu() {
+      const btn = document.getElementById('burgerToggleBtn');
+      const drawer = document.getElementById('mobileMenuDrawer');
+      if (btn) btn.classList.remove('active');
+      if (drawer) drawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    /* ПЕРЕКЛЮЧАТЕЛЬ ЭМУЛЯЦИИ УСТРОЙСТВ */
+    function setDeviceView(device, btn) {
+      document.querySelectorAll('.device-switcher-bar .device-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      const cards = document.querySelectorAll('#setsContainer .set-card');
-      cards.forEach(c => {
-        if (c.getAttribute('data-setcat') === cat) {
-          c.style.display = 'flex';
-        } else {
-          c.style.display = 'none';
-        }
-      });
-    }
+      document.body.classList.remove('view-tablet', 'view-mobile');
 
-    /* Emerald Gallery */
-    const emeraldImages = [
-      'podcast-setup-emerald-amber.jpg',
-      'podcast-setup-emerald-left.jpg',
-      'podcast-setup-emerald-right.jpg',
-      'podcast-setup-emerald-neon.jpg'
-    ];
-    let emeraldIndex = 0;
-
-    function updateEmeraldGallery() {
-      const imgEl = document.getElementById('emeraldGalleryImg');
-      if (imgEl) {
-        imgEl.style.opacity = '0.4';
-        setTimeout(() => {
-          imgEl.src = emeraldImages[emeraldIndex];
-          imgEl.style.opacity = '1';
-        }, 120);
-      }
-      const dots = document.querySelectorAll('#emeraldGalleryBox .gallery-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === emeraldIndex);
-      });
-    }
-
-    function stepEmeraldGallery(direction) {
-      emeraldIndex = (emeraldIndex + direction + emeraldImages.length) % emeraldImages.length;
-      updateEmeraldGallery();
-    }
-
-    function setEmeraldSlide(idx) {
-      emeraldIndex = idx;
-      updateEmeraldGallery();
-    }
-
-    /* Desk Gallery */
-    const deskImages = [
-      'podcast-setup-desk-guests.jpg',
-      'podcast-setup-desk-blue.jpg',
-      'podcast-setup-desk-table.jpg',
-      'podcast-setup-desk-left.jpg',
-      'podcast-setup-desk-right.jpg'
-    ];
-    let deskIndex = 0;
-
-    function updateDeskGallery() {
-      const imgEl = document.getElementById('deskGalleryImg');
-      if (imgEl) {
-        imgEl.style.opacity = '0.4';
-        setTimeout(() => {
-          imgEl.src = deskImages[deskIndex];
-          imgEl.style.opacity = '1';
-        }, 120);
-      }
-      const dots = document.querySelectorAll('#deskGalleryBox .gallery-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === deskIndex);
-      });
-    }
-
-    function stepDeskGallery(direction) {
-      deskIndex = (deskIndex + direction + deskImages.length) % deskImages.length;
-      updateDeskGallery();
-    }
-
-    function setDeskSlide(idx) {
-      deskIndex = idx;
-      updateDeskGallery();
-    }
-
-    /* CALCULATOR ENGINE */
-    let calcService = 'podcast';
-    let calcHours = 1;
-
-    const rates = {
-      podcast: { en: 'Podcast Production (3 Cams)', ru: 'Запись подкаста (3 камеры)', 1: 1900000, 2: 2600000, 3: 3200000, ext: 600000 },
-      social: { en: 'Reels Batching (1 Cam)', ru: 'Reels-пакет (1 камера)', 1: 1100000, 2: 1700000, 3: 2300000, ext: 600000 },
-      webinar: { en: 'Webinar / Stream', ru: 'Вебинар / Стрим', 1: 4100000, 2: 4100000, 3: 5300000, 4: 6400000, ext: 1000000 },
-      rental: { en: 'Studio Rental (Dry Hire)', ru: 'Аренда студии (Dry Hire)', 1: 700000, 2: 1400000, 3: 2100000, ext: 600000 }
-    };
-
-    function setService(srv, btn) {
-      calcService = srv;
-      document.querySelectorAll('.calc-options-grid .opt-btn').forEach(b => b.classList.remove('active'));
-      if (btn) {
-        btn.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.calc-options-grid .opt-btn')).find(b => {
-          const onclickAttr = b.getAttribute('onclick') || '';
-          return onclickAttr.includes(`'${srv}'`);
-        });
-        if (matchingBtn) matchingBtn.classList.add('active');
-      }
-      calcTotal();
-    }
-
-    function selectCalcFromCard(srv) {
-      setService(srv);
-      const calcElem = document.getElementById('calculator');
-      if (calcElem) {
-        calcElem.scrollIntoView({ behavior: 'smooth' });
+      if (device === 'tablet') {
+        document.body.classList.add('view-tablet');
+      } else if (device === 'mobile') {
+        document.body.classList.add('view-mobile');
       }
     }
 
-    function setHours(h, btn) {
-      calcHours = h;
-      document.querySelectorAll('.hours-picker .hour-btn').forEach(b => b.classList.remove('active'));
-      if (btn) {
-        btn.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.hours-picker .hour-btn')).find(b => b.innerText.trim().startsWith(String(h)));
-        if (matchingBtn) matchingBtn.classList.add('active');
-      }
-      calcTotal();
-    }
-
-    function formatIDR(num) {
-      return num.toLocaleString('id-ID') + ' IDR';
-    }
-
-    function calculateNightRatio(timeStr, hours) {
-      if (!timeStr || timeStr.includes('Flexible')) return 0;
-      const parts = timeStr.split(':');
-      if (parts.length < 2) return 0;
-      const startHour = parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
-      
-      let nightHoursCount = 0;
-      for (let i = 0; i < hours; i++) {
-        const currentH = (startHour + i) % 24;
-        if (currentH >= 22 || currentH < 9) {
-          nightHoursCount++;
-        }
-      }
-      return nightHoursCount / hours;
-    }
-
-    function onTimeChange() {
-      const timeVal = document.getElementById('booking-time').value;
-      const warningBanner = document.getElementById('night-warning');
-      const nightRatio = calculateNightRatio(timeVal, calcHours);
-
-      if (nightRatio > 0) {
-        warningBanner.classList.add('active');
-      } else {
-        warningBanner.classList.remove('active');
-      }
-      calcTotal();
-    }
-
-    function calcTotal() {
-      const data = rates[calcService];
-      let base = 0;
-
-      if (calcService === 'webinar') {
-        if (calcHours <= 2) base = data[2];
-        else if (calcHours === 3) base = data[3];
-        else if (calcHours === 4) base = data[4];
-        else base = data[4] + (calcHours - 4) * data.ext;
-      } else {
-        if (calcHours <= 3) base = data[calcHours];
-        else base = data[3] + (calcHours - 3) * data.ext;
-      }
-
-      const timeVal = document.getElementById('booking-time').value;
-      const nightRatio = calculateNightRatio(timeVal, calcHours);
-      const nightExtra = Math.round(base * 0.5 * nightRatio);
-
-      const nightRow = document.getElementById('bill-night-row');
-      const nightExtraEl = document.getElementById('bill-night-extra');
-      if (nightExtra > 0) {
-        nightRow.style.display = 'flex';
-        nightExtraEl.innerText = '+' + formatIDR(nightExtra);
-      } else {
-        nightRow.style.display = 'none';
-      }
-
-      let addons = 0;
-      if (document.getElementById('addon-prompter').checked) addons += 300000;
-      if (document.getElementById('addon-
+    function switchSets(cat, btn) {
+      document.querySelectorAll('.sets-tabs .set-tab-btn').forEach(b => b.classList.remove('active
