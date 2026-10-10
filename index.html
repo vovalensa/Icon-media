@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ICON MEDIA | Premium Podcast Studio & Video Production in Bali</title>
   
-  <meta name="description" content="ICON MEDIA — премиальная студия подкастов и видеопродакшна в Чангу, Бали. Многокамерная съемка 4K Sony FX, микрофоны Shure SM7B, телесуфлер и полный монтаж под ключ.">
+  <meta name="description" content="ICON MEDIA — премиальная студия подкастов и видеопродакшна в Чангу, Бали. Съемка на камеры Sony FX30/a7c, 2 микрофона Shure, телесуфлер Neewer и полный монтаж под ключ.">
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vovalensa.github.io/Icon-media/">
   <meta property="og:title" content="ICON MEDIA | Premium Podcast Studio & Video Production in Bali">
-  <meta property="og:description" content="Professional space for creators, experts and brands in Bali. 4K Cinema Multi-Cam, Shure SM7B, zero hassle.">
+  <meta property="og:description" content="Professional space for creators, experts and brands in Bali. Sony FX30 & a7c, 2 Shure microphones, Neewer prompter, zero hassle.">
   <meta property="og:image" content="IMG_2523.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -727,6 +727,54 @@
       margin-top: 2px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
+    }
+
+    
+    /* BENEFITS SECTION */
+    .benefits-section {
+      padding: 90px 0 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .benefits-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .benefit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 26px;
+      flex: 1 1 calc(33.333% - 24px);
+      min-width: 300px;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .benefit-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 68, 10, 0.1);
+    }
+
+    .benefit-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .benefit-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* 2. PORTFOLIO SHOWREEL */
@@ -1954,7 +2002,7 @@
               <div class="hero-badge-row">
                 <div class="authority-badge">
                   <i class="fa-solid fa-circle-dot"></i>
-                  <span>Kerobokan / Bali • Production studio</span>
+                  <span>CANGGU / BALI • PRODUCTION STUDIO</span>
                 </div>
                 
                 <div class="google-pill">
@@ -2018,7 +2066,42 @@
         </div>
       </section>
 
-      <!-- 2. PORTFOLIO SHOWREEL -->
+            <!-- BENEFITS SECTION -->
+      <section class="benefits-section" id="benefits">
+        <div class="container">
+          
+          <div class="reveal-item" style="text-align: center;">
+            <span class="section-eyebrow" data-i18n="benPreTitle">Why Choose Us</span>
+            <h2 class="section-heading" data-i18n="benTitle">The Icon Media Experience</h2>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben1Title">🎥 Professional Shooting, Tailored to Your Style</h3>
+              <p class="benefit-desc" data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben2Title">🎬 Ready Before You Arrive</h3>
+              <p class="benefit-desc" data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben3Title">☕️ Come Early. Feel Comfortable.</h3>
+              <p class="benefit-desc" data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben4Title">📶 Reliable High-Speed Internet</h3>
+              <p class="benefit-desc" data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben5Title">📍 Easy to Reach</h3>
+              <p class="benefit-desc" data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+<!-- 2. PORTFOLIO SHOWREEL -->
       <section class="portfolio-section" id="portfolio">
         <div class="container">
           
@@ -2186,11 +2269,11 @@
 
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="set1Title">Emerald Amber Lounge</h3>
-                  <p class="set-desc" data-i18n="set1Desc">Deep emerald velvet armchairs, warm 3200K ambient lighting, ethnic rug, and dual Shure SM7B boom stands.</p>
+                  <p class="set-desc" data-i18n="set1Desc">Deep emerald velvet armchairs, warm 3200K ambient lighting, ethnic rug, and 2 Shure microphones.</p>
                   <div class="set-specs">
                     <span class="set-spec-chip">2–3 Speakers</span>
                     <span class="set-spec-chip">Warm 3200K Amber</span>
-                    <span class="set-spec-chip">Shure SM7B + 3 Cams</span>
+                    <span class="set-spec-chip">2 Shure Mics + 3 Cams</span>
                   </div>
                 </div>
               </div>
@@ -2230,7 +2313,7 @@
                   <div class="set-specs">
                     <span class="set-spec-chip">2–4 Speakers</span>
                     <span class="set-spec-chip">Laptop Friendly</span>
-                    <span class="set-spec-chip">RØDECaster Pro II</span>
+                    <span class="set-spec-chip">Rode Caster Pro</span>
                   </div>
                 </div>
               </div>
@@ -2274,7 +2357,7 @@
                   <h3 class="set-title" data-i18n="setReels2Title">Armchair & Tropical Greenery</h3>
                   <p class="set-desc" data-i18n="setReels2Desc">Comfortable armchair framing for coaches, psychologists, and educators. Warm soft light and 4K beam-splitter teleprompter.</p>
                   <div class="set-specs">
-                    <span class="set-spec-chip">4K Teleprompter</span>
+                    <span class="set-spec-chip">Neewer Teleprompter</span>
                     <span class="set-spec-chip">Coaching / Info</span>
                     <span class="set-spec-chip">Batch 20+ Clips</span>
                   </div>
@@ -2299,7 +2382,7 @@
                   <div class="set-specs">
                     <span class="set-spec-chip">Executive Desk</span>
                     <span class="set-spec-chip">Confidence Display</span>
-                    <span class="set-spec-chip">DJI Wireless Mic</span>
+                    <span class="set-spec-chip">DJI mic</span>
                   </div>
                 </div>
               </div>
@@ -2352,7 +2435,7 @@
             <div class="studio-card">
               <div>
                 <div class="card-img-wrap">
-                  <span class="card-tag" data-i18n="tagPodcast">3 Cameras • Shure SM7B</span>
+                  <span class="card-tag" data-i18n="tagPodcast">3 Cameras • Shure Mics</span>
                   <img src="podcast-setup-emerald-wide.jpg" alt="Icon Media Studio Podcast Setup Bali" onerror="this.src='podcast-setup-emerald-amber.jpg'" loading="lazy">
                 </div>
                 <div class="card-content">
@@ -2374,7 +2457,7 @@
             <div class="studio-card">
               <div>
                 <div class="card-img-wrap">
-                  <span class="card-tag" data-i18n="tagReels">4K Prompter • DJI Mic 2</span>
+                  <span class="card-tag" data-i18n="tagReels">Neewer Prompter • DJI mic</span>
                   <img src="reels-shorts-production.jpg" alt="Reels Shorts Course Production Canggu" onerror="this.src='podcast-setup-guest-angle.jpg'" loading="lazy">
                 </div>
                 <div class="card-content">
@@ -2402,7 +2485,7 @@
                 <div class="card-content">
                   <h3 class="card-title" data-i18n="card4Title">Studio Space Rental (Dry Hire)</h3>
                   <p class="card-desc" data-i18n="card4Desc">
-                    Bring your own crew and camera package. Full access to acoustic space, Nanlite/Aputure cinema lighting grid, and high-speed fiber.
+                    Bring your own crew and camera package. Full access to acoustic space, Godox SL60 & TL60 RGB lighting grid, and high-speed fiber.
                   </p>
                 </div>
               </div>
@@ -2434,12 +2517,12 @@
           <div class="equip-grid">
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="sony-cinema-line.jpg" alt="Sony Cinema Line FX30 4K Camera Icon Media" loading="lazy">
+                <img src="sony-cinema-line.jpg" alt="Sony FX30 a7c Camera Icon Media" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
                   <h3 class="equip-title" data-i18n="eqCamTitle">Sony Cinema Line (4K 10-bit)</h3>
-                  <p class="equip-desc" data-i18n="eqCamDesc">Multi-cam setup with Sony FX3 & FX30, prime lenses, and S-Cinetone profile for rich skin tones and cinematic depth of field.</p>
+                  <p class="equip-desc" data-i18n="eqCamDesc">Multi-cam setup with Sony FX30 and a7c, prime lenses, and cinematic profile for rich skin tones and cinematic depth of field.</p>
                 </div>
                 <span class="equip-tag">4K 10-bit 4:2:2</span>
               </div>
@@ -2447,11 +2530,11 @@
 
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="shure-sm7b-mic.jpg" alt="Shure SM7B Microphone on Boom Arm" loading="lazy">
+                <img src="shure-sm7b-mic.jpg" alt="Shure Microphone on Boom Arm" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
-                  <h3 class="equip-title" data-i18n="eqMicTitle">Shure SM7B Broadcast Microphones</h3>
+                  <h3 class="equip-title" data-i18n="eqMicTitle">2 Shure Microphones</h3>
                   <p class="equip-desc" data-i18n="eqMicDesc">The industry benchmark for podcasts. Paired with inline preamps on silent boom arms for radio-grade vocal warmth.</p>
                 </div>
                 <span class="equip-tag">Broadcast Gold Standard</span>
@@ -2460,11 +2543,11 @@
 
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="audio-console-rodecaster.jpg" alt="RODECaster Pro II Console and DJI Mic" loading="lazy">
+                <img src="audio-console-rodecaster.jpg" alt="Rode Caster Pro Console and DJI mic" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
-                  <h3 class="equip-title" data-i18n="eqDeskTitle">RØDECaster Pro II & DJI Mic 2</h3>
+                  <h3 class="equip-title" data-i18n="eqDeskTitle">Rode Caster Pro & DJI Mic 2</h3>
                   <p class="equip-desc" data-i18n="eqDeskTitle">Separate ISO audio track recording, live sound pads, Bluetooth phone call integration, and 32-bit float wireless lavaliers.</p>
                 </div>
                 <span class="equip-tag">Multitrack ISO Audio</span>
@@ -2641,11 +2724,11 @@
                 <span class="step-title" data-i18n="calcStep3">Optional Add-ons & Production</span>
                 <div class="addons-list">
                   <label class="addon-card">
-                    <span><input type="checkbox" id="addon-prompter" onchange="calcTotal()"> <span data-i18n="addonPrompter">4K Beam-Splitter Teleprompter</span></span>
+                    <span><input type="checkbox" id="addon-prompter" onchange="calcTotal()"> <span data-i18n="addonPrompter">Neewer Teleprompter</span></span>
                     <span style="color: var(--flame-orange); font-weight: 700;">+300 000 IDR</span>
                   </label>
                   <label class="addon-card">
-                    <span><input type="checkbox" id="addon-fx30" onchange="calcTotal()"> <span data-i18n="addonFx30">Additional 4K Sony FX Camera Angle</span></span>
+                    <span><input type="checkbox" id="addon-fx30" onchange="calcTotal()"> <span data-i18n="addonFx30">Additional Sony FX30/a7c Camera Angle</span></span>
                     <span style="color: var(--flame-orange); font-weight: 700;">+300 000 IDR</span>
                   </label>
                   <label class="addon-card">
@@ -2678,8 +2761,8 @@
                   <!-- Динамический список inclusions -->
                   <div class="bill-includes-box">
                     <div style="font-weight: 700; color: #fff; margin-bottom: 6px;" data-i18n="billInclHeader">Included in this session:</div>
-                    <div id="incl-item1"><i class="fa-solid fa-check"></i> <span>3x Sony 4K Cinema Multicam Capture</span></div>
-                    <div id="incl-item2"><i class="fa-solid fa-check"></i> <span>Shure SM7B Broadcast Microphones</span></div>
+                    <div id="incl-item1"><i class="fa-solid fa-check"></i> <span>3x Sony FX30/a7c Multicam Capture</span></div>
+                    <div id="incl-item2"><i class="fa-solid fa-check"></i> <span>2 Shure Microphones</span></div>
                     <div id="incl-item3"><i class="fa-solid fa-check"></i> <span>Dedicated Sound Engineer on Site</span></div>
                     <div id="incl-item4"><i class="fa-solid fa-check"></i> <span>Direct Raw Master Files Transfer</span></div>
                   </div>
@@ -2750,7 +2833,7 @@
               </button>
               <div class="faq-answer">
                 <div class="faq-answer-inner" data-i18n="faqA3">
-                  <p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Nanlite/Aputure lighting rigs.</p>
+                  <p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>
                 </div>
               </div>
             </div>
@@ -2870,8 +2953,20 @@
         heroBtnReel: 'Watch Showreel',
         cred1: 'Episodes Recorded',
         cred2: 'Google Maps Rating',
-        cred3: 'Sony Cinema Line',
-        cred4: 'Dedicated Optical Fiber',
+        cred3: 'Sony FX30 & a7c',
+                cred4: 'Dedicated Optical Fiber',
+        benPreTitle: 'Why Choose Us',
+        benTitle: 'The Icon Media Experience',
+        ben1Title: '🎥 Professional Shooting, Tailored to Your Style',
+        ben1Desc: 'Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve.',
+        ben2Title: '🎬 Ready Before You Arrive',
+        ben2Desc: 'Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in.',
+        ben3Title: '☕️ Come Early. Feel Comfortable.',
+        ben3Desc: 'Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks.',
+        ben4Title: '📶 Reliable High-Speed Internet',
+        ben4Desc: 'With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content.',
+        ben5Title: '📍 Easy to Reach',
+        ben5Desc: 'Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu.',
         portPreTitle: 'Proven Production Quality',
         portTitle: 'Featured Episodes & Projects',
         portSub: 'Real multi-camera broadcasts, podcasts, and short-form assets filmed and graded at Icon Media Studio.',
@@ -2894,13 +2989,13 @@
         tabSetStream: 'Keynote & Live Stage',
         badgeSetFeatured: 'Flagship Lounge',
         set1Title: 'Emerald Amber Lounge',
-        set1Desc: 'Deep emerald velvet armchairs, warm 3200K ambient lighting, ethnic rug, and dual Shure SM7B boom stands.',
+        set1Desc: 'Deep emerald velvet armchairs, warm 3200K Godox SL60 lighting, ethnic rug, and 2 Shure microphone stands.',
         set2Title: 'Executive Dialogue Desk',
-        set2Desc: 'Clean white desk dialogue setup with leather executive chairs, desktop Shure booms, and laptop integration.',
+        set2Desc: 'Clean white desk dialogue setup with leather executive chairs, 2 desktop Shure mics, and laptop integration.',
         set3Title: 'Cyber Purple Neon',
         set3Desc: 'High-contrast RGB neon backlighting behind tropical monstera greenery for Web3 founders, crypto shows, and modern creators.',
         setReels2Title: 'Armchair & Tropical Greenery',
-        setReels2Desc: 'Comfortable armchair framing for coaches, psychologists, and educators. Warm soft light and 4K beam-splitter teleprompter.',
+        setReels2Desc: 'Comfortable armchair framing for coaches, psychologists, and educators. Godox soft light and Neewer teleprompter.',
         setReels3Title: 'Desk & Digital Display',
         setReels3Desc: 'White executive desk format with laptop display for financial breakdowns, market commentary, and video reactions.',
         setStream1Title: 'Webinar & Live Broadcast Stage',
@@ -2909,30 +3004,30 @@
         servPreTitle: 'Production Solutions',
         servTitle: 'What We Produce',
         servSub: 'Engineered workflows for high-performing creators, thought leaders, and remote businesses.',
-        tagPodcast: '3 Cameras • Shure SM7B',
+        tagPodcast: '3 Cameras • Shure Mics',
         card1Title: 'Turnkey Podcast Production',
-        card1Desc: '3-angle Sony 4K recording, dedicated sound engineer, live camera switching, and optional multi-cam editing with sound design.',
+        card1Desc: 'Multi-cam Sony FX30/a7c recording, dedicated sound engineer, live camera switching, and optional multi-cam editing with sound design.',
         card1Price: 'from 1,900,000 IDR',
         tierCrew: 'Includes Crew & Sound Engineer',
-        tagReels: '4K Prompter • DJI Mic 2',
+        tagReels: 'Neewer Prompter • DJI mic',
         card2Title: 'Vertical Video & Course Batching',
-        card2Desc: 'Shoot 15–30 short-form clips in 2 hours. Seamless beam-splitter teleprompter with operator and viral caption editing.',
+        card2Desc: 'Shoot 15–30 short-form clips in 2 hours. Seamless Neewer teleprompter with operator and viral caption editing.',
         card2Price: 'from 1,100,000 IDR',
         tierPrompter: 'Prompter Operator Included',
         card4Title: 'Studio Space Rental (Dry Hire)',
-        card4Desc: 'Bring your own crew and camera package. Full access to acoustic space, Nanlite/Aputure cinema lighting grid, and high-speed fiber.',
+        card4Desc: 'Bring your own crew and camera package. Full access to acoustic space, Godox SL60 & TL60 RGB lighting grid, and high-speed fiber.',
         card4Price: 'from 700,000 IDR/h',
         tierLighting: 'Full Lighting Included',
         btnBookSlot: 'Calculate',
         equipPreTitle: 'Cinema Grade Engineering',
         equipTitle: 'Studio Equipment & Tech Specs',
         equipSub: 'Every tool is selected to produce broadcast-grade audio and rich, flattering skin tones.',
-        eqCamTitle: 'Sony Cinema Line (4K 10-bit)',
-        eqCamDesc: 'Multi-cam setup with Sony FX3 & FX30, prime lenses, and S-Cinetone profile for rich skin tones and cinematic depth of field.',
-        eqMicTitle: 'Shure SM7B Broadcast Microphones',
-        eqMicDesc: 'The industry benchmark for podcasts. Paired with inline preamps on silent boom arms for radio-grade vocal warmth.',
-        eqDeskTitle: 'RØDECaster Pro II & DJI Mic 2',
-        eqDeskDesc: 'Separate ISO audio track recording, live sound pads, Bluetooth phone call integration, and 32-bit float wireless lavaliers.',
+        eqCamTitle: 'Sony FX30 & a7c Cameras',
+        eqCamDesc: 'Multi-cam setup with Sony FX30 and a7c, prime lenses, and cinematic profile for rich skin tones and depth of field.',
+        eqMicTitle: '2 Shure Microphones',
+        eqMicDesc: 'Professional 2 Godox SL60 Softboxes, Godox TL60 4-LED RGB Tube Light kit, 1 Light Stand Tripod, and Neewer Teleprompter.',
+        eqDeskTitle: 'Rode Caster Pro & DJI Mic 2',
+        eqDeskDesc: 'Professional audio suite featuring 2 Shure microphones, Rode Caster Pro audio console, and DJI mic wireless system for pristine sound.',
         infraPreTitle: 'Studio Environment',
         infraTitle: 'Designed for Focus & Hospitality',
         loungeTitle: 'Lounge & Refreshment Bar',
@@ -2965,8 +3060,8 @@
         calcOptRental: 'Studio Space (Dry Hire)',
         calcStep2: 'Step 3 • Session Duration',
         calcStep3: 'Optional Add-ons & Production',
-        addonPrompter: '4K Beam-Splitter Teleprompter',
-        addonFx30: 'Additional 4K Sony FX Camera Angle',
+        addonPrompter: 'Neewer Teleprompter',
+        addonFx30: 'Additional Sony FX30/a7c Camera Angle',
         addonEdit: 'Full Multi-Cam Video Editing & Color Grade',
         billTitle: 'Estimate Summary',
         billNightRate: '🌙 Night Rate (1.5×):',
@@ -2984,7 +3079,7 @@
         faqQ2: 'When and how do I receive my master files?',
         faqA2: '<p>All uncompressed 4K video files and isolated audio tracks (ISO stems) are transferred immediately onto your SSD or uploaded to cloud storage on the day of recording via our 300 Mbps fiber line.</p>',
         faqQ3: 'Can I bring my own video crew (Dry Hire)?',
-        faqA3: '<p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Nanlite/Aputure lighting rigs.</p>',
+        faqA3: '<p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>',
         faqQ4: 'Is there dedicated car and scooter parking?',
         faqA4: '<p>Yes, we have free private parking directly in front of the entrance with spacious car bays and scooter parking. Loading gear takes less than 2 minutes.</p>',
         faqQ5: 'Can I record during late night hours?',
@@ -3020,8 +3115,20 @@
         heroBtnReel: 'Смотреть шоурил',
         cred1: 'Выпусков записано',
         cred2: 'Рейтинг Google Maps',
-        cred3: 'Кинокамеры Sony FX',
-        cred4: 'Выделенная оптика',
+        cred3: 'Камеры Sony FX30/a7c',
+                cred4: 'Выделенная оптика',
+        benPreTitle: 'Преимущества',
+        benTitle: 'Подход Icon Media',
+        ben1Title: '🎥 Профессиональная съемка под ваш стиль',
+        ben1Desc: 'Профессиональные камеры, звук и свет — всё настраивается специально под ваш контент и желаемый визуальный стиль.',
+        ben2Title: '🎬 Всё готово до вашего прихода',
+        ben2Desc: 'Сетап собирается за 30 минут до начала сессии — камеры, свет и звук уже включены и настроены, когда вы переступаете порог.',
+        ben3Title: '☕️ Приезжайте пораньше. Чувствуйте себя как дома.',
+        ben3Desc: 'Приезжайте заранее, отдохните в лаундже и настройтесь на съемку. К вашим услугам напитки, гримерная зона и рейлы для одежды.',
+        ben4Title: '📶 Надежный высокоскоростной интернет',
+        ben4Desc: 'Со стабильным каналом 80–90 Мбит/с вы можете уверенно проводить прямые эфиры, вебинары, онлайн-встречи и стримы.',
+        ben5Title: '📍 Удобное расположение',
+        ben5Desc: 'Студия комфортно расположена всего в 15–20 минутах езды от Куты, Семиньяка и Чангу.',
         portPreTitle: 'Качество в кадре',
         portTitle: 'Шоурил и примеры проектов',
         portSub: 'Реальные подкасты, экспертные шоу и вертикальные форматы, записанные и покрашенные в Icon Media Studio.',
@@ -3044,13 +3151,13 @@
         tabSetStream: 'Сцена для вебинаров',
         badgeSetFeatured: 'Флагманский лаундж',
         set1Title: 'Emerald Amber Lounge',
-        set1Desc: 'Глубокие изумрудные бархатные кресла, теплый торшерный свет 3200K, этнический ковер и микрофоны Shure SM7B на стойках.',
+        set1Desc: 'Глубокие изумрудные бархатные кресла, мягкий свет Godox 3200K, этнический ковер и 2 микрофона Shure на стойках.',
         set2Title: 'Деловой стол для диалога',
-        set2Desc: 'Минималистичный белый стол, строгие кожаные кресла, настольные микрофоны Shure и подключение ноутбука для реакций.',
+        set2Desc: 'Минималистичный белый стол, строгие кожаные кресла, 2 настольных микрофона Shure и подключение ноутбука для реакций.',
         set3Title: 'Cyber Purple Neon',
         set3Desc: 'Контрастный фиолетовый неон за тропическими пальмами монстеры. Идеально для Web3-фаундеров, крипты и IT-подкастов.',
         setReels2Title: 'Кресло и тропическая зелень',
-        setReels2Desc: 'Доверительный формат в мягком кресле для коучей, психологов и экспертов. Мягкий свет и суфлер 4K без бликов.',
+        setReels2Desc: 'Доверительный формат в мягком кресле для коучей и экспертов. Мягкий свет Godox и телесуфлер Neewer.',
         setReels3Title: 'Рабочий стол и монитор',
         setReels3Desc: 'Съемка за белым столом с демонстрацией ноутбука, слайдов и разборов на студийном мониторе.',
         setStream1Title: 'Сцена для трансляций и запусков',
@@ -3059,30 +3166,30 @@
         servPreTitle: 'Направления работы',
         servTitle: 'Форматы продакшна',
         servSub: 'Понятные готовые процессы для авторов, экспертов и международных команд.',
-        tagPodcast: '3 Камеры • Shure SM7B',
+        tagPodcast: 'Sony FX30/a7c • Shure',
         card1Title: 'Подкасты и YouTube-шоу под ключ',
-        card1Desc: 'Многокамерная съемка на 3 камеры Sony 4K, звукорежиссер на сете, лайв-переключение планов и последующий монтаж.',
+        card1Desc: 'Многокамерная съемка на Sony FX30 и a7c, звукорежиссер на сете, лайв-переключение планов и монтаж.',
         card1Price: 'от 1 900 000 IDR',
         tierCrew: 'Оператор и звукорежиссер включены',
         tagReels: 'Суфлер 4K • DJI Mic 2',
         card2Title: 'Съемка Reels, Shorts и курсов',
-        card2Desc: 'Запись 15–30 роликов за 2 часа с оператором суфлера. Вертикальная 4K-картинка и нарезка с динамичными субтитрами.',
+        card2Desc: 'Запись 15–30 роликов за 2 часа с оператором суфлера. Съемка с телесуфлером Neewer и нарезка с субтитрами.',
         card2Price: 'от 1 100 000 IDR',
         tierPrompter: 'Оператор суфлера включен',
         card4Title: 'Аренда студии (Dry Hire)',
-        card4Desc: 'Съемка вашей собственной командой. Полный доступ к акустическому залу, свету Nanlite/Aputure и скоростной оптике.',
+        card4Desc: 'Съемка вашей собственной командой. Полный доступ к акустическому залу, свету Godox SL60 и TL60 RGB.',
         card4Price: 'от 700 000 IDR/час',
         tierLighting: 'Полный студийный свет включен',
         btnBookSlot: 'Рассчитать',
         equipPreTitle: 'Кино-оборудование',
         equipTitle: 'Оборудование и спецификации',
         equipSub: 'Профессиональная техника, настроенная на благородные оттенки кожи и чистейший студийный голос.',
-        eqCamTitle: 'Камеры Sony Cinema Line (4K 10-bit)',
-        eqCamDesc: 'Сетап из Sony FX3 и FX30, светосильные объективы и профиль S-Cinetone для кинематографичной пластики кадра.',
-        eqMicTitle: 'Микрофоны Shure SM7B Broadcast',
-        eqMicDesc: 'Золотой стандарт мирового подкастинга на бесшумных пантографах с Cloudlifter для бархатного тембра без эха.',
-        eqDeskTitle: 'Пульт RØDECaster Pro II & DJI Mic 2',
-        eqDeskDesc: 'Поканальная запись ISO дорожек, звуковые эффекты, интеграция звонков по Bluetooth и беспроводные петлицы 32-bit float.',
+        eqCamTitle: 'Камеры Sony FX30 и a7c',
+        eqCamDesc: 'Профессиональный сетап из камер Sony FX30 и a7c со светосильными объективами для кинематографичной пластики кадра.',
+        eqMicTitle: '2 микрофона Shure',
+        eqMicDesc: '2 источника Godox SL60 Softbox, набор из 4 RGB-трубок Godox TL60, 1 Light Stand Tripod и телесуфлер Neewer.',
+        eqDeskTitle: 'Пульт Rode Caster Pro & DJI Mic 2',
+        eqDeskDesc: 'Безупречная запись звука: 2 микрофона Shure, профессиональный аудиомикшер Rode Caster Pro и радиосистема DJI mic.',
         infraPreTitle: 'Инфраструктура',
         infraTitle: 'Пространство для комфортной работы',
         loungeTitle: 'Лаундж-зона и кофе-бар',
@@ -3115,8 +3222,8 @@
         calcOptRental: 'Аренда студии (Dry Hire)',
         calcStep2: 'Шаг 3 • Длительность съемки',
         calcStep3: 'Дополнительные опции и монтаж',
-        addonPrompter: 'Телесуфлер 4K с оператором',
-        addonFx30: 'Дополнительный ракурс камеры Sony FX',
+        addonPrompter: 'Телесуфлер Neewer с оператором',
+        addonFx30: 'Дополнительная камера Sony FX30/a7c',
         addonEdit: 'Монтаж мультикама под ключ с цветокором',
         billTitle: 'Детали расчета',
         billNightRate: '🌙 Ночной тариф (1.5×):',
@@ -3132,9 +3239,9 @@
         faqQ1: 'Как забронировать студию и нужна ли предоплата?',
         faqA1: '<p>Напишите нам в WhatsApp или Telegram с деталями расчета. Мы закрепляем слот по предоплате 50%. Оставшаяся часть оплачивается сразу после окончания съемки.</p>',
         faqQ2: 'Когда и как передаются исходные файлы?',
-        faqA2: '<p>Все несжатые 4K-файлы и поканальный звук отдаются сразу после съемки на ваш SSD или выгруुलिस в облако в тот же день по оптике 300 Mbps.</p>',
+        faqA2: '<p>Все несжатые 4K-файлы и поканальный звук отдаются сразу после съемки на ваш SSD или выгружаются в облако в тот же день по оптике 300 Mbps.</p>',
         faqQ3: 'Можно ли прийти со своей съемочной группой (Dry Hire)?',
-        faqA3: '<p>Да. Аренда помещения доступна от 700 000 IDR/час и включает все световые приборы Nanlite/Aputure и шумоизолированный зал.</p>',
+        faqA3: '<p>Да. Аренда помещения доступна от 700 000 IDR/час и включает весь свет Godox и шумоизолированный зал.</p>',
         faqQ4: 'Есть ли парковка для автомобилей и байков?',
         faqA4: '<p>Да, прямо перед входом собственная бесплатная парковка для авто и байков. Разгрузка оборудования занимает пару минут.</p>',
         faqQ5: 'Возможна ли съемка в ночные часы?',
@@ -3161,29 +3268,29 @@
     const inclusions = {
       podcast: {
         en: [
-          '3x Sony 4K Cinema Multicam Capture',
-          'Shure SM7B Broadcast Microphones',
+          '3x Sony FX30/a7c Multicam Capture',
+          '2 Shure Microphones',
           'Dedicated Sound Engineer on Site',
           'Direct Raw Master Files Transfer'
         ],
         ru: [
-          'Съемка на 3 кинокамеры Sony 4K',
-          'Микрофоны Shure SM7B Broadcast',
+          'Съемка на камеры Sony FX30/a7c',
+          '2 микрофона Shure',
           'Звукорежиссер на съемочной площадке',
           'Передача несжатых исходников в день съемки'
         ]
       },
       social: {
         en: [
-          '1x Sony 4K FX Cinema Vertical Rig',
-          'DJI Mic 2 Wireless System',
+          '1x Sony FX30/a7c Vertical Rig',
+          'DJI mic Wireless System',
           'Teleprompter Ready + Operator Support',
           'Same-Day 4K Video Files Handoff'
         ],
         ru: [
-          'Вертикальный кино-риг Sony FX 4K',
-          'Беспроводная радиосистема DJI Mic 2',
-          'Телесуфлер 4K с оператором текста',
+          'Вертикальный риг Sony FX30/a7c',
+          'Беспроводная радиосистема DJI mic',
+          'Телесуфлер Neewer с оператором текста',
           'Выгрузка 4K-видео сразу после сессии'
         ]
       },
@@ -3204,13 +3311,13 @@
       rental: {
         en: [
           'Acoustic Studio Space Access',
-          'Nanlite & Aputure Cinema Lighting Grid',
+          'Godox SL60 Softboxes & TL60 RGB',
           'Optical Fiber 300 Mbps Connection',
           'Furniture & Lounge Area Access'
         ],
         ru: [
           'Шумоизолированное студийное пространство',
-          'Световой парк Nanlite & Aputure Cinema',
+          'Свет Godox SL60 Softbox и TL60 RGB',
           'Оптоволоконный интернет 300 Mbps',
           'Доступ к лаундж-зоне и мебели'
         ]
@@ -3659,7 +3766,7 @@
 
       if (prompterCheck && prompterCheck.checked) {
         addons += 300000;
-        addonsList.push(lang === 'en' ? '4K Teleprompter' : 'Телесуфлер 4K');
+        addonsList.push(lang === 'en' ? 'Neewer Teleprompter' : 'Телесуфлер Neewer');
       }
       if (fx30Check && fx30Check.checked) {
         addons += 300000;
@@ -3694,12 +3801,32 @@
       }
 
       const srvTitle = lang === 'en' ? data.en : data.ru;
-      const nightNoteEn = nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
-      const nightNoteRu = nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
+      const nightNoteEn = nightExtra > 0 ? '
+• Night Rate: 1.5×' : '';
+      const nightNoteRu = nightExtra > 0 ? '
+• Ночной тариф: 1.5×' : '';
 
       const text = lang === 'en'
-        ? `Hello! I would like to book a session at Icon Media Studio:\n\n• Service: ${srvTitle}\n• Date: ${chosenDate}\n• Start time: ${chosenTime}\n• Duration: ${calcHours}h${nightNoteEn}\n• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}\n• Estimated Total: ${formatIDR(regularTotal)}\n\nCould you please check availability?`
-        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:\n\n• Формат: ${srvTitle}\n• Дата: ${chosenDate}\n• Время: ${chosenTime}\n• Длительность: ${calcHours} ч${nightNoteRu}\n• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}\n• Расчетная сумма: ${formatIDR(regularTotal)}\n\nСвободен ли этот слот?`;
+        ? `Hello! I would like to book a session at Icon Media Studio:
+
+• Service: ${srvTitle}
+• Date: ${chosenDate}
+• Start time: ${chosenTime}
+• Duration: ${calcHours}h${nightNoteEn}
+• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
+• Estimated Total: ${formatIDR(regularTotal)}
+
+Could you please check availability?`
+        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:
+
+• Формат: ${srvTitle}
+• Дата: ${chosenDate}
+• Время: ${chosenTime}
+• Длительность: ${calcHours} ч${nightNoteRu}
+• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
+• Расчетная сумма: ${formatIDR(regularTotal)}
+
+Свободен ли этот слот?`;
 
       if (ch === 'wa') {
         const encodedText = encodeURIComponent(text);
