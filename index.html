@@ -1954,7 +1954,7 @@
               <div class="hero-badge-row">
                 <div class="authority-badge">
                   <i class="fa-solid fa-circle-dot"></i>
-                  <span>CANGGU / BALI • PRODUCTION STUDIO</span>
+                  <span>Kerobokan / Bali • Production studio</span>
                 </div>
                 
                 <div class="google-pill">
@@ -3132,7 +3132,7 @@
         faqQ1: 'Как забронировать студию и нужна ли предоплата?',
         faqA1: '<p>Напишите нам в WhatsApp или Telegram с деталями расчета. Мы закрепляем слот по предоплате 50%. Оставшаяся часть оплачивается сразу после окончания съемки.</p>',
         faqQ2: 'Когда и как передаются исходные файлы?',
-        faqA2: '<p>Все несжатые 4K-файлы и поканальный звук отдаются сразу после съемки на ваш SSD или выгружаются в облако в тот же день по оптике 300 Mbps.</p>',
+        faqA2: '<p>Все несжатые 4K-файлы и поканальный звук отдаются сразу после съемки на ваш SSD или выгруुलिस в облако в тот же день по оптике 300 Mbps.</p>',
         faqQ3: 'Можно ли прийти со своей съемочной группой (Dry Hire)?',
         faqA3: '<p>Да. Аренда помещения доступна от 700 000 IDR/час и включает все световые приборы Nanlite/Aputure и шумоизолированный зал.</p>',
         faqQ4: 'Есть ли парковка для автомобилей и байков?',
@@ -3694,32 +3694,12 @@
       }
 
       const srvTitle = lang === 'en' ? data.en : data.ru;
-      const nightNoteEn = nightExtra > 0 ? '
-• Night Rate: 1.5×' : '';
-      const nightNoteRu = nightExtra > 0 ? '
-• Ночной тариф: 1.5×' : '';
+      const nightNoteEn = nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
+      const nightNoteRu = nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
 
       const text = lang === 'en'
-        ? `Hello! I would like to book a session at Icon Media Studio:
-
-• Service: ${srvTitle}
-• Date: ${chosenDate}
-• Start time: ${chosenTime}
-• Duration: ${calcHours}h${nightNoteEn}
-• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
-• Estimated Total: ${formatIDR(regularTotal)}
-
-Could you please check availability?`
-        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:
-
-• Формат: ${srvTitle}
-• Дата: ${chosenDate}
-• Время: ${chosenTime}
-• Длительность: ${calcHours} ч${nightNoteRu}
-• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
-• Расчетная сумма: ${formatIDR(regularTotal)}
-
-Свободен ли этот слот?`;
+        ? `Hello! I would like to book a session at Icon Media Studio:\n\n• Service: ${srvTitle}\n• Date: ${chosenDate}\n• Start time: ${chosenTime}\n• Duration: ${calcHours}h${nightNoteEn}\n• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}\n• Estimated Total: ${formatIDR(regularTotal)}\n\nCould you please check availability?`
+        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:\n\n• Формат: ${srvTitle}\n• Дата: ${chosenDate}\n• Время: ${chosenTime}\n• Длительность: ${calcHours} ч${nightNoteRu}\n• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}\n• Расчетная сумма: ${formatIDR(regularTotal)}\n\nСвободен ли этот слот?`;
 
       if (ch === 'wa') {
         const encodedText = encodeURIComponent(text);
