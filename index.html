@@ -57,17 +57,11 @@
       z-index: 5;
     }
 
-    /* Scroll Reveal (ниже первого экрана) */
+    /* Гарантия видимости контента */
     .reveal-item {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    .reveal-item.revealed {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* Authority Badge */
@@ -394,7 +388,7 @@
     }
 
     /* ========================================================
-       1. HERO SECTION (ГАРАНТИРОВАННО ВИДИМЫЙ ТЕКСТ + CSS GRID)
+       1. HERO SECTION (CSS GRID + ВЫРАВНИВАНИЕ ПО ЛОГОТИПУ)
        ======================================================== */
     .hero-section {
       position: relative;
@@ -407,7 +401,6 @@
       background-color: var(--bg-main);
     }
 
-    /* Фоновое фото справа без зума */
     .hero-bg-media {
       position: absolute;
       top: 0;
@@ -432,7 +425,6 @@
       mask-image: radial-gradient(ellipse 90% 90% at 75% 50%, black 50%, transparent 95%);
     }
 
-    /* Градиенты слияния */
     .hero-bg-gradient-scrim {
       position: absolute;
       inset: 0;
@@ -455,22 +447,17 @@
       pointer-events: none;
     }
 
-    /* CSS Grid для первого экрана */
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 36px;
       align-items: center;
       position: relative;
-      z-index: 10; /* Поверх всех фонов */
+      z-index: 10;
     }
 
-    /* Текст всегда 100% видим без ожидания JS */
     .hero-content-wrap {
       max-width: 650px;
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: none !important;
     }
 
     .hero-badge-row {
@@ -581,6 +568,7 @@
     .portfolio-section {
       padding: 90px 0;
       position: relative;
+      z-index: 5;
     }
 
     .portfolio-header-wrap {
@@ -738,6 +726,7 @@
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .sets-tabs {
@@ -914,6 +903,7 @@
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .cards-grid {
@@ -997,6 +987,7 @@
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .equip-grid {
@@ -1068,6 +1059,7 @@
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .infra-grid {
@@ -1130,6 +1122,7 @@
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .reviews-header-wrap {
@@ -1172,6 +1165,7 @@
       padding: 100px 0;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .calc-section::before {
@@ -1444,6 +1438,7 @@
       padding: 90px 0 100px;
       border-top: 1px solid var(--border-subtle);
       position: relative;
+      z-index: 5;
     }
 
     .faq-container {
@@ -1527,6 +1522,7 @@
       padding: 90px 0 40px;
       overflow: hidden;
       border-top: 1px solid var(--border-subtle);
+      z-index: 5;
     }
 
     .footer-flame-glow {
@@ -1731,20 +1727,17 @@
 
   <div id="pageFrameWrapper">
     <main>
-      <!-- 1. HERO SECTION: ТЕКСТ СТРОГО СЛЕВА, ВИДИМ СРАЗУ -->
+      <!-- 1. HERO SECTION -->
       <section class="hero-section">
-        <!-- Фотография справа -->
         <div class="hero-bg-media">
           <img src="IMG_2523.jpg" alt="Icon Media Studio Bali Background" onerror="this.src='hero-studio-emerald.jpg'">
         </div>
         
-        <!-- Градиенты -->
         <div class="hero-bg-gradient-scrim"></div>
         <div class="hero-bg-glow"></div>
 
         <div class="container">
           <div class="hero-grid">
-            <!-- Левая колонка: четко под логотипом, без скрытия через opacity -->
             <div class="hero-content-wrap">
               <div class="hero-badge-row">
                 <div class="authority-badge">
@@ -1760,17 +1753,14 @@
                 </div>
               </div>
 
-              <!-- H1: ICON MEDIA — Podcast Studio & Video Production in Bali -->
               <h1 class="hero-title" data-i18n="heroTitle">
                 ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali
               </h1>
 
-              <!-- Подзаголовок -->
               <p class="hero-sub" data-i18n="heroSub1">
                 A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.
               </p>
 
-              <!-- Маленький текст отдельно без точек -->
               <div class="hero-features-line">
                 <span data-i18n="hf1">Professional setup</span>
                 <span data-i18n="hf2">Great lighting</span>
@@ -1788,12 +1778,10 @@
               </div>
             </div>
 
-            <!-- Правая колонка-заглушка: резервирует место под фото кресла -->
             <div class="hero-photo-placeholder" aria-hidden="true"></div>
           </div>
         </div>
 
-        <!-- Credibility Strip -->
         <div class="cred-strip" style="margin-top: 55px;">
           <div class="container">
             <div class="cred-bar-grid">
@@ -1822,7 +1810,7 @@
       <section class="portfolio-section" id="portfolio">
         <div class="container">
           
-          <div class="portfolio-header-wrap reveal-item">
+          <div class="portfolio-header-wrap">
             <div>
               <span class="section-eyebrow" data-i18n="portPreTitle">Proven Production Quality</span>
               <h2 class="section-heading" data-i18n="portTitle">Featured Episodes & Projects</h2>
@@ -1841,7 +1829,7 @@
             </div>
           </div>
 
-          <div class="portfolio-carousel-track reveal-item" id="portfolioTrack">
+          <div class="portfolio-carousel-track" id="portfolioTrack">
             <div class="video-card" onclick="openVideoModal('GuUftSGhDi0')">
               <div class="video-thumb-box">
                 <img src="https://img.youtube.com/vi/GuUftSGhDi0/hqdefault.jpg" alt="Studio Multi-Cam Interview" class="video-thumb-img" loading="lazy">
@@ -1940,7 +1928,7 @@
       <section class="sets-section" id="sets">
         <div class="container">
           
-          <div class="reveal-item">
+          <div>
             <span class="section-eyebrow" data-i18n="setsPreTitle">Curated Filming Stages</span>
             <h2 class="section-heading" data-i18n="setsTitle">Studio Sets & Environments</h2>
             <p class="section-subtext" data-i18n="setsSub">
@@ -1948,7 +1936,7 @@
             </p>
           </div>
 
-          <div class="sets-tabs reveal-item">
+          <div class="sets-tabs">
             <button type="button" class="set-tab-btn active" onclick="switchSets('podcast', this)">
               <i class="fa-solid fa-podcast"></i> <span data-i18n="tabSetPod">Podcast Lounge & Desk</span>
             </button>
@@ -1961,7 +1949,7 @@
           </div>
 
           <div class="sets-grid" id="setsContainer">
-            <div class="set-card reveal-item" data-setcat="podcast">
+            <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="emeraldGalleryBox">
                   <span class="set-badge" data-i18n="badgeSetFeatured">Flagship Lounge</span>
@@ -1999,7 +1987,7 @@
               </div>
             </div>
 
-            <div class="set-card reveal-item" data-setcat="podcast">
+            <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="deskGalleryBox">
                   <span class="set-badge">Executive Format</span>
@@ -2038,7 +2026,7 @@
               </div>
             </div>
 
-            <div class="set-card reveal-item" data-setcat="podcast">
+            <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Cyber & Tech</span>
@@ -2134,7 +2122,7 @@
       <section class="services-section" id="services">
         <div class="container">
           
-          <div class="reveal-item">
+          <div>
             <span class="section-eyebrow" data-i18n="servPreTitle">Production Solutions</span>
             <h2 class="section-heading" data-i18n="servTitle">What We Produce</h2>
             <p class="section-subtext" data-i18n="servSub">
@@ -2143,7 +2131,7 @@
           </div>
 
           <div class="cards-grid">
-            <div class="studio-card reveal-item">
+            <div class="studio-card">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagPodcast">3 Cameras • Shure SM7B</span>
@@ -2165,7 +2153,7 @@
               </div>
             </div>
 
-            <div class="studio-card reveal-item">
+            <div class="studio-card">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagReels">4K Prompter • DJI Mic 2</span>
@@ -2187,7 +2175,7 @@
               </div>
             </div>
 
-            <div class="studio-card reveal-item">
+            <div class="studio-card">
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag">Acoustics • Lighting Grid</span>
@@ -2217,7 +2205,7 @@
       <section class="equip-section" id="equipment">
         <div class="container">
           
-          <div class="reveal-item">
+          <div>
             <span class="section-eyebrow" data-i18n="equipPreTitle">Cinema Grade Engineering</span>
             <h2 class="section-heading" data-i18n="equipTitle">Studio Equipment & Tech Specs</h2>
             <p class="section-subtext" data-i18n="equipSub">
@@ -2226,7 +2214,7 @@
           </div>
 
           <div class="equip-grid">
-            <div class="equip-card reveal-item">
+            <div class="equip-card">
               <div class="equip-photo-header">
                 <img src="sony-cinema-line.jpg" alt="Sony Cinema Line FX30 4K Camera Icon Media">
               </div>
@@ -2239,7 +2227,7 @@
               </div>
             </div>
 
-            <div class="equip-card reveal-item">
+            <div class="equip-card">
               <div class="equip-photo-header">
                 <img src="shure-sm7b-mic.jpg" alt="Shure SM7B Microphone on Boom Arm">
               </div>
@@ -2252,7 +2240,7 @@
               </div>
             </div>
 
-            <div class="equip-card reveal-item">
+            <div class="equip-card">
               <div class="equip-photo-header">
                 <img src="audio-console-rodecaster.jpg" alt="RODECaster Pro II Console and DJI Mic">
               </div>
@@ -2273,13 +2261,13 @@
       <section class="infra-section" id="infra">
         <div class="container">
           
-          <div class="reveal-item">
+          <div>
             <span class="section-eyebrow" data-i18n="infraPreTitle">Studio Environment</span>
             <h2 class="section-heading" data-i18n="infraTitle">Designed for Focus & Hospitality</h2>
           </div>
 
           <div class="infra-grid">
-            <div class="infra-card reveal-item">
+            <div class="infra-card">
               <div class="infra-photo-header">
                 <img src="lounge-waiting-area.jpg" alt="Icon Media Studio Chill Lounge and Waiting Area">
               </div>
@@ -2296,7 +2284,7 @@
               </div>
             </div>
 
-            <div class="infra-card reveal-item">
+            <div class="infra-card">
               <div class="infra-photo-header">
                 <img src="makeup-station.jpg" alt="Icon Media Studio Makeup Vanity Station">
               </div>
@@ -2313,7 +2301,7 @@
               </div>
             </div>
 
-            <div class="infra-card reveal-item" id="parking">
+            <div class="infra-card" id="parking">
               <div class="infra-inner-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding-top: 24px;">
                 <div>
                   <i class="fa-solid fa-square-parking" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
@@ -2336,7 +2324,7 @@
       <section class="reviews-section" id="reviews">
         <div class="container">
           
-          <div class="reviews-header-wrap reveal-item">
+          <div class="reviews-header-wrap">
             <div>
               <span class="section-eyebrow" data-i18n="revPreTitle">Client Feedback</span>
               <h2 class="section-heading" data-i18n="revTitle">Verified Google Reviews</h2>
@@ -2357,7 +2345,7 @@
             </div>
           </div>
 
-          <div class="reveal-item">
+          <div>
             <script src="https://elfsightcdn.com/platform.js" async></script>
             <div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div>
           </div>
@@ -2369,7 +2357,7 @@
       <section class="calc-section" id="calculator">
         <div class="container">
           
-          <div class="reveal-item">
+          <div>
             <span class="section-eyebrow" data-i18n="calcPreTitle">Transparent Pricing Engine</span>
             <h2 class="section-heading" data-i18n="calcTitle">Estimate Your Session</h2>
             <p class="section-subtext" data-i18n="calcSub">
@@ -2377,7 +2365,7 @@
             </p>
           </div>
 
-          <div class="calc-box reveal-item">
+          <div class="calc-box">
             <div class="calc-grid">
               
               <div>
@@ -2502,7 +2490,7 @@
       <section class="faq-section" id="faq">
         <div class="container">
           
-          <div class="reveal-item" style="text-align: center;">
+          <div style="text-align: center;">
             <span class="section-eyebrow" data-i18n="faqPreTitle">Direct Answers</span>
             <h2 class="section-heading" data-i18n="faqTitle">Frequently Asked Questions</h2>
             <p class="section-subtext" style="margin: 8px auto 0;" data-i18n="faqSub">
@@ -2511,7 +2499,7 @@
           </div>
 
           <div class="faq-container">
-            <div class="faq-item reveal-item">
+            <div class="faq-item">
               <button type="button" class="faq-question" onclick="toggleFaq(this)">
                 <span data-i18n="faqQ1">How do I book and is a deposit required?</span>
                 <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
@@ -2523,7 +2511,7 @@
               </div>
             </div>
 
-            <div class="faq-item reveal-item">
+            <div class="faq-item">
               <button type="button" class="faq-question" onclick="toggleFaq(this)">
                 <span data-i18n="faqQ2">When and how do I receive my master files?</span>
                 <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
@@ -2535,7 +2523,7 @@
               </div>
             </div>
 
-            <div class="faq-item reveal-item">
+            <div class="faq-item">
               <button type="button" class="faq-question" onclick="toggleFaq(this)">
                 <span data-i18n="faqQ3">Can I bring my own video crew (Dry Hire)?</span>
                 <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
@@ -2547,7 +2535,7 @@
               </div>
             </div>
 
-            <div class="faq-item reveal-item">
+            <div class="faq-item">
               <button type="button" class="faq-question" onclick="toggleFaq(this)">
                 <span data-i18n="faqQ4">Is there dedicated car and scooter parking?</span>
                 <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
@@ -2559,7 +2547,7 @@
               </div>
             </div>
 
-            <div class="faq-item reveal-item">
+            <div class="faq-item">
               <button type="button" class="faq-question" onclick="toggleFaq(this)">
                 <span data-i18n="faqQ5">Can I record during late night hours?</span>
                 <span class="faq-chevron"><i class="fa-solid fa-chevron-down"></i></span>
@@ -3160,55 +3148,4 @@
 
       let addons = 0;
       if (document.getElementById('addon-prompter').checked) addons += 300000;
-      if (document.getElementById('addon-fx30').checked) addons += 300000;
-      if (document.getElementById('addon-edit').checked) addons += 600000;
-
-      const regularTotal = base + nightExtra + addons;
-
-      const srvName = currentLang === 'en' ? data.en : data.ru;
-      document.getElementById('bill-service').innerText = `${srvName} (${calcHours}h)`;
-      document.getElementById('bill-base').innerText = formatIDR(base);
-      document.getElementById('bill-addons').innerText = formatIDR(addons);
-      document.getElementById('bill-total').innerText = formatIDR(regularTotal);
-
-      const itm1 = document.getElementById('incl-item1');
-      const itm2 = document.getElementById('incl-item2');
-      const itm3 = document.getElementById('incl-item3');
-
-      if (calcService === 'rental') {
-        itm1.innerHTML = '<i class="fa-solid fa-check"></i> <span>Acoustic Studio Space Access</span>';
-        itm2.innerHTML = '<i class="fa-solid fa-check"></i> <span>Nanlite & Aputure Cinema Lighting Grid</span>';
-        itm3.innerHTML = '<i class="fa-solid fa-check"></i> <span>Optical Fiber 300 Mbps Connection</span>';
-      } else if (calcService === 'social') {
-        itm1.innerHTML = '<i class="fa-solid fa-check"></i> <span>1x Sony 4K FX Cinema Vertical Rig</span>';
-        itm2.innerHTML = '<i class="fa-solid fa-check"></i> <span>DJI Mic 2 Wireless System</span>';
-        itm3.innerHTML = '<i class="fa-solid fa-check"></i> <span>Teleprompter Ready + Operator Support</span>';
-      } else {
-        itm1.innerHTML = '<i class="fa-solid fa-check"></i> <span>3x Sony 4K Cinema Multicam Capture</span>';
-        itm2.innerHTML = '<i class="fa-solid fa-check"></i> <span>Shure SM7B Broadcast Microphones</span>';
-        itm3.innerHTML = '<i class="fa-solid fa-check"></i> <span>Dedicated Sound Engineer on Site</span>';
-      }
-    }
-
-    function openDatePicker() {
-      const input = document.getElementById('booking-date');
-      if (input) {
-        if (typeof input.showPicker === 'function') {
-          input.showPicker();
-        } else {
-          input.focus();
-        }
-      }
-    }
-
-    function sendToMessenger(ch) {
-      const data = rates[calcService];
-      let base = 0;
-
-      if (calcService === 'webinar') {
-        if (calcHours <= 2) base = data[2];
-        else if (calcHours === 3) base = data[3];
-        else if (calcHours === 4) base = data[4];
-        else base = data[4] + (calcHours - 4) * data.ext;
-      } else {
-        if (calcHours <= 3) base
+      if (document.getElementById('addon-
