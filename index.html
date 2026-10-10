@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ICON MEDIA | Premium Podcast Studio & Video Production in Bali</title>
   
+  <meta name="description" content="ICON MEDIA — премиальная студия подкастов и видеопродакшна в Чангу, Бали. Многокамерная съемка 4K Sony FX, микрофоны Shure SM7B, телесуфлер и полный монтаж под ключ.">
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vovalensa.github.io/Icon-media/">
+  <meta property="og:title" content="ICON MEDIA | Premium Podcast Studio & Video Production in Bali">
+  <meta property="og:description" content="Professional space for creators, experts and brands in Bali. 4K Cinema Multi-Cam, Shure SM7B, zero hassle.">
+  <meta property="og:image" content="IMG_2523.jpg">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -143,13 +153,17 @@
       transform: translateY(-2px);
     }
 
-    /* ПЛАВАЮЩИЙ ТУЛБАР ПЕРЕКЛЮЧЕНИЯ ВЕРСИЙ (ИСПРАВЛЕННЫЙ) */
+    /* Тулбар эмулятора и кнопка PNG (по умолчанию скрыты, показ при ?dev=1) */
+    #downloadBtn,
+    .device-switcher-bar {
+      display: none !important;
+    }
+
     .device-switcher-bar {
       position: fixed;
       top: 84px;
       right: 24px;
       z-index: 100000 !important;
-      display: flex;
       gap: 6px;
       background: rgba(14, 14, 18, 0.92);
       border: 1px solid var(--border-light);
@@ -191,7 +205,6 @@
       position: relative;
     }
 
-    /* СТИЛИ ПРИ ЭМУЛЯЦИИ ТАБЛЕТА И МОБИЛЬНОГО ЧЕРЕЗ ТУЛБАР */
     body.view-tablet #pageFrameWrapper {
       max-width: 768px !important;
       border-left: 1px solid rgba(255, 68, 10, 0.4);
@@ -291,6 +304,31 @@
       box-shadow: 0 16px 45px rgba(255, 68, 10, 0.65);
     }
 
+    /* Тост уведомление */
+    .toast-notice {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(14, 14, 20, 0.96);
+      border: 1px solid var(--flame-orange);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--flame-glow);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100002;
+    }
+    .toast-notice.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* HEADER & BRAND LOGO */
     header {
       position: sticky;
@@ -382,7 +420,7 @@
       color: #fff;
     }
 
-    /* МЕНЮ-БУРГЕР (СТАНДАРТ 2026 ГОДА) */
+    /* МЕНЮ-БУРГЕР */
     .burger-btn {
       display: none;
       flex-direction: column;
@@ -420,7 +458,6 @@
       background-color: var(--flame-orange);
     }
 
-    /* ПОЛНОЭКРАННАЯ ШТОРКА МОБИЛЬНОГО МЕНЮ */
     .mobile-menu-drawer {
       position: fixed;
       inset: 0;
@@ -1438,6 +1475,14 @@
 
     .night-warning-banner.active { display: flex; }
 
+    .webinar-min-hint {
+      display: none;
+      font-size: 12px;
+      color: var(--flame-orange);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
     .hours-picker {
       display: flex;
       gap: 10px;
@@ -1802,17 +1847,21 @@
       .footer-watermark { font-size: 50px; }
       .brand-logo-img { height: 46px; }
       .footer-brand-logo-img { height: 48px; }
+      .header-cta-btn { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating PNG Exporter -->
+  <!-- Всплывающий тост для копирования текста в Telegram -->
+  <div id="toastNotice" class="toast-notice"></div>
+
+  <!-- Floating PNG Exporter (Показывается только при ?dev=1) -->
   <button id="downloadBtn" class="png-exporter-btn" onclick="exportToPNG()">
     <i class="fa-solid fa-camera"></i> <span id="btnExportText">Export PNG (1440px)</span>
   </button>
 
-  <!-- Device Switcher (100% кликабельный) -->
+  <!-- Device Switcher (Показывается только при ?dev=1) -->
   <div class="device-switcher-bar">
     <button type="button" class="device-btn active" onclick="setDeviceView('desktop', this)">
       <i class="fa-solid fa-desktop"></i> Desktop
@@ -1853,7 +1902,7 @@
           <span data-i18n="ctaBook">Book Session</span>
         </a>
 
-        <!-- Кнопка бургер-меню (2026) -->
+        <!-- Кнопка бургер-меню -->
         <button type="button" class="burger-btn" id="burgerToggleBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
           <span class="burger-line"></span>
           <span class="burger-line"></span>
@@ -2112,6 +2161,7 @@
           </div>
 
           <div class="sets-grid" id="setsContainer">
+            <!-- Setup 1 -->
             <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="emeraldGalleryBox">
@@ -2124,7 +2174,7 @@
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
 
-                  <img id="emeraldGalleryImg" src="podcast-setup-emerald-amber.jpg" alt="Emerald Velvet Amber Lounge Setup Icon Media">
+                  <img id="emeraldGalleryImg" src="podcast-setup-emerald-amber.jpg" alt="Emerald Velvet Amber Lounge Setup Icon Media" loading="lazy">
 
                   <div class="gallery-dots">
                     <span class="gallery-dot active" onclick="setEmeraldSlide(0)"></span>
@@ -2146,10 +2196,11 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Interviews & Talks</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
+            <!-- Setup 2 -->
             <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap" id="deskGalleryBox">
@@ -2162,7 +2213,7 @@
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
 
-                  <img id="deskGalleryImg" src="podcast-setup-desk-guests.jpg" alt="Executive White Desk Podcast Setup Icon Media" onerror="this.src='podcast-setup-desk-table.jpg'">
+                  <img id="deskGalleryImg" src="podcast-setup-desk-guests.jpg" alt="Executive White Desk Podcast Setup Icon Media" onerror="this.src='podcast-setup-desk-table.jpg'" loading="lazy">
 
                   <div class="gallery-dots">
                     <span class="gallery-dot active" onclick="setDeskSlide(0)"></span>
@@ -2185,15 +2236,16 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Business & Tech</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
+            <!-- Setup 3 -->
             <div class="set-card" data-setcat="podcast">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Cyber & Tech</span>
-                  <img src="podcast-setup-emerald-neon.jpg" alt="Cyber Neon Purple RGB Podcast Setup">
+                  <img src="podcast-setup-emerald-neon.jpg" alt="Cyber Neon Purple RGB Podcast Setup" loading="lazy">
                 </div>
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="set3Title">Cyber Purple Neon</h3>
@@ -2207,15 +2259,16 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Web3 & Crypto</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
+            <!-- Reels Setup 1 -->
             <div class="set-card" data-setcat="reels" style="display: none;">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Expert Trust</span>
-                  <img src="podcast-setup-guest-angle.jpg" alt="Emerald Armchair Expert Setup">
+                  <img src="podcast-setup-guest-angle.jpg" alt="Emerald Armchair Expert Setup" loading="lazy">
                 </div>
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="setReels2Title">Armchair & Tropical Greenery</h3>
@@ -2229,15 +2282,16 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Vertical 9:16</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
+            <!-- Reels Setup 2 -->
             <div class="set-card" data-setcat="reels" style="display: none;">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Business & Finance</span>
-                  <img src="podcast-setup-desk-table.jpg" alt="Business Desk Setup">
+                  <img src="podcast-setup-desk-table.jpg" alt="Business Desk Setup" loading="lazy">
                 </div>
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="setReels3Title">Desk & Digital Display</h3>
@@ -2251,15 +2305,16 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Expert Reels</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
 
+            <!-- Stream Setup -->
             <div class="set-card" data-setcat="stream" style="display: none;">
               <div>
                 <div class="set-img-wrap">
                   <span class="set-badge">Live Broadcast</span>
-                  <img src="webinar-live-stream.jpg" alt="Live Webinar Stage Bali" onerror="this.src='podcast-setup-desk-table.jpg'">
+                  <img src="webinar-live-stream.jpg" alt="Live Webinar Stage Bali" onerror="this.src='podcast-setup-desk-table.jpg'" loading="lazy">
                 </div>
                 <div class="set-body">
                   <h3 class="set-title" data-i18n="setStream1Title">Webinar & Live Broadcast Stage</h3>
@@ -2273,7 +2328,7 @@
               </div>
               <div class="set-cta">
                 <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Turnkey Broadcast</span>
-                <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
+                <a href="#calculator" onclick="selectCalcFromCard('webinar')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
               </div>
             </div>
           </div>
@@ -2298,7 +2353,7 @@
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagPodcast">3 Cameras • Shure SM7B</span>
-                  <img src="podcast-setup-emerald-wide.jpg" alt="Icon Media Studio Podcast Setup Bali" onerror="this.src='podcast-setup-emerald-amber.jpg'">
+                  <img src="podcast-setup-emerald-wide.jpg" alt="Icon Media Studio Podcast Setup Bali" onerror="this.src='podcast-setup-emerald-amber.jpg'" loading="lazy">
                 </div>
                 <div class="card-content">
                   <h3 class="card-title" data-i18n="card1Title">Turnkey Podcast Production</h3>
@@ -2320,7 +2375,7 @@
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag" data-i18n="tagReels">4K Prompter • DJI Mic 2</span>
-                  <img src="reels-shorts-production.jpg" alt="Reels Shorts Course Production Canggu" onerror="this.src='podcast-setup-guest-angle.jpg'">
+                  <img src="reels-shorts-production.jpg" alt="Reels Shorts Course Production Canggu" onerror="this.src='podcast-setup-guest-angle.jpg'" loading="lazy">
                 </div>
                 <div class="card-content">
                   <h3 class="card-title" data-i18n="card2Title">Vertical Video & Course Batching</h3>
@@ -2342,7 +2397,7 @@
               <div>
                 <div class="card-img-wrap">
                   <span class="card-tag">Acoustics • Lighting Grid</span>
-                  <img src="podcast-setup-emerald-neon.jpg" alt="Studio Rental Dry Hire Bali">
+                  <img src="podcast-setup-emerald-neon.jpg" alt="Studio Rental Dry Hire Bali" loading="lazy">
                 </div>
                 <div class="card-content">
                   <h3 class="card-title" data-i18n="card4Title">Studio Space Rental (Dry Hire)</h3>
@@ -2379,7 +2434,7 @@
           <div class="equip-grid">
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="sony-cinema-line.jpg" alt="Sony Cinema Line FX30 4K Camera Icon Media">
+                <img src="sony-cinema-line.jpg" alt="Sony Cinema Line FX30 4K Camera Icon Media" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
@@ -2392,7 +2447,7 @@
 
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="shure-sm7b-mic.jpg" alt="Shure SM7B Microphone on Boom Arm">
+                <img src="shure-sm7b-mic.jpg" alt="Shure SM7B Microphone on Boom Arm" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
@@ -2405,7 +2460,7 @@
 
             <div class="equip-card">
               <div class="equip-photo-header">
-                <img src="audio-console-rodecaster.jpg" alt="RODECaster Pro II Console and DJI Mic">
+                <img src="audio-console-rodecaster.jpg" alt="RODECaster Pro II Console and DJI Mic" loading="lazy">
               </div>
               <div class="equip-inner-content">
                 <div>
@@ -2432,7 +2487,7 @@
           <div class="infra-grid">
             <div class="infra-card">
               <div class="infra-photo-header">
-                <img src="lounge-waiting-area.jpg" alt="Icon Media Studio Chill Lounge and Waiting Area">
+                <img src="lounge-waiting-area.jpg" alt="Icon Media Studio Chill Lounge and Waiting Area" loading="lazy">
               </div>
               <div class="infra-inner-body">
                 <div>
@@ -2449,7 +2504,7 @@
 
             <div class="infra-card">
               <div class="infra-photo-header">
-                <img src="makeup-station.jpg" alt="Icon Media Studio Makeup Vanity Station">
+                <img src="makeup-station.jpg" alt="Icon Media Studio Makeup Vanity Station" loading="lazy">
               </div>
               <div class="infra-inner-body">
                 <div>
@@ -2502,7 +2557,7 @@
                   <span data-i18n="revMeta">Verified Reviews on Google Maps</span>
                 </div>
               </div>
-              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="margin-left: 12px;">
+              <a href="https://maps.app.goo.gl/uX7r4FzL73U6Lp4s7" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="margin-left: 12px;">
                 <i class="fa-brands fa-google" style="color: #ea4335;"></i> <span data-i18n="btnAllGoogle">View on Maps</span>
               </a>
             </div>
@@ -2516,7 +2571,7 @@
         </div>
       </section>
 
-      <!-- 8. REFINED CALCULATOR & BOOKING ENGINE -->
+      <!-- 8. CALCULATOR & BOOKING -->
       <section class="calc-section" id="calculator">
         <div class="container">
           
@@ -2574,11 +2629,13 @@
                 </div>
 
                 <span class="step-title" data-i18n="calcStep2">Step 3 • Session Duration</span>
+                <div id="webinar-min-hint" class="webinar-min-hint" data-i18n="webinarMinHint" style="display: none; font-size: 12px; color: var(--flame-orange); font-weight: 700; margin-bottom: 8px;">⚠️ Minimum booking duration for webinars is 2 hours.</div>
+
                 <div class="hours-picker">
-                  <button type="button" class="hour-btn active" onclick="setHours(1, this)">1h</button>
-                  <button type="button" class="hour-btn" onclick="setHours(2, this)">2h</button>
-                  <button type="button" class="hour-btn" onclick="setHours(3, this)">3h</button>
-                  <button type="button" class="hour-btn" onclick="setHours(4, this)">4h</button>
+                  <button type="button" class="hour-btn active" id="hour-btn-1" onclick="setHours(1, this)">1h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-2" onclick="setHours(2, this)">2h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-3" onclick="setHours(3, this)">3h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-4" onclick="setHours(4, this)">4h</button>
                 </div>
 
                 <span class="step-title" data-i18n="calcStep3">Optional Add-ons & Production</span>
@@ -2618,12 +2675,12 @@
                     <span id="bill-addons">0 IDR</span>
                   </div>
 
-                  <!-- Dynamic Package Inclusions -->
+                  <!-- Динамический список inclusions -->
                   <div class="bill-includes-box">
                     <div style="font-weight: 700; color: #fff; margin-bottom: 6px;" data-i18n="billInclHeader">Included in this session:</div>
-                    <div id="incl-item1"><i class="fa-solid fa-check"></i> <span>Sony 4K Multi-Camera System</span></div>
-                    <div id="incl-item2"><i class="fa-solid fa-check"></i> <span>Shure SM7B Broadcast Mics</span></div>
-                    <div id="incl-item3"><i class="fa-solid fa-check"></i> <span>Sound Engineer & Operator</span></div>
+                    <div id="incl-item1"><i class="fa-solid fa-check"></i> <span>3x Sony 4K Cinema Multicam Capture</span></div>
+                    <div id="incl-item2"><i class="fa-solid fa-check"></i> <span>Shure SM7B Broadcast Microphones</span></div>
+                    <div id="incl-item3"><i class="fa-solid fa-check"></i> <span>Dedicated Sound Engineer on Site</span></div>
                     <div id="incl-item4"><i class="fa-solid fa-check"></i> <span>Direct Raw Master Files Transfer</span></div>
                   </div>
 
@@ -2901,6 +2958,7 @@
         calcStepDateTime: 'Step 2 • Date & Preferred Time',
         optFlexible: 'Flexible / Discuss via Chat',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
+        webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
         calcOptPod: 'Podcast (3 Cams 4K)',
         calcOptReels: 'Reels Batch (1 Cam 4K)',
         calcOptWebinar: 'Webinar / Stream',
@@ -2917,6 +2975,7 @@
         billTotal: 'Estimated Total:',
         btnBookWA: 'Check Date on WhatsApp',
         btnBookTG: 'Reserve via Telegram',
+        toastTg: 'Message copied, paste it in the chat',
         faqPreTitle: 'Direct Answers',
         faqTitle: 'Frequently Asked Questions',
         faqSub: 'Everything you need to know about files transfer, booking confirmation, and technical workflow.',
@@ -2953,10 +3012,10 @@
         ctaBook: 'Забронировать',
         heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Студия подкастов и видеопродакшна</span> на Бали',
         heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
-        hf1: 'Professional setup',
-        hf2: 'Great lighting',
-        hf3: 'Clean sound',
-        hf4: 'Zero production hassle',
+        hf1: 'Профессиональный сетап',
+        hf2: 'Кинематографичный свет',
+        hf3: 'Чистый студийный звук',
+        hf4: 'Ноль забот о продакшне',
         heroBtnCalc: 'Рассчитать и выбрать дату',
         heroBtnReel: 'Смотреть шоурил',
         cred1: 'Выпусков записано',
@@ -3049,6 +3108,7 @@
         calcStepDateTime: 'Шаг 2 • Дата и время',
         optFlexible: 'Гибкое / Обсудить в чате',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
+        webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
         calcOptPod: 'Подкаст (3 камеры 4K)',
         calcOptReels: 'Reels-пакет (1 камера 4K)',
         calcOptWebinar: 'Вебинар / Стрим',
@@ -3065,6 +3125,7 @@
         billTotal: 'Итоговая стоимость:',
         btnBookWA: 'Уточнить дату в WhatsApp',
         btnBookTG: 'Забронировать в Telegram',
+        toastTg: 'Текст скопирован, вставьте в чат',
         faqPreTitle: 'Прямые ответы',
         faqTitle: 'Часто задаваемые вопросы',
         faqSub: 'Все детали о передаче исходников, подтверждении бронирования и техническом процессе.',
@@ -3096,8 +3157,81 @@
 
     let currentLang = 'en';
 
+    /* Объект описания включенных услуг под каждый формат и язык */
+    const inclusions = {
+      podcast: {
+        en: [
+          '3x Sony 4K Cinema Multicam Capture',
+          'Shure SM7B Broadcast Microphones',
+          'Dedicated Sound Engineer on Site',
+          'Direct Raw Master Files Transfer'
+        ],
+        ru: [
+          'Съемка на 3 кинокамеры Sony 4K',
+          'Микрофоны Shure SM7B Broadcast',
+          'Звукорежиссер на съемочной площадке',
+          'Передача несжатых исходников в день съемки'
+        ]
+      },
+      social: {
+        en: [
+          '1x Sony 4K FX Cinema Vertical Rig',
+          'DJI Mic 2 Wireless System',
+          'Teleprompter Ready + Operator Support',
+          'Same-Day 4K Video Files Handoff'
+        ],
+        ru: [
+          'Вертикальный кино-риг Sony FX 4K',
+          'Беспроводная радиосистема DJI Mic 2',
+          'Телесуфлер 4K с оператором текста',
+          'Выгрузка 4K-видео сразу после сессии'
+        ]
+      },
+      webinar: {
+        en: [
+          'Turnkey Broadcast Desk & Confidence Displays',
+          '300 Mbps Dedicated Backup Fiber Stream',
+          'Live Technical Director & Operator',
+          'Full High-Res Broadcast Master Recording'
+        ],
+        ru: [
+          'Студийный стол для вебинаров и мониторы суфлера',
+          'Выделенный оптоволоконный канал 300 Mbps',
+          'Технический режиссер эфира на площадке',
+          'Полная запись трансляции в максимальном качестве'
+        ]
+      },
+      rental: {
+        en: [
+          'Acoustic Studio Space Access',
+          'Nanlite & Aputure Cinema Lighting Grid',
+          'Optical Fiber 300 Mbps Connection',
+          'Furniture & Lounge Area Access'
+        ],
+        ru: [
+          'Шумоизолированное студийное пространство',
+          'Световой парк Nanlite & Aputure Cinema',
+          'Оптоволоконный интернет 300 Mbps',
+          'Доступ к лаундж-зоне и мебели'
+        ]
+      }
+    };
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotice');
+      if (toast) {
+        toast.innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3200);
+      }
+    }
+
     function switchLanguage(lang) {
       currentLang = lang;
+      document.documentElement.lang = lang;
+
       const btnEn = document.getElementById('btn-en');
       const btnRu = document.getElementById('btn-ru');
       if (btnEn) btnEn.classList.toggle('active', lang === 'en');
@@ -3118,17 +3252,21 @@
       document.title = lang === 'en'
         ? 'ICON MEDIA | Premium Podcast Studio & Video Production in Bali'
         : 'ICON MEDIA | Студия подкастов и видеопродакшна на Бали';
-      
+
+      /* Пересчет maxHeight открытых аккордеонов FAQ */
+      document.querySelectorAll('.faq-item.active .faq-answer').forEach(ans => {
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      });
+
       calcTotal();
     }
 
-    /* УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ */
     function toggleMobileMenu() {
       const btn = document.getElementById('burgerToggleBtn');
       const drawer = document.getElementById('mobileMenuDrawer');
-      const isActive = drawer.classList.contains('active');
+      const isActive = drawer && drawer.classList.contains('active');
 
-      if (!isActive) {
+      if (!isActive && drawer && btn) {
         btn.classList.add('active');
         drawer.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -3145,7 +3283,6 @@
       document.body.style.overflow = '';
     }
 
-    /* ПЕРЕКЛЮЧАТЕЛЬ ЭМУЛЯЦИИ УСТРОЙСТВ */
     function setDeviceView(device, btn) {
       document.querySelectorAll('.device-switcher-bar .device-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -3160,4 +3297,573 @@
     }
 
     function switchSets(cat, btn) {
-      document.querySelectorAll('.sets-tabs .set-tab-btn').forEach(b => b.classList.remove('active
+      document.querySelectorAll('.sets-tabs .set-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#setsContainer .set-card');
+      cards.forEach(c => {
+        if (c.getAttribute('data-setcat') === cat) {
+          c.style.display = 'flex';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      const answer = item.querySelector('.faq-answer');
+      const isActive = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-item').forEach(el => {
+        if (el !== item) {
+          el.classList.remove('active');
+          const ans = el.querySelector('.faq-answer');
+          if (ans) ans.style.maxHeight = null;
+        }
+      });
+
+      if (!isActive && answer) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else if (answer) {
+        item.classList.remove('active');
+        answer.style.maxHeight = null;
+      }
+    }
+
+    /* Галереи с fallback на первую картинку */
+    const emeraldImages = [
+      'podcast-setup-emerald-amber.jpg',
+      'podcast-setup-emerald-left.jpg',
+      'podcast-setup-emerald-right.jpg',
+      'podcast-setup-emerald-neon.jpg'
+    ];
+    let emeraldIndex = 0;
+
+    function updateEmeraldGallery() {
+      const imgEl = document.getElementById('emeraldGalleryImg');
+      if (imgEl) {
+        imgEl.onerror = () => { imgEl.src = emeraldImages[0]; };
+        imgEl.style.opacity = '0.4';
+        setTimeout(() => {
+          imgEl.src = emeraldImages[emeraldIndex];
+          imgEl.style.opacity = '1';
+        }, 120);
+      }
+      const dots = document.querySelectorAll('#emeraldGalleryBox .gallery-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === emeraldIndex);
+      });
+    }
+
+    function stepEmeraldGallery(direction) {
+      emeraldIndex = (emeraldIndex + direction + emeraldImages.length) % emeraldImages.length;
+      updateEmeraldGallery();
+    }
+
+    function setEmeraldSlide(idx) {
+      emeraldIndex = idx;
+      updateEmeraldGallery();
+    }
+
+    const deskImages = [
+      'podcast-setup-desk-guests.jpg',
+      'podcast-setup-desk-blue.jpg',
+      'podcast-setup-desk-table.jpg',
+      'podcast-setup-desk-left.jpg',
+      'podcast-setup-desk-right.jpg'
+    ];
+    let deskIndex = 0;
+
+    function updateDeskGallery() {
+      const imgEl = document.getElementById('deskGalleryImg');
+      if (imgEl) {
+        imgEl.onerror = () => { imgEl.src = deskImages[0]; };
+        imgEl.style.opacity = '0.4';
+        setTimeout(() => {
+          imgEl.src = deskImages[deskIndex];
+          imgEl.style.opacity = '1';
+        }, 120);
+      }
+      const dots = document.querySelectorAll('#deskGalleryBox .gallery-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === deskIndex);
+      });
+    }
+
+    function stepDeskGallery(direction) {
+      deskIndex = (deskIndex + direction + deskImages.length) % deskImages.length;
+      updateDeskGallery();
+    }
+
+    function setDeskSlide(idx) {
+      deskIndex = idx;
+      updateDeskGallery();
+    }
+
+    function scrollCarousel(direction) {
+      const track = document.getElementById('portfolioTrack');
+      if (track) {
+        const scrollAmount = track.offsetWidth * 0.85 * direction;
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+
+    function openVideoModal(videoId) {
+      const modal = document.getElementById('videoModal');
+      const slot = document.getElementById('modalPlayerSlot');
+      if (modal && slot) {
+        const watchLabel = currentLang === 'en' ? 'Watch on YouTube' : 'Смотреть на YouTube';
+        slot.innerHTML = `
+          <iframe 
+            src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0" 
+            title="YouTube video player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+          <div style="position: absolute; bottom: 12px; right: 16px; z-index: 10;">
+            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="font-size: 11px; padding: 6px 14px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.2);">
+              <i class="fa-brands fa-youtube" style="color: #ff440a;"></i> ${watchLabel}
+            </a>
+          </div>`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeVideoModal(event) {
+      const modal = document.getElementById('videoModal');
+      const slot = document.getElementById('modalPlayerSlot');
+      if (modal && slot) {
+        modal.classList.remove('active');
+        slot.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+    }
+
+    /* Закрытие по Esc только реально открытых окон */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('videoModal');
+        if (modal && modal.classList.contains('active')) {
+          closeVideoModal();
+        }
+        const drawer = document.getElementById('mobileMenuDrawer');
+        if (drawer && drawer.classList.contains('active')) {
+          closeMobileMenu();
+        }
+      }
+    });
+
+    /* Калькулятор и тарифы */
+    let calcService = 'podcast';
+    let calcHours = 1;
+
+    const rates = {
+      podcast: { en: 'Podcast Production (3 Cams)', ru: 'Запись подкаста (3 камеры)', 1: 1900000, 2: 2600000, 3: 3200000, ext: 600000 },
+      social: { en: 'Reels Batching (1 Cam)', ru: 'Reels-пакет (1 камера)', 1: 1100000, 2: 1700000, 3: 2300000, ext: 600000 },
+      webinar: { en: 'Webinar / Stream', ru: 'Вебинар / Стрим', 1: 4100000, 2: 4100000, 3: 5300000, 4: 6400000, ext: 1000000 },
+      rental: { en: 'Studio Rental (Dry Hire)', ru: 'Аренда студии (Dry Hire)', 1: 700000, 2: 1400000, 3: 2100000, ext: 600000 }
+    };
+
+    function setService(srv, btn) {
+      calcService = srv;
+      document.querySelectorAll('.calc-options-grid .opt-btn').forEach(b => b.classList.remove('active'));
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchingBtn = Array.from(document.querySelectorAll('.calc-options-grid .opt-btn')).find(b => {
+          const onclickAttr = b.getAttribute('onclick') || '';
+          return onclickAttr.includes(`'${srv}'`);
+        });
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      /* Подсказка о минимум 2 часах для вебинаров */
+      const webinarHint = document.getElementById('webinar-min-hint');
+      if (webinarHint) {
+        webinarHint.style.display = srv === 'webinar' ? 'block' : 'none';
+      }
+
+      /* Если выбран вебинар и длительность 1ч, переключаем на 2ч */
+      if (srv === 'webinar' && calcHours < 2) {
+        const btn2 = document.getElementById('hour-btn-2') || Array.from(document.querySelectorAll('.hours-picker .hour-btn')).find(b => b.innerText.trim().startsWith('2'));
+        setHours(2, btn2);
+      } else {
+        onTimeChange();
+      }
+    }
+
+    function selectCalcFromCard(srv) {
+      setService(srv);
+      const calcElem = document.getElementById('calculator');
+      if (calcElem) {
+        calcElem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /* setHours вызывает onTimeChange вместо calcTotal для обновления ночного тарифа */
+    function setHours(h, btn) {
+      calcHours = h;
+      document.querySelectorAll('.hours-picker .hour-btn').forEach(b => b.classList.remove('active'));
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchingBtn = Array.from(document.querySelectorAll('.hours-picker .hour-btn')).find(b => b.innerText.trim().startsWith(String(h)));
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+      onTimeChange();
+    }
+
+    function formatIDR(num) {
+      return num.toLocaleString('id-ID') + ' IDR';
+    }
+
+    function calculateNightRatio(timeStr, hours) {
+      if (!timeStr || timeStr.includes('Flexible')) return 0;
+      const parts = timeStr.split(':');
+      if (parts.length < 2) return 0;
+      const startHour = parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
+      
+      let nightHoursCount = 0;
+      for (let i = 0; i < hours; i++) {
+        const currentH = (startHour + i) % 24;
+        if (currentH >= 22 || currentH < 9) {
+          nightHoursCount++;
+        }
+      }
+      return nightHoursCount / hours;
+    }
+
+    function onTimeChange() {
+      const timeInput = document.getElementById('booking-time');
+      const timeVal = timeInput ? timeInput.value : '';
+      const warningBanner = document.getElementById('night-warning');
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+
+      if (warningBanner) {
+        if (nightRatio > 0) {
+          warningBanner.classList.add('active');
+          warningBanner.style.display = 'flex';
+        } else {
+          warningBanner.classList.remove('active');
+          warningBanner.style.display = 'none';
+        }
+      }
+      calcTotal();
+    }
+
+    function openDatePicker() {
+      const input = document.getElementById('booking-date');
+      if (input) {
+        if (typeof input.showPicker === 'function') {
+          input.showPicker();
+        } else {
+          input.focus();
+        }
+      }
+    }
+
+    function calcTotal() {
+      const data = rates[calcService] || rates.podcast;
+      let base = 0;
+
+      if (calcService === 'webinar') {
+        if (calcHours <= 2) base = data[2];
+        else if (calcHours === 3) base = data[3];
+        else if (calcHours === 4) base = data[4];
+        else base = data[4] + (calcHours - 4) * data.ext;
+      } else {
+        if (calcHours <= 3) base = data[calcHours];
+        else base = data[3] + (calcHours - 3) * data.ext;
+      }
+
+      const timeInput = document.getElementById('booking-time');
+      const timeVal = timeInput ? timeInput.value : '';
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+      const nightExtra = Math.round(base * 0.5 * nightRatio);
+
+      const nightRow = document.getElementById('bill-night-row');
+      const nightExtraEl = document.getElementById('bill-night-extra');
+      if (nightRow && nightExtraEl) {
+        if (nightExtra > 0) {
+          nightRow.style.display = 'flex';
+          nightExtraEl.innerText = '+' + formatIDR(nightExtra);
+        } else {
+          nightRow.style.display = 'none';
+        }
+      }
+
+      let addons = 0;
+      const prompterCheck = document.getElementById('addon-prompter');
+      const fx30Check = document.getElementById('addon-fx30');
+      const editCheck = document.getElementById('addon-edit');
+
+      if (prompterCheck && prompterCheck.checked) addons += 300000;
+      if (fx30Check && fx30Check.checked) addons += 300000;
+      if (editCheck && editCheck.checked) addons += 600000;
+
+      const regularTotal = base + nightExtra + addons;
+
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+      const srvName = lang === 'en' ? data.en : data.ru;
+
+      const billService = document.getElementById('bill-service');
+      const billBase = document.getElementById('bill-base');
+      const billAddons = document.getElementById('bill-addons');
+      const billTotal = document.getElementById('bill-total');
+
+      if (billService) billService.innerText = `${srvName} (${calcHours}h)`;
+      if (billBase) billBase.innerText = formatIDR(base);
+      if (billAddons) billAddons.innerText = formatIDR(addons);
+      if (billTotal) billTotal.innerText = formatIDR(regularTotal);
+
+      /* Подстановка пунктов из объекта inclusions */
+      const list = inclusions[calcService] ? inclusions[calcService][lang] : inclusions.podcast[lang];
+      for (let i = 1; i <= 4; i++) {
+        const itemEl = document.getElementById(`incl-item${i}`);
+        if (itemEl && list[i - 1]) {
+          itemEl.innerHTML = `<i class="fa-solid fa-check"></i> <span>${list[i - 1]}</span>`;
+        }
+      }
+    }
+
+    function sendToMessenger(ch) {
+      const data = rates[calcService] || rates.podcast;
+      let base = 0;
+
+      if (calcService === 'webinar') {
+        if (calcHours <= 2) base = data[2];
+        else if (calcHours === 3) base = data[3];
+        else if (calcHours === 4) base = data[4];
+        else base = data[4] + (calcHours - 4) * data.ext;
+      } else {
+        if (calcHours <= 3) base = data[calcHours];
+        else base = data[3] + (calcHours - 3) * data.ext;
+      }
+
+      const timeInput = document.getElementById('booking-time');
+      const timeVal = timeInput ? timeInput.value : '';
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+      const nightExtra = Math.round(base * 0.5 * nightRatio);
+
+      const prompterCheck = document.getElementById('addon-prompter');
+      const fx30Check = document.getElementById('addon-fx30');
+      const editCheck = document.getElementById('addon-edit');
+
+      let addons = 0;
+      let addonsList = [];
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+
+      if (prompterCheck && prompterCheck.checked) {
+        addons += 300000;
+        addonsList.push(lang === 'en' ? '4K Teleprompter' : 'Телесуфлер 4K');
+      }
+      if (fx30Check && fx30Check.checked) {
+        addons += 300000;
+        addonsList.push(lang === 'en' ? 'Extra FX Camera' : 'Доп. камера FX');
+      }
+      if (editCheck && editCheck.checked) {
+        addons += 600000;
+        addonsList.push(lang === 'en' ? 'Full Video Editing' : 'Монтаж выпуска');
+      }
+
+      const regularTotal = base + nightExtra + addons;
+
+      const dateInput = document.getElementById('booking-date');
+      const rawDate = dateInput ? dateInput.value : '';
+      let chosenDate = rawDate;
+      if (rawDate) {
+        const parts = rawDate.split('-');
+        if (parts.length === 3) {
+          const monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+          const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          const day = parseInt(parts[2], 10);
+          const monthIdx = parseInt(parts[1], 10) - 1;
+          chosenDate = lang === 'en' ? `${day} ${monthsEn[monthIdx]}` : `${day} ${monthsRu[monthIdx]}`;
+        }
+      } else {
+        chosenDate = lang === 'en' ? 'Flexible / Discuss' : 'Гибкая / Обсудить';
+      }
+
+      let chosenTime = timeVal.replace('🌙 (Night 1.5×)', '').trim();
+      if (chosenTime.includes('Flexible') || !chosenTime) {
+        chosenTime = lang === 'en' ? 'Flexible' : 'Гибкое';
+      }
+
+      const srvTitle = lang === 'en' ? data.en : data.ru;
+      const nightNoteEn = nightExtra > 0 ? '
+• Night Rate: 1.5×' : '';
+      const nightNoteRu = nightExtra > 0 ? '
+• Ночной тариф: 1.5×' : '';
+
+      const text = lang === 'en'
+        ? `Hello! I would like to book a session at Icon Media Studio:
+
+• Service: ${srvTitle}
+• Date: ${chosenDate}
+• Start time: ${chosenTime}
+• Duration: ${calcHours}h${nightNoteEn}
+• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
+• Estimated Total: ${formatIDR(regularTotal)}
+
+Could you please check availability?`
+        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:
+
+• Формат: ${srvTitle}
+• Дата: ${chosenDate}
+• Время: ${chosenTime}
+• Длительность: ${calcHours} ч${nightNoteRu}
+• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
+• Расчетная сумма: ${formatIDR(regularTotal)}
+
+Свободен ли этот слот?`;
+
+      if (ch === 'wa') {
+        const encodedText = encodeURIComponent(text);
+        window.open(`https://wa.me/6282314734072?text=${encodedText}`, '_blank', 'noopener,noreferrer');
+      } else {
+        /* Копирование текста в буфер обмена для Telegram */
+        const copyMsg = i18n[lang] && i18n[lang].toastTg ? i18n[lang].toastTg : 'Message copied, paste it in the chat';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast(copyMsg);
+          }).catch(() => {
+            showToast(copyMsg);
+          });
+        } else {
+          showToast(copyMsg);
+        }
+        window.open('https://t.me/iconmediastudio', '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function exportToPNG() {
+      const btn = document.getElementById('downloadBtn');
+      const originalHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Rendering...';
+        btn.style.display = 'none';
+      }
+
+      window.scrollTo(0, 0);
+
+      const target = document.getElementById('pageFrameWrapper') || document.body;
+
+      if (typeof html2canvas === 'function') {
+        html2canvas(target, {
+          scale: 2,
+          backgroundColor: '#070709',
+          useCORS: true,
+          logging: false
+        }).then(canvas => {
+          const link = document.createElement('a');
+          const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+          link.download = `icon-media-studio-${lang}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+
+          if (btn) {
+            btn.style.display = 'flex';
+            btn.innerHTML = originalHtml;
+          }
+        }).catch(err => {
+          console.error(err);
+          if (btn) {
+            btn.style.display = 'flex';
+            btn.innerHTML = originalHtml;
+          }
+          alert('PNG export failed. Please use manual screenshot.');
+        });
+      } else {
+        if (btn) {
+          btn.style.display = 'flex';
+          btn.innerHTML = originalHtml;
+        }
+        alert('html2canvas library not loaded.');
+      }
+    }
+
+    function animateCounters() {
+      const counterElements = document.querySelectorAll('.counter-number');
+      if (!counterElements.length) return;
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.getAttribute('data-target'));
+            const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1400;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const currentVal = (target * easeOut).toFixed(decimals);
+              el.innerText = currentVal + suffix;
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                el.innerText = target.toFixed(decimals) + suffix;
+              }
+            }
+
+            requestAnimationFrame(updateCounter);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      counterElements.forEach(el => observer.observe(el));
+    }
+
+    function initDefaultDate() {
+      const dateInput = document.getElementById('booking-date');
+      if (dateInput) {
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const dd = String(tomorrow.getDate()).padStart(2, '0');
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+
+    function initLanguageAutoDetect() {
+      const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (userLang.startsWith('ru')) {
+        switchLanguage('ru');
+      } else {
+        switchLanguage('en');
+      }
+    }
+
+    /* Инициализация dev-режима по ?dev=1 */
+    function checkDevMode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('dev') === '1') {
+        const devBar = document.querySelector('.device-switcher-bar');
+        const dlBtn = document.getElementById('downloadBtn');
+        if (devBar) devBar.style.display = 'flex';
+        if (dlBtn) dlBtn.style.display = 'flex';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initLanguageAutoDetect();
+      initDefaultDate();
+      checkDevMode();
+      animateCounters();
+      calcTotal();
+    });
+  </script>
+</body>
+</html>
