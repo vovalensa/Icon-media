@@ -1277,11 +1277,13 @@
 
     .infra-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 26px;
       margin-top: 36px;
     }
 
+    .infra-card { grid-column: span 2; }
+    .infra-card:nth-child(n+4) { grid-column: span 3; }
     .infra-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -1892,6 +1894,7 @@
       .datetime-row { grid-template-columns: 1fr; }
       .hero-title { font-size: 38px; }
       .cards-grid, .sets-grid, .equip-grid, .infra-grid, .calc-grid, .footer-grid, .cred-bar-grid { grid-template-columns: 1fr !important; }
+      .infra-card, .infra-card:nth-child(n+4) { grid-column: auto !important; }
       .footer-watermark { font-size: 50px; }
       .brand-logo-img { height: 46px; }
       .footer-brand-logo-img { height: 48px; }
@@ -2178,41 +2181,6 @@
                   <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-            <!-- BENEFITS SECTION -->
-      <section class="benefits-section" id="benefits">
-        <div class="container">
-          
-          <div class="reveal-item" style="text-align: center;">
-            <span class="section-eyebrow" data-i18n="benPreTitle">Creator Experience</span>
-            <h2 class="section-heading" data-i18n="benTitle">You create. We handle the rest.</h2>
-          </div>
-
-          <div class="benefits-grid">
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben1Title">🎥 Professional Shooting. Tailored to Your Style</h3>
-              <p class="benefit-desc" data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben2Title">🎬 Ready Before You Arrive</h3>
-              <p class="benefit-desc" data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben3Title">☕️ Come Early. Feel Comfortable</h3>
-              <p class="benefit-desc" data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben4Title">📶 Reliable High-Speed Internet</h3>
-              <p class="benefit-desc" data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben5Title">📍 Easy to Reach</h3>
-              <p class="benefit-desc" data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu</p>
             </div>
           </div>
 
@@ -2563,56 +2531,63 @@
         <div class="container">
           
           <div>
-            <span class="section-eyebrow" data-i18n="infraPreTitle">Studio Environment</span>
-            <h2 class="section-heading" data-i18n="infraTitle">Designed for Focus & Hospitality</h2>
+            <span class="section-eyebrow" data-i18n="benPreTitle">Creator Experience</span>
+            <h2 class="section-heading" data-i18n="benTitle">You create. We handle the rest.</h2>
           </div>
 
           <div class="infra-grid">
+            <div class="infra-card">
+              <div class="infra-photo-header">
+                <img src="sony-cinema-line.jpg" alt="Icon Media Studio professional cinema camera" loading="lazy">
+              </div>
+              <div class="infra-inner-body">
+                <div>
+                  <h3 data-i18n="ben1Title">Professional Shooting. Tailored to Your Style</h3>
+                  <p data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="infra-card">
+              <div class="infra-photo-header">
+                <img src="podcast-setup-emerald-wide.jpg" alt="Icon Media Studio podcast set ready for recording" loading="lazy">
+              </div>
+              <div class="infra-inner-body">
+                <div>
+                  <h3 data-i18n="ben2Title">Ready Before You Arrive</h3>
+                  <p data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in</p>
+                </div>
+              </div>
+            </div>
+
             <div class="infra-card">
               <div class="infra-photo-header">
                 <img src="lounge-waiting-area.jpg" alt="Icon Media Studio Chill Lounge and Waiting Area" loading="lazy">
               </div>
               <div class="infra-inner-body">
                 <div>
-                  <h3 data-i18n="loungeTitle">Lounge & Refreshment Bar</h3>
-                  <p data-i18n="loungeDesc">Air-conditioned lounge to brief guests, review scripts, or work on laptops with team and collaborators.</p>
-                </div>
-                <div class="infra-chips">
-                  <span class="chip-item" data-i18n="chipCoffee">Fresh bean coffee</span>
-                  <span class="chip-item" data-i18n="chipOatside">Oatside & Drinks</span>
-                  <span class="chip-item">Quiet A/C Zone</span>
+                  <h3 data-i18n="ben3Title">Come Early. Feel Comfortable</h3>
+                  <p data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks</p>
                 </div>
               </div>
             </div>
 
             <div class="infra-card">
-              <div class="infra-photo-header">
-                <img src="makeup-station-bali.jpg" alt="Icon Media Studio Makeup Vanity Station" loading="lazy">
-              </div>
-              <div class="infra-inner-body">
+              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
                 <div>
-                  <h3 data-i18n="makeupTitle">Makeup & Styling Station</h3>
-                  <p data-i18n="makeupDesc">Illuminated LED ring mirror table for makeup artists, hair styling, and quick on-camera touch-ups.</p>
-                </div>
-                <div class="infra-chips">
-                  <span class="chip-item" data-i18n="chipMakeup">Ring LED Mirror</span>
-                  <span class="chip-item">Power Outlets</span>
-                  <span class="chip-item">Full-Length Mirror</span>
+                  <i class="fa-solid fa-wifi" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
+                  <h3 data-i18n="ben4Title">Reliable High-Speed Internet</h3>
+                  <p data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content</p>
                 </div>
               </div>
             </div>
 
-            <div class="infra-card" id="parking">
-              <div class="infra-inner-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding-top: 24px;">
+            <div class="infra-card">
+              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
                 <div>
-                  <i class="fa-solid fa-square-parking" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
-                  <h3 data-i18n="parkingTitle">Private Parking & Direct Driveway</h3>
-                  <p data-i18n="parkingDesc">Wide direct driveway only 7–10 minutes from Berawa & Batu Bolong. Dedicated car bays and scooter parking right outside.</p>
-                </div>
-                <div class="infra-chips">
-                  <span class="chip-item" data-i18n="chipCar">Car parking bays</span>
-                  <span class="chip-item" data-i18n="chipBike">Scooter parking</span>
-                  <span class="chip-item" data-i18n="chipTaxi">Grab / Gojek friendly</span>
+                  <i class="fa-solid fa-location-dot" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
+                  <h3 data-i18n="ben5Title">Easy to Reach</h3>
+                  <p data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu</p>
                 </div>
               </div>
             </div>
@@ -2897,7 +2872,7 @@
             <ul class="footer-links">
               <li><a href="#infra" data-i18n="fLinkLounge">Client Lounge & Bar</a></li>
               <li><a href="#infra" data-i18n="fLinkMakeup">Makeup Station</a></li>
-              <li><a href="#parking" data-i18n="fLinkParking">Private Parking</a></li>
+              <li><a href="#infra" data-i18n="fLinkParking">Private Parking</a></li>
             </ul>
           </div>
 
@@ -2957,15 +2932,15 @@
                 cred4: 'Dedicated Optical Fiber',
         benPreTitle: 'Creator Experience',
         benTitle: 'You create. We handle the rest.',
-        ben1Title: '🎥 Professional Shooting. Tailored to Your Style',
+        ben1Title: 'Professional Shooting. Tailored to Your Style',
         ben1Desc: 'Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve',
-        ben2Title: '🎬 Ready Before You Arrive',
+        ben2Title: 'Ready Before You Arrive',
         ben2Desc: 'Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in',
-        ben3Title: '☕️ Come Early. Feel Comfortable',
+        ben3Title: 'Come Early. Feel Comfortable',
         ben3Desc: 'Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks',
-        ben4Title: '📶 Reliable High-Speed Internet',
+        ben4Title: 'Reliable High-Speed Internet',
         ben4Desc: 'With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content',
-        ben5Title: '📍 Easy to Reach',
+        ben5Title: 'Easy to Reach',
         ben5Desc: 'Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu',
         portPreTitle: 'Proven Production Quality',
         portTitle: 'Featured Episodes & Projects',
@@ -3119,15 +3094,15 @@
                 cred4: 'Выделенная оптика',
         benPreTitle: 'Опыт создателя',
         benTitle: 'Вы создаёте. Остальное — наша забота.',
-        ben1Title: '🎥 Профессиональная съемка под ваш стиль',
+        ben1Title: 'Профессиональная съемка под ваш стиль',
         ben1Desc: 'Профессиональные камеры, звук и свет — всё настраивается специально под ваш контент и желаемый визуальный стиль.',
-        ben2Title: '🎬 Всё готово до вашего прихода',
+        ben2Title: 'Всё готово до вашего прихода',
         ben2Desc: 'Сетап собирается за 30 минут до начала сессии — камеры, свет и звук уже включены и настроены, когда вы переступаете порог.',
-        ben3Title: '☕️ Приезжайте пораньше. Чувствуйте себя как дома.',
+        ben3Title: 'Приезжайте пораньше. Чувствуйте себя как дома.',
         ben3Desc: 'Приезжайте заранее, отдохните в лаундже и настройтесь на съемку. К вашим услугам напитки, гримерная зона и рейлы для одежды.',
-        ben4Title: '📶 Надежный высокоскоростной интернет',
+        ben4Title: 'Надежный высокоскоростной интернет',
         ben4Desc: 'Со стабильным каналом 80–90 Мбит/с вы можете уверенно проводить прямые эфиры, вебинары, онлайн-встречи и стримы.',
-        ben5Title: '📍 Удобное расположение',
+        ben5Title: 'Удобное расположение',
         ben5Desc: 'Студия комфортно расположена всего в 15–20 минутах езды от Куты, Семиньяка и Чангу.',
         portPreTitle: 'Качество в кадре',
         portTitle: 'Шоурил и примеры проектов',
