@@ -2066,41 +2066,6 @@
         </div>
       </section>
 
-            <!-- BENEFITS SECTION -->
-      <section class="benefits-section" id="benefits">
-        <div class="container">
-          
-          <div class="reveal-item" style="text-align: center;">
-            <span class="section-eyebrow" data-i18n="benPreTitle">Why Choose Us</span>
-            <h2 class="section-heading" data-i18n="benTitle">The Icon Media Experience</h2>
-          </div>
-
-          <div class="benefits-grid">
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben1Title">🎥 Professional Shooting, Tailored to Your Style</h3>
-              <p class="benefit-desc" data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve.</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben2Title">🎬 Ready Before You Arrive</h3>
-              <p class="benefit-desc" data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in.</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben3Title">☕️ Come Early. Feel Comfortable.</h3>
-              <p class="benefit-desc" data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks.</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben4Title">📶 Reliable High-Speed Internet</h3>
-              <p class="benefit-desc" data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content.</p>
-            </div>
-            <div class="benefit-card reveal-item">
-              <h3 class="benefit-title" data-i18n="ben5Title">📍 Easy to Reach</h3>
-              <p class="benefit-desc" data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
 <!-- 2. PORTFOLIO SHOWREEL -->
       <section class="portfolio-section" id="portfolio">
         <div class="container">
@@ -2213,6 +2178,41 @@
                   <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+            <!-- BENEFITS SECTION -->
+      <section class="benefits-section" id="benefits">
+        <div class="container">
+          
+          <div class="reveal-item" style="text-align: center;">
+            <span class="section-eyebrow" data-i18n="benPreTitle">Why Choose Us</span>
+            <h2 class="section-heading" data-i18n="benTitle">The Icon Media Experience</h2>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben1Title">🎥 Professional Shooting, Tailored to Your Style</h3>
+              <p class="benefit-desc" data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben2Title">🎬 Ready Before You Arrive</h3>
+              <p class="benefit-desc" data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben3Title">☕️ Come Early. Feel Comfortable.</h3>
+              <p class="benefit-desc" data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben4Title">📶 Reliable High-Speed Internet</h3>
+              <p class="benefit-desc" data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content.</p>
+            </div>
+            <div class="benefit-card reveal-item">
+              <h3 class="benefit-title" data-i18n="ben5Title">📍 Easy to Reach</h3>
+              <p class="benefit-desc" data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu.</p>
             </div>
           </div>
 
@@ -2587,7 +2587,7 @@
 
             <div class="infra-card">
               <div class="infra-photo-header">
-                <img src="makeup-station.jpg" alt="Icon Media Studio Makeup Vanity Station" loading="lazy">
+                <img src="makeup-station-bali.jpg" alt="Icon Media Studio Makeup Vanity Station" loading="lazy">
               </div>
               <div class="infra-inner-body">
                 <div>
@@ -3336,8 +3336,13 @@
     }
 
     function switchLanguage(lang) {
+      if (lang !== 'en' && lang !== 'ru') lang = 'en';
       currentLang = lang;
       document.documentElement.lang = lang;
+
+      try {
+        localStorage.setItem('icon_media_lang', lang);
+      } catch (e) { /* localStorage недоступен (приватный режим и т.п.) */ }
 
       const btnEn = document.getElementById('btn-en');
       const btnRu = document.getElementById('btn-ru');
@@ -3945,12 +3950,18 @@ Could you please check availability?`
     }
 
     function initLanguageAutoDetect() {
-      const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      if (userLang.startsWith('ru')) {
-        switchLanguage('ru');
-      } else {
-        switchLanguage('en');
+      let saved = null;
+      try {
+        saved = localStorage.getItem('icon_media_lang');
+      } catch (e) { saved = null; }
+
+      if (saved === 'en' || saved === 'ru') {
+        switchLanguage(saved);
+        return;
       }
+
+      const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      switchLanguage(userLang.startsWith('ru') ? 'ru' : 'en');
     }
 
     /* Инициализация dev-режима по ?dev=1 */
