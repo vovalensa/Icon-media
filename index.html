@@ -1906,6 +1906,102 @@
 
     .modal-close-btn:hover { background: var(--flame-orange); }
 
+
+    /* Калькулятор: новые элементы */
+    .calc-options-grid .opt-btn:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .hour-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .addon-group-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 8px 0 0;
+    }
+    .addon-group-title:first-child { margin-top: 0; }
+    .addon-main { display: flex; align-items: center; min-width: 0; }
+    .addon-main small { display: block; font-size: 11.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+    .addon-price { color: var(--flame-orange); font-weight: 700; white-space: nowrap; margin-left: 12px; }
+    .addon-card.is-disabled { opacity: 0.45; cursor: not-allowed; }
+    .addon-card-qty { cursor: default; gap: 10px; }
+    .qty-stepper {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .qty-stepper button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .qty-stepper button:hover:not(:disabled) { background: var(--flame-orange); }
+    .qty-stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+    .qty-value { min-width: 26px; text-align: center; font-weight: 800; }
+
+    .bill-sub, .bill-ext { font-size: 12px; color: var(--text-muted); margin: -4px 0 12px; }
+    .bill-row > span:first-child { padding-right: 12px; }
+    .bill-row > span:last-child { white-space: nowrap; }
+    .bill-row.discount-row { color: #22c55e; }
+    .bill-row.addon-row { color: #d6d6e2; }
+
+    /* Собственный календарь (язык всегда совпадает с языком сайта) */
+    .date-display { display: flex; align-items: center; justify-content: flex-start; text-align: left; cursor: pointer; padding-right: 44px; }
+    .cal-popup {
+      position: absolute;
+      z-index: 60;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 320px;
+      max-width: calc(100vw - 48px);
+      background: #14141c;
+      border: 1px solid var(--border-active);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      cursor: default;
+    }
+    .cal-popup[hidden] { display: none; }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .cal-title { font-weight: 800; font-size: 14px; color: #fff; }
+    .cal-nav {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-subtle); background: transparent; color: #fff; cursor: pointer;
+    }
+    .cal-nav:hover:not(:disabled) { border-color: var(--flame-orange); }
+    .cal-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+    .cal-week, .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-week span { font-size: 11px; color: var(--text-muted); text-align: center; font-weight: 700; padding: 4px 0; }
+    .cal-day {
+      aspect-ratio: 1; border-radius: 10px; border: none; background: transparent;
+      color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font-body);
+    }
+    .cal-day:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+    .cal-day.today { outline: 1px solid var(--border-light); }
+    .cal-day.selected { background: var(--flame-orange); }
+    .cal-day:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    @media (max-width: 640px) {
+      .calc-options-grid { grid-template-columns: 1fr !important; }
+      .calc-options-grid .opt-btn { padding: 15px 16px; font-size: 14px; }
+      .calc-box { padding: 22px 16px; border-radius: 26px; }
+      .bill-panel { padding: 22px 18px; }
+      .calc-grid { gap: 28px; }
+      .cal-popup { width: 100%; max-width: 100%; }
+    }
+    body.view-mobile .calc-options-grid { grid-template-columns: 1fr !important; }
+
     /* НАСТОЯЩИЙ АДАПТИВ (МЕНЬШЕ 992px) */
     @media (max-width: 992px) {
       .nav-list { display: none !important; }
@@ -2712,17 +2808,30 @@
               <div>
                 <span class="step-title" data-i18n="calcStep1">Step 1 • Choose Format</span>
                 <div class="calc-options-grid">
-                  <button type="button" class="opt-btn active" onclick="setService('podcast', this)">🎙 <span data-i18n="calcOptPod">Podcast (3 Cams 4K)</span></button>
-                  <button type="button" class="opt-btn" onclick="setService('social', this)">📱 <span data-i18n="calcOptReels">Reels Batch (1 Cam 4K)</span></button>
-                  <button type="button" class="opt-btn" onclick="setService('webinar', this)">📡 <span data-i18n="calcOptWebinar">Webinar / Stream</span></button>
-                  <button type="button" class="opt-btn" onclick="setService('rental', this)">🏠 <span data-i18n="calcOptRental">Studio Space (Dry Hire)</span></button>
+                  <button type="button" class="opt-btn active" data-srv="podcast" onclick="setService('podcast', this)"><span data-i18n="calcOptPod">Podcast</span></button>
+                  <button type="button" class="opt-btn" data-srv="social" onclick="setService('social', this)"><span data-i18n="calcOptReels">Social media</span></button>
+                  <button type="button" class="opt-btn" data-srv="webinar" onclick="setService('webinar', this)"><span data-i18n="calcOptWebinar">Webinars / Live Stream</span></button>
+                  <button type="button" class="opt-btn" data-srv="online" onclick="setService('online', this)"><span data-i18n="calcOptOnline">Online Podcast / Zoom</span></button>
+                  <button type="button" class="opt-btn" data-srv="rental" onclick="setService('rental', this)"><span data-i18n="calcOptRental">Studio Rental</span></button>
                 </div>
 
                 <span class="step-title" data-i18n="calcStepDateTime">Step 2 • Date & Preferred Time</span>
                 <div class="datetime-row">
-                  <div class="date-input-wrapper" onclick="openDatePicker()">
-                    <input type="date" id="booking-date" class="input-field-dark" onchange="calcTotal()">
+                  <div class="date-input-wrapper" id="datePicker">
+                    <input type="hidden" id="booking-date">
+                    <button type="button" class="input-field-dark date-display" id="dateDisplay" onclick="toggleDatePicker()" aria-haspopup="dialog" aria-expanded="false">
+                      <span id="dateDisplayText"></span>
+                    </button>
                     <i class="fa-regular fa-calendar-days"></i>
+                    <div class="cal-popup" id="calPopup" role="dialog" hidden>
+                      <div class="cal-head">
+                        <button type="button" class="cal-nav" id="calPrev" onclick="calShiftMonth(-1)" aria-label="Previous month"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="cal-title" id="calTitle"></div>
+                        <button type="button" class="cal-nav" id="calNext" onclick="calShiftMonth(1)" aria-label="Next month"><i class="fa-solid fa-chevron-right"></i></button>
+                      </div>
+                      <div class="cal-week" id="calWeek"></div>
+                      <div class="cal-days" id="calDays"></div>
+                    </div>
                   </div>
 
                   <select id="booking-time" class="input-field-dark" onchange="onTimeChange()">
@@ -2740,9 +2849,9 @@
                     <option value="19:00">19:00</option>
                     <option value="20:00">20:00</option>
                     <option value="21:00">21:00</option>
-                    <option value="22:00">22:00 🌙 (Night 1.5×)</option>
-                    <option value="23:00">23:00 🌙 (Night 1.5×)</option>
-                    <option value="00:00">00:00 🌙 (Night 1.5×)</option>
+                    <option value="22:00" data-night="1">22:00 🌙 (Night 1.5×)</option>
+                    <option value="23:00" data-night="1">23:00 🌙 (Night 1.5×)</option>
+                    <option value="00:00" data-night="1">00:00 🌙 (Night 1.5×)</option>
                   </select>
                 </div>
 
@@ -2755,27 +2864,14 @@
                 <div id="webinar-min-hint" class="webinar-min-hint" data-i18n="webinarMinHint" style="display: none; font-size: 12px; color: var(--flame-orange); font-weight: 700; margin-bottom: 8px;">⚠️ Minimum booking duration for webinars is 2 hours.</div>
 
                 <div class="hours-picker">
-                  <button type="button" class="hour-btn active" id="hour-btn-1" onclick="setHours(1, this)">1h</button>
-                  <button type="button" class="hour-btn" id="hour-btn-2" onclick="setHours(2, this)">2h</button>
-                  <button type="button" class="hour-btn" id="hour-btn-3" onclick="setHours(3, this)">3h</button>
-                  <button type="button" class="hour-btn" id="hour-btn-4" onclick="setHours(4, this)">4h</button>
+                  <button type="button" class="hour-btn active" id="hour-btn-1" data-h="1" onclick="setHours(1, this)">1h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-2" data-h="2" onclick="setHours(2, this)">2h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-3" data-h="3" onclick="setHours(3, this)">3h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-4" data-h="4" onclick="setHours(4, this)">4h</button>
                 </div>
 
                 <span class="step-title" data-i18n="calcStep3">Optional Add-ons & Production</span>
-                <div class="addons-list">
-                  <label class="addon-card">
-                    <span><input type="checkbox" id="addon-prompter" onchange="calcTotal()"> <span data-i18n="addonPrompter">Neewer Teleprompter</span></span>
-                    <span style="color: var(--flame-orange); font-weight: 700;">+300 000 IDR</span>
-                  </label>
-                  <label class="addon-card">
-                    <span><input type="checkbox" id="addon-fx30" onchange="calcTotal()"> <span data-i18n="addonFx30">Additional Sony FX30/a7c Camera Angle</span></span>
-                    <span style="color: var(--flame-orange); font-weight: 700;">+300 000 IDR</span>
-                  </label>
-                  <label class="addon-card">
-                    <span><input type="checkbox" id="addon-edit" onchange="calcTotal()"> <span data-i18n="addonEdit">Full Multi-Cam Video Editing & Color Grade</span></span>
-                    <span style="color: var(--flame-orange); font-weight: 700;">+600 000 IDR</span>
-                  </label>
-                </div>
+                <div class="addons-list" id="addons-list"></div>
               </div>
 
               <!-- Bill Summary -->
@@ -2784,27 +2880,23 @@
                   <h4 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; margin-bottom: 18px; color: #fff;" data-i18n="billTitle">Estimate Summary</h4>
                   
                   <div class="bill-row">
-                    <span id="bill-service">Podcast Production (1h)</span>
-                    <span id="bill-base">1 900 000 IDR</span>
+                    <span id="bill-service">Podcast (1h)</span>
+                    <span id="bill-base">1.900.000 IDR</span>
                   </div>
-                  
+                  <div class="bill-sub" id="bill-sub" style="display: none;"></div>
+                  <div class="bill-ext" id="bill-ext"></div>
+
                   <div class="bill-row night-row" id="bill-night-row">
                     <span data-i18n="billNightRate">🌙 Night Rate (1.5×):</span>
                     <span id="bill-night-extra">+0 IDR</span>
                   </div>
 
-                  <div class="bill-row">
-                    <span data-i18n="billAddons">Add-ons & Deliverables:</span>
-                    <span id="bill-addons">0 IDR</span>
-                  </div>
+                  <div id="bill-addon-rows"></div>
 
-                  <!-- Динамический список inclusions -->
+                  <!-- Описание: что входит (берётся из прайс-листов) -->
                   <div class="bill-includes-box">
                     <div style="font-weight: 700; color: #fff; margin-bottom: 6px;" data-i18n="billInclHeader">Included in this session:</div>
-                    <div id="incl-item1"><i class="fa-solid fa-check"></i> <span>3x Sony FX30/a7c Multicam Capture</span></div>
-                    <div id="incl-item2"><i class="fa-solid fa-check"></i> <span>2 Shure Microphones</span></div>
-                    <div id="incl-item3"><i class="fa-solid fa-check"></i> <span>Dedicated Sound Engineer on Site</span></div>
-                    <div id="incl-item4"><i class="fa-solid fa-check"></i> <span>Direct Raw Master Files Transfer</span></div>
+                    <div id="incl-list"></div>
                   </div>
 
                   <div class="bill-total-row">
@@ -3094,18 +3186,19 @@
         optFlexible: 'Flexible / Discuss via Chat',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
         webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
-        calcOptPod: 'Podcast (3 Cams 4K)',
-        calcOptReels: 'Reels Batch (1 Cam 4K)',
-        calcOptWebinar: 'Webinar / Stream',
-        calcOptRental: 'Studio Space (Dry Hire)',
+        calcOptPod: 'Podcast',
+        calcOptReels: 'Social media',
+        calcOptWebinar: 'Webinars / Live Stream',
+        calcOptRental: 'Studio Rental',
+        calcOptOnline: 'Online Podcast / Zoom',
         calcStep2: 'Step 3 • Session Duration',
-        calcStep3: 'Optional Add-ons & Production',
+        calcStep3: 'Step 4 • Additional',
         addonPrompter: 'Neewer Teleprompter',
         addonFx30: 'Additional Sony FX30/a7c Camera Angle',
         addonEdit: 'Full Multi-Cam Video Editing & Color Grade',
         billTitle: 'Estimate Summary',
         billNightRate: '🌙 Night Rate (1.5×):',
-        billAddons: 'Add-ons & Deliverables:',
+        billAddons: 'Additional:',
         billInclHeader: 'Included in this session:',
         billTotal: 'Estimated Total:',
         btnBookWA: 'Check Date on WhatsApp',
@@ -3256,18 +3349,19 @@
         optFlexible: 'Гибкое / Обсудить в чате',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
         webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
-        calcOptPod: 'Подкаст (3 камеры 4K)',
-        calcOptReels: 'Reels-пакет (1 камера 4K)',
-        calcOptWebinar: 'Вебинар / Стрим',
-        calcOptRental: 'Аренда студии (Dry Hire)',
+        calcOptPod: 'Подкаст',
+        calcOptReels: 'Видео для соцсетей',
+        calcOptWebinar: 'Вебинары / Прямые эфиры',
+        calcOptRental: 'Аренда студии',
+        calcOptOnline: 'Онлайн-подкаст / Zoom',
         calcStep2: 'Шаг 3 • Длительность съемки',
-        calcStep3: 'Дополнительные опции и монтаж',
+        calcStep3: 'Шаг 4 • Дополнительно',
         addonPrompter: 'Телесуфлер Neewer с оператором',
         addonFx30: 'Дополнительная камера Sony FX30/a7c',
         addonEdit: 'Монтаж мультикама под ключ с цветокором',
         billTitle: 'Детали расчета',
         billNightRate: '🌙 Ночной тариф (1.5×):',
-        billAddons: 'Доп. опции и монтаж:',
+        billAddons: 'Дополнительно:',
         billInclHeader: 'В эту сессию входит:',
         billTotal: 'Итоговая стоимость:',
         btnBookWA: 'Уточнить дату в WhatsApp',
@@ -3303,66 +3397,6 @@
     };
 
     let currentLang = 'en';
-
-    /* Объект описания включенных услуг под каждый формат и язык */
-    const inclusions = {
-      podcast: {
-        en: [
-          '3x Sony FX30/a7c Multicam Capture',
-          '2 Shure Microphones',
-          'Dedicated Sound Engineer on Site',
-          'Direct Raw Master Files Transfer'
-        ],
-        ru: [
-          'Съемка на камеры Sony FX30/a7c',
-          '2 микрофона Shure',
-          'Звукорежиссер на съемочной площадке',
-          'Передача несжатых исходников в день съемки'
-        ]
-      },
-      social: {
-        en: [
-          '1x Sony FX30/a7c Vertical Rig',
-          'DJI mic Wireless System',
-          'Teleprompter Ready + Operator Support',
-          'Same-Day 4K Video Files Handoff'
-        ],
-        ru: [
-          'Вертикальный риг Sony FX30/a7c',
-          'Беспроводная радиосистема DJI mic',
-          'Телесуфлер Neewer с оператором текста',
-          'Выгрузка 4K-видео сразу после сессии'
-        ]
-      },
-      webinar: {
-        en: [
-          'Turnkey Broadcast Desk & Confidence Displays',
-          '300 Mbps Dedicated Backup Fiber Stream',
-          'Live Technical Director & Operator',
-          'Full High-Res Broadcast Master Recording'
-        ],
-        ru: [
-          'Студийный стол для вебинаров и мониторы суфлера',
-          'Выделенный оптоволоконный канал 300 Mbps',
-          'Технический режиссер эфира на площадке',
-          'Полная запись трансляции в максимальном качестве'
-        ]
-      },
-      rental: {
-        en: [
-          'Acoustic Studio Space Access',
-          'Godox SL60 Softboxes & TL60 RGB',
-          'Optical Fiber 300 Mbps Connection',
-          'Furniture & Lounge Area Access'
-        ],
-        ru: [
-          'Шумоизолированное студийное пространство',
-          'Свет Godox SL60 Softbox и TL60 RGB',
-          'Оптоволоконный интернет 300 Mbps',
-          'Доступ к лаундж-зоне и мебели'
-        ]
-      }
-    };
 
     function showToast(msg) {
       const toast = document.getElementById('toastNotice');
@@ -3410,7 +3444,7 @@
         ans.style.maxHeight = ans.scrollHeight + 'px';
       });
 
-      calcTotal();
+      refreshCalcLanguage();
     }
 
     function toggleMobileMenu() {
@@ -3666,68 +3700,121 @@
       }
     });
 
-    /* Калькулятор и тарифы */
+    /* ===== Калькулятор и тарифы (по прайс-листам студии) ===== */
     let calcService = 'podcast';
     let calcHours = 1;
 
-    const rates = {
-      podcast: { en: 'Podcast Production (3 Cams)', ru: 'Запись подкаста (3 камеры)', 1: 1900000, 2: 2600000, 3: 3200000, ext: 600000 },
-      social: { en: 'Reels Batching (1 Cam)', ru: 'Reels-пакет (1 камера)', 1: 1100000, 2: 1700000, 3: 2300000, ext: 600000 },
-      webinar: { en: 'Webinar / Stream', ru: 'Вебинар / Стрим', 1: 4100000, 2: 4100000, 3: 5300000, 4: 6400000, ext: 1000000 },
-      rental: { en: 'Studio Rental (Dry Hire)', ru: 'Аренда студии (Dry Hire)', 1: 700000, 2: 1400000, 3: 2100000, ext: 600000 }
+    const CALC_CAM_PRICE = 300000;          /* доп. камера, за каждую */
+    const NIGHT_EXTRA_RATIO = 0.5;          /* ночной тариф 1.5× */
+    const BULK_REELS_DISCOUNT = 0.2;        /* +10 reels = скидка 20% на монтаж */
+    const SOCIAL_EDIT = { simple: 600000, pro: 1200000 };
+    /* Podcast: «Editing (incl. 1 reel)» — пакет запись + монтаж. Цена монтажа = пакет − запись. */
+    const PODCAST_EDIT_PACKAGE = { 1: 3400000, 2: 5000000 };
+
+    const INCL_ONE_CAM = {
+      en: ['Studio', '1 camera', 'Videographer', 'DJI MIC – wireless microphone'],
+      ru: ['Студия', '1 камера', 'Видеограф', 'Беспроводной микрофон DJI MIC']
     };
 
-    function setService(srv, btn) {
-      calcService = srv;
-      document.querySelectorAll('.calc-options-grid .opt-btn').forEach(b => b.classList.remove('active'));
-      if (btn) {
-        btn.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.calc-options-grid .opt-btn')).find(b => {
-          const onclickAttr = b.getAttribute('onclick') || '';
-          return onclickAttr.includes(`'${srv}'`);
-        });
-        if (matchingBtn) matchingBtn.classList.add('active');
+    /* table — цена за N часов, ext — продление за каждый час сверх таблицы */
+    const CALC_SERVICES = {
+      podcast: {
+        name: { en: 'Podcast', ru: 'Подкаст' },
+        table: { 1: 1900000, 2: 2600000, 3: 3200000 }, ext: 600000, minHours: 1,
+        included: {
+          en: ['Studio', '3 cameras', 'Videographer', 'Professional podcast microphones'],
+          ru: ['Студия', '3 камеры', 'Видеограф', 'Профессиональные подкаст-микрофоны']
+        },
+        addons: ['cams'], edit: 'podcast'
+      },
+      social: {
+        name: { en: 'Social media', ru: 'Видео для соцсетей' },
+        sub: { en: 'Reels, YouTube, educational courses', ru: 'Reels, YouTube, обучающие курсы' },
+        table: { 1: 1100000, 2: 1700000, 3: 2300000 }, ext: 600000, minHours: 1,
+        included: INCL_ONE_CAM,
+        addons: ['cams', 'mics', 'prompter'], edit: 'social'
+      },
+      webinar: {
+        name: { en: 'Webinars / Live Stream', ru: 'Вебинары / Прямые эфиры' },
+        table: { 2: 4100000, 3: 5300000, 4: 6400000 }, ext: 1000000, minHours: 2,
+        included: INCL_ONE_CAM,
+        addons: ['cams', 'mics', 'director'], edit: null
+      },
+      online: {
+        name: { en: 'Online Podcast / Zoom', ru: 'Онлайн-подкаст / Zoom' },
+        table: { 1: 1700000, 2: 2300000 }, ext: 600000, minHours: 1,
+        included: INCL_ONE_CAM,
+        addons: ['cams', 'mics'], edit: null
+      },
+      rental: {
+        name: { en: 'Studio Rental', ru: 'Аренда студии' },
+        table: { 1: 700000, 2: 1200000 }, ext: 500000, minHours: 1,
+        included: {
+          en: ['2 Godox SL60 softboxes', 'Godox TL60 kit – 4 LED RGB tube lights', 'Furniture', '1 light stand tripod', 'DJI MIC – wireless microphone', 'Assistant', 'Internet 80–90 Mbps'],
+          ru: ['2 софтбокса Godox SL60', 'Комплект Godox TL60 – 4 RGB LED-трубки', 'Мебель', '1 стойка для света (штатив)', 'Беспроводной микрофон DJI MIC', 'Ассистент', 'Интернет 80–90 Мбит/с']
+        },
+        addons: ['cams', 'mics', 'prompter', 'board'], edit: null
       }
+    };
 
-      /* Подсказка о минимум 2 часах для вебинаров */
-      const webinarHint = document.getElementById('webinar-min-hint');
-      if (webinarHint) {
-        webinarHint.style.display = srv === 'webinar' ? 'block' : 'none';
-      }
+    const CALC_ADDONS = {
+      prompter: { price: 300000, name: { en: 'Teleprompter', ru: 'Телесуфлер' } },
+      mics: { price: 300000, name: { en: 'Podcast microphones (2 Shure + Rode Caster Pro)', ru: 'Подкаст-микрофоны (2 Shure + Rode Caster Pro)' } },
+      board: { price: 100000, name: { en: 'White board', ru: 'Маркерная доска' } }
+    };
+    const DIRECTOR = { price: 2200000, includedHours: 3, extHour: 400000 };
 
-      /* Если выбран вебинар и длительность 1ч, переключаем на 2ч */
-      if (srv === 'webinar' && calcHours < 2) {
-        const btn2 = document.getElementById('hour-btn-2') || Array.from(document.querySelectorAll('.hours-picker .hour-btn')).find(b => b.innerText.trim().startsWith('2'));
-        setHours(2, btn2);
-      } else {
-        onTimeChange();
+    const CALC_T = {
+      en: {
+        groupEquip: 'Equipment & crew', groupEdit: 'Editing',
+        camName: 'Additional Sony FX30 / a7C camera', camEach: '+300.000 IDR per camera', camQty: 'Additional camera',
+        directorName: 'Live stream director', directorNote: 'up to 3 hours, +400.000 IDR for each extra hour',
+        editPod: 'Video editing (incl. 1 reel)', editPodNote: 'for the recorded session',
+        editNA: 'Editing for sessions over 2 hours — on request in chat',
+        editSimple: 'Simple edit', editPro: 'Pro edit',
+        editBulk: '10+ reels', editBulkNote: '20% discount on editing', bulkLine: '10+ reels discount (−20% editing)',
+        ext: 'Extension', perHour: 'IDR / hour', none: 'None', extraCam: 'Additional camera',
+        datePlaceholder: 'Select date', night: 'Night 1.5×'
+      },
+      ru: {
+        groupEquip: 'Оборудование и команда', groupEdit: 'Монтаж',
+        camName: 'Дополнительная камера Sony FX30 / a7C', camEach: '+300.000 IDR за каждую камеру', camQty: 'Доп. камера',
+        directorName: 'Режиссёр трансляции', directorNote: 'до 3 часов, +400.000 IDR за каждый доп. час',
+        editPod: 'Монтаж (включая 1 reels)', editPodNote: 'записанной сессии',
+        editNA: 'Монтаж сессий дольше 2 часов — по запросу в чате',
+        editSimple: 'Простой монтаж', editPro: 'Про-монтаж',
+        editBulk: '10+ reels', editBulkNote: 'скидка 20% на монтаж', bulkLine: 'Скидка за 10+ reels (−20% монтаж)',
+        ext: 'Продление', perHour: 'IDR / час', none: 'Нет', extraCam: 'Доп. камера',
+        datePlaceholder: 'Выберите дату', night: 'Ночь 1.5×'
       }
-    }
+    };
 
-    function selectCalcFromCard(srv) {
-      setService(srv);
-      const calcElem = document.getElementById('calculator');
-      if (calcElem) {
-        calcElem.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    /* Состояние выбранных допов */
+    const calcState = { cams: 0, prompter: false, mics: false, board: false, director: false, edit: null, bulk: false };
 
-    /* setHours вызывает onTimeChange вместо calcTotal для обновления ночного тарифа */
-    function setHours(h, btn) {
-      calcHours = h;
-      document.querySelectorAll('.hours-picker .hour-btn').forEach(b => b.classList.remove('active'));
-      if (btn) {
-        btn.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.hours-picker .hour-btn')).find(b => b.innerText.trim().startsWith(String(h)));
-        if (matchingBtn) matchingBtn.classList.add('active');
-      }
-      onTimeChange();
-    }
+    function calcLang() { return (typeof currentLang !== 'undefined' && currentLang === 'ru') ? 'ru' : 'en'; }
 
     function formatIDR(num) {
       return num.toLocaleString('id-ID') + ' IDR';
+    }
+
+    function baseFor(svc, hours) {
+      const keys = Object.keys(svc.table).map(Number).sort((a, b) => a - b);
+      const max = keys[keys.length - 1];
+      const h = Math.max(hours, svc.minHours);
+      if (svc.table[h] !== undefined) return svc.table[h];
+      if (h > max) return svc.table[max] + (h - max) * svc.ext;
+      return svc.table[keys[0]];
+    }
+
+    function podcastEditPrice(hours) {
+      const pkg = PODCAST_EDIT_PACKAGE[hours];
+      if (pkg === undefined) return null;
+      return pkg - baseFor(CALC_SERVICES.podcast, hours);
+    }
+
+    function directorPrice(hours) {
+      return DIRECTOR.price + Math.max(0, hours - DIRECTOR.includedHours) * DIRECTOR.extHour;
     }
 
     function calculateNightRatio(timeStr, hours) {
@@ -3735,15 +3822,172 @@
       const parts = timeStr.split(':');
       if (parts.length < 2) return 0;
       const startHour = parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
-      
       let nightHoursCount = 0;
       for (let i = 0; i < hours; i++) {
         const currentH = (startHour + i) % 24;
-        if (currentH >= 22 || currentH < 9) {
-          nightHoursCount++;
-        }
+        if (currentH >= 22 || currentH < 9) nightHoursCount++;
       }
       return nightHoursCount / hours;
+    }
+
+    /* Единый расчёт: используется и для сметы, и для сообщения в мессенджер */
+    function computeQuote() {
+      const svc = CALC_SERVICES[calcService];
+      const base = baseFor(svc, calcHours);
+      const timeInput = document.getElementById('booking-time');
+      const timeVal = timeInput ? timeInput.value : '';
+      const nightRatio = calculateNightRatio(timeVal, calcHours);
+      const nightExtra = Math.round(base * NIGHT_EXTRA_RATIO * nightRatio);
+      const T = CALC_T;
+      const lines = [];
+
+      if (svc.addons.includes('cams') && calcState.cams > 0) {
+        lines.push({ label: { en: `${T.en.extraCam} ×${calcState.cams}`, ru: `${T.ru.extraCam} ×${calcState.cams}` }, amount: calcState.cams * CALC_CAM_PRICE });
+      }
+      ['mics', 'prompter', 'board'].forEach(k => {
+        if (svc.addons.includes(k) && calcState[k]) {
+          lines.push({ label: CALC_ADDONS[k].name, amount: CALC_ADDONS[k].price });
+        }
+      });
+      if (svc.addons.includes('director') && calcState.director) {
+        lines.push({ label: { en: T.en.directorName, ru: T.ru.directorName }, amount: directorPrice(calcHours) });
+      }
+
+      /* Монтаж */
+      let editPrice = 0;
+      if (svc.edit === 'podcast' && calcState.edit === 'podcast') {
+        const pr = podcastEditPrice(calcHours);
+        if (pr !== null) {
+          editPrice = pr;
+          lines.push({ label: { en: T.en.editPod, ru: T.ru.editPod }, amount: pr });
+        }
+      } else if (svc.edit === 'social' && (calcState.edit === 'simple' || calcState.edit === 'pro')) {
+        editPrice = SOCIAL_EDIT[calcState.edit];
+        const key = calcState.edit === 'simple' ? 'editSimple' : 'editPro';
+        lines.push({ label: { en: T.en[key], ru: T.ru[key] }, amount: editPrice });
+        if (calcState.bulk) {
+          lines.push({ label: { en: T.en.bulkLine, ru: T.ru.bulkLine }, amount: -Math.round(editPrice * BULK_REELS_DISCOUNT), discount: true });
+        }
+      }
+
+      const addonsTotal = lines.reduce((sum, l) => sum + l.amount, 0);
+      return { svc, base, nightExtra, nightRatio, timeVal, lines, addonsTotal, total: base + nightExtra + addonsTotal };
+    }
+
+    /* ----- Отрисовка блока «Дополнительно» ----- */
+    function renderAddons() {
+      const box = document.getElementById('addons-list');
+      if (!box) return;
+      const lang = calcLang();
+      const t = CALC_T[lang];
+      const svc = CALC_SERVICES[calcService];
+      let html = '';
+
+      const checkbox = (id, checked, name, note, priceText, disabled) => `
+        <label class="addon-card${disabled ? ' is-disabled' : ''}">
+          <span class="addon-main"><input type="checkbox" ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''} onchange="${id}"> <span>${name}${note ? `<small>${note}</small>` : ''}</span></span>
+          <span class="addon-price">${priceText}</span>
+        </label>`;
+
+      html += `<div class="addon-group-title">${t.groupEquip}</div>`;
+
+      if (svc.addons.includes('cams')) {
+        html += `
+        <div class="addon-card addon-card-qty">
+          <span class="addon-main"><span>${t.camName}<small>${t.camEach}</small></span></span>
+          <div class="qty-stepper">
+            <button type="button" onclick="changeCams(-1)" aria-label="−" ${calcState.cams <= 0 ? 'disabled' : ''}>−</button>
+            <span class="qty-value" id="cams-qty">${calcState.cams}</span>
+            <button type="button" onclick="changeCams(1)" aria-label="+" ${calcState.cams >= 5 ? 'disabled' : ''}>+</button>
+          </div>
+        </div>`;
+      }
+      ['mics', 'prompter', 'board'].forEach(k => {
+        if (svc.addons.includes(k)) {
+          html += checkbox(`setAddon('${k}', this.checked)`, calcState[k], CALC_ADDONS[k].name[lang], '', '+' + formatIDR(CALC_ADDONS[k].price));
+        }
+      });
+      if (svc.addons.includes('director')) {
+        html += checkbox(`setAddon('director', this.checked)`, calcState.director, t.directorName, t.directorNote, '+' + formatIDR(directorPrice(calcHours)));
+      }
+
+      if (svc.edit) {
+        html += `<div class="addon-group-title">${t.groupEdit}</div>`;
+        if (svc.edit === 'podcast') {
+          const pr = podcastEditPrice(calcHours);
+          if (pr === null) {
+            html += `<div class="addon-card is-disabled"><span class="addon-main"><span>${t.editNA}</span></span></div>`;
+          } else {
+            html += checkbox(`setEdit('podcast', this.checked)`, calcState.edit === 'podcast', t.editPod, '', '+' + formatIDR(pr));
+          }
+        } else {
+          html += checkbox(`setEdit('simple', this.checked)`, calcState.edit === 'simple', t.editSimple, '', '+' + formatIDR(SOCIAL_EDIT.simple));
+          html += checkbox(`setEdit('pro', this.checked)`, calcState.edit === 'pro', t.editPro, '', '+' + formatIDR(SOCIAL_EDIT.pro));
+          const hasEdit = calcState.edit === 'simple' || calcState.edit === 'pro';
+          html += checkbox(`setBulk(this.checked)`, calcState.bulk && hasEdit, t.editBulk, t.editBulkNote, '−20%', !hasEdit);
+        }
+      }
+      box.innerHTML = html;
+    }
+
+    function changeCams(delta) {
+      calcState.cams = Math.max(0, Math.min(5, calcState.cams + delta));
+      renderAddons();
+      calcTotal();
+    }
+    function setAddon(key, val) { calcState[key] = !!val; calcTotal(); }
+    function setEdit(key, val) {
+      calcState.edit = val ? key : null;
+      if (!calcState.edit) calcState.bulk = false;
+      renderAddons();
+      calcTotal();
+    }
+    function setBulk(val) { calcState.bulk = !!val; calcTotal(); }
+
+    /* ----- Формат и длительность ----- */
+    function applyHoursConstraints() {
+      const svc = CALC_SERVICES[calcService];
+      if (calcHours < svc.minHours) calcHours = svc.minHours;
+      document.querySelectorAll('.hours-picker .hour-btn').forEach(b => {
+        const h = parseInt(b.getAttribute('data-h'), 10);
+        b.disabled = h < svc.minHours;
+        b.classList.toggle('active', h === calcHours);
+      });
+      const hint = document.getElementById('webinar-min-hint');
+      if (hint) hint.style.display = calcService === 'webinar' ? 'block' : 'none';
+    }
+
+    function setService(srv, btn) {
+      if (!CALC_SERVICES[srv]) srv = 'podcast';
+      /* при смене формата выбранные допы сбрасываются, чтобы не переносить чужие опции */
+      if (srv !== calcService) {
+        Object.assign(calcState, { cams: 0, prompter: false, mics: false, board: false, director: false, edit: null, bulk: false });
+      }
+      calcService = srv;
+      document.querySelectorAll('.calc-options-grid .opt-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-srv') === srv);
+      });
+      const svc = CALC_SERVICES[srv];
+      /* сброс монтажа, которого нет в выбранном формате */
+      if (svc.edit === 'podcast' && calcState.edit !== 'podcast') calcState.edit = null;
+      if (svc.edit === 'social' && calcState.edit === 'podcast') calcState.edit = null;
+      if (!svc.edit) { calcState.edit = null; calcState.bulk = false; }
+      applyHoursConstraints();
+      renderAddons();
+      onTimeChange();
+    }
+
+    function selectCalcFromCard(srv) {
+      setService(srv);
+      const calcElem = document.getElementById('calculator');
+      if (calcElem) calcElem.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function setHours(h, btn) {
+      calcHours = h;
+      applyHoursConstraints();
+      renderAddons();
+      onTimeChange();
     }
 
     function onTimeChange() {
@@ -3751,7 +3995,6 @@
       const timeVal = timeInput ? timeInput.value : '';
       const warningBanner = document.getElementById('night-warning');
       const nightRatio = calculateNightRatio(timeVal, calcHours);
-
       if (warningBanner) {
         if (nightRatio > 0) {
           warningBanner.classList.add('active');
@@ -3764,147 +4007,81 @@
       calcTotal();
     }
 
-    function openDatePicker() {
-      const input = document.getElementById('booking-date');
-      if (input) {
-        if (typeof input.showPicker === 'function') {
-          input.showPicker();
-        } else {
-          input.focus();
-        }
-      }
-    }
-
+    /* ----- Смета ----- */
     function calcTotal() {
-      const data = rates[calcService] || rates.podcast;
-      let base = 0;
+      const q = computeQuote();
+      const lang = calcLang();
+      const t = CALC_T[lang];
+      const svc = q.svc;
 
-      if (calcService === 'webinar') {
-        if (calcHours <= 2) base = data[2];
-        else if (calcHours === 3) base = data[3];
-        else if (calcHours === 4) base = data[4];
-        else base = data[4] + (calcHours - 4) * data.ext;
-      } else {
-        if (calcHours <= 3) base = data[calcHours];
-        else base = data[3] + (calcHours - 3) * data.ext;
+      const billService = document.getElementById('bill-service');
+      const billBase = document.getElementById('bill-base');
+      const billTotal = document.getElementById('bill-total');
+      if (billService) billService.innerText = `${svc.name[lang]} (${calcHours}h)`;
+      if (billBase) billBase.innerText = formatIDR(q.base);
+      if (billTotal) billTotal.innerText = formatIDR(q.total);
+
+      const sub = document.getElementById('bill-sub');
+      if (sub) {
+        if (svc.sub) { sub.style.display = 'block'; sub.innerText = svc.sub[lang]; }
+        else { sub.style.display = 'none'; sub.innerText = ''; }
       }
-
-      const timeInput = document.getElementById('booking-time');
-      const timeVal = timeInput ? timeInput.value : '';
-      const nightRatio = calculateNightRatio(timeVal, calcHours);
-      const nightExtra = Math.round(base * 0.5 * nightRatio);
+      const ext = document.getElementById('bill-ext');
+      if (ext) ext.innerText = `${t.ext}: +${formatIDR(svc.ext).replace(' IDR', '')} ${t.perHour}`;
 
       const nightRow = document.getElementById('bill-night-row');
       const nightExtraEl = document.getElementById('bill-night-extra');
       if (nightRow && nightExtraEl) {
-        if (nightExtra > 0) {
+        if (q.nightExtra > 0) {
           nightRow.style.display = 'flex';
-          nightExtraEl.innerText = '+' + formatIDR(nightExtra);
+          nightExtraEl.innerText = '+' + formatIDR(q.nightExtra);
         } else {
           nightRow.style.display = 'none';
         }
       }
 
-      let addons = 0;
-      const prompterCheck = document.getElementById('addon-prompter');
-      const fx30Check = document.getElementById('addon-fx30');
-      const editCheck = document.getElementById('addon-edit');
-
-      if (prompterCheck && prompterCheck.checked) addons += 300000;
-      if (fx30Check && fx30Check.checked) addons += 300000;
-      if (editCheck && editCheck.checked) addons += 600000;
-
-      const regularTotal = base + nightExtra + addons;
-
-      const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
-      const srvName = lang === 'en' ? data.en : data.ru;
-
-      const billService = document.getElementById('bill-service');
-      const billBase = document.getElementById('bill-base');
-      const billAddons = document.getElementById('bill-addons');
-      const billTotal = document.getElementById('bill-total');
-
-      if (billService) billService.innerText = `${srvName} (${calcHours}h)`;
-      if (billBase) billBase.innerText = formatIDR(base);
-      if (billAddons) billAddons.innerText = formatIDR(addons);
-      if (billTotal) billTotal.innerText = formatIDR(regularTotal);
-
-      /* Подстановка пунктов из объекта inclusions */
-      const list = inclusions[calcService] ? inclusions[calcService][lang] : inclusions.podcast[lang];
-      for (let i = 1; i <= 4; i++) {
-        const itemEl = document.getElementById(`incl-item${i}`);
-        if (itemEl && list[i - 1]) {
-          itemEl.innerHTML = `<i class="fa-solid fa-check"></i> <span>${list[i - 1]}</span>`;
+      const rows = document.getElementById('bill-addon-rows');
+      if (rows) {
+        if (q.lines.length === 0) {
+          const lbl = (i18n[lang] && i18n[lang].billAddons) ? i18n[lang].billAddons : 'Additional:';
+          rows.innerHTML = `<div class="bill-row"><span>${lbl}</span><span>0 IDR</span></div>`;
+        } else {
+          rows.innerHTML = q.lines.map(l =>
+            `<div class="bill-row ${l.discount ? 'discount-row' : 'addon-row'}"><span>${l.label[lang]}</span><span>${l.amount < 0 ? '−' : '+'}${formatIDR(Math.abs(l.amount))}</span></div>`
+          ).join('');
         }
+      }
+
+      const incl = document.getElementById('incl-list');
+      if (incl) {
+        incl.innerHTML = svc.included[lang].map(item => `<div><i class="fa-solid fa-check"></i> <span>${item}</span></div>`).join('');
       }
     }
 
+    /* ----- Сообщение в WhatsApp / Telegram ----- */
     function sendToMessenger(ch) {
-      const data = rates[calcService] || rates.podcast;
-      let base = 0;
-
-      if (calcService === 'webinar') {
-        if (calcHours <= 2) base = data[2];
-        else if (calcHours === 3) base = data[3];
-        else if (calcHours === 4) base = data[4];
-        else base = data[4] + (calcHours - 4) * data.ext;
-      } else {
-        if (calcHours <= 3) base = data[calcHours];
-        else base = data[3] + (calcHours - 3) * data.ext;
-      }
-
-      const timeInput = document.getElementById('booking-time');
-      const timeVal = timeInput ? timeInput.value : '';
-      const nightRatio = calculateNightRatio(timeVal, calcHours);
-      const nightExtra = Math.round(base * 0.5 * nightRatio);
-
-      const prompterCheck = document.getElementById('addon-prompter');
-      const fx30Check = document.getElementById('addon-fx30');
-      const editCheck = document.getElementById('addon-edit');
-
-      let addons = 0;
-      let addonsList = [];
-      const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
-
-      if (prompterCheck && prompterCheck.checked) {
-        addons += 300000;
-        addonsList.push(lang === 'en' ? 'Neewer Teleprompter' : 'Телесуфлер Neewer');
-      }
-      if (fx30Check && fx30Check.checked) {
-        addons += 300000;
-        addonsList.push(lang === 'en' ? 'Extra FX Camera' : 'Доп. камера FX');
-      }
-      if (editCheck && editCheck.checked) {
-        addons += 600000;
-        addonsList.push(lang === 'en' ? 'Full Video Editing' : 'Монтаж выпуска');
-      }
-
-      const regularTotal = base + nightExtra + addons;
+      const q = computeQuote();
+      const lang = calcLang();
+      const svc = q.svc;
+      const addonsList = q.lines.map(l => l.label[lang]);
 
       const dateInput = document.getElementById('booking-date');
       const rawDate = dateInput ? dateInput.value : '';
-      let chosenDate = rawDate;
+      let chosenDate;
       if (rawDate) {
-        const parts = rawDate.split('-');
-        if (parts.length === 3) {
-          const monthsRu = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-          const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-          const day = parseInt(parts[2], 10);
-          const monthIdx = parseInt(parts[1], 10) - 1;
-          chosenDate = lang === 'en' ? `${day} ${monthsEn[monthIdx]}` : `${day} ${monthsRu[monthIdx]}`;
-        }
+        chosenDate = formatLongDate(parseISODate(rawDate));
       } else {
         chosenDate = lang === 'en' ? 'Flexible / Discuss' : 'Гибкая / Обсудить';
       }
 
-      let chosenTime = timeVal.replace('🌙 (Night 1.5×)', '').trim();
+      let chosenTime = q.timeVal.trim();
       if (chosenTime.includes('Flexible') || !chosenTime) {
         chosenTime = lang === 'en' ? 'Flexible' : 'Гибкое';
       }
 
-      const srvTitle = lang === 'en' ? data.en : data.ru;
-      const nightNoteEn = nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
-      const nightNoteRu = nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
+      const srvTitle = svc.name[lang];
+      const nightNoteEn = q.nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
+      const nightNoteRu = q.nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
 
       const text = lang === 'en'
         ? `Hello! I would like to book a session at Icon Media Studio:
@@ -3913,8 +4090,8 @@
 • Date: ${chosenDate}
 • Start time: ${chosenTime}
 • Duration: ${calcHours}h${nightNoteEn}
-• Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
-• Estimated Total: ${formatIDR(regularTotal)}
+• Additional: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
+• Estimated Total: ${formatIDR(q.total)}
 
 Could you please check availability?`
         : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:
@@ -3923,8 +4100,8 @@ Could you please check availability?`
 • Дата: ${chosenDate}
 • Время: ${chosenTime}
 • Длительность: ${calcHours} ч${nightNoteRu}
-• Доп. опции: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
-• Расчетная сумма: ${formatIDR(regularTotal)}
+• Дополнительно: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
+• Расчетная сумма: ${formatIDR(q.total)}
 
 Свободен ли этот слот?`;
 
@@ -3932,19 +4109,134 @@ Could you please check availability?`
         const encodedText = encodeURIComponent(text);
         window.open(`https://wa.me/6282314734072?text=${encodedText}`, '_blank', 'noopener,noreferrer');
       } else {
-        /* Копирование текста в буфер обмена для Telegram */
         const copyMsg = i18n[lang] && i18n[lang].toastTg ? i18n[lang].toastTg : 'Message copied, paste it in the chat';
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(() => {
-            showToast(copyMsg);
-          }).catch(() => {
-            showToast(copyMsg);
-          });
+          navigator.clipboard.writeText(text).then(() => { showToast(copyMsg); }).catch(() => { showToast(copyMsg); });
         } else {
           showToast(copyMsg);
         }
         window.open('https://t.me/iconmediastudio', '_blank', 'noopener,noreferrer');
       }
+    }
+
+    /* ===== Календарь: язык всегда как у сайта (а не как у браузера/ОС) ===== */
+    let calViewYear = null;
+    let calViewMonth = null;
+
+    function calLocale() { return calcLang() === 'ru' ? 'ru-RU' : 'en-GB'; }
+    function parseISODate(str) {
+      const p = str.split('-').map(Number);
+      return new Date(p[0], p[1] - 1, p[2]);
+    }
+    function toISODate(d) {
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+    function formatLongDate(d) {
+      return new Intl.DateTimeFormat(calLocale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+    }
+    function capFirst(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
+    function calMinDate() {
+      const input = document.getElementById('booking-date');
+      return input && input.dataset.min ? parseISODate(input.dataset.min) : new Date();
+    }
+
+    function updateDateDisplay() {
+      const input = document.getElementById('booking-date');
+      const txt = document.getElementById('dateDisplayText');
+      if (!txt) return;
+      txt.textContent = (input && input.value) ? formatLongDate(parseISODate(input.value)) : CALC_T[calcLang()].datePlaceholder;
+    }
+
+    function renderCalendar() {
+      const popup = document.getElementById('calPopup');
+      if (!popup || popup.hidden) return;
+      const input = document.getElementById('booking-date');
+      const selected = input && input.value ? input.value : '';
+      const minDate = calMinDate();
+      const loc = calLocale();
+      const first = new Date(calViewYear, calViewMonth, 1);
+
+      document.getElementById('calTitle').textContent = capFirst(new Intl.DateTimeFormat(loc, { month: 'long', year: 'numeric' }).format(first));
+
+      const week = document.getElementById('calWeek');
+      let wk = '';
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(2024, 0, 1 + i); /* 1 января 2024 — понедельник */
+        wk += `<span>${capFirst(new Intl.DateTimeFormat(loc, { weekday: 'short' }).format(d))}</span>`;
+      }
+      week.innerHTML = wk;
+
+      const offset = (first.getDay() + 6) % 7;
+      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+      const todayISO = toISODate(new Date());
+      let html = '';
+      for (let i = 0; i < offset; i++) html += '<span></span>';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const d = new Date(calViewYear, calViewMonth, day);
+        const iso = toISODate(d);
+        const disabled = d < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
+        const cls = 'cal-day' + (iso === selected ? ' selected' : '') + (iso === todayISO ? ' today' : '');
+        html += `<button type="button" class="${cls}" ${disabled ? 'disabled' : ''} onclick="pickDate('${iso}')">${day}</button>`;
+      }
+      document.getElementById('calDays').innerHTML = html;
+
+      const prev = document.getElementById('calPrev');
+      if (prev) prev.disabled = (calViewYear === minDate.getFullYear() && calViewMonth <= minDate.getMonth()) || calViewYear < minDate.getFullYear();
+    }
+
+    function toggleDatePicker() {
+      const popup = document.getElementById('calPopup');
+      const btn = document.getElementById('dateDisplay');
+      if (!popup) return;
+      if (popup.hidden) {
+        const input = document.getElementById('booking-date');
+        const base = input && input.value ? parseISODate(input.value) : calMinDate();
+        calViewYear = base.getFullYear();
+        calViewMonth = base.getMonth();
+        popup.hidden = false;
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        renderCalendar();
+      } else {
+        closeDatePicker();
+      }
+    }
+    function openDatePicker() { const popup = document.getElementById('calPopup'); if (popup && popup.hidden) toggleDatePicker(); }
+    function closeDatePicker() {
+      const popup = document.getElementById('calPopup');
+      const btn = document.getElementById('dateDisplay');
+      if (popup) popup.hidden = true;
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+    function calShiftMonth(delta) {
+      const d = new Date(calViewYear, calViewMonth + delta, 1);
+      calViewYear = d.getFullYear();
+      calViewMonth = d.getMonth();
+      renderCalendar();
+    }
+    function pickDate(iso) {
+      const input = document.getElementById('booking-date');
+      if (input) input.value = iso;
+      updateDateDisplay();
+      closeDatePicker();
+      calcTotal();
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.getElementById('datePicker');
+      if (wrap && !wrap.contains(e.target)) closeDatePicker();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDatePicker(); });
+
+    /* Подписи ночных слотов и календаря при смене языка */
+    function refreshCalcLanguage() {
+      const t = CALC_T[calcLang()];
+      document.querySelectorAll('#booking-time option[data-night]').forEach(opt => {
+        opt.textContent = `${opt.value} 🌙 (${t.night})`;
+      });
+      updateDateDisplay();
+      renderCalendar();
+      renderAddons();
+      calcTotal();
     }
 
     function exportToPNG() {
@@ -4040,7 +4332,8 @@ Could you please check availability?`
         const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
         const dd = String(tomorrow.getDate()).padStart(2, '0');
         dateInput.value = `${yyyy}-${mm}-${dd}`;
-        dateInput.min = `${yyyy}-${mm}-${dd}`;
+        dateInput.dataset.min = `${yyyy}-${mm}-${dd}`;
+        updateDateDisplay();
       }
     }
 
