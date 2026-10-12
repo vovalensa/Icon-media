@@ -3806,10 +3806,8 @@
       }
 
       const srvTitle = lang === 'en' ? data.en : data.ru;
-      const nightNoteEn = nightExtra > 0 ? '
-• Night Rate: 1.5×' : '';
-      const nightNoteRu = nightExtra > 0 ? '
-• Ночной тариф: 1.5×' : '';
+      const nightNoteEn = nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
+      const nightNoteRu = nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
 
       const text = lang === 'en'
         ? `Hello! I would like to book a session at Icon Media Studio:
