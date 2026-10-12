@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ICON MEDIA | Premium Podcast Studio & Video Production in Bali</title>
   
   <meta name="description" content="ICON MEDIA — премиальная студия подкастов и видеопродакшна в Чангу, Бали. Съемка на камеры Sony FX30/a7c, 2 микрофона Shure, телесуфлер Neewer и полный монтаж под ключ.">
@@ -41,6 +41,19 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Страница не должна «ездить» вправо на мобильных */
+    html {
+      max-width: 100%;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      -webkit-text-size-adjust: 100%;
+    }
+    @supports (overflow: clip) {
+      html { overflow-x: clip; }
+    }
+    body { max-width: 100%; overscroll-behavior-x: none; }
+    html.menu-open, html.menu-open body { overflow: hidden; overscroll-behavior: none; }
 
     body {
       background-color: var(--bg-main);
@@ -467,18 +480,42 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 100px 32px 40px;
-      opacity: 0;
+      padding: 100px 32px calc(40px + env(safe-area-inset-bottom, 0px));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+      visibility: hidden;
       pointer-events: none;
-      transform: translateY(-10px);
-      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.38s;
     }
 
     .mobile-menu-drawer.active {
-      opacity: 1;
+      visibility: visible;
       pointer-events: auto;
-      transform: translateY(0);
+      transform: translateX(0);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
     }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: calc(env(safe-area-inset-top, 0px) + 18px);
+      right: 24px;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(18, 18, 25, 0.85);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .mobile-menu-close:active { background: var(--flame-orange); border-color: var(--flame-orange); }
 
     .mobile-nav-links {
       list-style: none;
@@ -1381,6 +1418,10 @@
       border-top: 1px solid var(--border-subtle);
       position: relative;
       z-index: 5;
+      overflow-x: hidden;
+    }
+    @supports (overflow: clip) {
+      .calc-section { overflow-x: clip; }
     }
 
     .calc-section::before {
@@ -1900,6 +1941,26 @@
       .footer-brand-logo-img { height: 48px; }
       .header-cta-btn { display: none !important; }
     }
+
+    @media (max-width: 520px) {
+      .header-inner { gap: 10px; }
+      .header-inner > div:last-child { gap: 8px !important; min-width: 0; }
+      .wa-label { display: none; }
+      header .btn-pill-dark { padding: 0; width: 44px; height: 44px; font-size: 18px; flex: 0 0 auto; }
+      .brand-logo-img { height: 40px; }
+      .google-score-box { flex-wrap: wrap; gap: 14px; padding: 14px 16px; }
+      .google-score-box .btn-pill { margin-left: 0 !important; width: 100%; }
+      .calc-section, .infra-section { padding-left: 0; padding-right: 0; }
+      img, video, iframe { max-width: 100%; }
+      .burger-btn { flex: 0 0 44px; }
+    }
+
+    @media (max-width: 360px) {
+      .lang-btn { padding: 5px 9px; }
+      .brand-logo-img { height: 34px; }
+      .header-inner > div:last-child { gap: 6px !important; }
+      .header-inner { gap: 6px; }
+    }
   </style>
 </head>
 <body>
@@ -1947,7 +2008,7 @@
         </div>
 
         <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
-          <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> WhatsApp
+          <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> <span class="wa-label">WhatsApp</span>
         </a>
         <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange header-cta-btn">
           <span data-i18n="ctaBook">Book Session</span>
@@ -1964,7 +2025,10 @@
   </header>
 
   <!-- Полноэкранная шторка мобильного меню -->
-  <div class="mobile-menu-drawer" id="mobileMenuDrawer">
+  <div class="mobile-menu-drawer" id="mobileMenuDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button type="button" class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <ul class="mobile-nav-links">
       <li><a href="#sets" onclick="closeMobileMenu()" data-i18n="navSets">Studio Sets <i class="fa-solid fa-arrow-right"></i></a></li>
       <li><a href="#portfolio" onclick="closeMobileMenu()" data-i18n="navPortfolio">Showreel <i class="fa-solid fa-arrow-right"></i></a></li>
@@ -3356,6 +3420,7 @@
       if (!isActive && drawer && btn) {
         btn.classList.add('active');
         drawer.classList.add('active');
+        document.documentElement.classList.add('menu-open');
         document.body.style.overflow = 'hidden';
       } else {
         closeMobileMenu();
@@ -3366,9 +3431,65 @@
       const btn = document.getElementById('burgerToggleBtn');
       const drawer = document.getElementById('mobileMenuDrawer');
       if (btn) btn.classList.remove('active');
-      if (drawer) drawer.classList.remove('active');
+      if (drawer) {
+        drawer.classList.remove('active');
+        drawer.style.transition = '';
+        drawer.style.transform = '';
+      }
+      document.documentElement.classList.remove('menu-open');
       document.body.style.overflow = '';
     }
+
+    /* Свайп вправо закрывает меню (шторка следует за пальцем) */
+    function initMobileMenuSwipe() {
+      const drawer = document.getElementById('mobileMenuDrawer');
+      if (!drawer) return;
+      let startX = 0, startY = 0, startT = 0, dx = 0, mode = null;
+
+      drawer.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) { mode = 'ignore'; return; }
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startT = Date.now();
+        dx = 0;
+        mode = null;
+      }, { passive: true });
+
+      drawer.addEventListener('touchmove', (e) => {
+        if (mode === 'ignore' || mode === 'vertical') return;
+        const t = e.touches[0];
+        const mx = t.clientX - startX;
+        const my = t.clientY - startY;
+        if (mode === null) {
+          if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+          mode = (mx > 0 && Math.abs(mx) > Math.abs(my) * 1.2) ? 'swipe' : 'vertical';
+          if (mode === 'swipe') drawer.style.transition = 'none';
+        }
+        if (mode === 'swipe') {
+          dx = Math.max(0, mx);
+          drawer.style.transform = 'translateX(' + dx + 'px)';
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      const finish = () => {
+        if (mode !== 'swipe') { mode = null; return; }
+        const speed = dx / Math.max(1, Date.now() - startT);
+        mode = null;
+        drawer.style.transition = '';
+        if (dx > 90 || (dx > 30 && speed > 0.5)) {
+          closeMobileMenu();
+        } else {
+          drawer.style.transform = '';
+        }
+      };
+      drawer.addEventListener('touchend', finish);
+      drawer.addEventListener('touchcancel', finish);
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 992) closeMobileMenu();
+    });
 
     function setDeviceView(device, btn) {
       document.querySelectorAll('.device-switcher-bar .device-btn').forEach(b => b.classList.remove('active'));
@@ -3949,6 +4070,7 @@ Could you please check availability?`
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      initMobileMenuSwipe();
       initLanguageAutoDetect();
       initDefaultDate();
       checkDevMode();
