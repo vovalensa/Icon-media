@@ -694,6 +694,13 @@
       color: #fff;
     }
 
+    .hero-title .m-br { display: none; }
+    @media (max-width: 640px) {
+      .hero-title { font-size: min(34px, 8.2vw) !important; letter-spacing: -1px; line-height: 1.12; }
+      .hero-title .m-br { display: inline; }
+      .hero-title .t-dash { display: none; }
+    }
+
     .hero-title-highlight {
       background: linear-gradient(135deg, #ffffff 30%, #ff5e26 90%);
       -webkit-background-clip: text;
@@ -2039,19 +2046,26 @@
       .hero-content-wrap {
         max-width: 100% !important;
       }
+      /* Шапка не «едет» за пользователем на мобильных */
+      header { position: relative; }
+      /* Фото студии (кресло) видно на фоне первого экрана */
       .hero-bg-media {
         width: 100% !important;
-        opacity: 0.35 !important;
+        opacity: 1 !important;
       }
       .hero-bg-media img {
-        max-height: 100% !important;
         width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
         object-fit: cover !important;
-        object-position: center !important;
+        object-position: 75% center !important;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
       }
       .hero-bg-gradient-scrim {
-        background: linear-gradient(180deg, rgba(7, 7, 9, 0.85) 0%, rgba(7, 7, 9, 0.95) 100%) !important;
+        background: linear-gradient(180deg, rgba(7, 7, 9, 0.6) 0%, rgba(7, 7, 9, 0.48) 40%, rgba(7, 7, 9, 0.62) 72%, #070709 100%) !important;
       }
+      .hero-bg-glow { display: none; }
       .datetime-row { grid-template-columns: 1fr; }
       .hero-title { font-size: 38px; }
       .cards-grid, .sets-grid, .equip-grid, .infra-grid, .calc-grid, .footer-grid, .cred-bar-grid { grid-template-columns: 1fr !important; }
@@ -2080,6 +2094,11 @@
       .brand-logo-img { height: 34px; }
       .header-inner > div:last-child { gap: 6px !important; }
       .header-inner { gap: 6px; }
+    }
+  
+    /* body не должен становиться скролл-контейнером (иначе ломается sticky-шапка на десктопе) */
+    @supports (overflow: clip) {
+      html, body { overflow-x: clip; }
     }
   </style>
 </head>
@@ -2201,7 +2220,7 @@
               </div>
 
               <h1 class="hero-title" data-i18n="heroTitle">
-                ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali
+                ICON MEDIA<span class="t-dash"> —</span><br class="m-br"> <span class="hero-title-highlight">Podcast Studio &<br class="m-br"> Video Production</span><br class="m-br"> in Bali
               </h1>
 
               <p class="hero-sub" data-i18n="heroSub1">
@@ -3097,7 +3116,7 @@
         navCalc: 'Pricing',
         navFaq: 'FAQ',
         ctaBook: 'Book Session',
-        heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Podcast Studio & Video Production</span> in Bali',
+        heroTitle: 'ICON MEDIA<span class="t-dash"> —</span><br class="m-br"> <span class="hero-title-highlight">Podcast Studio &<br class="m-br"> Video Production</span><br class="m-br"> in Bali',
         heroSub1: 'A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.',
         hf1: 'Professional setup',
         hf2: 'Great lighting',
@@ -3261,7 +3280,7 @@
         navCalc: 'Цены',
         navFaq: 'FAQ',
         ctaBook: 'Забронировать',
-        heroTitle: 'ICON MEDIA — <span class="hero-title-highlight">Студия подкастов и видеопродакшна</span> на Бали',
+        heroTitle: 'ICON MEDIA<span class="t-dash"> —</span><br class="m-br"> <span class="hero-title-highlight">Студия подкастов и<br class="m-br"> видеопродакшна</span><br class="m-br"> на Бали',
         heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
         hf1: 'Профессиональный сетап',
         hf2: 'Кинематографичный свет',
