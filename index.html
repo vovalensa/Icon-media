@@ -2096,6 +2096,175 @@
       .header-inner { gap: 6px; }
     }
   
+
+    /* ===== Нижняя панель (мобильные/планшеты) ===== */
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 992px) {
+      .mobile-cta-bar {
+        display: block;
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 900;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(9, 9, 12, 0.92);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        border-top: 1px solid var(--border-subtle);
+        transform: translateY(110%);
+        visibility: hidden;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.3s;
+      }
+      .mobile-cta-bar.is-visible {
+        transform: none;
+        visibility: visible;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+      }
+      .mcb-mode { display: none; align-items: center; gap: 10px; }
+      .mobile-cta-bar.mode-cta .mcb-cta { display: flex; }
+      .mobile-cta-bar.mode-total .mcb-total { display: flex; justify-content: space-between; }
+      .mcb-primary {
+        flex: 1;
+        min-height: 48px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--flame-orange), #ff5e26);
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 15px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(255, 68, 10, 0.35);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mcb-wa {
+        flex: 0 0 48px;
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 1px solid var(--border-light);
+        background: rgba(14, 14, 20, 0.85);
+        color: #25d366;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mcb-sum { display: flex; flex-direction: column; min-width: 0; }
+      .mcb-sum-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+      .mcb-sum strong { font-family: var(--font-heading); font-size: 19px; color: #fff; white-space: nowrap; }
+      .mcb-total .mcb-primary { flex: 0 0 auto; padding: 0 28px; }
+      body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+      .toast-notice { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+    }
+
+    /* ===== Первый экран на телефоне: компактнее, кнопка видна без прокрутки ===== */
+    @media (max-width: 640px) {
+      .hero-section { padding: 24px 0 36px; }
+      .hero-badge-row { gap: 8px; margin-bottom: 14px; }
+      .authority-badge { font-size: 11px; padding: 7px 12px; }
+      .google-pill { padding: 5px 12px; font-size: 11.5px; }
+      .hero-title { margin-bottom: 12px; }
+      .hero-sub { font-size: 15px; line-height: 1.5; margin-bottom: 14px; }
+      .hero-features-line {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        margin: 0 -24px 16px;
+        padding: 0 24px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 86%, transparent 100%);
+      }
+      .hero-features-line::-webkit-scrollbar { display: none; }
+      .hero-features-line span { flex: 0 0 auto; white-space: nowrap; }
+      .hero-offer { font-size: 24px; margin-bottom: 10px; }
+    }
+
+    /* ===== Доступность: видимый фокус с клавиатуры ===== */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+    textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+      outline: 2px solid var(--flame-orange);
+      outline-offset: 3px;
+    }
+    .opt-btn:focus-visible, .hour-btn:focus-visible, .addon-card:focus-within {
+      outline: 2px solid var(--flame-orange);
+      outline-offset: 2px;
+    }
+
+    /* ===== Зоны нажатия не меньше 44px на сенсорных экранах ===== */
+    @media (max-width: 992px), (pointer: coarse) {
+      .lang-btn { min-width: 44px; min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; }
+      .brand-logo-wrap { min-height: 44px; display: inline-flex; align-items: center; }
+      .set-tab-btn { min-height: 44px; }
+      .gallery-nav-btn { width: 44px; height: 44px; font-size: 14px; }
+      .btn-pill { min-height: 44px; }
+      .input-field-dark { min-height: 48px; }
+      .hour-btn { min-height: 46px; }
+      .qty-stepper button { width: 44px; height: 44px; }
+      .addon-card { min-height: 54px; }
+      .addon-card input[type="checkbox"] { width: 22px; height: 22px; flex: 0 0 auto; accent-color: var(--flame-orange); }
+      .footer-links { gap: 0; }
+      .footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+      .cal-day { min-height: 40px; }
+    }
+    @media (max-width: 360px) {
+      .lang-btn { min-width: 40px; padding: 0 8px; }
+    }
+
+    /* ===== Блок «Как нас найти» ===== */
+    .location-section {
+      padding: 90px 0;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 5;
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.3fr;
+      gap: 28px;
+      margin-top: 40px;
+      align-items: stretch;
+    }
+    .location-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      backdrop-filter: blur(12px);
+    }
+    .loc-row { display: flex; gap: 14px; align-items: flex-start; }
+    .loc-row > i { color: var(--flame-orange); font-size: 18px; margin-top: 3px; width: 20px; text-align: center; flex: 0 0 auto; }
+    .loc-label { font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); font-weight: 800; margin-bottom: 4px; }
+    .loc-value { color: #fff; font-weight: 600; line-height: 1.5; }
+    .loc-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+    .location-map {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      min-height: 380px;
+      background: #0e0e13;
+    }
+    .location-map iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      border: 0;
+      filter: invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.95);
+    }
+    @media (max-width: 992px) {
+      .location-section { padding: 70px 0; }
+      .location-grid { grid-template-columns: 1fr; margin-top: 28px; }
+      .location-card { padding: 24px 20px; }
+      .location-map, .location-map iframe { min-height: 300px; }
+    }
+
     /* body не должен становиться скролл-контейнером (иначе ломается sticky-шапка на десктопе) */
     @supports (overflow: clip) {
       html, body { overflow-x: clip; }
@@ -2119,7 +2288,8 @@
     }
     .sets-section,
     .equip-section,
-    .reviews-section {
+    .reviews-section,
+    .location-section {
       background-image:
         radial-gradient(var(--glow-w) var(--glow-h) at 100% 32%, rgba(255, 68, 10, var(--glow-a)) 0%, rgba(255, 68, 10, 0.045) 45%, rgba(255, 68, 10, 0) 100%),
         radial-gradient(calc(var(--glow-w) * 0.7) calc(var(--glow-h) * 0.7) at 0% 88%, rgba(255, 68, 10, var(--glow-b)) 0%, rgba(255, 68, 10, 0) 100%);
@@ -2132,11 +2302,56 @@
       :root { --glow-w: 340px; --glow-h: 420px; --glow-a: 0.12; --glow-b: 0.05; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://vovalensa.github.io/Icon-media/#business",
+    "name": "Icon Media Studio",
+    "alternateName": "ICON MEDIA",
+    "description": "Podcast studio and video production in Kerobokan, Bali: Sony FX30 / a7C cameras, Shure microphones, professional lighting, teleprompter and editing.",
+    "url": "https://vovalensa.github.io/Icon-media/",
+    "image": "https://vovalensa.github.io/Icon-media/IMG_2523.jpg",
+    "logo": "https://vovalensa.github.io/Icon-media/logo.png",
+    "telephone": "+6282314734072",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kerobokan",
+      "addressRegion": "Bali",
+      "addressCountry": "ID"
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "09:00",
+      "closes": "22:00"
+    }],
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=Icon+Media+Studio+Kerobokan+Bali",
+    "areaServed": ["Kerobokan", "Canggu", "Seminyak", "Kuta"],
+    "knowsLanguage": ["en", "ru"],
+    "sameAs": ["https://t.me/iconmediastudio"]
+  }
+  </script>
 </head>
 <body>
 
   <!-- Всплывающий тост для копирования текста в Telegram -->
   <div id="toastNotice" class="toast-notice"></div>
+
+  <!-- Нижняя панель на мобильных: быстрый переход к расчёту / итог калькулятора -->
+  <div class="mobile-cta-bar" id="mobileCtaBar" aria-hidden="true">
+    <div class="mcb-mode mcb-cta">
+      <a href="#calculator" class="mcb-primary" data-i18n="stickyCalc">Calculate price</a>
+      <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="mcb-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="mcb-mode mcb-total">
+      <div class="mcb-sum">
+        <span class="mcb-sum-lbl" data-i18n="stickyTotal">Estimated total</span>
+        <strong id="mcbTotal">0 IDR</strong>
+      </div>
+      <button type="button" class="mcb-primary" onclick="scrollToBill()" data-i18n="stickyBook">Reserve</button>
+    </div>
+  </div>
 
   <!-- Floating PNG Exporter (Показывается только при ?dev=1) -->
   <button id="downloadBtn" class="png-exporter-btn" onclick="exportToPNG()">
@@ -2947,7 +3162,7 @@
               </div>
 
               <!-- Bill Summary -->
-              <div class="bill-panel">
+              <div class="bill-panel" id="billPanel">
                 <div>
                   <h4 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; margin-bottom: 18px; color: #fff;" data-i18n="billTitle">Estimate Summary</h4>
                   
@@ -3069,6 +3284,50 @@
 
         </div>
       </section>
+
+      <!-- LOCATION / MAP -->
+      <section class="location-section" id="location">
+        <div class="container">
+          <div>
+            <span class="section-eyebrow" data-i18n="locPre">Location</span>
+            <h2 class="section-heading" data-i18n="locTitle">Find us in Kerobokan</h2>
+          </div>
+
+          <div class="location-grid">
+            <div class="location-card">
+              <div class="loc-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <div class="loc-label" data-i18n="locAddrLabel">Address</div>
+                  <div class="loc-value" data-i18n="locAddr">Kerobokan, Bali, Indonesia</div>
+                </div>
+              </div>
+              <div class="loc-row">
+                <i class="fa-regular fa-clock"></i>
+                <div>
+                  <div class="loc-label" data-i18n="locHoursLabel">Opening hours</div>
+                  <div class="loc-value" data-i18n="fHours">Daily 09:00 – 22:00 WITA</div>
+                </div>
+              </div>
+              <div class="loc-row">
+                <i class="fa-solid fa-car-side"></i>
+                <div>
+                  <div class="loc-label" data-i18n="locAccessLabel">Getting here</div>
+                  <div class="loc-value" data-i18n="locAccess">15–20 minutes by car from Kuta, Seminyak and Canggu</div>
+                </div>
+              </div>
+              <div class="loc-actions">
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Icon+Media+Studio+Kerobokan+Bali" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-orange" data-i18n="locBtnMap">Open in Google Maps</a>
+                <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" data-i18n="locBtnWa">Get directions on WhatsApp</a>
+              </div>
+            </div>
+
+            <div class="location-map">
+              <iframe src="https://maps.google.com/maps?q=Icon+Media+Studio+Kerobokan+Bali&amp;z=15&amp;output=embed" title="Icon Media Studio on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- FOOTER -->
@@ -3093,6 +3352,7 @@
               <li><a href="#portfolio" data-i18n="fLinkWork">Showreel</a></li>
               <li><a href="#services" data-i18n="fLinkServices">Services</a></li>
               <li><a href="#calculator" data-i18n="fLinkPricing">Pricing Engine</a></li>
+              <li><a href="#location" data-i18n="fLinkLocation">Location</a></li>
             </ul>
           </div>
 
@@ -3111,7 +3371,7 @@
               <li><a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +62 823-1473-4072</a></li>
               <li><a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @iconmediastudio</a></li>
               <li><span style="color: var(--text-dim);" data-i18n="fHours">Daily 09:00 – 22:00 WITA</span></li>
-              <li><span style="color: var(--text-dim);">Kerobokan / Canggu, Bali</span></li>
+              <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Icon+Media+Studio+Kerobokan+Bali" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> <span data-i18n="locAddrShort">Kerobokan, Bali</span></a></li>
             </ul>
           </div>
         </div>
@@ -3156,6 +3416,20 @@
         heroBtnCalc: 'Calculate & Reserve',
         heroBtnReel: 'Watch Showreel',
       heroOffer: '10% OFF your first session',
+      stickyCalc: 'Calculate price',
+      stickyTotal: 'Estimated total',
+      stickyBook: 'Reserve',
+      locPre: 'Location',
+      locTitle: 'Find us in Kerobokan',
+      locAddrLabel: 'Address',
+      locAddr: 'Kerobokan, Bali, Indonesia',
+      locAddrShort: 'Kerobokan, Bali',
+      locHoursLabel: 'Opening hours',
+      locAccessLabel: 'Getting here',
+      locAccess: '15–20 minutes by car from Kuta, Seminyak and Canggu',
+      locBtnMap: 'Open in Google Maps',
+      locBtnWa: 'Get directions on WhatsApp',
+      fLinkLocation: 'Location',
         cred1: 'Episodes Recorded',
         cred2: 'Google Maps Rating',
         cred3: 'Sony FX30 & a7c',
@@ -3320,6 +3594,20 @@
         heroBtnCalc: 'Рассчитать и выбрать дату',
         heroBtnReel: 'Смотреть шоурил',
       heroOffer: 'Скидка 10% на первую сессию',
+      stickyCalc: 'Рассчитать',
+      stickyTotal: 'Итого',
+      stickyBook: 'Оформить',
+      locPre: 'Как нас найти',
+      locTitle: 'Мы в Керобокане',
+      locAddrLabel: 'Адрес',
+      locAddr: 'Керобокан, Бали, Индонезия',
+      locAddrShort: 'Керобокан, Бали',
+      locHoursLabel: 'Часы работы',
+      locAccessLabel: 'Как добраться',
+      locAccess: '15–20 минут на машине от Куты, Семиньяка и Чангу',
+      locBtnMap: 'Открыть в Google Maps',
+      locBtnWa: 'Уточнить маршрут в WhatsApp',
+      fLinkLocation: 'Как добраться',
         cred1: 'Выпусков записано',
         cred2: 'Рейтинг Google Maps',
         cred3: 'Камеры Sony FX30/a7c',
@@ -4094,6 +4382,8 @@
       if (billService) billService.innerText = `${svc.name[lang]} (${calcHours}h)`;
       if (billBase) billBase.innerText = formatIDR(q.base);
       if (billTotal) billTotal.innerText = formatIDR(q.total);
+      const mcbTotal = document.getElementById('mcbTotal');
+      if (mcbTotal) mcbTotal.innerText = formatIDR(q.total);
 
       const sub = document.getElementById('bill-sub');
       if (sub) {
@@ -4301,6 +4591,41 @@ Could you please check availability?`
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDatePicker(); });
 
+    /* ===== Нижняя панель на мобильных ===== */
+    function scrollToBill() {
+      const el = document.getElementById('billPanel');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function initMobileCtaBar() {
+      const bar = document.getElementById('mobileCtaBar');
+      if (!bar || !('IntersectionObserver' in window)) return;
+      const st = { hero: true, calc: false, bill: false };
+      const root = document.documentElement;
+      const update = () => {
+        let mode = null;
+        if (!st.hero && !root.classList.contains('menu-open')) {
+          mode = st.calc ? (st.bill ? null : 'total') : 'cta';
+        }
+        bar.classList.toggle('is-visible', !!mode);
+        bar.classList.toggle('mode-cta', mode === 'cta');
+        bar.classList.toggle('mode-total', mode === 'total');
+        bar.setAttribute('aria-hidden', mode ? 'false' : 'true');
+      };
+      const watch = (sel, key, threshold) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        new IntersectionObserver((entries) => {
+          st[key] = entries[entries.length - 1].isIntersecting;
+          update();
+        }, { threshold: threshold }).observe(el);
+      };
+      watch('.hero-cta-btns', 'hero', 0.6);
+      watch('#calculator', 'calc', 0.01);
+      watch('#billPanel', 'bill', 0.25);
+      new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['class'] });
+    }
+
     /* Подписи ночных слотов и календаря при смене языка */
     function refreshCalcLanguage() {
       const t = CALC_T[calcLang()];
@@ -4439,6 +4764,7 @@ Could you please check availability?`
 
     document.addEventListener('DOMContentLoaded', () => {
       initMobileMenuSwipe();
+      initMobileCtaBar();
       initLanguageAutoDetect();
       initDefaultDate();
       checkDevMode();
