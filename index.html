@@ -2100,6 +2100,37 @@
     @supports (overflow: clip) {
       html, body { overflow-x: clip; }
     }
+  
+    /* Лёгкие оранжевые акценты на фоне секций: чередуются слева/справа */
+    :root {
+      --glow-w: 700px;
+      --glow-h: 600px;
+      --glow-a: 0.12;      /* основной акцент */
+      --glow-b: 0.045;     /* едва заметный встречный акцент */
+    }
+    .portfolio-section,
+    .services-section,
+    .infra-section,
+    .faq-section {
+      background-image:
+        radial-gradient(var(--glow-w) var(--glow-h) at 0% 32%, rgba(255, 68, 10, var(--glow-a)) 0%, rgba(255, 68, 10, 0.045) 45%, rgba(255, 68, 10, 0) 100%),
+        radial-gradient(calc(var(--glow-w) * 0.7) calc(var(--glow-h) * 0.7) at 100% 88%, rgba(255, 68, 10, var(--glow-b)) 0%, rgba(255, 68, 10, 0) 100%);
+      background-repeat: no-repeat;
+    }
+    .sets-section,
+    .equip-section,
+    .reviews-section {
+      background-image:
+        radial-gradient(var(--glow-w) var(--glow-h) at 100% 32%, rgba(255, 68, 10, var(--glow-a)) 0%, rgba(255, 68, 10, 0.045) 45%, rgba(255, 68, 10, 0) 100%),
+        radial-gradient(calc(var(--glow-w) * 0.7) calc(var(--glow-h) * 0.7) at 0% 88%, rgba(255, 68, 10, var(--glow-b)) 0%, rgba(255, 68, 10, 0) 100%);
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 992px) {
+      :root { --glow-w: 520px; --glow-h: 480px; --glow-a: 0.11; }
+    }
+    @media (max-width: 640px) {
+      :root { --glow-w: 340px; --glow-h: 420px; --glow-a: 0.12; --glow-b: 0.05; }
+    }
   </style>
 </head>
 <body>
