@@ -734,17 +734,14 @@
       flex-wrap: wrap;
     }
     .hero-offer {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: 1px dashed rgba(255, 68, 10, 0.6);
-      background: rgba(255, 68, 10, 0.1);
-      color: var(--flame-orange);
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 3.4vw, 38px);
       font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--flame-orange);
+      text-shadow: 0 0 28px rgba(255, 68, 10, 0.35);
+      margin-bottom: 18px;
     }
 
     /* CREDIBILITY STRIP */
@@ -2218,11 +2215,12 @@
                 <span data-i18n="hf4">Zero production hassle</span>
               </div>
 
+              <div class="hero-offer" data-i18n="heroOffer">10% OFF your first session</div>
+
               <div class="hero-cta-btns">
                 <a href="#calculator" class="btn-pill btn-pill-orange" style="padding: 13px 28px; font-size: 14px;" data-i18n="heroBtnCalc">
                   Calculate & Reserve
                 </a>
-                <span class="hero-offer" data-i18n="heroOffer">10% OFF your first session</span>
               </div>
             </div>
 
