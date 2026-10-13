@@ -1674,6 +1674,18 @@
       color: #22c55e;
       font-size: 11px;
     }
+    /* Список «что включено» — по одному пункту в строке */
+    .bill-includes-box #incl-list {
+      display: block;
+      margin: 0;
+    }
+    .bill-includes-box #incl-list > div {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .bill-includes-box #incl-list > div i { margin-top: 4px; flex: 0 0 auto; }
 
     .bill-total-row {
       margin-top: 16px;
