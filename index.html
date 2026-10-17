@@ -4588,7 +4588,6 @@ Could you please check availability?`
       {
         id: 1,
         photos: [[1600, 1066], [1200, 1600], [1130, 1600], [1290, 1496], [1200, 1600], [1200, 1600]],
-        title: { en: 'Graphite & Amber', ru: 'Графит и янтарь' },
         desc: {
           en: 'Graphite walls, a clean white desk and warm amber shelf lighting. A calm, premium backdrop for expert talks, interviews and talking-head Reels.',
           ru: 'Графитовые стены, чистый белый стол и тёплая янтарная подсветка полок. Спокойный премиальный фон для экспертных разговоров, интервью и Reels.'
@@ -4598,8 +4597,25 @@ Could you please check availability?`
           ru: ['Графит и белый', 'Янтарный акцентный свет', 'Соло и интервью']
         },
         alt: {
-          en: 'Graphite & Amber social media video set at Icon Media Studio, Bali',
-          ru: 'Сетап «Графит и янтарь» для видео в соцсети, Icon Media Studio, Бали'
+          en: 'Setup 1 – graphite walls and warm amber light, social media video set at Icon Media Studio, Bali',
+          ru: 'Сетап 1 – графитовые стены и тёплый янтарный свет, сет для видео в соцсети, Icon Media Studio, Бали'
+        },
+        cta: { en: 'Reels · YouTube · Courses', ru: 'Reels · YouTube · Курсы' }
+      },
+      {
+        id: 2,
+        photos: [[1600, 1066], [1600, 1066], [1600, 1066], [1069, 1600], [1104, 687], [1218, 1600]],
+        desc: {
+          en: 'A warm terracotta wood-slat wall, a black leather chair and a Shure microphone on a boom arm. A cozy, high-contrast backdrop for podcasts, interviews and expert Reels.',
+          ru: 'Тёплая стена из деревянных реек цвета терракоты, чёрное кожаное кресло и микрофон Shure на пантографе. Уютный контрастный фон для подкастов, интервью и экспертных Reels.'
+        },
+        chips: {
+          en: ['Terracotta & wood', 'Warm accent light', 'Podcast & interview'],
+          ru: ['Терракота и дерево', 'Тёплый акцентный свет', 'Подкаст и интервью']
+        },
+        alt: {
+          en: 'Setup 2 – terracotta wood-slat wall and black leather chair, social media video set at Icon Media Studio, Bali',
+          ru: 'Сетап 2 – терракотовая стена из реек и чёрное кожаное кресло, сет для видео в соцсети, Icon Media Studio, Бали'
         },
         cta: { en: 'Reels · YouTube · Courses', ru: 'Reels · YouTube · Курсы' }
       }
@@ -4640,11 +4656,10 @@ Could you please check availability?`
           <article class="set-card social-card" data-set="${set.id}">
             <div>
               <div class="social-photo" style="--r:${(set.photos[0][0] / set.photos[0][1]).toFixed(4)}">
-                <span class="set-badge">${lang === 'ru' ? 'Сет' : 'Set'} ${nn}</span>
                 ${slides}${nav}
               </div>
               <div class="set-body">
-                <h3 class="set-title">${set.title[lang]}</h3>
+                <h3 class="set-title">${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}</h3>
                 <p class="set-desc">${set.desc[lang]}</p>
                 <div class="set-specs">${chips}</div>
               </div>
