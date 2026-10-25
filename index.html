@@ -2716,7 +2716,7 @@
               <i class="fa-solid fa-mobile-screen-button"></i> <span data-i18n="tabSetReels">Vertical Content & Solo</span>
             </button>
             <button type="button" class="set-tab-btn" onclick="switchSets('stream', this)">
-              <i class="fa-solid fa-tower-broadcast"></i> <span data-i18n="tabSetStream">Keynote & Live Stage</span>
+              <i class="fa-solid fa-tower-broadcast"></i> <span data-i18n="tabSetStream">Webinars / Live Stream</span>
             </button>
           
           <div class="carousel-nav-btns sets-carousel-nav" id="socialNav">
@@ -2732,28 +2732,8 @@
             <!-- Social Media Video: карточки строятся из списка SOCIAL_SETS (см. скрипт) -->
             <div class="social-sets" id="socialSets" data-setcat="reels" style="display: none;"></div>
 
-            <!-- Stream Setup -->
-            <div class="set-card" data-setcat="stream" style="display: none;">
-              <div>
-                <div class="set-img-wrap">
-                  <span class="set-badge">Live Broadcast</span>
-                  <img src="webinar-live-stream.jpg" alt="Live Webinar Stage Bali" onerror="this.src='podcast-setup-desk-table.jpg'" loading="lazy">
-                </div>
-                <div class="set-body">
-                  <h3 class="set-title" data-i18n="setStream1Title">Webinar & Live Broadcast Stage</h3>
-                  <p class="set-desc" data-i18n="setStream1Desc">Full-featured webinar broadcasting desk with confidence monitors for slides, chat moderation, and 80–90 Mbps optical fiber.</p>
-                  <div class="set-specs">
-                    <span class="set-spec-chip">80–90 Mbps Fiber</span>
-                    <span class="set-spec-chip">Slide Monitors</span>
-                    <span class="set-spec-chip">Live Director</span>
-                  </div>
-                </div>
-              </div>
-              <div class="set-cta">
-                <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Turnkey Broadcast</span>
-                <a href="#calculator" onclick="selectCalcFromCard('webinar')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
-              </div>
-            </div>
+            <!-- Webinars / Live Stream: карточки строятся из списка WEBINAR_SETS (см. скрипт) -->
+            <div class="social-sets" id="webinarSets" data-setcat="stream" style="display: none;"></div>
           </div>
 
         </div>
@@ -3389,10 +3369,8 @@
         setsSub: 'Explore customizable backdrops, lighting schemes, and multi-cam angles pre-configured for your format.',
         tabSetPod: 'Podcasts',
         tabSetReels: 'Social Media Video',
-        tabSetStream: 'Keynote & Live Stage',
+        tabSetStream: 'Webinars / Live Stream',
         badgeSetFeatured: 'Flagship Lounge',
-        setStream1Title: 'Webinar & Live Broadcast Stage',
-        setStream1Desc: 'Full-featured webinar broadcasting desk with confidence monitors for slides, chat moderation, and 80–90 Mbps optical fiber.',
         btnBookThisSet: 'Select Setup',
         servPreTitle: 'Production Solutions',
         servTitle: 'What We Produce',
@@ -3557,10 +3535,8 @@
         setsSub: 'Готовые варианты задних планов, света и схемы рассадки спикеров под ваши задачи.',
         tabSetPod: 'Подкасты',
         tabSetReels: 'Видео для соцсетей',
-        tabSetStream: 'Сцена для вебинаров',
+        tabSetStream: 'Вебинары / Прямые эфиры',
         badgeSetFeatured: 'Флагманский лаундж',
-        setStream1Title: 'Сцена для трансляций и запусков',
-        setStream1Desc: 'Оборудованная зона прямого эфира со студийным монитором суфлера, чата и резервным оптоволокном 80–90 Mbps.',
         btnBookThisSet: 'Выбрать сетап',
         servPreTitle: 'Направления работы',
         servTitle: 'Форматы продакшна',
@@ -4572,9 +4548,30 @@ Could you please check availability?`
       }
     ];
 
+    const WEBINAR_SETS = [
+      {
+        id: 1,
+        count: 5,
+        desc: {
+          en: 'A studio set for webinars and live broadcasts: stable 80–90 Mbps fiber internet, multi-cam switching and a live director for a turnkey stream.',
+          ru: 'Студийный сет для вебинаров и прямых эфиров: стабильный оптоволоконный интернет 80–90 Мбит/с, мультикамерная коммутация и режиссёр эфира для трансляции «под ключ».'
+        },
+        chips: {
+          en: ['80–90 Mbps fiber', 'Multi-cam', 'Live director'],
+          ru: ['Интернет 80–90 Мбит/с', 'Мультикамера', 'Режиссёр эфира']
+        },
+        alt: {
+          en: 'Webinar and live stream Setup 1 at Icon Media Studio, Kerobokan, Bali',
+          ru: 'Вебинары и прямые эфиры, сетап 1, Icon Media Studio, Керобокан, Бали'
+        },
+        cta: { en: 'Turnkey broadcast', ru: 'Трансляция под ключ' }
+      }
+    ];
+
     /* Группы каруселей: id контейнера, папка, префикс файлов, ключ калькулятора */
     const SET_GROUPS = {
       podcast: { box: 'podcastSets', base: 'images/sets/podcast/', prefix: 'podcast', calc: 'podcast', sets: PODCAST_SETS },
+      stream:  { box: 'webinarSets', base: 'images/sets/webinar/', prefix: 'webinar', calc: 'webinar', sets: WEBINAR_SETS },
       reels:   { box: 'socialSets',  base: 'images/sets/social/',  prefix: 'social',  calc: 'social',  sets: SOCIAL_SETS }
     };
     const socialState = {};
