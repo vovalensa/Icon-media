@@ -2710,7 +2710,7 @@
 
           <div class="sets-tabs">
             <button type="button" class="set-tab-btn active" onclick="switchSets('podcast', this)">
-              <i class="fa-solid fa-podcast"></i> <span data-i18n="tabSetPod">Podcast Lounge & Desk</span>
+              <i class="fa-solid fa-podcast"></i> <span data-i18n="tabSetPod">Podcasts</span>
             </button>
             <button type="button" class="set-tab-btn" onclick="switchSets('reels', this)">
               <i class="fa-solid fa-mobile-screen-button"></i> <span data-i18n="tabSetReels">Vertical Content & Solo</span>
@@ -2726,107 +2726,8 @@
         </div>
 
           <div class="sets-grid" id="setsContainer">
-            <!-- Setup 1 -->
-            <div class="set-card" data-setcat="podcast">
-              <div>
-                <div class="set-img-wrap" id="emeraldGalleryBox">
-                  <span class="set-badge" data-i18n="badgeSetFeatured">Flagship Lounge</span>
-                  
-                  <button type="button" class="gallery-nav-btn gallery-nav-prev" onclick="stepEmeraldGallery(-1)" aria-label="Previous photo">
-                    <i class="fa-solid fa-chevron-left"></i>
-                  </button>
-                  <button type="button" class="gallery-nav-btn gallery-nav-next" onclick="stepEmeraldGallery(1)" aria-label="Next photo">
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </button>
-
-                  <img id="emeraldGalleryImg" src="podcast-setup-emerald-amber.jpg" alt="Emerald Velvet Amber Lounge Setup Icon Media" loading="lazy">
-
-                  <div class="gallery-dots">
-                    <span class="gallery-dot active" onclick="setEmeraldSlide(0)"></span>
-                    <span class="gallery-dot" onclick="setEmeraldSlide(1)"></span>
-                    <span class="gallery-dot" onclick="setEmeraldSlide(2)"></span>
-                    <span class="gallery-dot" onclick="setEmeraldSlide(3)"></span>
-                  </div>
-                </div>
-
-                <div class="set-body">
-                  <h3 class="set-title" data-i18n="set1Title">Emerald Amber Lounge</h3>
-                  <p class="set-desc" data-i18n="set1Desc">Deep emerald velvet armchairs, warm 3200K ambient lighting, ethnic rug, and 2 Shure microphones.</p>
-                  <div class="set-specs">
-                    <span class="set-spec-chip">2–3 Speakers</span>
-                    <span class="set-spec-chip">Warm 3200K Amber</span>
-                    <span class="set-spec-chip">2 Shure Mics + 3 Cams</span>
-                  </div>
-                </div>
-              </div>
-              <div class="set-cta">
-                <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Interviews & Talks</span>
-                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
-              </div>
-            </div>
-
-            <!-- Setup 2 -->
-            <div class="set-card" data-setcat="podcast">
-              <div>
-                <div class="set-img-wrap" id="deskGalleryBox">
-                  <span class="set-badge">Executive Format</span>
-                  
-                  <button type="button" class="gallery-nav-btn gallery-nav-prev" onclick="stepDeskGallery(-1)" aria-label="Previous photo">
-                    <i class="fa-solid fa-chevron-left"></i>
-                  </button>
-                  <button type="button" class="gallery-nav-btn gallery-nav-next" onclick="stepDeskGallery(1)" aria-label="Next photo">
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </button>
-
-                  <img id="deskGalleryImg" src="podcast-setup-desk-guests.jpg" alt="Executive White Desk Podcast Setup Icon Media" onerror="this.src='podcast-setup-desk-table.jpg'" loading="lazy">
-
-                  <div class="gallery-dots">
-                    <span class="gallery-dot active" onclick="setDeskSlide(0)"></span>
-                    <span class="gallery-dot" onclick="setDeskSlide(1)"></span>
-                    <span class="gallery-dot" onclick="setDeskSlide(2)"></span>
-                    <span class="gallery-dot" onclick="setDeskSlide(3)"></span>
-                    <span class="gallery-dot" onclick="setDeskSlide(4)"></span>
-                  </div>
-                </div>
-
-                <div class="set-body">
-                  <h3 class="set-title" data-i18n="set2Title">Executive Dialogue Desk</h3>
-                  <p class="set-desc" data-i18n="set2Desc">Clean white desk dialogue setup with leather executive chairs, desktop Shure booms, and laptop integration.</p>
-                  <div class="set-specs">
-                    <span class="set-spec-chip">2–4 Speakers</span>
-                    <span class="set-spec-chip">Laptop Friendly</span>
-                    <span class="set-spec-chip">Rode Caster Pro</span>
-                  </div>
-                </div>
-              </div>
-              <div class="set-cta">
-                <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Business & Tech</span>
-                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
-              </div>
-            </div>
-
-            <!-- Setup 3 -->
-            <div class="set-card" data-setcat="podcast">
-              <div>
-                <div class="set-img-wrap">
-                  <span class="set-badge">Cyber & Tech</span>
-                  <img src="podcast-setup-emerald-neon.jpg" alt="Cyber Neon Purple RGB Podcast Setup" loading="lazy">
-                </div>
-                <div class="set-body">
-                  <h3 class="set-title" data-i18n="set3Title">Cyber Purple Neon</h3>
-                  <p class="set-desc" data-i18n="set3Desc">High-contrast RGB neon backlighting behind tropical monstera greenery for Web3 founders, crypto shows, and modern creators.</p>
-                  <div class="set-specs">
-                    <span class="set-spec-chip">Custom RGB Neon</span>
-                    <span class="set-spec-chip">High Contrast</span>
-                    <span class="set-spec-chip">Sony 4K Multi-Angle</span>
-                  </div>
-                </div>
-              </div>
-              <div class="set-cta">
-                <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">Web3 & Crypto</span>
-                <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;" data-i18n="btnBookThisSet">Select Setup</a>
-              </div>
-            </div>
+            <!-- Podcasts: карточки строятся из списка PODCAST_SETS (см. скрипт) -->
+            <div class="social-sets" id="podcastSets" data-setcat="podcast"></div>
 
             <!-- Social Media Video: карточки строятся из списка SOCIAL_SETS (см. скрипт) -->
             <div class="social-sets" id="socialSets" data-setcat="reels" style="display: none;"></div>
@@ -3486,16 +3387,10 @@
         setsPreTitle: 'Curated Filming Stages',
         setsTitle: 'Studio Sets & Environments',
         setsSub: 'Explore customizable backdrops, lighting schemes, and multi-cam angles pre-configured for your format.',
-        tabSetPod: 'Podcast Lounge & Desk',
+        tabSetPod: 'Podcasts',
         tabSetReels: 'Social Media Video',
         tabSetStream: 'Keynote & Live Stage',
         badgeSetFeatured: 'Flagship Lounge',
-        set1Title: 'Emerald Amber Lounge',
-        set1Desc: 'Deep emerald velvet armchairs, warm 3200K Godox SL60 lighting, ethnic rug, and 2 Shure microphone stands.',
-        set2Title: 'Executive Dialogue Desk',
-        set2Desc: 'Clean white desk dialogue setup with leather executive chairs, 2 desktop Shure mics, and laptop integration.',
-        set3Title: 'Cyber Purple Neon',
-        set3Desc: 'High-contrast RGB neon backlighting behind tropical monstera greenery for Web3 founders, crypto shows, and modern creators.',
         setStream1Title: 'Webinar & Live Broadcast Stage',
         setStream1Desc: 'Full-featured webinar broadcasting desk with confidence monitors for slides, chat moderation, and 80–90 Mbps optical fiber.',
         btnBookThisSet: 'Select Setup',
@@ -3660,16 +3555,10 @@
         setsPreTitle: 'Интерьерные пространства',
         setsTitle: 'Студийные зоны и сетапы',
         setsSub: 'Готовые варианты задних планов, света и схемы рассадки спикеров под ваши задачи.',
-        tabSetPod: 'Подкаст-лаундж и стол',
+        tabSetPod: 'Подкасты',
         tabSetReels: 'Видео для соцсетей',
         tabSetStream: 'Сцена для вебинаров',
         badgeSetFeatured: 'Флагманский лаундж',
-        set1Title: 'Emerald Amber Lounge',
-        set1Desc: 'Глубокие изумрудные бархатные кресла, мягкий свет Godox 3200K, этнический ковер и 2 микрофона Shure на стойках.',
-        set2Title: 'Деловой стол для диалога',
-        set2Desc: 'Минималистичный белый стол, строгие кожаные кресла, 2 настольных микрофона Shure и подключение ноутбука для реакций.',
-        set3Title: 'Cyber Purple Neon',
-        set3Desc: 'Контрастный фиолетовый неон за тропическими пальмами монстеры. Идеально для Web3-фаундеров, крипты и IT-подкастов.',
         setStream1Title: 'Сцена для трансляций и запусков',
         setStream1Desc: 'Оборудованная зона прямого эфира со студийным монитором суфлера, чата и резервным оптоволокном 80–90 Mbps.',
         btnBookThisSet: 'Выбрать сетап',
@@ -3953,76 +3842,6 @@
         item.classList.remove('active');
         answer.style.maxHeight = null;
       }
-    }
-
-    /* Галереи с fallback на первую картинку */
-    const emeraldImages = [
-      'podcast-setup-emerald-amber.jpg',
-      'podcast-setup-emerald-left.jpg',
-      'podcast-setup-emerald-right.jpg',
-      'podcast-setup-emerald-neon.jpg'
-    ];
-    let emeraldIndex = 0;
-
-    function updateEmeraldGallery() {
-      const imgEl = document.getElementById('emeraldGalleryImg');
-      if (imgEl) {
-        imgEl.onerror = () => { imgEl.src = emeraldImages[0]; };
-        imgEl.style.opacity = '0.4';
-        setTimeout(() => {
-          imgEl.src = emeraldImages[emeraldIndex];
-          imgEl.style.opacity = '1';
-        }, 120);
-      }
-      const dots = document.querySelectorAll('#emeraldGalleryBox .gallery-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === emeraldIndex);
-      });
-    }
-
-    function stepEmeraldGallery(direction) {
-      emeraldIndex = (emeraldIndex + direction + emeraldImages.length) % emeraldImages.length;
-      updateEmeraldGallery();
-    }
-
-    function setEmeraldSlide(idx) {
-      emeraldIndex = idx;
-      updateEmeraldGallery();
-    }
-
-    const deskImages = [
-      'podcast-setup-desk-guests.jpg',
-      'podcast-setup-desk-blue.jpg',
-      'podcast-setup-desk-table.jpg',
-      'podcast-setup-desk-left.jpg',
-      'podcast-setup-desk-right.jpg'
-    ];
-    let deskIndex = 0;
-
-    function updateDeskGallery() {
-      const imgEl = document.getElementById('deskGalleryImg');
-      if (imgEl) {
-        imgEl.onerror = () => { imgEl.src = deskImages[0]; };
-        imgEl.style.opacity = '0.4';
-        setTimeout(() => {
-          imgEl.src = deskImages[deskIndex];
-          imgEl.style.opacity = '1';
-        }, 120);
-      }
-      const dots = document.querySelectorAll('#deskGalleryBox .gallery-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === deskIndex);
-      });
-    }
-
-    function stepDeskGallery(direction) {
-      deskIndex = (deskIndex + direction + deskImages.length) % deskImages.length;
-      updateDeskGallery();
-    }
-
-    function setDeskSlide(idx) {
-      deskIndex = idx;
-      updateDeskGallery();
     }
 
     function scrollCarousel(direction) {
@@ -4608,10 +4427,46 @@ Could you please check availability?`
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDatePicker(); });
 
-    /* ===== Social Media Video: карусель сетапов =====
-       Чтобы добавить сет: положите фото в images/sets/social/set-NN/ (social-set-NN-1.webp, -2.webp ...)
-       и добавьте запись в SOCIAL_SETS (count — сколько фото в папке). */
-    const SOCIAL_BASE = 'images/sets/social/';
+    /* ===== Карусели сетапов (Podcasts, Social Media Video) =====
+       Чтобы добавить сет: положите фото в images/sets/<группа>/set-NN/ (<префикс>-set-NN-1.webp, -2.webp ...)
+       и добавьте запись в PODCAST_SETS / SOCIAL_SETS (count — сколько фото в папке). */
+    const PODCAST_SETS = [
+      {
+        id: 1,
+        count: 10,
+        desc: {
+          en: 'A podcast set built for conversations: professional Shure microphones, soft studio lighting and several camera angles for a polished multi-cam episode.',
+          ru: 'Сет для разговорных форматов: профессиональные микрофоны Shure, мягкий студийный свет и несколько ракурсов для качественного мультикамерного выпуска.'
+        },
+        chips: {
+          en: ['Shure microphones', 'Multi-cam', 'Studio lighting'],
+          ru: ['Микрофоны Shure', 'Мультикамера', 'Студийный свет']
+        },
+        alt: {
+          en: 'Podcast Setup 1 at Icon Media Studio, Kerobokan, Bali',
+          ru: 'Подкаст, сетап 1, Icon Media Studio, Керобокан, Бали'
+        },
+        cta: { en: 'Podcasts · Interviews · Talk shows', ru: 'Подкасты · Интервью · Ток-шоу' }
+      },
+      {
+        id: 2,
+        count: 7,
+        desc: {
+          en: 'A second podcast set with a different look and feel: pro audio, balanced lighting and multi-cam angles, ready for interviews, shows and guest episodes.',
+          ru: 'Второй подкаст-сет с другой атмосферой: профессиональный звук, сбалансированный свет и мультикамера для интервью, шоу и выпусков с гостями.'
+        },
+        chips: {
+          en: ['Pro audio', 'Multi-cam', 'Guest episodes'],
+          ru: ['Студийный звук', 'Мультикамера', 'Гости в кадре']
+        },
+        alt: {
+          en: 'Podcast Setup 2 at Icon Media Studio, Kerobokan, Bali',
+          ru: 'Подкаст, сетап 2, Icon Media Studio, Керобокан, Бали'
+        },
+        cta: { en: 'Podcasts · Interviews · Talk shows', ru: 'Подкасты · Интервью · Ток-шоу' }
+      }
+    ];
+
     const SOCIAL_SETS = [
       {
         id: 1,
@@ -4717,11 +4572,16 @@ Could you please check availability?`
       }
     ];
 
+    /* Группы каруселей: id контейнера, папка, префикс файлов, ключ калькулятора */
+    const SET_GROUPS = {
+      podcast: { box: 'podcastSets', base: 'images/sets/podcast/', prefix: 'podcast', calc: 'podcast', sets: PODCAST_SETS },
+      reels:   { box: 'socialSets',  base: 'images/sets/social/',  prefix: 'social',  calc: 'social',  sets: SOCIAL_SETS }
+    };
     const socialState = {};
 
-    function socialPhotoUrl(set, i) {
+    function setPhotoUrl(g, set, i) {
       const nn = String(set.id).padStart(2, '0');
-      return `${SOCIAL_BASE}set-${nn}/social-set-${nn}-${i + 1}.webp`;
+      return `${g.base}set-${nn}/${g.prefix}-set-${nn}-${i + 1}.webp`;
     }
 
     /* Фото подгружаются по мере необходимости: активное сразу, следующее — заранее */
@@ -4733,19 +4593,21 @@ Could you please check availability?`
       });
     }
 
-    function renderSocialSets() {
-      const box = document.getElementById('socialSets');
+    function renderSetGroup(key) {
+      const g = SET_GROUPS[key];
+      const box = document.getElementById(g.box);
       if (!box) return;
       const lang = calcLang();
       const t = (typeof i18n !== 'undefined' && i18n[lang]) ? i18n[lang] : {};
       const keepScroll = box.scrollLeft;
       box.textContent = '';
-      SOCIAL_SETS.forEach(set => {
-        const idx = Math.min(socialState[set.id] || 0, set.count - 1);
+      g.sets.forEach(set => {
+        const sk = key + '-' + set.id;
+        const idx = Math.min(socialState[sk] || 0, set.count - 1);
         const many = set.count > 1;
         let slides = '';
         for (let i = 0; i < set.count; i++) {
-          const url = socialPhotoUrl(set, i);
+          const url = setPhotoUrl(g, set, i);
           slides += `<div class="social-slide${i === idx ? ' active' : ''}"><img class="social-slide-bg" data-src="${url}" alt="" aria-hidden="true" loading="lazy" decoding="async"><img class="social-slide-img" data-src="${url}" alt="${set.alt[lang]} — ${i + 1}/${set.count}" loading="lazy" decoding="async"></div>`;
         }
         let dots = '';
@@ -4757,7 +4619,7 @@ Could you please check availability?`
         const chips = set.chips[lang].map(c => `<span class="set-spec-chip">${c}</span>`).join('');
         const wrap = document.createElement('div');
         wrap.innerHTML = `
-          <article class="set-card social-card" data-set="${set.id}">
+          <article class="set-card social-card" data-set="${sk}">
             <div>
               <div class="social-photo">${slides}${nav}</div>
               <div class="set-body">
@@ -4768,7 +4630,7 @@ Could you please check availability?`
             </div>
             <div class="set-cta">
               <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">${set.cta[lang]}</span>
-              <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;">${t.btnBookThisSet || 'Select Setup'}</a>
+              <a href="#calculator" onclick="selectCalcFromCard('${g.calc}')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;">${t.btnBookThisSet || 'Select Setup'}</a>
             </div>
           </article>`;
         const card = wrap.firstElementChild;
@@ -4781,6 +4643,10 @@ Could you please check availability?`
       box.style.scrollBehavior = 'auto';
       box.scrollLeft = keepScroll;
       box.style.scrollBehavior = '';
+    }
+
+    function renderSocialSets() {
+      Object.keys(SET_GROUPS).forEach(renderSetGroup);
       updateSocialNav();
     }
 
@@ -4801,51 +4667,55 @@ Could you please check availability?`
       socialLoadSlide(slides[(idx + 1) % n]);
     }
 
+    /* Видимая сейчас лента карточек */
+    function activeSetTrack() {
+      return Array.from(document.querySelectorAll('.social-sets')).find(t => t.style.display !== 'none' && t.clientWidth > 0) || null;
+    }
+
     /* Листание самих карточек (как в карусели Showreel) */
     function socialScroll(direction) {
-      const track = document.getElementById('socialSets');
+      const track = activeSetTrack();
       if (track) track.scrollBy({ left: track.offsetWidth * 0.85 * direction, behavior: 'smooth' });
     }
 
     function updateSocialNav() {
-      const track = document.getElementById('socialSets');
       const nav = document.getElementById('socialNav');
-      if (!track || !nav) return;
-      const visible = track.style.display !== 'none' && track.clientWidth > 0;
-      const max = track.scrollWidth - track.clientWidth;
-      nav.style.display = (visible && max > 2) ? 'flex' : 'none';
+      if (!nav) return;
+      const track = activeSetTrack();
+      const max = track ? track.scrollWidth - track.clientWidth : 0;
+      nav.style.display = (track && max > 2) ? 'flex' : 'none';
       const prev = document.getElementById('socialPrev');
       const next = document.getElementById('socialNext');
-      if (prev) prev.disabled = track.scrollLeft <= 2;
-      if (next) next.disabled = track.scrollLeft >= max - 2;
+      if (track && prev) prev.disabled = track.scrollLeft <= 2;
+      if (track && next) next.disabled = track.scrollLeft >= max - 2;
     }
 
     function initSocialSets() {
-      const box = document.getElementById('socialSets');
-      if (!box) return;
-      box.addEventListener('click', (e) => {
-        const card = e.target.closest('.social-card');
-        if (!card) return;
-        const nav = e.target.closest('.social-nav');
-        if (nav) { socialGo(card, socialCurrent(card) + parseInt(nav.getAttribute('data-dir'), 10)); return; }
-        const dot = e.target.closest('.gallery-dot');
-        if (dot) socialGo(card, parseInt(dot.getAttribute('data-idx'), 10));
-      });
-      /* свайп по фото внутри карточки */
       let sx = 0, sy = 0, swCard = null;
-      box.addEventListener('touchstart', (e) => {
-        const photo = e.target.closest('.social-photo');
-        swCard = photo ? photo.closest('.social-card') : null;
-        if (swCard) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
-      }, { passive: true });
-      box.addEventListener('touchend', (e) => {
-        if (!swCard) return;
-        const dx = e.changedTouches[0].clientX - sx;
-        const dy = e.changedTouches[0].clientY - sy;
-        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) socialGo(swCard, socialCurrent(swCard) + (dx < 0 ? 1 : -1));
-        swCard = null;
-      }, { passive: true });
-      box.addEventListener('scroll', updateSocialNav, { passive: true });
+      document.querySelectorAll('.social-sets').forEach(box => {
+        box.addEventListener('click', (e) => {
+          const card = e.target.closest('.social-card');
+          if (!card) return;
+          const nav = e.target.closest('.social-nav');
+          if (nav) { socialGo(card, socialCurrent(card) + parseInt(nav.getAttribute('data-dir'), 10)); return; }
+          const dot = e.target.closest('.gallery-dot');
+          if (dot) socialGo(card, parseInt(dot.getAttribute('data-idx'), 10));
+        });
+        /* свайп по фото внутри карточки */
+        box.addEventListener('touchstart', (e) => {
+          const photo = e.target.closest('.social-photo');
+          swCard = photo ? photo.closest('.social-card') : null;
+          if (swCard) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
+        }, { passive: true });
+        box.addEventListener('touchend', (e) => {
+          if (!swCard) return;
+          const dx = e.changedTouches[0].clientX - sx;
+          const dy = e.changedTouches[0].clientY - sy;
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) socialGo(swCard, socialCurrent(swCard) + (dx < 0 ? 1 : -1));
+          swCard = null;
+        }, { passive: true });
+        box.addEventListener('scroll', updateSocialNav, { passive: true });
+      });
       window.addEventListener('resize', updateSocialNav);
     }
 
