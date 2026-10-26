@@ -153,6 +153,23 @@
       box-shadow: 0 10px 30px rgba(255, 68, 10, 0.5);
     }
 
+    /* Иконки соцсетей в шапке */
+    .header-socials { display: flex; align-items: center; gap: 8px; }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      font-size: 18px; text-decoration: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .social-icon:hover { transform: translateY(-2px); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.25); }
+    .social-icon:focus-visible { outline: 2px solid var(--accent, #f26a3d); outline-offset: 2px; }
+    .social-icon-wa { color: #25d366; }
+    .social-icon-tg { color: #38bdf8; }
+    .social-icon-ig { color: #e1306c; }
+    @media (max-width: 520px) { .header-socials { display: none; } }
+
     .btn-pill-dark {
       background: rgba(14, 14, 20, 0.75);
       border-color: var(--border-light);
@@ -2390,7 +2407,7 @@
     "hasMap": "https://www.google.com/maps/search/?api=1&query=Icon+Media+Studio+Kerobokan+Bali",
     "areaServed": ["Kerobokan", "Canggu", "Seminyak", "Kuta"],
     "knowsLanguage": ["en", "ru"],
-    "sameAs": ["https://t.me/iconmediastudio"]
+    "sameAs": ["https://t.me/iconmediastudio", "https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq"]
   }
   </script>
 </head>
@@ -2453,9 +2470,11 @@
           <button type="button" class="lang-btn" id="btn-ru" onclick="switchLanguage('ru')">RU</button>
         </div>
 
-        <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
-          <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i> <span class="wa-label">WhatsApp</span>
-        </a>
+        <div class="header-socials">
+          <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="social-icon social-icon-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer" class="social-icon social-icon-tg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq" target="_blank" rel="noopener noreferrer" class="social-icon social-icon-ig" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
         <a id="ctaHeaderBtn" href="#calculator" class="btn-pill btn-pill-orange header-cta-btn">
           <span data-i18n="ctaBook">Book Session</span>
         </a>
@@ -2493,6 +2512,9 @@
         </a>
         <a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px; color: #38bdf8;">
           <i class="fa-brands fa-telegram"></i> Telegram
+        </a>
+        <a href="https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px; color: #e1306c;">
+          <i class="fa-brands fa-instagram"></i> Instagram
         </a>
       </div>
     </div>
@@ -2533,13 +2555,6 @@
               <p class="hero-sub" data-i18n="heroSub1">
                 A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.
               </p>
-
-              <div class="hero-features-line">
-                <span data-i18n="hf1">Professional setup</span>
-                <span data-i18n="hf2">Great lighting</span>
-                <span data-i18n="hf3">Clean sound</span>
-                <span data-i18n="hf4">Zero production hassle</span>
-              </div>
 
               <div class="hero-offer" data-i18n="heroOffer">10% OFF your first session</div>
 
@@ -2584,7 +2599,7 @@
           
           <div class="portfolio-header-wrap">
             <div>
-              <span class="section-eyebrow" data-i18n="portPreTitle">Proven Production Quality</span>
+              <span class="section-eyebrow" data-i18n="portPreTitle">Showreel</span>
               <h2 class="section-heading" data-i18n="portTitle">Featured Episodes & Projects</h2>
               <p class="section-subtext" data-i18n="portSub">
                 Real multi-camera broadcasts, podcasts, and short-form assets filmed and graded at Icon Media Studio.
@@ -2701,7 +2716,7 @@
         <div class="container">
           
           <div>
-            <span class="section-eyebrow" data-i18n="setsPreTitle">Curated Filming Stages</span>
+            <span class="section-eyebrow" data-i18n="setsPreTitle">Studio Sets</span>
             <h2 class="section-heading" data-i18n="setsTitle">Studio Sets & Environments</h2>
             <p class="section-subtext" data-i18n="setsSub">
               Explore customizable backdrops, lighting schemes, and multi-cam angles pre-configured for your format.
@@ -2744,7 +2759,7 @@
         <div class="container">
           
           <div>
-            <span class="section-eyebrow" data-i18n="servPreTitle">Production Solutions</span>
+            <span class="section-eyebrow" data-i18n="servPreTitle">Services</span>
             <h2 class="section-heading" data-i18n="servTitle">What We Produce</h2>
             <p class="section-subtext" data-i18n="servSub">
               Engineered workflows for high-performing creators, thought leaders, and remote businesses.
@@ -2986,7 +3001,7 @@
         <div class="container">
           
           <div>
-            <span class="section-eyebrow" data-i18n="calcPreTitle">Transparent Pricing Engine</span>
+            <span class="section-eyebrow" data-i18n="calcPreTitle">Pricing</span>
             <h2 class="section-heading" data-i18n="calcTitle">Estimate Your Session</h2>
             <p class="section-subtext" data-i18n="calcSub">
               Configure your format, time, and deliverables. Your detailed summary will be pre-filled for 1-click booking on WhatsApp.
@@ -3274,6 +3289,7 @@
             <ul class="footer-links">
               <li><a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +62 823-1473-4072</a></li>
               <li><a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @iconmediastudio</a></li>
+              <li><a href="https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> @icon.media.studio</a></li>
               <li><span style="color: var(--text-dim);" data-i18n="fHours">Daily 09:00 – 22:00 WITA</span></li>
               <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Icon+Media+Studio+Kerobokan+Bali" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i> <span data-i18n="locAddrShort">Kerobokan, Bali</span></a></li>
             </ul>
@@ -3313,10 +3329,6 @@
         ctaBook: 'Book Session',
         heroTitle: 'ICON MEDIA<span class="t-dash"> —</span><br class="m-br"> <span class="hero-title-highlight">Podcast Studio &<br class="m-br"> Video Production</span><br class="m-br"> in Bali',
         heroSub1: 'A professional space for creators, experts, entrepreneurs and brands to shoot podcasts, Reels, YouTube videos, courses and more.',
-        hf1: 'Professional setup',
-        hf2: 'Great lighting',
-        hf3: 'Clean sound',
-        hf4: 'Zero production hassle',
         heroBtnCalc: 'Calculate & Reserve',
         heroBtnReel: 'Watch Showreel',
       heroOffer: '10% OFF your first session',
@@ -3350,7 +3362,7 @@
         ben4Desc: 'With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content',
         ben5Title: 'Easy to Reach',
         ben5Desc: 'Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu',
-        portPreTitle: 'Proven Production Quality',
+        portPreTitle: 'Showreel',
         portTitle: 'Featured Episodes & Projects',
         portSub: 'Real multi-camera broadcasts, podcasts, and short-form assets filmed and graded at Icon Media Studio.',
         vidWatch: 'Watch Episode',
@@ -3364,7 +3376,7 @@
         vidTitle4: 'Deep Dive Storytelling',
         vidCat7: 'Podcast Interview',
         vidTitle7: 'Founder Insights & Strategy',
-        setsPreTitle: 'Curated Filming Stages',
+        setsPreTitle: 'Studio Sets',
         setsTitle: 'Studio Sets & Environments',
         setsSub: 'Explore customizable backdrops, lighting schemes, and multi-cam angles pre-configured for your format.',
         tabSetPod: 'Podcasts',
@@ -3372,7 +3384,7 @@
         tabSetStream: 'Webinars / Live Stream',
         badgeSetFeatured: 'Flagship Lounge',
         btnBookThisSet: 'Select Setup',
-        servPreTitle: 'Production Solutions',
+        servPreTitle: 'Services',
         servTitle: 'What We Produce',
         servSub: 'Engineered workflows for high-performing creators, thought leaders, and remote businesses.',
         tagPodcast: '3 Cameras • Shure Mics',
@@ -3417,7 +3429,7 @@
         revTitle: 'Verified Google Reviews',
         revMeta: 'Verified Reviews on Google Maps',
         btnAllGoogle: 'View on Maps',
-        calcPreTitle: 'Transparent Pricing Engine',
+        calcPreTitle: 'Pricing',
         calcTitle: 'Estimate Your Session',
         calcSub: 'Configure your format, time, and deliverables. Your detailed summary will be pre-filled for 1-click booking on WhatsApp.',
         calcStep1: 'Step 1 • Choose Format',
@@ -3479,10 +3491,6 @@
         ctaBook: 'Забронировать',
         heroTitle: 'ICON MEDIA<span class="t-dash"> —</span><br class="m-br"> <span class="hero-title-highlight">Студия подкастов и<br class="m-br"> видеопродакшна</span><br class="m-br"> на Бали',
         heroSub1: 'Профессиональное пространство для авторов, экспертов, предпринимателей и брендов для съемок подкастов, Reels, YouTube-шоу и онлайн-курсов.',
-        hf1: 'Профессиональный сетап',
-        hf2: 'Кинематографичный свет',
-        hf3: 'Чистый студийный звук',
-        hf4: 'Ноль забот о продакшне',
         heroBtnCalc: 'Рассчитать и выбрать дату',
         heroBtnReel: 'Смотреть шоурил',
       heroOffer: 'Скидка 10% на первую сессию',
@@ -3516,7 +3524,7 @@
         ben4Desc: 'Со стабильным каналом 80–90 Мбит/с вы можете уверенно проводить прямые эфиры, вебинары, онлайн-встречи и стримы.',
         ben5Title: 'Удобное расположение',
         ben5Desc: 'Студия комфортно расположена всего в 15–20 минутах езды от Куты, Семиньяка и Чангу.',
-        portPreTitle: 'Качество в кадре',
+        portPreTitle: 'Шоурил',
         portTitle: 'Шоурил и примеры проектов',
         portSub: 'Реальные подкасты, экспертные шоу и вертикальные форматы, записанные и покрашенные в Icon Media Studio.',
         vidWatch: 'Смотреть выпуск',
@@ -3530,7 +3538,7 @@
         vidTitle4: 'Глубокий разбор и сторителлинг',
         vidCat7: 'Интервью подкаст',
         vidTitle7: 'Инсайты фаундеров и стратегия',
-        setsPreTitle: 'Интерьерные пространства',
+        setsPreTitle: 'Сетапы',
         setsTitle: 'Студийные зоны и сетапы',
         setsSub: 'Готовые варианты задних планов, света и схемы рассадки спикеров под ваши задачи.',
         tabSetPod: 'Подкасты',
@@ -3538,7 +3546,7 @@
         tabSetStream: 'Вебинары / Прямые эфиры',
         badgeSetFeatured: 'Флагманский лаундж',
         btnBookThisSet: 'Выбрать сетап',
-        servPreTitle: 'Направления работы',
+        servPreTitle: 'Услуги',
         servTitle: 'Форматы продакшна',
         servSub: 'Понятные готовые процессы для авторов, экспертов и международных команд.',
         tagPodcast: 'Sony FX30/a7c • Shure',
@@ -3583,7 +3591,7 @@
         revTitle: 'Отзывы в Google Maps',
         revMeta: 'подтвержденных отзывов в Google',
         btnAllGoogle: 'Смотреть на картах',
-        calcPreTitle: 'Прозрачный расчет',
+        calcPreTitle: 'Цены',
         calcTitle: 'Калькулятор стоимости сессии',
         calcSub: 'Выберите формат и опции. Детализированная смета сформируется автоматически для подтверждения в WhatsApp.',
         calcStep1: 'Шаг 1 • Формат съемки',
