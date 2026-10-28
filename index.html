@@ -4550,7 +4550,8 @@ Could you please check availability?`
        Чтобы добавить сет: положите фото в images/sets/<группа>/set-NN/ (<префикс>-set-NN-1.webp, -2.webp ...)
        и добавьте запись в PODCAST_SETS / SOCIAL_SETS (count — сколько фото в папке).
        skip — номера фото, которые пока НЕ показываем (сейчас это все вертикальные кадры).
-       Чтобы вернуть фото на сайт, удалите его номер из skip. Сет без видимых фото не выводится. */
+       Чтобы вернуть фото на сайт, удалите его номер из skip. Сет без видимых фото не выводится.
+       lead — номера фото, которые идут первыми. Скрытые (skip) фото показываются только в галерее при клике на фото. */
     const PODCAST_SETS = [
       {
         id: 1,
@@ -4683,8 +4684,9 @@ Could you please check availability?`
       },
       {
         id: 6,
-        count: 7,
+        count: 9,
         skip: [1,2,3,4,5,6,7],
+        lead: [8,9],
         desc: {
           en: 'A pure black backdrop with a white desk, a tan leather lounge chair or an emerald armchair and soft pampas accents. A dramatic, high-contrast look for personal-brand videos, interviews and talking-head Reels.',
           ru: 'Чистый чёрный фон, белый стол, кожаное кресло цвета тан или изумрудное кресло и мягкие акценты из пампасной травы. Драматичный контрастный образ для личного бренда, интервью и Reels.'
@@ -4751,10 +4753,16 @@ Could you please check availability?`
     }
 
     function visiblePhotos(set) {
-      const skip = set.skip || [];
-      const list = [];
-      for (let n = 1; n <= set.count; n++) if (!skip.includes(n)) list.push(n - 1);
+      const skip = set.skip || [], lead = set.lead || [];
+      const list = lead.filter(n => !skip.includes(n)).map(n => n - 1);
+      for (let n = 1; n <= set.count; n++) if (!skip.includes(n) && !lead.includes(n)) list.push(n - 1);
       return list;
+    }
+
+    /* Скрытые в карточке фото (вертикальные): показываем их только в галерее */
+    function hiddenPhotos(set) {
+      const skip = set.skip || [];
+      return skip.filter(n => n >= 1 && n <= set.count).map(n => n - 1);
     }
 
     function renderSetGroup(key) {
@@ -4771,6 +4779,7 @@ Could you please check availability?`
         const sk = key + '-' + set.id;
         const idx = Math.min(socialState[sk] || 0, photos.length - 1);
         const many = photos.length > 1;
+        const extra = hiddenPhotos(set).map(p => setPhotoUrl(g, set, p)).join('|');
         let slides = '';
         photos.forEach((p, i) => {
           const url = setPhotoUrl(g, set, p);
@@ -4785,7 +4794,7 @@ Could you please check availability?`
         const equip = setIncluded(key, lang).map(x => `<li><i class="fa-solid fa-check"></i><span>${x}</span></li>`).join('');
         const wrap = document.createElement('div');
         wrap.innerHTML = `
-          <article class="set-card social-card" data-set="${sk}" data-title="${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}">
+          <article class="set-card social-card" data-set="${sk}" data-extra="${extra}" data-title="${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}">
             <div>
               <div class="social-photo" title="${lang === 'ru' ? 'Открыть галерею' : 'Open gallery'}">${slides}${nav}</div>
               <div class="set-body">
@@ -4888,13 +4897,15 @@ Could you please check availability?`
 
 
     /* ===== Галерея (pop-up) для детального просмотра фото сетапа ===== */
-    const setLb = { urls: [], i: 0, card: null, sx: 0, sy: 0 };
+    const setLb = { urls: [], i: 0, vis: 0, card: null, sx: 0, sy: 0 };
 
     function openSetLightbox(card) {
       const slides = Array.from(card.querySelectorAll('.social-slide'));
       if (!slides.length) return;
       setLb.card = card;
-      setLb.urls = slides.map(sl => sl.getAttribute('data-url'));
+      const extra = (card.getAttribute('data-extra') || '').split('|').filter(Boolean);
+      setLb.urls = slides.map(sl => sl.getAttribute('data-url')).concat(extra);
+      setLb.vis = slides.length;
       setLb.i = Math.max(0, socialCurrent(card));
       const lb = document.getElementById('setLightbox');
       document.getElementById('setLbTitle').textContent = card.getAttribute('data-title') || '';
@@ -4924,7 +4935,7 @@ Could you please check availability?`
       lb.classList.remove('active');
       document.getElementById('setLbImg').removeAttribute('src');
       document.body.style.overflow = '';
-      if (setLb.card) socialGo(setLb.card, setLb.i);   /* карточка показывает тот же кадр, на котором закрыли */
+      if (setLb.card && setLb.i < setLb.vis) socialGo(setLb.card, setLb.i);   /* карточка показывает тот же кадр, на котором закрыли (если он есть в карточке) */
       setLb.card = null;
     }
 
