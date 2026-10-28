@@ -2119,7 +2119,7 @@
 
     /* ===== Social Media Video: карусель сетапов (карточки одной высоты, фото целиком) ===== */
     .social-sets {
-      --social-ratio: 1 / 1;            /* пропорция рамки фото: одинаковая у всех карточек (4 / 3 — шире, 4 / 5 — выше) */
+      --social-ratio: 4 / 3;            /* пропорция рамки фото: одинаковая у всех карточек (4 / 3 — шире, 4 / 5 — выше) */
       grid-column: 1 / -1;
       min-width: 0;
       width: 100%;
@@ -2152,7 +2152,7 @@
       transition: opacity 0.35s ease, visibility 0s linear 0.35s;
     }
     .social-slide.active { opacity: 1; visibility: visible; transition: opacity 0.35s ease, visibility 0s; }
-    .social-slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+    .social-slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; cursor: zoom-in; }
     .social-slide-bg {
       position: absolute;
       inset: -24px;
@@ -2161,6 +2161,29 @@
       object-fit: cover;
       filter: blur(22px) brightness(0.55);
     }
+    .social-photo { cursor: zoom-in; }
+    .social-card .set-cta { min-height: 92px; }
+    .set-equip-title { font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim, #8a8aa0); margin: 4px 0 10px; font-weight: 700; }
+    .set-equip { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+    .set-equip li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.35; color: #d9d9e6; }
+    .set-equip li i { color: var(--flame-orange, #ff440a); font-size: 12px; margin-top: 3px; flex: 0 0 auto; }
+
+    /* Галерея (pop-up) */
+    .set-lightbox {
+      position: fixed; inset: 0; z-index: 10002;
+      background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(16px);
+      display: none; flex-direction: column; padding: 16px 20px 20px; gap: 12px;
+    }
+    .set-lightbox.active { display: flex; }
+    .set-lb-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex: 0 0 auto; }
+    .set-lb-info { color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: baseline; gap: 12px; }
+    .set-lb-count { color: var(--text-muted); font-weight: 500; font-size: 13px; }
+    .set-lb-stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+    .set-lb-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 14px; box-shadow: 0 20px 70px rgba(0,0,0,.9); user-select: none; -webkit-user-drag: none; }
+    .set-lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; z-index: 2; }
+    .set-lb-prev { left: 4px; }
+    .set-lb-next { right: 4px; }
+    @media (max-width: 640px) { .set-lightbox { padding: 12px 12px 16px; } .set-lb-nav { width: 40px; height: 40px; } }
     .social-photo .gallery-dots { gap: 8px; padding: 6px 12px; }
     .social-photo .gallery-dot { width: 8px; height: 8px; }
     .sets-carousel-nav { margin-left: auto; display: none; }
@@ -3400,6 +3423,21 @@
     </footer>
   </div>
 
+  <!-- SET PHOTO LIGHTBOX -->
+  <div id="setLightbox" class="set-lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
+    <div class="set-lb-bar">
+      <div class="set-lb-info"><span id="setLbTitle"></span><span id="setLbCount" class="set-lb-count"></span></div>
+      <button type="button" id="setLbClose" class="modal-bar-btn" onclick="closeSetLightbox()" aria-label="Close">
+        <span data-i18n="vidClose">Close</span> <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="set-lb-stage">
+      <button type="button" id="setLbPrev" class="gallery-nav-btn set-lb-nav set-lb-prev" onclick="setLbShow(-1)" aria-label="Previous photo"><i class="fa-solid fa-chevron-left"></i></button>
+      <img id="setLbImg" class="set-lb-img" alt="">
+      <button type="button" id="setLbNext" class="gallery-nav-btn set-lb-nav set-lb-next" onclick="setLbShow(1)" aria-label="Next photo"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
+
   <!-- VIDEO MODAL LIGHTBOX -->
   <div id="videoModal" class="video-modal" onclick="closeVideoModal(event)">
     <div class="video-modal-bar" onclick="event.stopPropagation()">
@@ -4510,11 +4548,14 @@ Could you please check availability?`
 
     /* ===== Карусели сетапов (Podcasts, Social Media Video) =====
        Чтобы добавить сет: положите фото в images/sets/<группа>/set-NN/ (<префикс>-set-NN-1.webp, -2.webp ...)
-       и добавьте запись в PODCAST_SETS / SOCIAL_SETS (count — сколько фото в папке). */
+       и добавьте запись в PODCAST_SETS / SOCIAL_SETS (count — сколько фото в папке).
+       skip — номера фото, которые пока НЕ показываем (сейчас это все вертикальные кадры).
+       Чтобы вернуть фото на сайт, удалите его номер из skip. Сет без видимых фото не выводится. */
     const PODCAST_SETS = [
       {
         id: 1,
         count: 10,
+        skip: [8,9,10],
         desc: {
           en: 'A podcast set built for conversations: professional Shure microphones, soft studio lighting and several camera angles for a polished multi-cam episode.',
           ru: 'Сет для разговорных форматов: профессиональные микрофоны Shure, мягкий студийный свет и несколько ракурсов для качественного мультикамерного выпуска.'
@@ -4532,6 +4573,7 @@ Could you please check availability?`
       {
         id: 2,
         count: 7,
+        skip: [6,7],
         desc: {
           en: 'A second podcast set with a different look and feel: pro audio, balanced lighting and multi-cam angles, ready for interviews, shows and guest episodes.',
           ru: 'Второй подкаст-сет с другой атмосферой: профессиональный звук, сбалансированный свет и мультикамера для интервью, шоу и выпусков с гостями.'
@@ -4552,6 +4594,7 @@ Could you please check availability?`
       {
         id: 1,
         count: 6,
+        skip: [2,3,4,5,6],
         desc: {
           en: 'Graphite walls, a clean white desk and warm amber shelf lighting. A calm, premium backdrop for expert talks, interviews and talking-head Reels.',
           ru: 'Графитовые стены, чистый белый стол и тёплая янтарная подсветка полок. Спокойный премиальный фон для экспертных разговоров, интервью и Reels.'
@@ -4569,6 +4612,7 @@ Could you please check availability?`
       {
         id: 2,
         count: 6,
+        skip: [4,6],
         desc: {
           en: 'A warm terracotta wood-slat wall, a black leather chair and a Shure microphone on a boom arm. A cozy, high-contrast backdrop for podcasts, interviews and expert Reels.',
           ru: 'Тёплая стена из деревянных реек цвета терракоты, чёрное кожаное кресло и микрофон Shure на пантографе. Уютный контрастный фон для подкастов, интервью и экспертных Reels.'
@@ -4586,6 +4630,7 @@ Could you please check availability?`
       {
         id: 3,
         count: 4,
+        skip: [3],
         desc: {
           en: 'An orange wood-slat accent wall paired with a soft beige wall, black metal shelving with gold details and a boom-arm Shure microphone. A bright, warm look for interviews and talking-head content.',
           ru: 'Оранжевая реечная акцентная стена в сочетании с мягкой бежевой, чёрные металлические полки с золотым декором и микрофон Shure на пантографе. Светлый тёплый образ для интервью и говорящей головы.'
@@ -4603,6 +4648,7 @@ Could you please check availability?`
       {
         id: 4,
         count: 7,
+        skip: [],
         desc: {
           en: 'A textured light wall with color-changing light: warm amber, deep blue, violet or neutral white. A black leather chair and a desk microphone make a clean frame for brand videos, interviews and talking-head Reels.',
           ru: 'Светлая фактурная стена со сменным цветом света: тёплый янтарный, глубокий синий, фиолетовый или нейтральный белый. Чёрное кожаное кресло и настольный микрофон дают чистый кадр для брендовых видео, интервью и Reels.'
@@ -4620,6 +4666,7 @@ Could you please check availability?`
       {
         id: 5,
         count: 6,
+        skip: [1,2,3,4,5],
         desc: {
           en: 'An emerald velvet armchair with a mustard cushion, a warm amber floor lamp and a bookshelf with soft candle light. A cozy lounge look for conversational podcasts, interviews and Reels.',
           ru: 'Изумрудное бархатное кресло с горчичной подушкой, тёплый янтарный торшер и стеллаж с мягким светом свечей. Уютный лаунж-образ для разговорных подкастов, интервью и Reels.'
@@ -4637,6 +4684,7 @@ Could you please check availability?`
       {
         id: 6,
         count: 7,
+        skip: [1,2,3,4,5,6,7],
         desc: {
           en: 'A pure black backdrop with a white desk, a tan leather lounge chair or an emerald armchair and soft pampas accents. A dramatic, high-contrast look for personal-brand videos, interviews and talking-head Reels.',
           ru: 'Чистый чёрный фон, белый стол, кожаное кресло цвета тан или изумрудное кресло и мягкие акценты из пампасной травы. Драматичный контрастный образ для личного бренда, интервью и Reels.'
@@ -4657,6 +4705,7 @@ Could you please check availability?`
       {
         id: 1,
         count: 5,
+        skip: [3,4,5],
         desc: {
           en: 'A studio set for webinars and live broadcasts: stable 80–90 Mbps fiber internet, multi-cam switching and a live director for a turnkey stream.',
           ru: 'Студийный сет для вебинаров и прямых эфиров: стабильный оптоволоконный интернет 80–90 Мбит/с, мультикамерная коммутация и режиссёр эфира для трансляции «под ключ».'
@@ -4695,6 +4744,19 @@ Could you please check availability?`
       });
     }
 
+    /* Что входит в стоимость — берём из тарифов калькулятора (единый источник данных) */
+    function setIncluded(key, lang) {
+      const svc = (typeof CALC_SERVICES !== 'undefined') ? CALC_SERVICES[SET_GROUPS[key].calc] : null;
+      return (svc && svc.included && svc.included[lang]) || [];
+    }
+
+    function visiblePhotos(set) {
+      const skip = set.skip || [];
+      const list = [];
+      for (let n = 1; n <= set.count; n++) if (!skip.includes(n)) list.push(n - 1);
+      return list;
+    }
+
     function renderSetGroup(key) {
       const g = SET_GROUPS[key];
       const box = document.getElementById(g.box);
@@ -4704,30 +4766,32 @@ Could you please check availability?`
       const keepScroll = box.scrollLeft;
       box.textContent = '';
       g.sets.forEach(set => {
+        const photos = visiblePhotos(set);
+        if (!photos.length) return;
         const sk = key + '-' + set.id;
-        const idx = Math.min(socialState[sk] || 0, set.count - 1);
-        const many = set.count > 1;
+        const idx = Math.min(socialState[sk] || 0, photos.length - 1);
+        const many = photos.length > 1;
         let slides = '';
-        for (let i = 0; i < set.count; i++) {
-          const url = setPhotoUrl(g, set, i);
-          slides += `<div class="social-slide${i === idx ? ' active' : ''}"><img class="social-slide-bg" data-src="${url}" alt="" aria-hidden="true" loading="lazy" decoding="async"><img class="social-slide-img" data-src="${url}" alt="${set.alt[lang]} — ${i + 1}/${set.count}" loading="lazy" decoding="async"></div>`;
-        }
+        photos.forEach((p, i) => {
+          const url = setPhotoUrl(g, set, p);
+          slides += `<div class="social-slide${i === idx ? ' active' : ''}" data-url="${url}"><img class="social-slide-img" data-src="${url}" alt="${set.alt[lang]} — ${i + 1}/${photos.length}" loading="lazy" decoding="async"></div>`;
+        });
         let dots = '';
-        for (let i = 0; i < set.count; i++) dots += `<span class="gallery-dot${i === idx ? ' active' : ''}" data-idx="${i}"></span>`;
+        for (let i = 0; i < photos.length; i++) dots += `<span class="gallery-dot${i === idx ? ' active' : ''}" data-idx="${i}"></span>`;
         const nav = many ? `
               <button type="button" class="gallery-nav-btn gallery-nav-prev social-nav" data-dir="-1" aria-label="Previous photo"><i class="fa-solid fa-chevron-left"></i></button>
               <button type="button" class="gallery-nav-btn gallery-nav-next social-nav" data-dir="1" aria-label="Next photo"><i class="fa-solid fa-chevron-right"></i></button>
               <div class="gallery-dots">${dots}</div>` : '';
-        const chips = set.chips[lang].map(c => `<span class="set-spec-chip">${c}</span>`).join('');
+        const equip = setIncluded(key, lang).map(x => `<li><i class="fa-solid fa-check"></i><span>${x}</span></li>`).join('');
         const wrap = document.createElement('div');
         wrap.innerHTML = `
-          <article class="set-card social-card" data-set="${sk}">
+          <article class="set-card social-card" data-set="${sk}" data-title="${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}">
             <div>
-              <div class="social-photo">${slides}${nav}</div>
+              <div class="social-photo" title="${lang === 'ru' ? 'Открыть галерею' : 'Open gallery'}">${slides}${nav}</div>
               <div class="set-body">
                 <h3 class="set-title">${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}</h3>
-                <p class="set-desc">${set.desc[lang]}</p>
-                <div class="set-specs">${chips}</div>
+                <div class="set-equip-title">${lang === 'ru' ? 'Что входит' : 'Included'}</div>
+                <ul class="set-equip">${equip}</ul>
               </div>
             </div>
             <div class="set-cta">
@@ -4801,7 +4865,8 @@ Could you please check availability?`
           const nav = e.target.closest('.social-nav');
           if (nav) { socialGo(card, socialCurrent(card) + parseInt(nav.getAttribute('data-dir'), 10)); return; }
           const dot = e.target.closest('.gallery-dot');
-          if (dot) socialGo(card, parseInt(dot.getAttribute('data-idx'), 10));
+          if (dot) { socialGo(card, parseInt(dot.getAttribute('data-idx'), 10)); return; }
+          if (e.target.closest('.social-photo')) openSetLightbox(card);
         });
         /* свайп по фото внутри карточки */
         box.addEventListener('touchstart', (e) => {
@@ -4820,6 +4885,65 @@ Could you please check availability?`
       });
       window.addEventListener('resize', updateSocialNav);
     }
+
+
+    /* ===== Галерея (pop-up) для детального просмотра фото сетапа ===== */
+    const setLb = { urls: [], i: 0, card: null, sx: 0, sy: 0 };
+
+    function openSetLightbox(card) {
+      const slides = Array.from(card.querySelectorAll('.social-slide'));
+      if (!slides.length) return;
+      setLb.card = card;
+      setLb.urls = slides.map(sl => sl.getAttribute('data-url'));
+      setLb.i = Math.max(0, socialCurrent(card));
+      const lb = document.getElementById('setLightbox');
+      document.getElementById('setLbTitle').textContent = card.getAttribute('data-title') || '';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setLbShow(0);
+      document.getElementById('setLbClose').focus({ preventScroll: true });
+    }
+
+    function setLbShow(delta) {
+      const n = setLb.urls.length;
+      if (!n) return;
+      setLb.i = (setLb.i + delta + n) % n;
+      const img = document.getElementById('setLbImg');
+      img.src = setLb.urls[setLb.i];
+      document.getElementById('setLbCount').textContent = (setLb.i + 1) + ' / ' + n;
+      const multi = n > 1;
+      document.getElementById('setLbPrev').style.display = multi ? '' : 'none';
+      document.getElementById('setLbNext').style.display = multi ? '' : 'none';
+      /* подгружаем соседние кадры */
+      [1, -1].forEach(d => { const im = new Image(); im.src = setLb.urls[(setLb.i + d + n) % n]; });
+    }
+
+    function closeSetLightbox() {
+      const lb = document.getElementById('setLightbox');
+      if (!lb || !lb.classList.contains('active')) return;
+      lb.classList.remove('active');
+      document.getElementById('setLbImg').removeAttribute('src');
+      document.body.style.overflow = '';
+      if (setLb.card) socialGo(setLb.card, setLb.i);   /* карточка показывает тот же кадр, на котором закрыли */
+      setLb.card = null;
+    }
+
+    (function initSetLightbox() {
+      const lb = document.getElementById('setLightbox');
+      if (!lb) return;
+      lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('set-lb-stage')) closeSetLightbox(); });
+      lb.addEventListener('touchstart', (e) => { setLb.sx = e.touches[0].clientX; setLb.sy = e.touches[0].clientY; }, { passive: true });
+      lb.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - setLb.sx, dy = e.changedTouches[0].clientY - setLb.sy;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) setLbShow(dx < 0 ? 1 : -1);
+      }, { passive: true });
+      document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('active')) return;
+        if (e.key === 'Escape') closeSetLightbox();
+        else if (e.key === 'ArrowRight') setLbShow(1);
+        else if (e.key === 'ArrowLeft') setLbShow(-1);
+      });
+    })();
 
     /* ===== Нижняя панель на мобильных ===== */
     function scrollToBill() {
