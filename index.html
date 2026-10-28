@@ -677,7 +677,9 @@
 
     .hero-content-wrap {
       max-width: 650px;
+      min-width: 0;
     }
+    .hero-grid > * { min-width: 0; }
 
     .hero-badge-row {
       display: flex;
@@ -1912,10 +1914,29 @@
       display: none;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      gap: 14px;
       padding: 24px;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+    .video-modal-bar {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-bar-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 44px; padding: 0 18px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      color: #fff; font: 600 14px/1 var(--font-body, inherit);
+      cursor: pointer; transition: background .2s ease;
+    }
+    .modal-bar-btn:hover { background: var(--flame-orange); }
 
     .video-modal.active { display: flex; opacity: 1; }
 
@@ -1933,25 +1954,6 @@
 
     .video-modal-content iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-    .modal-close-btn {
-      position: absolute;
-      top: -46px;
-      right: 0;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 50%;
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .modal-close-btn:hover { background: var(--flame-orange); }
 
 
     /* Калькулятор: новые элементы */
@@ -2617,6 +2619,114 @@
           </div>
 
           <div class="portfolio-carousel-track" id="portfolioTrack">
+            <div class="video-card" onclick="openVideoModal('djUCCRWOqvs')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/djUCCRWOqvs/hqdefault.jpg" alt="Le développement personnel, source de trauma ?" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">Le développement personnel, source de trauma ?</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('fn4LCngSwcQ')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/fn4LCngSwcQ/hqdefault.jpg" alt="How to Build a High-Value Network Fast" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">How to Build a High-Value Network Fast</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('GPrFT048ifY')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/GPrFT048ifY/hqdefault.jpg" alt="Les erreurs à ne pas faire pour bien recruter" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">Les erreurs à ne pas faire pour bien recruter</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('V2atQC2BOsw')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/V2atQC2BOsw/hqdefault.jpg" alt="Comment rendre vos clients accros à votre produit ?" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">Comment rendre vos clients accros à votre produit ?</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('Kl2JzNpigUQ')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/Kl2JzNpigUQ/hqdefault.jpg" alt="Почему английский такой? Вся история языка" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">Почему английский такой? Вся история языка</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('lMDYx5YJVX0')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/lMDYx5YJVX0/hqdefault.jpg" alt="Ex-Military Cop: Why I Quit Partying, Found God in Bali" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
+                  <h3 class="video-title">Ex-Military Cop: Why I Quit Partying, Found God in Bali</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
+                </div>
+              </div>
+            </div>
+
             <div class="video-card" onclick="openVideoModal('GuUftSGhDi0')">
               <div class="video-thumb-box">
                 <img src="https://img.youtube.com/vi/GuUftSGhDi0/hqdefault.jpg" alt="Studio Multi-Cam Interview" class="video-thumb-img" loading="lazy">
@@ -2628,24 +2738,6 @@
                 <div>
                   <span class="video-tag" data-i18n="vidCat1">Podcast Episode</span>
                   <h3 class="video-title" data-i18n="vidTitle1">Studio Multi-Cam Interview</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="video-card" onclick="openVideoModal('1CEfuJemTmM')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/1CEfuJemTmM/hqdefault.jpg" alt="Business & Mindset Dialogue" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCat2">Podcast Production</span>
-                  <h3 class="video-title" data-i18n="vidTitle2">Business & Mindset Dialogue</h3>
                 </div>
                 <div class="video-card-footer">
                   <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatch">Watch Episode</span>
@@ -3310,10 +3402,15 @@
 
   <!-- VIDEO MODAL LIGHTBOX -->
   <div id="videoModal" class="video-modal" onclick="closeVideoModal(event)">
-    <div class="video-modal-content" onclick="event.stopPropagation()">
-      <button type="button" class="modal-close-btn" onclick="closeVideoModal()" aria-label="Close">
-        <i class="fa-solid fa-xmark"></i>
+    <div class="video-modal-bar" onclick="event.stopPropagation()">
+      <button type="button" class="modal-bar-btn" onclick="closeVideoModal()">
+        <i class="fa-solid fa-arrow-left"></i> <span data-i18n="vidBack">Back</span>
       </button>
+      <button type="button" class="modal-bar-btn modal-bar-close" onclick="closeVideoModal()" aria-label="Close">
+        <span data-i18n="vidClose">Close</span> <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="video-modal-content" onclick="event.stopPropagation()">
       <div id="modalPlayerSlot" style="width: 100%; height: 100%;"></div>
     </div>
   </div>
@@ -3366,10 +3463,10 @@
         portTitle: 'Featured Episodes & Projects',
         portSub: 'Real multi-camera broadcasts, podcasts, and short-form assets filmed and graded at Icon Media Studio.',
         vidWatch: 'Watch Episode',
+        vidBack: 'Back',
+        vidClose: 'Close',
         vidCat1: 'Podcast Episode',
         vidTitle1: 'Studio Multi-Cam Interview',
-        vidCat2: 'Podcast Production',
-        vidTitle2: 'Business & Mindset Dialogue',
         vidCat3: 'Podcast & Discussion',
         vidTitle3: 'Expert Talk & Life in Bali',
         vidCat4: 'Creator Content',
@@ -3528,10 +3625,10 @@
         portTitle: 'Шоурил и примеры проектов',
         portSub: 'Реальные подкасты, экспертные шоу и вертикальные форматы, записанные и покрашенные в Icon Media Studio.',
         vidWatch: 'Смотреть выпуск',
+        vidBack: 'Назад',
+        vidClose: 'Закрыть',
         vidCat1: 'Выпуск подкаста',
         vidTitle1: 'Многокамерное интервью в студии',
-        vidCat2: 'Запись подкаста',
-        vidTitle2: 'Бизнес-диалог и мышление',
         vidCat3: 'Подкаст и дискуссия',
         vidTitle3: 'Экспертный диалог и жизнь на Бали',
         vidCat4: 'Контент эксперта',
@@ -3907,7 +4004,7 @@
           en: ['Studio', '3 cameras', 'Videographer', 'Professional podcast microphones'],
           ru: ['Студия', '3 камеры', 'Видеограф', 'Профессиональные подкаст-микрофоны']
         },
-        addons: ['cams'], edit: 'podcast'
+        addons: [], edit: 'podcast'
       },
       social: {
         name: { en: 'Social media', ru: 'Видео для соцсетей' },
@@ -4071,7 +4168,7 @@
           <span class="addon-price">${priceText}</span>
         </label>`;
 
-      html += `<div class="addon-group-title">${t.groupEquip}</div>`;
+      if (svc.addons.length) html += `<div class="addon-group-title">${t.groupEquip}</div>`;
 
       if (svc.addons.includes('cams')) {
         html += `
