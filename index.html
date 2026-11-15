@@ -608,6 +608,31 @@
       line-height: 1.6;
     }
 
+    /* ON-LOCATION PRODUCTION */
+    .onloc-section { padding: 70px 0 20px; }
+    .onloc-card {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
+      padding: 44px; border-radius: 28px;
+      background: linear-gradient(135deg, rgba(255,68,10,0.10), rgba(18,18,25,0.7) 55%);
+      border: 1px solid var(--border-light);
+    }
+    .onloc-text { min-width: 0; }
+    .onloc-text .section-subtext { max-width: 560px; margin-top: 14px; }
+    .onloc-btn { margin-top: 26px; display: inline-flex; }
+    .onloc-list { list-style: none; display: grid; gap: 12px; min-width: 0; }
+    .onloc-list li {
+      display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 16px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+      font-weight: 600; font-size: 15px; color: var(--text-main);
+    }
+    .onloc-list i { color: var(--flame-orange); width: 22px; text-align: center; font-size: 17px; }
+    @media (max-width: 992px) { .onloc-card { grid-template-columns: 1fr; padding: 32px 24px; gap: 26px; } }
+    @media (max-width: 520px) {
+      .onloc-section { padding-top: 50px; }
+      .onloc-card { padding: 26px 18px; border-radius: 22px; }
+      .onloc-btn { width: 100%; justify-content: center; }
+    }
+
     /* 1. HERO SECTION */
     .hero-section {
       position: relative;
@@ -1283,6 +1308,10 @@
       gap: 22px;
       margin-top: 36px;
     }
+
+
+    .equip-grid--4 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    @media (max-width: 1180px) { .equip-grid--4 { grid-template-columns: repeat(2, 1fr); } }
 
     .equip-card {
       background: var(--bg-card);
@@ -2483,9 +2512,9 @@
 
       <!-- Десктопное меню -->
       <ul class="nav-list">
-        <li><a href="#sets" data-i18n="navSets">Studio Sets</a></li>
         <li><a href="#portfolio" data-i18n="navPortfolio">Showreel</a></li>
-        <li><a href="#services" data-i18n="navServices">Services</a></li>
+        <li><a href="#sets" data-i18n="navSets">Studio Sets</a></li>
+        <li><a href="#on-location" data-i18n="navOnloc">On-Location</a></li>
         <li><a href="#calculator" data-i18n="navCalc">Pricing</a></li>
       </ul>
 
@@ -2520,9 +2549,9 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
     <ul class="mobile-nav-links">
-      <li><a href="#sets" onclick="closeMobileMenu()" data-i18n="navSets">Studio Sets <i class="fa-solid fa-arrow-right"></i></a></li>
       <li><a href="#portfolio" onclick="closeMobileMenu()" data-i18n="navPortfolio">Showreel <i class="fa-solid fa-arrow-right"></i></a></li>
-      <li><a href="#services" onclick="closeMobileMenu()" data-i18n="navServices">Services <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#sets" onclick="closeMobileMenu()" data-i18n="navSets">Studio Sets <i class="fa-solid fa-arrow-right"></i></a></li>
+      <li><a href="#on-location" onclick="closeMobileMenu()" data-i18n="navOnloc">On-Location <i class="fa-solid fa-arrow-right"></i></a></li>
       <li><a href="#calculator" onclick="closeMobileMenu()" data-i18n="navCalc">Pricing <i class="fa-solid fa-arrow-right"></i></a></li>
       <li><a href="#faq" onclick="closeMobileMenu()" data-i18n="navFaq">FAQ <i class="fa-solid fa-arrow-right"></i></a></li>
     </ul>
@@ -2821,6 +2850,178 @@
                 </div>
               </div>
             </div>
+            <div class="video-card" onclick="openVideoModal('mfac55IpYsI')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/mfac55IpYsI/hqdefault.jpg" alt="Where to Relax in Bali? Pandawa Residence Villas" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle11">Where to Relax in Bali? Pandawa Residence Villas</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('tJMl3Luq37w')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/tJMl3Luq37w/hqdefault.jpg" alt="Why Bali? And why now?" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle12">Why Bali? And why now?</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('2fXh_9Ta-7c')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/2fXh_9Ta-7c/hqdefault.jpg" alt="Real Estate Development in Bali: Inside the Meliora Project" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle13">Real Estate Development in Bali: Inside the Meliora Project</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('3GM6Sh2a334')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/3GM6Sh2a334/hqdefault.jpg" alt="ETCH — DJ Mix from Bali, Nuanu" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
+                  <h3 class="video-title" data-i18n="vidTitle14">ETCH — DJ Mix from Bali, Nuanu</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('x93VSZD-Tig')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/x93VSZD-Tig/hqdefault.jpg" alt="Ann Epi — Sunset Vocal DJ Mix, Nuanu" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
+                  <h3 class="video-title" data-i18n="vidTitle15">Ann Epi — Sunset Vocal DJ Mix, Nuanu</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('AXEmBljeAAE')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/AXEmBljeAAE/hqdefault.jpg" alt="MELIORA — Beyond the Renders" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle16">MELIORA — Beyond the Renders</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. INFRASTRUCTURE & AMENITIES -->
+      <section class="infra-section" id="infra">
+        <div class="container">
+          
+          <div>
+            <span class="section-eyebrow" data-i18n="benPreTitle">Creator Experience</span>
+            <h2 class="section-heading" data-i18n="benTitle">You create. We handle the rest</h2>
+          </div>
+
+          <div class="infra-grid">
+            <div class="infra-card">
+              <div class="infra-photo-header">
+                <img src="images/creator/creator-experience-1.webp" alt="Podcast recording at Icon Media Studio: guest at the desk with Shure microphone, softbox lighting and teleprompter" loading="lazy" decoding="async">
+              </div>
+              <div class="infra-inner-body">
+                <div>
+                  <h3 data-i18n="ben1Title">Professional Shooting. Tailored to Your Style</h3>
+                  <p data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="infra-card">
+              <div class="infra-photo-header">
+                <img src="images/creator/creator-experience-2.webp" alt="Icon Media Studio podcast set ready for recording" loading="lazy" decoding="async">
+              </div>
+              <div class="infra-inner-body">
+                <div>
+                  <h3 data-i18n="ben2Title">Ready Before You Arrive</h3>
+                  <p data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="infra-card">
+              <div class="infra-photo-header">
+                <img src="images/site/lounge-waiting-area.webp" alt="Icon Media Studio Chill Lounge and Waiting Area" loading="lazy">
+              </div>
+              <div class="infra-inner-body">
+                <div>
+                  <h3 data-i18n="ben3Title">Come Early. Feel Comfortable</h3>
+                  <p data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="infra-card">
+              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
+                <div>
+                  <i class="fa-solid fa-wifi" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
+                  <h3 data-i18n="ben4Title">Reliable High-Speed Internet</h3>
+                  <p data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="infra-card">
+              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
+                <div>
+                  <i class="fa-solid fa-location-dot" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
+                  <h3 data-i18n="ben5Title">Easy to Reach</h3>
+                  <p data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu</p>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -2870,7 +3071,7 @@
       </section>
 
       <!-- 4. SERVICES -->
-      <section class="services-section" id="services">
+      <section class="services-section" id="services" hidden style="display:none">
         <div class="container">
           
           <div>
@@ -2964,7 +3165,7 @@
             </p>
           </div>
 
-          <div class="equip-grid">
+          <div class="equip-grid equip-grid--4">
             <div class="equip-card">
               <div class="equip-photo-header">
                 <img src="images/site/sony-cinema-line.webp" alt="Sony FX30 a7c Camera Icon Media" loading="lazy">
@@ -2998,9 +3199,21 @@
               <div class="equip-inner-content">
                 <div>
                   <h3 class="equip-title" data-i18n="eqDeskTitle">Rode Caster Pro & DJI Mic 2</h3>
-                  <p class="equip-desc" data-i18n="eqDeskTitle">Separate ISO audio track recording, live sound pads, Bluetooth phone call integration, and 32-bit float wireless lavaliers.</p>
+                  <p class="equip-desc" data-i18n="eqDeskDesc">Separate ISO audio track recording, live sound pads, Bluetooth phone call integration, and 32-bit float wireless lavaliers.</p>
                 </div>
                 <span class="equip-tag">Multitrack ISO Audio</span>
+              </div>
+            </div>
+            <div class="equip-card">
+              <div class="equip-photo-header">
+                <img src="images/site/teleprompter.webp" alt="Neewer teleprompter with tablet on a tripod at Icon Media Studio" loading="lazy">
+              </div>
+              <div class="equip-inner-content">
+                <div>
+                  <h3 class="equip-title" data-i18n="eqPromptTitle">Neewer Teleprompter</h3>
+                  <p class="equip-desc" data-i18n="eqPromptDesc">Read your script while looking straight into the lens. A professional teleprompter with a tablet keeps natural eye contact for course videos, reels and expert talks.</p>
+                </div>
+                <span class="equip-tag" data-i18n="eqPromptTag">Eye Contact with Camera</span>
               </div>
             </div>
           </div>
@@ -3008,73 +3221,23 @@
         </div>
       </section>
 
-      <!-- 6. INFRASTRUCTURE & AMENITIES -->
-      <section class="infra-section" id="infra">
+      <!-- 6b. ON-LOCATION PRODUCTION -->
+      <section class="onloc-section" id="on-location">
         <div class="container">
-          
-          <div>
-            <span class="section-eyebrow" data-i18n="benPreTitle">Creator Experience</span>
-            <h2 class="section-heading" data-i18n="benTitle">You create. We handle the rest</h2>
+          <div class="onloc-card">
+            <div class="onloc-text">
+              <span class="section-eyebrow" data-i18n="onlocPre">On-Location Production</span>
+              <h2 class="section-heading" data-i18n="onlocTitle">We bring the production to you.</h2>
+              <p class="section-subtext" data-i18n="onlocText">From corporate events, brand launches and weddings to real estate and commercial projects, our professional production team brings everything needed to capture your story on location — wherever it happens.</p>
+              <a href="https://wa.me/6282314734072?text=Hello%2C%20I%20would%20like%20to%20discuss%20an%20on-location%20production" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-orange onloc-btn" data-i18n="onlocBtn">Discuss your project</a>
+            </div>
+            <ul class="onloc-list">
+              <li><i class="fa-solid fa-building"></i><span data-i18n="onlocI1">Corporate events</span></li>
+              <li><i class="fa-solid fa-rocket"></i><span data-i18n="onlocI2">Brand launches</span></li>
+              <li><i class="fa-solid fa-ring"></i><span data-i18n="onlocI3">Weddings</span></li>
+              <li><i class="fa-solid fa-house"></i><span data-i18n="onlocI4">Real estate &amp; commercial</span></li>
+            </ul>
           </div>
-
-          <div class="infra-grid">
-            <div class="infra-card">
-              <div class="infra-photo-header">
-                <img src="images/creator/creator-experience-1.webp" alt="Podcast recording at Icon Media Studio: guest at the desk with Shure microphone, softbox lighting and teleprompter" loading="lazy" decoding="async">
-              </div>
-              <div class="infra-inner-body">
-                <div>
-                  <h3 data-i18n="ben1Title">Professional Shooting. Tailored to Your Style</h3>
-                  <p data-i18n="ben1Desc">Professional cameras, sound and lighting, all tailored specifically to your content and the visual style you want to achieve</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="infra-card">
-              <div class="infra-photo-header">
-                <img src="images/creator/creator-experience-2.webp" alt="Icon Media Studio podcast set ready for recording" loading="lazy" decoding="async">
-              </div>
-              <div class="infra-inner-body">
-                <div>
-                  <h3 data-i18n="ben2Title">Ready Before You Arrive</h3>
-                  <p data-i18n="ben2Desc">Your setup is prepared 30 minutes before your session — cameras, lighting and sound are ready when you walk in</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="infra-card">
-              <div class="infra-photo-header">
-                <img src="images/site/lounge-waiting-area.webp" alt="Icon Media Studio Chill Lounge and Waiting Area" loading="lazy">
-              </div>
-              <div class="infra-inner-body">
-                <div>
-                  <h3 data-i18n="ben3Title">Come Early. Feel Comfortable</h3>
-                  <p data-i18n="ben3Desc">Arrive a little early, relax in our waiting area and get ready for your shoot. Enjoy a drink and use our dedicated makeup area and clothing racks</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="infra-card">
-              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
-                <div>
-                  <i class="fa-solid fa-wifi" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
-                  <h3 data-i18n="ben4Title">Reliable High-Speed Internet</h3>
-                  <p data-i18n="ben4Desc">With a stable 80–90 Mbps connection, you can confidently host livestreams, webinars, online meetings and other internet-based content</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="infra-card">
-              <div class="infra-inner-body" style="height: 100%; padding-top: 24px;">
-                <div>
-                  <i class="fa-solid fa-location-dot" style="font-size: 38px; color: var(--flame-orange); margin-bottom: 16px;"></i>
-                  <h3 data-i18n="ben5Title">Easy to Reach</h3>
-                  <p data-i18n="ben5Desc">Conveniently located just 15–20 minutes by car from Kuta, Seminyak and Canggu</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
@@ -3382,9 +3545,9 @@
           <div>
             <h5 data-i18n="footerColServices">Navigation</h5>
             <ul class="footer-links">
-              <li><a href="#sets" data-i18n="fLinkSets">Studio Sets</a></li>
               <li><a href="#portfolio" data-i18n="fLinkWork">Showreel</a></li>
-              <li><a href="#services" data-i18n="fLinkServices">Services</a></li>
+              <li><a href="#sets" data-i18n="fLinkSets">Studio Sets</a></li>
+              <li><a href="#on-location" data-i18n="navOnloc">On-Location</a></li>
               <li><a href="#calculator" data-i18n="fLinkPricing">Pricing Engine</a></li>
               <li><a href="#location" data-i18n="fLinkLocation">Location</a></li>
             </ul>
@@ -3457,6 +3620,15 @@
     const i18n = {
       en: {
         navServices: 'Services',
+        navOnloc: 'On-Location',
+        onlocPre: 'On-Location Production',
+        onlocTitle: 'We bring the production to you.',
+        onlocText: 'From corporate events, brand launches and weddings to real estate and commercial projects, our professional production team brings everything needed to capture your story on location — wherever it happens.',
+        onlocBtn: 'Discuss your project',
+        onlocI1: 'Corporate events',
+        onlocI2: 'Brand launches',
+        onlocI3: 'Weddings',
+        onlocI4: 'Real estate & commercial',
         navSets: 'Studio Sets',
         navPortfolio: 'Showreel',
         navCalc: 'Pricing',
@@ -3511,6 +3683,15 @@
         vidTitle4: 'Deep Dive Storytelling',
         vidCat7: 'Podcast Interview',
         vidTitle7: 'Founder Insights & Strategy',
+        vidCatRE: 'Real Estate Film',
+        vidCatDJ: 'DJ Set',
+        vidWatchVideo: 'Watch Video',
+        vidTitle11: 'Where to Relax in Bali? Pandawa Residence Villas',
+        vidTitle12: 'Why Bali? And why now?',
+        vidTitle13: 'Real Estate Development in Bali: Inside the Meliora Project',
+        vidTitle14: 'ETCH — DJ Mix from Bali, Nuanu',
+        vidTitle15: 'Ann Epi — Sunset Vocal DJ Mix, Nuanu',
+        vidTitle16: 'MELIORA — Beyond the Renders',
         setsPreTitle: 'Studio Sets',
         setsTitle: 'Studio Sets & Environments',
         setsSub: 'Explore customizable backdrops, lighting schemes, and multi-cam angles pre-configured for your format.',
@@ -3546,6 +3727,9 @@
         eqMicDesc: 'Professional 2 Godox SL60 Softboxes, Godox TL60 4-LED RGB Tube Light kit, 1 Light Stand Tripod, and Neewer Teleprompter.',
         eqDeskTitle: 'Rode Caster Pro & DJI Mic 2',
         eqDeskDesc: 'Professional audio suite featuring 2 Shure microphones, Rode Caster Pro audio console, and DJI mic wireless system for pristine sound.',
+        eqPromptTitle: 'Neewer Teleprompter',
+        eqPromptDesc: 'Read your script while looking straight into the lens. A professional teleprompter with a tablet keeps natural eye contact for course videos, reels and expert talks.',
+        eqPromptTag: 'Eye Contact with Camera',
         infraPreTitle: 'Studio Environment',
         infraTitle: 'Designed for Focus & Hospitality',
         loungeTitle: 'Lounge & Refreshment Bar',
@@ -3619,6 +3803,15 @@
       },
       ru: {
         navServices: 'Услуги',
+        navOnloc: 'Выезд',
+        onlocPre: 'Выездной продакшн',
+        onlocTitle: 'Привозим продакшн к вам.',
+        onlocText: 'От корпоративных мероприятий, запусков брендов и свадеб до недвижимости и коммерческих проектов: наша профессиональная команда привезёт всё необходимое, чтобы снять вашу историю на локации, где бы она ни происходила.',
+        onlocBtn: 'Обсудить проект',
+        onlocI1: 'Корпоративные мероприятия',
+        onlocI2: 'Запуски брендов',
+        onlocI3: 'Свадьбы',
+        onlocI4: 'Недвижимость и коммерция',
         navSets: 'Сетапы',
         navPortfolio: 'Шоурил',
         navCalc: 'Цены',
@@ -3673,6 +3866,15 @@
         vidTitle4: 'Глубокий разбор и сторителлинг',
         vidCat7: 'Интервью подкаст',
         vidTitle7: 'Инсайты фаундеров и стратегия',
+        vidCatRE: 'Фильм о недвижимости',
+        vidCatDJ: 'DJ-сет',
+        vidWatchVideo: 'Смотреть видео',
+        vidTitle11: 'Где отдохнуть на Бали? Виллы Pandawa Residence',
+        vidTitle12: 'Почему Бали? И почему сейчас?',
+        vidTitle13: 'Девелопмент на Бали: проект Meliora изнутри',
+        vidTitle14: 'ETCH — DJ Mix from Bali, Nuanu',
+        vidTitle15: 'Ann Epi — Sunset Vocal DJ Mix, Nuanu',
+        vidTitle16: 'MELIORA — за пределами рендеров',
         setsPreTitle: 'Сетапы',
         setsTitle: 'Студийные зоны и сетапы',
         setsSub: 'Готовые варианты задних планов, света и схемы рассадки спикеров под ваши задачи.',
@@ -3708,6 +3910,9 @@
         eqMicDesc: '2 источника Godox SL60 Softbox, набор из 4 RGB-трубок Godox TL60, 1 Light Stand Tripod и телесуфлер Neewer.',
         eqDeskTitle: 'Пульт Rode Caster Pro & DJI Mic 2',
         eqDeskDesc: 'Безупречная запись звука: 2 микрофона Shure, профессиональный аудиомикшер Rode Caster Pro и радиосистема DJI mic.',
+        eqPromptTitle: 'Телесуфлер Neewer',
+        eqPromptDesc: 'Читайте текст, глядя прямо в объектив. Профессиональный телесуфлер с планшетом сохраняет живой зрительный контакт с камерой: для видео курсов, Reels и выступлений экспертов.',
+        eqPromptTag: 'Взгляд прямо в камеру',
         infraPreTitle: 'Инфраструктура',
         infraTitle: 'Пространство для комфортной работы',
         loungeTitle: 'Лаундж-зона и кофе-бар',
