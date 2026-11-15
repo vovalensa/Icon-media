@@ -608,30 +608,10 @@
       line-height: 1.6;
     }
 
-    /* ON-LOCATION PRODUCTION */
-    .onloc-section { padding: 70px 0 20px; }
-    .onloc-card {
-      display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
-      padding: 44px; border-radius: 28px;
-      background: linear-gradient(135deg, rgba(255,68,10,0.10), rgba(18,18,25,0.7) 55%);
-      border: 1px solid var(--border-light);
-    }
-    .onloc-text { min-width: 0; }
-    .onloc-text .section-subtext { max-width: 560px; margin-top: 14px; }
-    .onloc-btn { margin-top: 26px; display: inline-flex; }
-    .onloc-list { list-style: none; display: grid; gap: 12px; min-width: 0; }
-    .onloc-list li {
-      display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 16px;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
-      font-weight: 600; font-size: 15px; color: var(--text-main);
-    }
-    .onloc-list i { color: var(--flame-orange); width: 22px; text-align: center; font-size: 17px; }
-    @media (max-width: 992px) { .onloc-card { grid-template-columns: 1fr; padding: 32px 24px; gap: 26px; } }
-    @media (max-width: 520px) {
-      .onloc-section { padding-top: 50px; }
-      .onloc-card { padding: 26px 18px; border-radius: 22px; }
-      .onloc-btn { width: 100%; justify-content: center; }
-    }
+    /* ON-LOCATION PRODUCTION (reuses the showreel carousel styles) */
+    .onloc-cta { margin-top: 8px; }
+    .onloc-btn { display: inline-flex; }
+    @media (max-width: 520px) { .onloc-btn { width: 100%; justify-content: center; } }
 
     /* 1. HERO SECTION */
     .hero-section {
@@ -2850,108 +2830,6 @@
                 </div>
               </div>
             </div>
-            <div class="video-card" onclick="openVideoModal('mfac55IpYsI')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/mfac55IpYsI/hqdefault.jpg" alt="Where to Relax in Bali? Pandawa Residence Villas" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
-                  <h3 class="video-title" data-i18n="vidTitle11">Where to Relax in Bali? Pandawa Residence Villas</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
-            <div class="video-card" onclick="openVideoModal('tJMl3Luq37w')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/tJMl3Luq37w/hqdefault.jpg" alt="Why Bali? And why now?" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
-                  <h3 class="video-title" data-i18n="vidTitle12">Why Bali? And why now?</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
-            <div class="video-card" onclick="openVideoModal('2fXh_9Ta-7c')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/2fXh_9Ta-7c/hqdefault.jpg" alt="Real Estate Development in Bali: Inside the Meliora Project" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
-                  <h3 class="video-title" data-i18n="vidTitle13">Real Estate Development in Bali: Inside the Meliora Project</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
-            <div class="video-card" onclick="openVideoModal('3GM6Sh2a334')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/3GM6Sh2a334/hqdefault.jpg" alt="ETCH — DJ Mix from Bali, Nuanu" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
-                  <h3 class="video-title" data-i18n="vidTitle14">ETCH — DJ Mix from Bali, Nuanu</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
-            <div class="video-card" onclick="openVideoModal('x93VSZD-Tig')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/x93VSZD-Tig/hqdefault.jpg" alt="Ann Epi — Sunset Vocal DJ Mix, Nuanu" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
-                  <h3 class="video-title" data-i18n="vidTitle15">Ann Epi — Sunset Vocal DJ Mix, Nuanu</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
-            <div class="video-card" onclick="openVideoModal('AXEmBljeAAE')">
-              <div class="video-thumb-box">
-                <img src="https://img.youtube.com/vi/AXEmBljeAAE/hqdefault.jpg" alt="MELIORA — Beyond the Renders" class="video-thumb-img" loading="lazy">
-                <div class="video-play-overlay">
-                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
-                </div>
-              </div>
-              <div class="video-info">
-                <div>
-                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
-                  <h3 class="video-title" data-i18n="vidTitle16">MELIORA — Beyond the Renders</h3>
-                </div>
-                <div class="video-card-footer">
-                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -3222,22 +3100,135 @@
       </section>
 
       <!-- 6b. ON-LOCATION PRODUCTION -->
-      <section class="onloc-section" id="on-location">
+      <section class="portfolio-section onloc-section" id="on-location">
         <div class="container">
-          <div class="onloc-card">
-            <div class="onloc-text">
+
+          <div class="portfolio-header-wrap">
+            <div>
               <span class="section-eyebrow" data-i18n="onlocPre">On-Location Production</span>
               <h2 class="section-heading" data-i18n="onlocTitle">We bring the production to you</h2>
               <p class="section-subtext" data-i18n="onlocText">From corporate events, brand launches and weddings to real estate and commercial projects, our professional production team brings everything needed to capture your story on location — wherever it happens.</p>
-              <a href="https://wa.me/6282314734072?text=Hello%2C%20I%20would%20like%20to%20discuss%20an%20on-location%20production" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-orange onloc-btn" data-i18n="onlocBtn">Discuss your project</a>
             </div>
-            <ul class="onloc-list">
-              <li><i class="fa-solid fa-building"></i><span data-i18n="onlocI1">Corporate events</span></li>
-              <li><i class="fa-solid fa-rocket"></i><span data-i18n="onlocI2">Brand launches</span></li>
-              <li><i class="fa-solid fa-ring"></i><span data-i18n="onlocI3">Weddings</span></li>
-              <li><i class="fa-solid fa-house"></i><span data-i18n="onlocI4">Real estate &amp; commercial</span></li>
-            </ul>
+
+            <div class="carousel-nav-btns">
+              <button type="button" class="carousel-arrow" onclick="scrollCarousel(-1, 'onlocTrack')" aria-label="Previous">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button type="button" class="carousel-arrow" onclick="scrollCarousel(1, 'onlocTrack')" aria-label="Next">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
+
+          <div class="portfolio-carousel-track" id="onlocTrack">
+            <div class="video-card" onclick="openVideoModal('mfac55IpYsI')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/mfac55IpYsI/hqdefault.jpg" alt="Where to Relax in Bali? Pandawa Residence Villas" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle11">Where to Relax in Bali? Pandawa Residence Villas</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('tJMl3Luq37w')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/tJMl3Luq37w/hqdefault.jpg" alt="Why Bali? And why now?" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle12">Why Bali? And why now?</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('2fXh_9Ta-7c')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/2fXh_9Ta-7c/hqdefault.jpg" alt="Real Estate Development in Bali: Inside the Meliora Project" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle13">Real Estate Development in Bali: Inside the Meliora Project</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('3GM6Sh2a334')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/3GM6Sh2a334/hqdefault.jpg" alt="ETCH — DJ Mix from Bali, Nuanu" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
+                  <h3 class="video-title" data-i18n="vidTitle14">ETCH — DJ Mix from Bali, Nuanu</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('x93VSZD-Tig')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/x93VSZD-Tig/hqdefault.jpg" alt="Ann Epi — Sunset Vocal DJ Mix, Nuanu" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatDJ">DJ Set</span>
+                  <h3 class="video-title" data-i18n="vidTitle15">Ann Epi — Sunset Vocal DJ Mix, Nuanu</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+            <div class="video-card" onclick="openVideoModal('AXEmBljeAAE')">
+              <div class="video-thumb-box">
+                <img src="https://img.youtube.com/vi/AXEmBljeAAE/hqdefault.jpg" alt="MELIORA — Beyond the Renders" class="video-thumb-img" loading="lazy">
+                <div class="video-play-overlay">
+                  <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+              <div class="video-info">
+                <div>
+                  <span class="video-tag" data-i18n="vidCatRE">Real Estate Film</span>
+                  <h3 class="video-title" data-i18n="vidTitle16">MELIORA — Beyond the Renders</h3>
+                </div>
+                <div class="video-card-footer">
+                  <i class="fa-brands fa-youtube"></i> <span data-i18n="vidWatchVideo">Watch Video</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="onloc-cta">
+            <a href="https://wa.me/6282314734072?text=Hello%2C%20I%20would%20like%20to%20discuss%20an%20on-location%20production" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-orange onloc-btn" data-i18n="onlocBtn">Discuss your project</a>
+          </div>
+
         </div>
       </section>
 
@@ -3625,10 +3616,6 @@
         onlocTitle: 'We bring the production to you',
         onlocText: 'From corporate events, brand launches and weddings to real estate and commercial projects, our professional production team brings everything needed to capture your story on location — wherever it happens.',
         onlocBtn: 'Discuss your project',
-        onlocI1: 'Corporate events',
-        onlocI2: 'Brand launches',
-        onlocI3: 'Weddings',
-        onlocI4: 'Real estate & commercial',
         navSets: 'Studio Sets',
         navPortfolio: 'Showreel',
         navCalc: 'Pricing',
@@ -3808,10 +3795,6 @@
         onlocTitle: 'Привозим продакшн к вам',
         onlocText: 'От корпоративных мероприятий, запусков брендов и свадеб до недвижимости и коммерческих проектов: наша профессиональная команда привезёт всё необходимое, чтобы снять вашу историю на локации, где бы она ни происходила.',
         onlocBtn: 'Обсудить проект',
-        onlocI1: 'Корпоративные мероприятия',
-        onlocI2: 'Запуски брендов',
-        onlocI3: 'Свадьбы',
-        onlocI4: 'Недвижимость и коммерция',
         navSets: 'Сетапы',
         navPortfolio: 'Шоурил',
         navCalc: 'Цены',
@@ -4168,8 +4151,8 @@
       }
     }
 
-    function scrollCarousel(direction) {
-      const track = document.getElementById('portfolioTrack');
+    function scrollCarousel(direction, trackId) {
+      const track = document.getElementById(trackId || 'portfolioTrack');
       if (track) {
         const scrollAmount = track.offsetWidth * 0.85 * direction;
         track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
