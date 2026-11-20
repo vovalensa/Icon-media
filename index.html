@@ -1910,12 +1910,16 @@
       z-index: 1;
     }
 
+    .footer-privacy { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-privacy:hover, .footer-privacy:focus-visible { color: var(--text-main); }
     .footer-bottom-bar {
       position: relative;
       z-index: 2;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding-top: 20px;
       display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
       justify-content: space-between;
       font-size: 12.5px;
       color: var(--text-dim);
@@ -3580,7 +3584,7 @@
         </div>
 
         <div class="footer-bottom-bar">
-          <span>© 2026 Icon Media Studio Bali. All rights reserved.</span>
+          <span>© 2026 Icon Media Studio Bali. All rights reserved. · <a href="privacy.html" class="footer-privacy" data-i18n="fPrivacy">Privacy Policy</a></span>
           <span>Kerobokan • Canggu • Seminyak</span>
         </div>
       </div>
@@ -3796,6 +3800,7 @@
         fLinkMakeup: 'Makeup Station',
         fLinkParking: 'Private Parking',
         fHours: 'Daily 09:00 – 22:00 WITA',
+        fPrivacy: 'Privacy Policy',
         exportBtnText: 'Export PNG (1440px)'
       },
       ru: {
@@ -3975,6 +3980,7 @@
         fLinkMakeup: 'Гримерная станция',
         fLinkParking: 'Своя автопарковка',
         fHours: 'Ежедневно 09:00 – 22:00 WITA',
+        fPrivacy: 'Политика конфиденциальности',
         exportBtnText: 'Скачать PNG (1440px)'
       }
     };
