@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZKZ22S10L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DZKZ22S10L');
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ICON MEDIA | Premium Podcast Studio & Video Production in Bali</title>
   
@@ -2501,8 +2509,8 @@
 
       <div style="display: flex; align-items: center; gap: 12px;">
         <div class="lang-switcher">
-          <button type="button" class="lang-btn active" id="btn-en" onclick="switchLanguage('en')">EN</button>
-          <button type="button" class="lang-btn" id="btn-ru" onclick="switchLanguage('ru')">RU</button>
+          <button type="button" class="lang-btn active" id="btn-en" onclick="switchLanguage('en'); track('language_switch', { language: 'en' })">EN</button>
+          <button type="button" class="lang-btn" id="btn-ru" onclick="switchLanguage('ru'); track('language_switch', { language: 'ru' })">RU</button>
         </div>
 
         <div class="header-socials">
@@ -4161,6 +4169,7 @@
     }
 
     function openVideoModal(videoId) {
+      track('video_open', { video_id: videoId });
       const modal = document.getElementById('videoModal');
       const slot = document.getElementById('modalPlayerSlot');
       if (modal && slot) {
@@ -4613,6 +4622,8 @@ Could you please check availability?`
 
 Свободен ли этот слот?`;
 
+      track('calculator_booking', { channel: ch === 'wa' ? 'whatsapp' : 'telegram', service: srvTitle, hours: calcHours, value: q.total, currency: 'IDR' });
+      track(ch === 'wa' ? 'whatsapp_click' : 'telegram_click', { place: 'calculator' });
       if (ch === 'wa') {
         const encodedText = encodeURIComponent(text);
         window.open(`https://wa.me/6282314734072?text=${encodedText}`, '_blank', 'noopener,noreferrer');
@@ -5091,6 +5102,7 @@ Could you please check availability?`
     function openSetLightbox(card) {
       const slides = Array.from(card.querySelectorAll('.social-slide'));
       if (!slides.length) return;
+      track('set_gallery_open', { set_name: card.getAttribute('data-title') || '' });
       setLb.card = card;
       const extra = (card.getAttribute('data-extra') || '').split('|').filter(Boolean);
       setLb.urls = slides.map(sl => sl.getAttribute('data-url')).concat(extra);
@@ -5326,6 +5338,43 @@ Could you please check availability?`
       animateCounters();
       calcTotal();
     });
+  </script>
+  <script>
+    /* ===== GA4: события кликов и взаимодействий ===== */
+    function track(name, params) {
+      try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch (e) {}
+    }
+    function trackPlace(el) {
+      if (!el || !el.closest) return 'unknown';
+      if (el.closest('#mobileCtaBar')) return 'mobile_bar';
+      if (el.closest('#mobileMenuDrawer')) return 'mobile_menu';
+      if (el.closest('header')) return 'header';
+      if (el.closest('footer')) return 'footer';
+      const sec = el.closest('section[id]');
+      if (sec) return sec.id;
+      if (el.closest('.hero-cta-btns, .hero-title, .hero-sub, [class^="hero"]')) return 'hero';
+      return 'other';
+    }
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      const place = trackPlace(a);
+      if (href.indexOf('wa.me/') !== -1) track('whatsapp_click', { place: place });
+      else if (href.indexOf('t.me/') !== -1) track('telegram_click', { place: place });
+      else if (href.indexOf('google.com/maps') !== -1) track('maps_click', { place: place });
+      else if (href.indexOf('instagram.com') !== -1) track('instagram_click', { place: place });
+    }, true);
+    (function () {
+      let used = false;
+      function mark() { if (used) return; used = true; track('calculator_use'); }
+      document.addEventListener('DOMContentLoaded', function () {
+        const c = document.getElementById('calculator');
+        if (!c) return;
+        c.addEventListener('click', mark, { capture: true });
+        c.addEventListener('change', mark, { capture: true });
+      });
+    })();
   </script>
 </body>
 </html>
