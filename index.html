@@ -1425,6 +1425,8 @@
       color: #cfcfe0;
     }
 
+    /* место под виджет отзывов заранее: он грузится лениво и иначе сдвигает калькулятор вниз во время прокрутки к нему */
+    .reviews-widget-slot { min-height: 610px; }
     .reviews-section {
       padding: 90px 0;
       border-top: 1px solid var(--border-subtle);
@@ -3273,7 +3275,7 @@
 
           <div>
             <script src="https://elfsightcdn.com/platform.js" async></script>
-            <div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div>
+            <div class="reviews-widget-slot"><div class="elfsight-app-c8640b04-ae15-40d5-b939-f61b525f5602" data-elfsight-app-lazy></div></div>
           </div>
 
         </div>
@@ -4142,6 +4144,8 @@
         }
       });
       updateSocialNav();
+      /* калькулятор подстраивается под выбранную вкладку сетапов, пока посетитель сам ничего в нём не менял */
+      if (!calcTouched && typeof SET_GROUPS !== 'undefined' && SET_GROUPS[cat]) setService(SET_GROUPS[cat].calc);
     }
 
     function toggleFaq(btn) {
@@ -4224,6 +4228,7 @@
 
     /* ===== Калькулятор и тарифы (по прайс-листам студии) ===== */
     let calcService = 'podcast';
+    let calcTouched = false;   /* true, как только посетитель кликнул что-то внутри калькулятора */
     let calcHours = 1;
 
     const CALC_CAM_PRICE = 300000;          /* доп. камера, за каждую */
@@ -4500,10 +4505,26 @@
     }
 
     function selectCalcFromCard(srv) {
-      setService(srv);
-      const calcElem = document.getElementById('calculator');
-      if (calcElem) calcElem.scrollIntoView({ behavior: 'smooth' });
+      setService(srv);   /* прокрутку к калькулятору делает общий обработчик ссылок #calculator */
     }
+
+    /* Переход к калькулятору: плавная прокрутка + доводка, если блоки выше (ленивые фото, отзывы) успели изменить высоту */
+    function goToCalculator() {
+      const el = document.getElementById('calculator');
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      [700, 1400, 2200].forEach(ms => setTimeout(() => {
+        const top = el.getBoundingClientRect().top;
+        if (Math.abs(top) > 40) el.scrollIntoView({ behavior: ms < 2200 ? 'smooth' : 'auto', block: 'start' });
+      }, ms));
+      if (history.replaceState) history.replaceState(null, '', '#calculator');
+    }
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest && e.target.closest('a[href="#calculator"]');
+      if (!a) return;
+      e.preventDefault();
+      goToCalculator();
+    });
 
     function setHours(h, btn) {
       calcHours = h;
@@ -5386,6 +5407,7 @@ Could you please check availability?`
         const c = document.getElementById('calculator');
         if (!c) return;
         c.addEventListener('click', mark, { capture: true });
+        c.addEventListener('click', function () { calcTouched = true; }, { capture: true });
         c.addEventListener('change', mark, { capture: true });
       });
     })();
