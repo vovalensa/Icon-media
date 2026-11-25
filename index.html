@@ -3774,7 +3774,7 @@
         billTotal: 'Estimated Total:',
         btnBookWA: 'Check Date on WhatsApp',
         btnBookTG: 'Reserve via Telegram',
-        toastTg: 'Message copied, paste it in the chat',
+        toastTg: 'Opening Telegram. If the text is not there, just paste it — it is copied',
         faqPreTitle: 'Direct Answers',
         faqTitle: 'Frequently Asked Questions',
         faqSub: 'Everything you need to know about files transfer, booking confirmation, and technical workflow.',
@@ -3954,7 +3954,7 @@
         billTotal: 'Итоговая стоимость:',
         btnBookWA: 'Уточнить дату в WhatsApp',
         btnBookTG: 'Забронировать в Telegram',
-        toastTg: 'Текст скопирован, вставьте в чат',
+        toastTg: 'Открываем Telegram. Если текста нет в поле — просто вставьте, он скопирован',
         faqPreTitle: 'Прямые ответы',
         faqTitle: 'Часто задаваемые вопросы',
         faqSub: 'Все детали о передаче исходников, подтверждении бронирования и техническом процессе.',
@@ -4641,7 +4641,8 @@ Could you please check availability?`
         } else {
           showToast(copyMsg);
         }
-        window.open('https://t.me/iconmediastudio', '_blank', 'noopener,noreferrer');
+        /* t.me/<username>?text= — Telegram сам вставит текст заявки в поле ввода; копия в буфере — запасной вариант для старых версий */
+        window.open(`https://t.me/iconmediastudio?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
       }
     }
 
