@@ -1,0 +1,13 @@
+# robots.txt — Icon Media Studio (https://iconmediabali.com)
+# Сайт открыт для всех поисковых систем (Google, Bing, Yandex, Baidu и др.)
+# и для AI-поисковиков (ChatGPT, Perplexity, Claude, Gemini), чтобы студию
+# находили и рекомендовали в ответах нейросетей.
+
+User-agent: *
+Allow: /
+
+# Служебные папки репозитория не индексируем
+Disallow: /.git/
+Disallow: /.github/
+
+Sitemap: https://iconmediabali.com/sitemap.xml
