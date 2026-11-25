@@ -4758,7 +4758,8 @@ Could you please check availability?`
        и добавьте запись в PODCAST_SETS / SOCIAL_SETS (count — сколько фото в папке).
        skip — номера фото, которые пока НЕ показываем (сейчас это все вертикальные кадры).
        Чтобы вернуть фото на сайт, удалите его номер из skip. Сет без видимых фото не выводится.
-       lead — номера фото, которые идут первыми. Скрытые (skip) фото показываются только в галерее при клике на фото. */
+       lead — номера фото, которые идут первыми. Скрытые (skip) фото показываются только в галерее при клике на фото.
+       ordered: true — галерея показывает все фото строго по порядку номеров файлов (1, 2, 3 …), а не «сначала карточка, потом скрытые». */
     const PODCAST_SETS = [
       {
         id: 1,
@@ -4780,8 +4781,8 @@ Could you please check availability?`
       },
       {
         id: 2,
-        count: 7,
-        skip: [6,7],
+        count: 9,
+        skip: [6,7,8,9],
         desc: {
           en: 'A second podcast set with a different look and feel: pro audio, balanced lighting and multi-cam angles, ready for interviews, shows and guest episodes.',
           ru: 'Второй подкаст-сет с другой атмосферой: профессиональный звук, сбалансированный свет и мультикамера для интервью, шоу и выпусков с гостями.'
@@ -4801,8 +4802,8 @@ Could you please check availability?`
     const SOCIAL_SETS = [
       {
         id: 1,
-        count: 4,
-        skip: [4],
+        count: 6,
+        skip: [4,6],
         desc: {
           en: 'Graphite walls, a clean white desk and warm amber shelf lighting. A calm, premium backdrop for expert talks, interviews and talking-head Reels.',
           ru: 'Графитовые стены, чистый белый стол и тёплая янтарная подсветка полок. Спокойный премиальный фон для экспертных разговоров, интервью и Reels.'
@@ -4819,8 +4820,8 @@ Could you please check availability?`
       },
       {
         id: 2,
-        count: 4,
-        skip: [4],
+        count: 7,
+        skip: [4,6,7],
         desc: {
           en: 'A warm terracotta wood-slat wall, a black leather chair and a Shure microphone on a boom arm. A cozy, high-contrast backdrop for podcasts, interviews and expert Reels.',
           ru: 'Тёплая стена из деревянных реек цвета терракоты, чёрное кожаное кресло и микрофон Shure на пантографе. Уютный контрастный фон для подкастов, интервью и экспертных Reels.'
@@ -4837,8 +4838,8 @@ Could you please check availability?`
       },
       {
         id: 3,
-        count: 4,
-        skip: [4],
+        count: 5,
+        skip: [4,5],
         desc: {
           en: 'An orange wood-slat accent wall paired with a soft beige wall, black metal shelving with gold details and a boom-arm Shure microphone. A bright, warm look for interviews and talking-head content.',
           ru: 'Оранжевая реечная акцентная стена в сочетании с мягкой бежевой, чёрные металлические полки с золотым декором и микрофон Shure на пантографе. Светлый тёплый образ для интервью и говорящей головы.'
@@ -4873,8 +4874,8 @@ Could you please check availability?`
       },
       {
         id: 5,
-        count: 6,
-        skip: [1,2,3,4,5],
+        count: 8,
+        skip: [2,3,4,5,6,7,8],
         desc: {
           en: 'An emerald velvet armchair with a mustard cushion, a warm amber floor lamp and a bookshelf with soft candle light. A cozy lounge look for conversational podcasts, interviews and Reels.',
           ru: 'Изумрудное бархатное кресло с горчичной подушкой, тёплый янтарный торшер и стеллаж с мягким светом свечей. Уютный лаунж-образ для разговорных подкастов, интервью и Reels.'
@@ -4891,9 +4892,9 @@ Could you please check availability?`
       },
       {
         id: 6,
-        count: 9,
-        skip: [1,2,3,4,5,6,7],
-        lead: [8,9],
+        count: 8,
+        skip: [2,3,4,6,7,8],
+        ordered: true,
         desc: {
           en: 'A pure black backdrop with a white desk, a tan leather lounge chair or an emerald armchair and soft pampas accents. A dramatic, high-contrast look for personal-brand videos, interviews and talking-head Reels.',
           ru: 'Чистый чёрный фон, белый стол, кожаное кресло цвета тан или изумрудное кресло и мягкие акценты из пампасной травы. Драматичный контрастный образ для личного бренда, интервью и Reels.'
@@ -4987,6 +4988,8 @@ Could you please check availability?`
         const idx = Math.min(socialState[sk] || 0, photos.length - 1);
         const many = photos.length > 1;
         const extra = hiddenPhotos(set).map(p => setPhotoUrl(g, set, p)).join('|');
+        let all = '';
+        if (set.ordered) { const a = []; for (let n = 0; n < set.count; n++) a.push(setPhotoUrl(g, set, n)); all = a.join('|'); }
         let slides = '';
         photos.forEach((p, i) => {
           const url = setPhotoUrl(g, set, p);
@@ -5001,7 +5004,7 @@ Could you please check availability?`
         const equip = setIncluded(key, lang).map(x => `<li><i class="fa-solid fa-check"></i><span>${x}</span></li>`).join('');
         const wrap = document.createElement('div');
         wrap.innerHTML = `
-          <article class="set-card social-card" data-set="${sk}" data-extra="${extra}" data-title="${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}">
+          <article class="set-card social-card" data-set="${sk}" data-extra="${extra}"${all ? ` data-all="${all}"` : ''} data-title="${lang === 'ru' ? 'Сетап' : 'Setup'} ${set.id}">
             <div>
               <div class="social-photo" title="${lang === 'ru' ? 'Открыть галерею' : 'Open gallery'}">${slides}${nav}</div>
               <div class="set-body">
@@ -5104,17 +5107,19 @@ Could you please check availability?`
 
 
     /* ===== Галерея (pop-up) для детального просмотра фото сетапа ===== */
-    const setLb = { urls: [], i: 0, vis: 0, card: null, sx: 0, sy: 0 };
+    const setLb = { urls: [], cardUrls: [], i: 0, card: null, sx: 0, sy: 0 };
 
     function openSetLightbox(card) {
       const slides = Array.from(card.querySelectorAll('.social-slide'));
       if (!slides.length) return;
       track('set_gallery_open', { set_name: card.getAttribute('data-title') || '' });
       setLb.card = card;
+      const cardUrls = slides.map(sl => sl.getAttribute('data-url'));
       const extra = (card.getAttribute('data-extra') || '').split('|').filter(Boolean);
-      setLb.urls = slides.map(sl => sl.getAttribute('data-url')).concat(extra);
-      setLb.vis = slides.length;
-      setLb.i = Math.max(0, socialCurrent(card));
+      const all = (card.getAttribute('data-all') || '').split('|').filter(Boolean);
+      setLb.urls = all.length ? all : cardUrls.concat(extra);
+      setLb.cardUrls = cardUrls;
+      setLb.i = Math.max(0, setLb.urls.indexOf(cardUrls[Math.max(0, socialCurrent(card))]));
       const lb = document.getElementById('setLightbox');
       document.getElementById('setLbTitle').textContent = card.getAttribute('data-title') || '';
       lb.classList.add('active');
@@ -5143,7 +5148,8 @@ Could you please check availability?`
       lb.classList.remove('active');
       document.getElementById('setLbImg').removeAttribute('src');
       document.body.style.overflow = '';
-      if (setLb.card && setLb.i < setLb.vis) socialGo(setLb.card, setLb.i);   /* карточка показывает тот же кадр, на котором закрыли (если он есть в карточке) */
+      const ci = setLb.card ? (setLb.cardUrls || []).indexOf(setLb.urls[setLb.i]) : -1;
+      if (ci >= 0) socialGo(setLb.card, ci);   /* карточка показывает тот же кадр, на котором закрыли (если он есть в карточке) */
       setLb.card = null;
     }
 
