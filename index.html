@@ -1756,6 +1756,11 @@
     /* Поле «Ваше имя» перед кнопками заявки */
     .client-name-field { display: flex; flex-direction: column; gap: 6px; margin: 4px 0 12px; }
     .client-name-field > span { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+    /* Галочка согласия на акции */
+    .promo-consent { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 14px; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); cursor: pointer; }
+    .promo-consent input { width: 20px; height: 20px; flex: 0 0 auto; margin-top: 0; accent-color: var(--flame-orange); cursor: pointer; }
+    .promo-consent a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+    .promo-consent a:hover { color: #fff; }
 
     .bill-row {
       display: flex;
@@ -3487,6 +3492,12 @@
                   <input type="text" id="client-name" class="input-field-dark" maxlength="40" autocomplete="given-name" placeholder="How should we address you?">
                 </label>
 
+                <!-- Согласие на акции: по умолчанию выключено, попадает в текст заявки -->
+                <label class="promo-consent" for="promo-consent">
+                  <input type="checkbox" id="promo-consent">
+                  <span><span data-i18n="promoConsent">Send me studio promotions and special offers</span> <a href="privacy.html#promotions" target="_blank" rel="noopener" data-i18n="promoConsentMore">(details)</a></span>
+                </label>
+
                 <div class="messenger-buttons">
                   <button type="button" onclick="sendToMessenger('wa')" class="btn-pill btn-pill-orange" style="width: 100%; padding: 14px;">
                     <i class="fa-brands fa-whatsapp"></i> <span data-i18n="btnBookWA">Check Date on WhatsApp</span>
@@ -3852,6 +3863,8 @@
         optFlexible: 'Flexible / Discuss via Chat',
         optSelectTime: 'Select time',
         nameLabel: 'Your name',
+        promoConsent: 'Send me studio promotions and special offers',
+        promoConsentMore: '(details)',
         hoursMoreLbl: 'Session length',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
         webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
@@ -4035,6 +4048,8 @@
         optFlexible: 'Гибкое / Обсудить в чате',
         optSelectTime: 'Выберите время',
         nameLabel: 'Ваше имя',
+        promoConsent: 'Сообщать мне об акциях и спецпредложениях студии',
+        promoConsentMore: '(подробнее)',
         hoursMoreLbl: 'Длительность съёмки',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
         webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
@@ -4819,6 +4834,10 @@
       const introRu = clientName ? `Здравствуйте! Меня зовут ${clientName}. Хочу забронировать сессию в Icon Media Studio:` : 'Здравствуйте! Хочу забронировать сессию в Icon Media Studio:';
       const setupEn = calcSetup ? `\n• Setup: ${calcSetup.id}` : '';
       const setupRu = calcSetup ? `\n• Сетап: ${calcSetup.id}` : '';
+      const promoEl = document.getElementById('promo-consent');
+      const promoOn = !!(promoEl && promoEl.checked);
+      const promoEn = promoOn ? '\n\nI agree to receive studio promotions and special offers.' : '';
+      const promoRu = promoOn ? '\n\nСогласен(на) получать акции и спецпредложения студии.' : '';
 
       const text = lang === 'en'
         ? `${introEn}
@@ -4830,7 +4849,7 @@
 • Additional: ${addonsList.length > 0 ? addonsList.join(', ') : 'None'}
 • Estimated Total: ${formatIDR(q.total)}
 
-Could you please check availability?`
+Could you please check availability?${promoEn}`
         : `${introRu}
 
 • Формат: ${srvTitle}${setupRu}
@@ -4840,7 +4859,7 @@ Could you please check availability?`
 • Дополнительно: ${addonsList.length > 0 ? addonsList.join(', ') : 'Без опций'}
 • Расчетная сумма: ${formatIDR(q.total)}
 
-Свободен ли этот слот?`;
+Свободен ли этот слот?${promoRu}`;
 
       track('calculator_booking', { channel: ch === 'wa' ? 'whatsapp' : 'telegram', service: srvTitle, setup: calcSetup ? calcSetup.id : '', hours: calcHours, value: q.total, currency: 'IDR' });
       track(ch === 'wa' ? 'whatsapp_click' : 'telegram_click', { place: 'calculator' });
