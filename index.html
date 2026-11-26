@@ -4387,6 +4387,8 @@
     const calcState = { cams: 0, prompter: false, mics: false, board: false, director: false, edit: null, bulk: false };
 
     function calcLang() { return (typeof currentLang !== 'undefined' && currentLang === 'ru') ? 'ru' : 'en'; }
+    /* Часы: «1ч» в русской версии, «1h» в английской */
+    function hrs(n) { return n + (calcLang() === 'ru' ? 'ч' : 'h'); }
 
     function formatIDR(num) {
       return num.toLocaleString('id-ID') + ' IDR';
@@ -4545,10 +4547,12 @@
       if (calcHours > HOURS_MAX) calcHours = HOURS_MAX;
       document.querySelectorAll('.hours-picker .hour-btn').forEach(b => {
         if (b.getAttribute('data-h') === 'more') {
+          b.textContent = hrs(HOURS_MORE_MIN) + '+';
           b.classList.toggle('active', calcHours >= HOURS_MORE_MIN);
           return;
         }
         const h = parseInt(b.getAttribute('data-h'), 10);
+        b.textContent = hrs(h);
         b.disabled = h < svc.minHours;
         b.classList.toggle('active', h === calcHours);
       });
@@ -4556,7 +4560,7 @@
       const moreRow = document.getElementById('hours-more-row');
       if (moreRow) moreRow.hidden = calcHours < HOURS_MORE_MIN;
       const moreVal = document.getElementById('hours-more-val');
-      if (moreVal) moreVal.textContent = calcHours + 'h';
+      if (moreVal) moreVal.textContent = hrs(calcHours);
       const minus = document.getElementById('hours-more-minus');
       const plus = document.getElementById('hours-more-plus');
       if (minus) minus.disabled = calcHours <= HOURS_MORE_MIN;
@@ -4648,7 +4652,7 @@
       const billService = document.getElementById('bill-service');
       const billBase = document.getElementById('bill-base');
       const billTotal = document.getElementById('bill-total');
-      if (billService) billService.innerText = `${svc.name[lang]} (${calcHours}h)`;
+      if (billService) billService.innerText = `${svc.name[lang]} (${hrs(calcHours)})`;
       if (billBase) billBase.innerText = formatIDR(q.base);
       if (billTotal) billTotal.innerText = formatIDR(q.total);
       const mcbTotal = document.getElementById('mcbTotal');
@@ -5361,6 +5365,7 @@ Could you please check availability?`
       });
       updateDateDisplay();
       renderCalendar();
+      applyHoursConstraints();
       renderAddons();
       calcTotal();
     }
