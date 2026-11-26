@@ -1883,6 +1883,9 @@
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-links a { color: var(--text-muted); font-size: 13.5px; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
+    /* Иконка + текст: стабильный отступ на всех устройствах, текст выровнен по одной линии */
+    .footer-links a { display: inline-flex; align-items: center; gap: 10px; }
+    .footer-links a i { width: 16px; text-align: center; flex: 0 0 16px; }
     .footer-hours { color: var(--text-dim); font-size: 13.5px; }
     .footer-brand-info { margin-top: 20px; }
 
