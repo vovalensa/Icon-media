@@ -27,7 +27,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- html2canvas нужен только служебному экспорту PNG (?dev=1) — обычным посетителям не грузим -->
+  <script>
+    if (/[?&]dev=1(&|$)/.test(location.search)) {
+      var h2c = document.createElement('script');
+      h2c.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      document.head.appendChild(h2c);
+    }
+  </script>
 
   <style>
     :root {
@@ -43,7 +50,7 @@
       --flame-glow: rgba(255, 68, 10, 0.3);
       --text-main: #f5f5f7;
       --text-muted: #a1a1b5;
-      --text-dim: #656578;
+      --text-dim: #84849a; /* было #656578 — контраст 3.5:1, теперь ~5:1 (WCAG AA) */
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
@@ -577,6 +584,9 @@
       border-top: 1px solid var(--border-subtle);
       padding-top: 24px;
     }
+    /* Три кнопки соцсетей в меню: равная ширина, помещаются на узких экранах */
+    .mobile-menu-socials { display: flex; gap: 8px; }
+    .mobile-menu-socials .btn-pill { flex: 1 1 0; min-width: 0; padding: 12px 6px; gap: 6px; font-size: 13px; white-space: nowrap; }
 
     /* SECTION HEADERS */
     /* Надписи над заголовками скрыты (дублировали заголовки и добавляли оранжевого).
@@ -997,7 +1007,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      color: var(--flame-orange);
+      color: var(--text-muted);
       margin-bottom: 6px;
       display: inline-block;
     }
@@ -1754,7 +1764,8 @@
 
     .final-sum {
       font-family: var(--font-heading);
-      font-size: 30px;
+      font-size: clamp(22px, 2.1vw, 30px);
+      white-space: nowrap;
       font-weight: 900;
       color: #fff;
     }
@@ -1776,7 +1787,7 @@
 
     .faq-container {
       max-width: 900px;
-      margin: 36px auto 0;
+      margin: 36px 0 0; /* по левому краю, как остальные разделы */
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -2561,14 +2572,14 @@
       <a href="#calculator" onclick="closeMobileMenu()" class="btn-pill btn-pill-orange" style="width: 100%; padding: 14px; font-size: 15px;">
         <span data-i18n="ctaBook">Book Session</span>
       </a>
-      <div style="display: flex; gap: 10px;">
-        <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px;">
+      <div class="mobile-menu-socials">
+        <a href="https://wa.me/6282314734072" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
-        <a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px;">
+        <a href="https://t.me/iconmediastudio" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-telegram"></i> Telegram
         </a>
-        <a href="https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark" style="flex: 1; padding: 12px;">
+        <a href="https://www.instagram.com/icon.media.studio?obrf=eDZpdHdseXg0dDBq" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
           <i class="fa-brands fa-instagram"></i> Instagram
         </a>
       </div>
@@ -2997,7 +3008,7 @@
               </div>
               <div class="card-footer">
                 <div>
-                  <div class="card-price" data-i18n="card1Price">from 1,900,000 IDR</div>
+                  <div class="card-price" data-i18n="card1Price">from 1.900.000 IDR</div>
                   <div class="card-tier" data-i18n="tierCrew">Includes Crew & Engineer</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('podcast')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
@@ -3019,7 +3030,7 @@
               </div>
               <div class="card-footer">
                 <div>
-                  <div class="card-price" data-i18n="card2Price">from 1,100,000 IDR</div>
+                  <div class="card-price" data-i18n="card2Price">from 1.100.000 IDR</div>
                   <div class="card-tier" data-i18n="tierPrompter">Prompter Operator Included</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('social')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
@@ -3041,7 +3052,7 @@
               </div>
               <div class="card-footer">
                 <div>
-                  <div class="card-price" data-i18n="card4Price">from 700,000 IDR/h</div>
+                  <div class="card-price" data-i18n="card4Price">from 700.000 IDR/h</div>
                   <div class="card-tier" data-i18n="tierLighting">Full Lighting Included</div>
                 </div>
                 <a href="#calculator" onclick="selectCalcFromCard('rental')" class="btn-pill btn-pill-orange" data-i18n="btnBookSlot">Calculate</a>
@@ -3331,13 +3342,13 @@
                   </div>
 
                   <select id="booking-time" class="input-field-dark" onchange="onTimeChange()">
-                    <option value="Any time / Flexible" data-i18n="optFlexible">Flexible / Discuss via Chat</option>
+                    <option value="Any time / Flexible" data-i18n="optFlexible" selected>Flexible / Discuss via Chat</option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>
                     <option value="11:00">11:00</option>
                     <option value="12:00">12:00</option>
                     <option value="13:00">13:00</option>
-                    <option value="14:00" selected>14:00</option>
+                    <option value="14:00">14:00</option>
                     <option value="15:00">15:00</option>
                     <option value="16:00">16:00</option>
                     <option value="17:00">17:00</option>
@@ -3397,7 +3408,7 @@
 
                   <div class="bill-total-row">
                     <span style="font-weight: 800;" data-i18n="billTotal">Estimated Total:</span>
-                    <span class="final-sum" id="bill-total">1 900 000 IDR</span>
+                    <span class="final-sum" id="bill-total">1.900.000 IDR</span>
                   </div>
                 </div>
 
@@ -3421,10 +3432,10 @@
       <section class="faq-section" id="faq">
         <div class="container">
           
-          <div style="text-align: center;">
+          <div class="faq-header">
             <span class="section-eyebrow" data-i18n="faqPreTitle">Direct Answers</span>
             <h2 class="section-heading" data-i18n="faqTitle">Frequently Asked Questions</h2>
-            <p class="section-subtext" style="margin: 8px auto 0;" data-i18n="faqSub">
+            <p class="section-subtext" style="margin: 8px 0 0;" data-i18n="faqSub">
               Everything you need to know about files transfer, booking confirmation, and technical workflow.
             </p>
           </div>
@@ -3461,7 +3472,7 @@
               </button>
               <div class="faq-answer">
                 <div class="faq-answer-inner" data-i18n="faqA3">
-                  <p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>
+                  <p>Yes. Dry hire is available from 700.000 IDR/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>
                 </div>
               </div>
             </div>
@@ -3716,16 +3727,16 @@
         tagPodcast: '3 Cameras • Shure Mics',
         card1Title: 'Turnkey Podcast Production',
         card1Desc: 'Multi-cam Sony FX30/a7c recording, dedicated sound engineer, live camera switching, and optional multi-cam editing with sound design.',
-        card1Price: 'from 1,900,000 IDR',
+        card1Price: 'from 1.900.000 IDR',
         tierCrew: 'Includes Crew & Sound Engineer',
         tagReels: 'Neewer Prompter • DJI mic',
         card2Title: 'Vertical Video & Course Batching',
         card2Desc: 'Shoot 15–30 short-form clips in 2 hours. Seamless Neewer teleprompter with operator and viral caption editing.',
-        card2Price: 'from 1,100,000 IDR',
+        card2Price: 'from 1.100.000 IDR',
         tierPrompter: 'Prompter Operator Included',
         card4Title: 'Studio Space Rental (Dry Hire)',
         card4Desc: 'Bring your own crew and camera package. Full access to acoustic space, Godox SL60 & TL60 RGB lighting grid, and high-speed fiber.',
-        card4Price: 'from 700,000 IDR/h',
+        card4Price: 'from 700.000 IDR/h',
         tierLighting: 'Full Lighting Included',
         btnBookSlot: 'Calculate',
         equipPreTitle: 'Cinema Grade Engineering',
@@ -3792,7 +3803,7 @@
         faqQ2: 'When and how do I receive my master files?',
         faqA2: '<p>All uncompressed 4K video files and isolated audio tracks (ISO stems) are transferred immediately onto your SSD or uploaded to cloud storage on the day of recording via our 80–90 Mbps fiber line.</p>',
         faqQ3: 'Can I bring my own video crew (Dry Hire)?',
-        faqA3: '<p>Yes. Dry hire is available from IDR 700,000/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>',
+        faqA3: '<p>Yes. Dry hire is available from 700.000 IDR/hour, which grants full access to the acoustically isolated room, furniture, and Godox lighting rigs.</p>',
         faqQ4: 'Is there dedicated car and scooter parking?',
         faqA4: '<p>Yes, we have free private parking directly in front of the entrance with spacious car bays and scooter parking. Loading gear takes less than 2 minutes.</p>',
         faqQ5: 'Can I record during late night hours?',
@@ -3896,16 +3907,16 @@
         tagPodcast: 'Sony FX30/a7c • Shure',
         card1Title: 'Подкасты и YouTube-шоу под ключ',
         card1Desc: 'Многокамерная съемка на Sony FX30 и a7c, звукорежиссер на сете, лайв-переключение планов и монтаж.',
-        card1Price: 'от 1 900 000 IDR',
+        card1Price: 'от 1.900.000 IDR',
         tierCrew: 'Оператор и звукорежиссер включены',
         tagReels: 'Суфлер 4K • DJI Mic 2',
         card2Title: 'Съемка Reels, Shorts и курсов',
         card2Desc: 'Запись 15–30 роликов за 2 часа с оператором суфлера. Съемка с телесуфлером Neewer и нарезка с субтитрами.',
-        card2Price: 'от 1 100 000 IDR',
+        card2Price: 'от 1.100.000 IDR',
         tierPrompter: 'Оператор суфлера включен',
         card4Title: 'Аренда студии (Dry Hire)',
         card4Desc: 'Съемка вашей собственной командой. Полный доступ к акустическому залу, свету Godox SL60 и TL60 RGB.',
-        card4Price: 'от 700 000 IDR/час',
+        card4Price: 'от 700.000 IDR/час',
         tierLighting: 'Полный студийный свет включен',
         btnBookSlot: 'Рассчитать',
         equipPreTitle: 'Кино-оборудование',
@@ -3972,7 +3983,7 @@
         faqQ2: 'Когда и как передаются исходные файлы?',
         faqA2: '<p>Все несжатые 4K-файлы и поканальный звук отдаются сразу после съемки на ваш SSD или выгружаются в облако в тот же день по оптике 80–90 Mbps.</p>',
         faqQ3: 'Можно ли прийти со своей съемочной группой (Dry Hire)?',
-        faqA3: '<p>Да. Аренда помещения доступна от 700 000 IDR/час и включает весь свет Godox и шумоизолированный зал.</p>',
+        faqA3: '<p>Да. Аренда помещения доступна от 700.000 IDR/час и включает весь свет Godox и шумоизолированный зал.</p>',
         faqQ4: 'Есть ли парковка для автомобилей и байков?',
         faqA4: '<p>Да, прямо перед входом собственная бесплатная парковка для авто и байков. Разгрузка оборудования занимает пару минут.</p>',
         faqQ5: 'Возможна ли съемка в ночные часы?',
@@ -4308,7 +4319,7 @@
         editSimple: 'Simple edit', editPro: 'Pro edit',
         editBulk: '10+ reels', editBulkNote: '20% discount on editing', bulkLine: '10+ reels discount (−20% editing)',
         ext: 'Extension', perHour: 'IDR / hour', none: 'None', extraCam: 'Additional camera',
-        datePlaceholder: 'Select date', night: 'Night 1.5×'
+        datePlaceholder: 'Flexible / Discuss via Chat', night: 'Night 1.5×'
       },
       ru: {
         groupEquip: 'Оборудование и команда', groupEdit: 'Монтаж',
@@ -4319,7 +4330,7 @@
         editSimple: 'Простой монтаж', editPro: 'Про-монтаж',
         editBulk: '10+ reels', editBulkNote: 'скидка 20% на монтаж', bulkLine: 'Скидка за 10+ reels (−20% монтаж)',
         ext: 'Продление', perHour: 'IDR / час', none: 'Нет', extraCam: 'Доп. камера',
-        datePlaceholder: 'Выберите дату', night: 'Ночь 1.5×'
+        datePlaceholder: 'Гибкая / Обсудить в чате', night: 'Ночь 1.5×'
       }
     };
 
@@ -5338,7 +5349,8 @@ Could you please check availability?`
         const yyyy = tomorrow.getFullYear();
         const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
         const dd = String(tomorrow.getDate()).padStart(2, '0');
-        dateInput.value = `${yyyy}-${mm}-${dd}`;
+        /* Дата по умолчанию не выбрана — в заявке «Гибкая / Обсудить», пока клиент сам не выберет день */
+        dateInput.value = '';
         dateInput.dataset.min = `${yyyy}-${mm}-${dd}`;
         updateDateDisplay();
       }
