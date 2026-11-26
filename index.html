@@ -173,9 +173,9 @@
     }
     .social-icon:hover { transform: translateY(-2px); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.25); }
     .social-icon:focus-visible { outline: 2px solid var(--accent, #f26a3d); outline-offset: 2px; }
-    .social-icon-wa { color: #25d366; }
-    .social-icon-tg { color: #38bdf8; }
-    .social-icon-ig { color: #e1306c; }
+    /* Иконки соцсетей — однотонные, без брендовых цветов */
+    .social-icon { color: var(--text-muted); }
+    .social-icon:hover { color: var(--text-main); }
     @media (max-width: 520px) { .header-socials { display: none; } }
 
     .btn-pill-dark {
@@ -590,14 +590,6 @@
       letter-spacing: 1.5px;
       margin-bottom: 8px;
     }
-    .section-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 14px;
-      height: 2px;
-      background: var(--flame-orange);
-      border-radius: 2px;
-    }
 
     .section-heading {
       font-family: var(--font-heading);
@@ -970,18 +962,24 @@
       width: 54px;
       height: 54px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--flame-orange), #ff5e26);
-      color: #fff;
+      /* Спокойная кнопка play: полупрозрачная, без оранжевого и свечения */
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      color: rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       padding-left: 3px;
-      box-shadow: 0 8px 25px var(--flame-glow);
-      transition: transform 0.25s ease;
+      opacity: 0.85;
+      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
     }
     .video-card:hover .play-btn-circle {
-      transform: scale(1.1);
+      transform: scale(1.06);
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
     }
 
     .video-info {
