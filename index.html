@@ -1617,6 +1617,20 @@
       border-color: var(--flame-orange);
     }
 
+    /* Просьба выбрать дату и время перед отправкой заявки */
+    .datetime-error {
+      display: flex; align-items: center; gap: 8px;
+      margin: -8px 0 18px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+      font-size: 13px; font-weight: 600; line-height: 1.4;
+    }
+    .datetime-error[hidden] { display: none; }
+    .input-field-dark.field-error { border-color: rgba(239, 68, 68, 0.8); }
+
     .night-warning-banner {
       display: none;
       background: rgba(147, 51, 234, 0.12);
@@ -3342,7 +3356,8 @@
                   </div>
 
                   <select id="booking-time" class="input-field-dark" onchange="onTimeChange()">
-                    <option value="Any time / Flexible" data-i18n="optFlexible" selected>Flexible / Discuss via Chat</option>
+                    <option value="" disabled selected data-i18n="optSelectTime">Select time</option>
+                    <option value="Any time / Flexible" data-i18n="optFlexible">Flexible / Discuss via Chat</option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>
                     <option value="11:00">11:00</option>
@@ -3360,6 +3375,10 @@
                     <option value="23:00" data-night="1">23:00 🌙 (Night 1.5×)</option>
                     <option value="00:00" data-night="1">00:00 🌙 (Night 1.5×)</option>
                   </select>
+                </div>
+
+                <div id="datetime-error" class="datetime-error" role="alert" hidden>
+                  <i class="fa-solid fa-circle-exclamation"></i> <span id="datetime-error-text"></span>
                 </div>
 
                 <div id="night-warning" class="night-warning-banner">
@@ -3775,6 +3794,7 @@
         calcStep1: 'Step 1 • Choose Format',
         calcStepDateTime: 'Step 2 • Date & Preferred Time',
         optFlexible: 'Flexible / Discuss via Chat',
+        optSelectTime: 'Select time',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
         webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
         calcOptPod: 'Podcast',
@@ -3955,6 +3975,7 @@
         calcStep1: 'Шаг 1 • Формат съемки',
         calcStepDateTime: 'Шаг 2 • Дата и время',
         optFlexible: 'Гибкое / Обсудить в чате',
+        optSelectTime: 'Выберите время',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
         webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
         calcOptPod: 'Подкаст',
@@ -4319,7 +4340,8 @@
         editSimple: 'Simple edit', editPro: 'Pro edit',
         editBulk: '10+ reels', editBulkNote: '20% discount on editing', bulkLine: '10+ reels discount (−20% editing)',
         ext: 'Extension', perHour: 'IDR / hour', none: 'None', extraCam: 'Additional camera',
-        datePlaceholder: 'Flexible / Discuss via Chat', night: 'Night 1.5×'
+        datePlaceholder: 'Select date', night: 'Night 1.5×',
+        dtRequired: 'Please select the date and time of your session'
       },
       ru: {
         groupEquip: 'Оборудование и команда', groupEdit: 'Монтаж',
@@ -4330,7 +4352,8 @@
         editSimple: 'Простой монтаж', editPro: 'Про-монтаж',
         editBulk: '10+ reels', editBulkNote: 'скидка 20% на монтаж', bulkLine: 'Скидка за 10+ reels (−20% монтаж)',
         ext: 'Продление', perHour: 'IDR / час', none: 'Нет', extraCam: 'Доп. камера',
-        datePlaceholder: 'Гибкая / Обсудить в чате', night: 'Ночь 1.5×'
+        datePlaceholder: 'Выберите дату', night: 'Ночь 1.5×',
+        dtRequired: 'Пожалуйста, выберите дату и время съёмки'
       }
     };
 
@@ -4565,6 +4588,7 @@
           warningBanner.style.display = 'none';
         }
       }
+      clearDateTimeError();
       calcTotal();
     }
 
@@ -4622,7 +4646,40 @@
     }
 
     /* ----- Сообщение в WhatsApp / Telegram ----- */
+    /* Дата и время обязательны: без них заявку не отправляем, а показываем просьбу их выбрать */
+    function validateDateTime() {
+      const dateInput = document.getElementById('booking-date');
+      const timeInput = document.getElementById('booking-time');
+      const dateBtn = document.getElementById('dateDisplay');
+      const noDate = !(dateInput && dateInput.value);
+      const noTime = !(timeInput && timeInput.value);
+      if (dateBtn) dateBtn.classList.toggle('field-error', noDate);
+      if (timeInput) timeInput.classList.toggle('field-error', noTime);
+      const box = document.getElementById('datetime-error');
+      if (noDate || noTime) {
+        const txt = document.getElementById('datetime-error-text');
+        if (txt) txt.textContent = CALC_T[calcLang()].dtRequired;
+        if (box) {
+          box.hidden = false;
+          (dateBtn || box).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return false;
+      }
+      if (box) box.hidden = true;
+      return true;
+    }
+    function clearDateTimeError() {
+      const dateInput = document.getElementById('booking-date');
+      const timeInput = document.getElementById('booking-time');
+      const dateBtn = document.getElementById('dateDisplay');
+      if (dateBtn && dateInput && dateInput.value) dateBtn.classList.remove('field-error');
+      if (timeInput && timeInput.value) timeInput.classList.remove('field-error');
+      const box = document.getElementById('datetime-error');
+      if (box && dateInput && dateInput.value && timeInput && timeInput.value) box.hidden = true;
+    }
+
     function sendToMessenger(ch) {
+      if (!validateDateTime()) return;
       const q = computeQuote();
       const lang = calcLang();
       const svc = q.svc;
@@ -4711,6 +4768,10 @@ Could you please check availability?`
       const txt = document.getElementById('dateDisplayText');
       if (!txt) return;
       txt.textContent = (input && input.value) ? formatLongDate(parseISODate(input.value)) : CALC_T[calcLang()].datePlaceholder;
+      /* при смене языка обновляем и текст просьбы выбрать дату/время, если он показан */
+      const errTxt = document.getElementById('datetime-error-text');
+      const errBox = document.getElementById('datetime-error');
+      if (errTxt && errBox && !errBox.hidden) errTxt.textContent = CALC_T[calcLang()].dtRequired;
     }
 
     function renderCalendar() {
@@ -4784,6 +4845,7 @@ Could you please check availability?`
       if (input) input.value = iso;
       updateDateDisplay();
       closeDatePicker();
+      clearDateTimeError();
       calcTotal();
     }
 
@@ -5349,7 +5411,7 @@ Could you please check availability?`
         const yyyy = tomorrow.getFullYear();
         const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
         const dd = String(tomorrow.getDate()).padStart(2, '0');
-        /* Дата по умолчанию не выбрана — в заявке «Гибкая / Обсудить», пока клиент сам не выберет день */
+        /* Дата по умолчанию не выбрана: перед отправкой заявки клиента попросят выбрать дату и время */
         dateInput.value = '';
         dateInput.dataset.min = `${yyyy}-${mm}-${dd}`;
         updateDateDisplay();
