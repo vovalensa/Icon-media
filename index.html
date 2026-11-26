@@ -1736,6 +1736,27 @@
       justify-content: space-between;
     }
 
+    /* Выбранный сетап в смете */
+    .bill-setup {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      margin: -4px 0 12px;
+      padding: 6px 6px 6px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      font-size: 13px; font-weight: 700; color: #fff;
+      width: fit-content;
+    }
+    .bill-setup[hidden] { display: none; }
+    .bill-setup i.fa-check { color: var(--flame-orange); margin-right: 4px; }
+    .bill-setup button {
+      width: 26px; height: 26px; border-radius: 50%; border: none;
+      background: rgba(255, 255, 255, 0.08); color: var(--text-muted); cursor: pointer;
+    }
+    .bill-setup button:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+    /* Поле «Ваше имя» перед кнопками заявки */
+    .client-name-field { display: flex; flex-direction: column; gap: 6px; margin: 4px 0 12px; }
+    .client-name-field > span { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+
     .bill-row {
       display: flex;
       justify-content: space-between;
@@ -3435,6 +3456,10 @@
                     <span id="bill-service">Podcast (1h)</span>
                     <span id="bill-base">1.900.000 IDR</span>
                   </div>
+                  <div class="bill-setup" id="bill-setup" hidden>
+                    <span><i class="fa-solid fa-check"></i> <span id="bill-setup-text"></span></span>
+                    <button type="button" onclick="clearSetup()" aria-label="Remove setup"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
                   <div class="bill-sub" id="bill-sub" style="display: none;"></div>
                   <div class="bill-ext" id="bill-ext"></div>
 
@@ -3456,6 +3481,11 @@
                     <span class="final-sum" id="bill-total">1.900.000 IDR</span>
                   </div>
                 </div>
+
+                <label class="client-name-field" for="client-name">
+                  <span data-i18n="nameLabel">Your name</span>
+                  <input type="text" id="client-name" class="input-field-dark" maxlength="40" autocomplete="given-name" placeholder="How should we address you?">
+                </label>
 
                 <div class="messenger-buttons">
                   <button type="button" onclick="sendToMessenger('wa')" class="btn-pill btn-pill-orange" style="width: 100%; padding: 14px;">
@@ -3821,6 +3851,7 @@
         calcStepDateTime: 'Step 2 • Date & Preferred Time',
         optFlexible: 'Flexible / Discuss via Chat',
         optSelectTime: 'Select time',
+        nameLabel: 'Your name',
         hoursMoreLbl: 'Session length',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
         webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
@@ -4003,6 +4034,7 @@
         calcStepDateTime: 'Шаг 2 • Дата и время',
         optFlexible: 'Гибкое / Обсудить в чате',
         optSelectTime: 'Выберите время',
+        nameLabel: 'Ваше имя',
         hoursMoreLbl: 'Длительность съёмки',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
         webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
@@ -4371,7 +4403,8 @@
         editBulk: '10+ reels', editBulkNote: '20% discount on editing', bulkLine: '10+ reels discount (−20% editing)',
         ext: 'Extension', perHour: 'IDR / hour', none: 'None', extraCam: 'Additional camera',
         datePlaceholder: 'Select date', night: 'Night 1.5×',
-        dtRequired: 'Please select the date and time of your session'
+        dtRequired: 'Please select the date and time of your session',
+        namePlaceholder: 'How should we address you?'
       },
       ru: {
         groupEquip: 'Оборудование и команда', groupEdit: 'Монтаж',
@@ -4383,12 +4416,15 @@
         editBulk: '10+ reels', editBulkNote: 'скидка 20% на монтаж', bulkLine: 'Скидка за 10+ reels (−20% монтаж)',
         ext: 'Продление', perHour: 'IDR / час', none: 'Нет', extraCam: 'Доп. камера',
         datePlaceholder: 'Выберите дату', night: 'Ночь 1.5×',
-        dtRequired: 'Пожалуйста, выберите дату и время съёмки'
+        dtRequired: 'Пожалуйста, выберите дату и время съёмки',
+        namePlaceholder: 'Как к вам обращаться?'
       }
     };
 
     /* Состояние выбранных допов */
     const calcState = { cams: 0, prompter: false, mics: false, board: false, director: false, edit: null, bulk: false };
+    /* Сетап, выбранный кнопкой «Выбрать сетап» на карточке: { srv, id } или null */
+    let calcSetup = null;
 
     function calcLang() { return (typeof currentLang !== 'undefined' && currentLang === 'ru') ? 'ru' : 'en'; }
     /* Часы: «1ч» в русской версии, «1h» в английской */
@@ -4588,13 +4624,33 @@
       if (svc.edit === 'podcast' && calcState.edit !== 'podcast') calcState.edit = null;
       if (svc.edit === 'social' && calcState.edit === 'podcast') calcState.edit = null;
       if (!svc.edit) { calcState.edit = null; calcState.bulk = false; }
+      /* выбранный сетап относится к своему формату — при смене формата его снимаем */
+      if (calcSetup && calcSetup.srv !== srv) { calcSetup = null; renderSetupChip(); }
       applyHoursConstraints();
       renderAddons();
       onTimeChange();
     }
 
-    function selectCalcFromCard(srv) {
+    function selectCalcFromCard(srv, setId) {
       setService(srv);   /* прокрутку к калькулятору делает общий обработчик ссылок #calculator */
+      calcSetup = setId ? { srv: srv, id: String(setId) } : null;
+      renderSetupChip();
+    }
+    /* Строка «Сетап N» в смете — с крестиком, чтобы снять выбор */
+    function setupLabel() {
+      if (!calcSetup) return '';
+      return (calcLang() === 'ru' ? 'Сетап ' : 'Setup ') + calcSetup.id;
+    }
+    function renderSetupChip() {
+      const box = document.getElementById('bill-setup');
+      const txt = document.getElementById('bill-setup-text');
+      if (!box || !txt) return;
+      box.hidden = !calcSetup;
+      txt.textContent = setupLabel();
+    }
+    function clearSetup() {
+      calcSetup = null;
+      renderSetupChip();
     }
 
     /* Переход к калькулятору: плавная прокрутка + доводка, если блоки выше (ленивые фото, отзывы) успели изменить высоту */
@@ -4757,10 +4813,17 @@
       const nightNoteEn = q.nightExtra > 0 ? '\n• Night Rate: 1.5×' : '';
       const nightNoteRu = q.nightExtra > 0 ? '\n• Ночной тариф: 1.5×' : '';
 
-      const text = lang === 'en'
-        ? `Hello! I would like to book a session at Icon Media Studio:
+      const nameEl = document.getElementById('client-name');
+      const clientName = nameEl ? nameEl.value.replace(/\s+/g, ' ').trim().slice(0, 40) : '';
+      const introEn = clientName ? `Hello! My name is ${clientName}. I would like to book a session at Icon Media Studio:` : 'Hello! I would like to book a session at Icon Media Studio:';
+      const introRu = clientName ? `Здравствуйте! Меня зовут ${clientName}. Хочу забронировать сессию в Icon Media Studio:` : 'Здравствуйте! Хочу забронировать сессию в Icon Media Studio:';
+      const setupEn = calcSetup ? `\n• Setup: ${calcSetup.id}` : '';
+      const setupRu = calcSetup ? `\n• Сетап: ${calcSetup.id}` : '';
 
-• Service: ${srvTitle}
+      const text = lang === 'en'
+        ? `${introEn}
+
+• Service: ${srvTitle}${setupEn}
 • Date: ${chosenDate}
 • Start time: ${chosenTime}
 • Duration: ${calcHours}h${nightNoteEn}
@@ -4768,9 +4831,9 @@
 • Estimated Total: ${formatIDR(q.total)}
 
 Could you please check availability?`
-        : `Здравствуйте! Хочу забронировать сессию в Icon Media Studio:
+        : `${introRu}
 
-• Формат: ${srvTitle}
+• Формат: ${srvTitle}${setupRu}
 • Дата: ${chosenDate}
 • Время: ${chosenTime}
 • Длительность: ${calcHours} ч${nightNoteRu}
@@ -4779,7 +4842,7 @@ Could you please check availability?`
 
 Свободен ли этот слот?`;
 
-      track('calculator_booking', { channel: ch === 'wa' ? 'whatsapp' : 'telegram', service: srvTitle, hours: calcHours, value: q.total, currency: 'IDR' });
+      track('calculator_booking', { channel: ch === 'wa' ? 'whatsapp' : 'telegram', service: srvTitle, setup: calcSetup ? calcSetup.id : '', hours: calcHours, value: q.total, currency: 'IDR' });
       track(ch === 'wa' ? 'whatsapp_click' : 'telegram_click', { place: 'calculator' });
       if (ch === 'wa') {
         const encodedText = encodeURIComponent(text);
@@ -5171,7 +5234,7 @@ Could you please check availability?`
             </div>
             <div class="set-cta">
               <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 600;">${set.cta[lang]}</span>
-              <a href="#calculator" onclick="selectCalcFromCard('${g.calc}')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;">${t.btnBookThisSet || 'Select Setup'}</a>
+              <a href="#calculator" onclick="selectCalcFromCard('${g.calc}', '${set.id}')" class="btn-pill btn-pill-orange" style="padding: 8px 18px; font-size: 12.5px;">${t.btnBookThisSet || 'Select Setup'}</a>
             </div>
           </article>`;
         const card = wrap.firstElementChild;
@@ -5370,6 +5433,9 @@ Could you please check availability?`
       updateDateDisplay();
       renderCalendar();
       applyHoursConstraints();
+      renderSetupChip();
+      const nameInput = document.getElementById('client-name');
+      if (nameInput) nameInput.placeholder = t.namePlaceholder;
       renderAddons();
       calcTotal();
     }
