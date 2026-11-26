@@ -1660,6 +1660,18 @@
       gap: 10px;
       margin-bottom: 24px;
     }
+    /* Счётчик часов для сессий дольше 4 часов */
+    .hours-more-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin: -12px 0 24px;
+      padding: 8px 8px 8px 16px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      background: rgba(22, 22, 30, 0.6);
+    }
+    .hours-more-row[hidden] { display: none; }
+    .hours-more-lbl { font-size: 13.5px; font-weight: 600; color: var(--text-muted); }
+    #hours-more-val { min-width: 44px; }
 
     .hour-btn {
       flex: 1;
@@ -3394,6 +3406,16 @@
                   <button type="button" class="hour-btn" id="hour-btn-2" data-h="2" onclick="setHours(2, this)">2h</button>
                   <button type="button" class="hour-btn" id="hour-btn-3" data-h="3" onclick="setHours(3, this)">3h</button>
                   <button type="button" class="hour-btn" id="hour-btn-4" data-h="4" onclick="setHours(4, this)">4h</button>
+                  <button type="button" class="hour-btn" id="hour-btn-more" data-h="more" onclick="setHours(Math.max(calcHours, HOURS_MORE_MIN), this)">5h+</button>
+                </div>
+                <!-- Длительность больше 4 часов: появляется после нажатия «5h+» -->
+                <div class="hours-more-row" id="hours-more-row" hidden>
+                  <span class="hours-more-lbl" data-i18n="hoursMoreLbl">Session length</span>
+                  <div class="qty-stepper">
+                    <button type="button" id="hours-more-minus" onclick="stepHours(-1)" aria-label="−1 h">−</button>
+                    <span class="qty-value" id="hours-more-val">5h</span>
+                    <button type="button" id="hours-more-plus" onclick="stepHours(1)" aria-label="+1 h">+</button>
+                  </div>
                 </div>
 
                 <span class="step-title" data-i18n="calcStep3">Optional Add-ons & Production</span>
@@ -3795,6 +3817,7 @@
         calcStepDateTime: 'Step 2 • Date & Preferred Time',
         optFlexible: 'Flexible / Discuss via Chat',
         optSelectTime: 'Select time',
+        hoursMoreLbl: 'Session length',
         nightWarningText: '🌙 Night session selected (22:00 – 09:00). Calculated at a 1.5× rate with advance booking.',
         webinarMinHint: '⚠️ Minimum booking duration for webinars is 2 hours.',
         calcOptPod: 'Podcast',
@@ -3976,6 +3999,7 @@
         calcStepDateTime: 'Шаг 2 • Дата и время',
         optFlexible: 'Гибкое / Обсудить в чате',
         optSelectTime: 'Выберите время',
+        hoursMoreLbl: 'Длительность съёмки',
         nightWarningText: '🌙 Выбрана ночная смена (22:00 – 09:00). Ночные часы рассчитываются с коэффициентом 1.5× по согласованию.',
         webinarMinHint: '⚠️ Минимальное время бронирования для вебинаров — 2 часа.',
         calcOptPod: 'Подкаст',
@@ -4269,6 +4293,8 @@
     let calcService = 'podcast';
     let calcTouched = false;   /* true, как только посетитель кликнул что-то внутри калькулятора */
     let calcHours = 1;
+    const HOURS_MORE_MIN = 5;  /* с какого часа включается счётчик «5h+» */
+    const HOURS_MAX = 12;      /* максимум часов в калькуляторе */
 
     const CALC_CAM_PRICE = 300000;          /* доп. камера, за каждую */
     const NIGHT_EXTRA_RATIO = 0.5;          /* ночной тариф 1.5× */
@@ -4516,11 +4542,25 @@
     function applyHoursConstraints() {
       const svc = CALC_SERVICES[calcService];
       if (calcHours < svc.minHours) calcHours = svc.minHours;
+      if (calcHours > HOURS_MAX) calcHours = HOURS_MAX;
       document.querySelectorAll('.hours-picker .hour-btn').forEach(b => {
+        if (b.getAttribute('data-h') === 'more') {
+          b.classList.toggle('active', calcHours >= HOURS_MORE_MIN);
+          return;
+        }
         const h = parseInt(b.getAttribute('data-h'), 10);
         b.disabled = h < svc.minHours;
         b.classList.toggle('active', h === calcHours);
       });
+      /* счётчик часов виден, когда выбрано 5 часов и больше */
+      const moreRow = document.getElementById('hours-more-row');
+      if (moreRow) moreRow.hidden = calcHours < HOURS_MORE_MIN;
+      const moreVal = document.getElementById('hours-more-val');
+      if (moreVal) moreVal.textContent = calcHours + 'h';
+      const minus = document.getElementById('hours-more-minus');
+      const plus = document.getElementById('hours-more-plus');
+      if (minus) minus.disabled = calcHours <= HOURS_MORE_MIN;
+      if (plus) plus.disabled = calcHours >= HOURS_MAX;
       const hint = document.getElementById('webinar-min-hint');
       if (hint) hint.style.display = calcService === 'webinar' ? 'block' : 'none';
     }
@@ -4566,6 +4606,12 @@
       e.preventDefault();
       goToCalculator();
     });
+
+    /* Длительность: кнопки 1–4 ч и «5h+» со счётчиком до HOURS_MAX.
+       Цена после последнего часа в таблице считается по ставке продления (ext) каждого формата. */
+    function stepHours(delta) {
+      setHours(Math.min(HOURS_MAX, Math.max(HOURS_MORE_MIN, calcHours + delta)));
+    }
 
     function setHours(h, btn) {
       calcHours = h;
