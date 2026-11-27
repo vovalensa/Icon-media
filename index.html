@@ -2507,6 +2507,26 @@
     @media (max-width: 640px) {
       :root { --glow-w: 340px; --glow-h: 420px; --glow-a: 0.12; --glow-b: 0.05; }
     }
+    /* Широкие экраны: контейнер шире (меньше пустых полей), фото в первом экране — внутри сетки, ближе к тексту */
+    @media (min-width: 1680px) {
+      .container { max-width: 1500px; }
+      .hero-bg-media {
+        right: max(0px, calc((100% - 1500px) / 2));
+        width: 52%;
+        max-width: 820px;
+        justify-content: center;
+      }
+      .hero-section > .container { width: 100%; }
+      .hero-bg-media img {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 82%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        -webkit-mask-composite: source-in;
+        mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 82%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        mask-composite: intersect;
+      }
+      .hero-bg-gradient-scrim {
+        background: linear-gradient(180deg, rgba(7, 7, 9, 0.4) 0%, transparent 15%, transparent 80%, #070709 100%);
+      }
+    }
   </style>
   <script type="application/ld+json">
   {
