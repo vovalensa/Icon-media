@@ -87,6 +87,14 @@
 
     a { text-decoration: none; color: inherit; }
 
+    /* Большие мониторы: масштабируем всю страницу целиком, чтобы контент не превращался в узкую колонку посередине.
+       До 1680px — без изменений (ноутбуки, планшеты, телефоны). */
+    @media (min-width: 1680px) { html { zoom: 1.1; } }
+    @media (min-width: 1900px) { html { zoom: 1.2; } }
+    @media (min-width: 2200px) { html { zoom: 1.35; } }
+    @media (min-width: 2500px) { html { zoom: 1.5; } }
+    @media (min-width: 3200px) { html { zoom: 1.9; } }
+
     .container {
       max-width: 1240px;
       margin: 0 auto;
